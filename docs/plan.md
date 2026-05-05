@@ -10,23 +10,24 @@ To structure, prioritize, and execute Pramod's business portfolio across two ent
 
 | Project | Role | Investment | Tasks | Urgency | Key Skills Required |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Mauritius Tenders** | Project Management / Bid Ops | Working Capital | Source tenders, estimate costs, hire engineering manpower, submit monthly bids. | **High** | Senior Estimator (Elec/Mech), Bid Manager (Mid) |
-| **Home Automation** | PMO / Partner Coordination | Minimal (Partnership driven) | Finalize supply/execution partners, set up 3D design team, client acquisition. | **High** | Partnership Manager (Mid/Senior), 3D Designer (Mid) |
-| **Bus Automation** | System Setup / Ad Sales Mgmt | 1Cr | Hardware sourcing, ad-sales network setup, tech deployment. | **High** | Tech Lead/Hardware (Senior), Ad Sales Rep (Mid) |
+| **1. Mauritius Tenders** | Project Management / Bid Ops | Working Capital | Source tenders, estimate costs, hire engineering manpower, submit monthly bids. | **High** | Senior Estimator (Elec/Mech), Bid Manager |
+| **2. Home Automation** | PMO / Partner Coordination | Minimal (Partnerships) | Finalize supply/execution partners, set up 3D design team, client acquisition. | **High** | Partnership Manager, 3D Designer |
+| **3. Bus Automation** | System Setup / Ad Sales Mgmt | 1Cr | Hardware sourcing, ad-sales network setup, tech deployment. | **High** | Tech Lead/Hardware, Ad Sales Rep |
 
 ### B. Byso Global (Diversified Track - Medium/Long-Term)
 *Time Allocation: 2 hours/day (10 hours/week)*
 
 | Project | Role | Investment | Tasks | Urgency | Key Skills Required |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Trading** | Broker / Dealmaker | Nil | Vet inquiries, verify suppliers, coordinate travel/terms (1h/day). | Ongoing | Trading Expert/Negotiator (Mid) |
-| **Real Estate** | Dealmaker / Coordinator | Investor Capital | Identify disputed land, leverage official contacts, pitch investors. | Ongoing | Real Estate Liaison (Senior), Legal Advisor |
-| **Tea Bags & Hair Oil** | Brand Owner | 80L (50L + 30L) | Setup manufacturing/sourcing, branding, distribution network. | Medium | FMCG Operations Manager (Mid) |
-| **Bio Fertilizers** | Manufacturer | 50L | Secure facility, source raw materials, distribution. | Low | Manufacturing Plant Head (Senior) |
-| **Pharma** | Global Ops Co-Lead | 1Cr | Legal setup in 4 countries, coordinate EU manufacturing. | Medium | International Trade Lawyer, Pharma Exec (Senior) |
-| **Production House** | Financier / Producer | 1Cr | Setup studio/company, source scripts/talent. | Low | Media Producer (Senior) |
-| **Agriculture** | Management | ~1Cr (Reassess) | Acquire land/leases, hire farm management. | Low | Farm Manager (Mid) |
-| **Political AI** | Product Owner | TBD | Define requirements, hire AI engineers. | Low | AI Data Scientist (Senior) |
+| **4. Liaising (New)** | Dealmaker / Broker | Nil | Connect parties for solar, Delhi roads, Noida building, real estate advances (e.g., 50L). | **Ongoing** | Networker, Deal Closer |
+| **5. Trading** | Broker / Dealmaker | Nil | Vet inquiries (iron ore, coal, etc.), verify suppliers, coordinate travel/terms. | Ongoing | Trading Expert/Negotiator |
+| **6. Real Estate** | Dealmaker / Coordinator | Investor Capital | Identify disputed land (Nawab/Army), pitch investors, clear titles via officials. | Ongoing | Real Estate Liaison, Legal Advisor |
+| **7. Tea Bags & Herbal Hair Oil** | Brand Owner | 80L (50L+30L) | Setup manufacturing/sourcing, branding, distribution network. | Medium | FMCG Operations Manager |
+| **8. Pharma** | Global Ops Co-Lead | 1Cr | Legal setup in 4 countries (Abu Dhabi, Swiss, Japan, US), EU manufacturing. | Medium | International Trade Lawyer |
+| **9. Bio Organic Fertilizers** | Manufacturer | 50L | Secure facility, source raw materials, distribution. | Low | Manufacturing Plant Head |
+| **10. Production House** | Financier / Producer | 1Cr | Setup studio/company, source scripts/talent. | Low | Media Producer |
+| **11. Agriculture** | Management | ~1Cr (Reassess) | Acquire land/leases, hire farm management. | Low | Farm Manager |
+| **12. Political AI** | Product Owner | TBD | Define requirements, hire AI engineers for regional analysis. | Low | AI Data Scientist |
 
 ---
 
@@ -34,48 +35,48 @@ To structure, prioritize, and execute Pramod's business portfolio across two ent
 
 ### **Week 1 (May 4 - May 10, 2026)**
 *   **Debaz (30h):**
-    *   *Mauritius Tenders:* Identify top 3 tender portals. Define the profile for the Electrical/Mechanical engineering contractor needed for estimating.
-    *   *Home Automation:* Draft partnership agreement templates for Supply and Execution partners. Outline the workflow for the 3D design phase.
-    *   *Bus Automation:* Initiate supplier research for bus camera/alert hardware and interior monitors.
+    *   *Mauritius Tenders:* Identify top 3 tender portals. Define engineering contractor profile.
+    *   *Home Automation:* Draft partnership agreements for Supply and Execution. 
+    *   *Bus Automation:* Initiate supplier research for bus camera/alert hardware.
 *   **Byso Global (10h):**
-    *   *Trading:* Filter current active inquiries down to 1 high-probability deal. Allocate exactly 5 hours this week to verify the supplier for this deal.
-    *   *Real Estate:* Identify 1 specific plot in TS/AP. Schedule initial meetings with local revenue contacts.
+    *   *Liaising / Trading:* Process incoming daily leads. Allocate 5 hours to connect parties on the most promising lead (e.g., Solar plant or Delhi roads).
+    *   *Real Estate:* Follow up on the 50L advance revenue project.
 
 ### **Week 2 (May 11 - May 17, 2026)**
 *   **Debaz (30h):**
-    *   *Mauritius Tenders:* Begin interviewing/sourcing freelance or full-time engineers for the tender estimation team.
-    *   *Home Automation:* Reach out to 5 potential Supply partners and 5 Execution partners. Schedule initial alignment meetings.
-    *   *Bus Automation:* Finalize hardware bill of materials (BOM) estimates. Research hyperlocal ad delivery software.
+    *   *Mauritius Tenders:* Sourcing freelance/full-time engineers for tender estimation.
+    *   *Home Automation:* Reach out to 5 potential Supply and Execution partners.
+    *   *Bus Automation:* Finalize hardware bill of materials (BOM) estimates.
 *   **Byso Global (10h):**
-    *   *Trading:* Attempt to close the deal identified in Week 1. If stalled, document reasons to improve future filtering.
-    *   *Pharma:* Initial sync with Venkat to draft the legal incorporation roadmap for Abu Dhabi and the US.
+    *   *Liaising / Trading:* Attempt to close the deal identified in Week 1.
+    *   *Pharma:* Initial sync with Venkat to draft Abu Dhabi / US legal incorporation roadmap.
 
 ### **Week 3 (May 18 - May 24, 2026)**
 *   **Debaz (30h):**
-    *   *Mauritius Tenders:* Download and analyze the first viable tender. Have the engineering resource begin the cost estimation.
-    *   *Home Automation:* Interview 3D designers. Shortlist 2 partners (1 Supply, 1 Execution) for a pilot project.
-    *   *Bus Automation:* Draft the business plan/pitch deck outlining the 1Cr investment requirement and ROI via ad sales.
+    *   *Mauritius Tenders:* Analyze first viable tender and begin cost estimation.
+    *   *Home Automation:* Interview 3D designers. Shortlist 2 partners for pilot.
+    *   *Bus Automation:* Draft business plan/pitch deck for the 1Cr investment.
 *   **Byso Global (10h):**
-    *   *Real Estate:* Prepare a preliminary dossier on the target land to present to potential investors.
-    *   *FMCG (Tea/Oil):* Begin market research on third-party white-label manufacturers for the health tea.
+    *   *Real Estate:* Prepare dossier on target land to present to potential investors.
+    *   *FMCG (Tea/Oil):* Begin market research on third-party white-label manufacturers.
 
 ### **Week 4 (May 25 - May 31, 2026)**
 *   **Debaz (30h):**
-    *   *Mauritius Tenders:* Finalize and submit the first tender. Set up the recurring monthly pipeline tracking system.
-    *   *Home Automation:* Sign MOUs with the selected Supply and Execution partners. Hire the 3D designer.
-    *   *Bus Automation:* Begin investor outreach/capital allocation mapping for the 1Cr hardware pilot.
+    *   *Mauritius Tenders:* Finalize and submit the first tender. 
+    *   *Home Automation:* Sign MOUs with partners. Hire the 3D designer.
+    *   *Bus Automation:* Begin investor outreach.
 *   **Byso Global (10h):**
-    *   *Trading:* Select a new 1-week deal to process.
-    *   *Resource Mapping:* Review project loads and prepare the formal resource/investor allocation matrix for June.
+    *   *Liaising:* Review the daily inputs backlog and pick the next high-value connection to facilitate.
+    *   *Resource Mapping:* Prepare resource/investor allocation matrix for June across all 12 projects.
 
 ---
 
 ## 4. Long-Term Timeline
 
 ### **Next 2 Months (June - July 2026)**
-*   **Debaz:** Establish a rhythm of 1-2 tender submissions per month. Launch the first pilot Home Automation project (utilizing 3D design and new partners). Order prototype hardware for one bus to test the alert and ad-delivery system.
-*   **Byso Global:** Successfully close at least one trading deal to validate the 1h/day model. Secure investor commitment for the first TS/AP real estate project. Formally register the Pharma entities in the first 2 target countries. Finalize a manufacturer for the Tea/Oil.
+*   **Debaz:** Establish 1-2 tender submissions/month. Launch Home Automation pilot. Order prototype hardware for one bus.
+*   **Byso Global:** Successfully close 1-2 Liaising/Trading deals to validate the model. Secure investor commitment for TS/AP real estate. Register Pharma entities. Finalize Tea/Oil manufacturer.
 
 ### **Next 1 Year (May 2026 - May 2027)**
-*   **Debaz:** Win and execute at least one 6-10Cr Mauritius tender. Scale Home Automation to hit a 10Cr+ run rate towards the 50-100Cr goal. Outfit a fleet of 50+ buses in Chennai with the automation/ad system.
-*   **Byso Global:** Have the EU Pharma manufacturing pipeline operational and trading. Launch the Tea Bags and Herbal Hair oil into retail/D2C channels. Reassess and potentially deploy capital into Agriculture and Bio Organic Fertilizers if time permits. Deprioritize Production House and Political AI unless passive investment opportunities arise.
+*   **Debaz:** Win and execute at least one 6-10Cr Mauritius tender. Scale Home Automation to hit 10Cr+ run rate. Outfit 50+ buses in Chennai.
+*   **Byso Global:** EU Pharma manufacturing operational. Launch Tea/Oil into retail. Reassess capital for Agriculture and Bio Organic Fertilizers.
