@@ -15,7 +15,7 @@ The portfolio is divided into two distinct legal entities based on business doma
 - **Projects:**
   1. **Mauritius Tenders:** Electrical and mechanical engineering tenders. Target 1Cr profit/year from 6-10Cr tenders. Requires monthly bidding and dedicated manpower.
   2. **Home Automation (India):** Target 50-100Cr annual turnover. Profit model: ~5% company, ~5% partners (supply and execution). Includes 3D designing of homes.
-  3. **Bus Automation:** Safety cameras, alert systems, and hyperlocal ad monitors in metro city buses (e.g., Chennai). 1Cr investment. Profits reinvested for scaling.
+  3. **Bus Surveillance:** Safety cameras and alert systems in public buses to record and report video to the nearest police station in case of emergencies. 1Cr investment. Profits reinvested for scaling.
 
 ### B. Byso Global Pvt Ltd (Diversified Portfolio)
 - **Time Allocation:** 2 hours/day (10 hours/week)
@@ -28,6 +28,6 @@ The portfolio is divided into two distinct legal entities based on business doma
   8. **Pharma:** Partnered with Venkat. Establish entities in Abu Dhabi, Switzerland, Japan, and US. Manufacturing in Europe. Target: 50Cr annual turnover. Initial investment: 1Cr.
   9. **Production House:** Media production. Initial investment: 1Cr.
   10. **Agriculture:** Agricultural operations. Initial investment: ~1Cr (needs reassessment).
-  11. **Political AI:** AI product for regional political analysis.
+  11. **Political AI (High Priority):** Build AI prototype with public data to present to potential clients for regional political analysis.
   
 *(Note: Delhi air pollution project noted previously as non-profit).*
