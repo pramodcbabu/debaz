@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nethra - Visualization Specs</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.js';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 2rem; }
+        h1, h2, h3 { color: #1a202c; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem; }
+        .mermaid { margin: 2rem 0; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem; }
+        .ui-mockup { background: #1a202c; color: #e2e8f0; padding: 2rem; border-radius: 12px; font-family: monospace; border: 1px solid #4a5568; margin: 1rem 0; }
+        .btn { background: #3182ce; color: white; padding: 0.5rem 1rem; border-radius: 4px; display: inline-block; text-decoration: none; font-weight: bold; margin: 0.5rem 0; cursor: not-allowed; }
+        .btn-green { background: #38a169; }
+    </style>
+</head>
+<body>
+    <h1>Nethra Command Center: Visualization Specs</h1>
+
+    <h2>1. Dashboard User Flow</h2>
+    <p>The UI is designed for high-stakes decision-making under pressure. It follows a "Macro-to-Micro" discovery pattern.</p>
+
+    <div class="mermaid">
+        graph LR
+            A[State/District Map View] --> B[Booth Volatility Heatmap]
+            B --> C{Select Volatile Booth}
+            C --> D[Issue & Sentiment Deep-Dive]
+            D --> E[Simulated Anomaly Check]
+            E --> F[Audience Size: 240 Swing Voters]
+            F --> G[Intervention: Dispatch AI Ad Campaign]
+            G --> H[Real-time ROI Monitoring]
+    </div>
+
+    <h2>2. The "Booth Intelligence" UI Component</h2>
+    <p>When a volatile booth is selected, the sidebar populates with real-time AI insights.</p>
+
+    <div class="ui-mockup">
+        <h3>BOOTH: TN-234-001 (Tiruchi East)</h3>
+        <p>------------------------------------------</p>
+        <p>VOLATILITY INDEX: <span style="color: #f56565;">0.88 (CRITICAL)</span></p>
+        <p>SWING VOTE POTENTIAL: ~240 Voters</p>
+        <br>
+        <p>TOP GRIEVANCES (AI CLUSTERED):</p>
+        <p>1. Youth Unemployment [65% Sentiment Drop]</p>
+        <p>2. Irregular Water Supply [22% Neutral]</p>
+        <p>3. High Road Tolls [13% Angry]</p>
+        <br>
+        <p>CADRE DATA STATUS: <span style="color: #f6e05e;">ANOMALY DETECTED (Flagged)</span></p>
+        <p>AI suggests cadre is over-reporting support by +40%.</p>
+        <br>
+        <a href="#" class="btn">GENERATE TARGETED REEL SCRIPT</a>
+        <a href="#" class="btn btn-green">DISPATCH CUSTOM AUDIENCE TO META</a>
+    </div>
+
+    <h2>3. Visual Design Standards</h2>
+    <ul>
+        <li><strong>Theme:</strong> Dark Mode primary (reduces eye strain for campaign managers during late-night war-room sessions).</li>
+        <li><strong>Geospatial:</strong> Uses MapBox GL JS for fluid zooming into booth-level boundaries.</li>
+        <li><strong>Sentiment Indicators:</strong> 
+            <span style="color: #48bb78;">Green (+1.0)</span> for supporters, 
+            <span style="color: #f56565;">Red (-1.0)</span> for angry opponents, and 
+            <span style="color: #f6e05e;">Yellow (0)</span> for identified swing voters.
+        </li>
+        <li><strong>Gradients:</strong> Heatmaps use a <span style="color: #9f7aea;">Purple-to-Orange</span> gradient to denote "Volatility", distinguishing it from simple "Support" maps.</li>
+    </ul>
+
+    <h2>4. Intervention Verification UI</h2>
+    <p>After a campaign is dispatched, the dashboard switches to an "A/B Tracker" view, showing real-time engagement lifts in the targeted Treatment booths versus the Control booths.</p>
+
+</body>
+</html>

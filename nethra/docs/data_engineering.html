@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nethra - Data Engineering</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.js';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 2rem; }
+        h1, h2, h3 { color: #1a202c; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem; }
+        .mermaid { margin: 2rem 0; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem; }
+        pre { background: #f6f8fa; padding: 1rem; border-radius: 8px; overflow-x: auto; border: 1px solid #d1d5db; }
+        .data-tag { color: #d53f8c; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Data Engineering & Simulation Strategy</h1>
+
+    <h2>1. Data Ingestion Pipeline</h2>
+    <p>Nethra's ETL (Extract, Transform, Load) pipeline is built to handle three distinct categories of data while maintaining strict privacy boundaries.</p>
+
+    <div class="mermaid">
+        graph TD
+            subgraph Public Sources
+                A[ECI Portal - PDF/Scrapers]
+                B[Census - CSV]
+            end
+            
+            subgraph Private Sources
+                C[AI Survey Engine - WhatsApp]
+                D[Party Voter Rolls]
+                E[Cadre Activity Logs]
+            end
+            
+            subgraph ETL Process
+                A & B --> F[Data Cleaner & Standardizer]
+                C & D & E --> G[PII Hashing Engine - SHA256]
+                F & G --> H[Nethra Unified Data Warehouse]
+            end
+            
+            subgraph Model Consumption
+                H --> I[Booth Volatility Model]
+                H --> J[Audience Matcher API]
+            end
+    </div>
+
+    <h2>2. Core Data Schemas</h2>
+
+    <h3>Booth History (Public Data)</h3>
+    <pre>
+{
+    "booth_id": "TN-234-001",
+    "district": "Tiruchirappalli",
+    "constituency": "Tiruchirappalli East",
+    "total_voters": 1250,
+    "historical_results": [
+        {"year": 2021, "winner": "DMK", "margin_percent": 4.2},
+        {"year": 2024, "winner": "BJP", "margin_percent": 1.5},
+        {"year": 2026, "winner": "TVK", "margin_percent": 8.7}
+    ],
+    "demographics": {
+        "youth_percent": 42.0,
+        "urban_score": 0.85
+    }
+}
+    </pre>
+
+    <h3>Voter Sentiment Profile (Private/Simulated Data)</h3>
+    <pre>
+{
+    "phone_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "booth_id": "TN-234-001",
+    "sentiment_score": -0.65,
+    "top_grievance": "Unemployment",
+    "engagement_history": [
+        {"channel": "WhatsApp", "interaction_type": "SurveyComplete", "timestamp": "2026-05-18T10:00Z"}
+    ],
+    "swing_probability": 0.82
+}
+    </pre>
+
+    <h2>3. Data Mirroring & Simulation</h2>
+    <h3>Public Data Mirroring</h3>
+    <p>We utilize the <code>/data/public/</code> directory to store mirrored datasets from the Election Commission of India (ECI). These are parsed from raw PDFs into structured JSON/Parquet files using our custom scrapers.</p>
+
+    <h3>Private Data Simulation</h3>
+    <p>Since actual voter sentiment data is proprietary, Nethra uses a <strong>Synthetic Voter Engine</strong> to generate simulated private data for testing. 
+    <ul>
+        <li><strong>Stochastic Distribution:</strong> We use Gaussian distributions centered around real historical results to generate believable voter clusters.</li>
+        <li><strong>Issue Propagation:</strong> Grievances are simulated using a "Viral Issue Model"—if one voter in a booth is assigned a "Water Crisis" issue, the probability of neighbors having the same issue increases by 30%.</li>
+        <li><strong>Cadre Noise:</strong> 15% of cadre reports are intentionally corrupted with "Over-Optimism Bias" to test the Anomaly Detection engine.</li>
+    </ul>
+
+</body>
+</html>
