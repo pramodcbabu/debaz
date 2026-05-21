@@ -9,7 +9,7 @@ The Nethra intelligence engine utilizes **Multilevel Regression and Poststratifi
 We first train a Bayesian hierarchical model to learn the relationship between demographic characteristics and political volatility.
 
 ### The Regression Equation
-$$ P(\text{Swing}_i) = \text{logit}^{-1}(\beta_0 + \alpha_{\text{age},i} + \alpha_{\text{gender},i} + \alpha_{\text{social\_cat},i} + \alpha_{\text{occupation},i} + \gamma_{\text{booth},i}) $$
+$$ P(\text{Swing}_i) = \text{logit}^{-1}(\beta_0 + \alpha_{age,i} + \alpha_{gender,i} + \alpha_{social,i} + \alpha_{occup,i} + \gamma_{booth,i}) $$
 
 *   **$\alpha$ (Demographic Strata Parameters):** These are the learned swing probabilities for every combination of age, gender, social category, and occupation. 
 *   **Behavioral Weighting:** Cognitive multipliers (like the **Loss Aversion Index**) are integrated as priors in the Bayesian model, increasing the starting probability of volatility for demographics exposed to specific negative economic shifts.
@@ -20,8 +20,8 @@ $$ P(\text{Swing}_i) = \text{logit}^{-1}(\beta_0 + \alpha_{\text{age},i} + \alph
 ## 3. Step 2: Poststratification (The Projection Phase)
 Once we have learned the swing probabilities for every demographic stratum ($k$), we project them across the actual population counts of the constituency.
 
-### Booth-Level Volatility Calculation ($V_{\text{booth}}$)
-$$ V_{\text{booth}} = \sum_{k=1}^{96} (N_{booth, k} \cdot \hat{P}_k) $$
+### Booth-Level Volatility Calculation ($V_{booth}$)
+$$ V_{booth} = \sum_{k=1}^{96} (N_{booth, k} \cdot \hat{P}_k) $$
 
 *   **$N_{booth, k}$:** The number of voters in Booth $X$ belonging to demographic stratum $k$ (derived from ECI Voter Rolls and Census data).
 *   **$\hat{P}_k$:** The predicted swing probability for stratum $k$ from our Multilevel Model.
@@ -49,5 +49,7 @@ If the model identifies that **Strata $k$ (Males, 18-25, Low Income)** in **Boot
 We utilize private party data (Cadre reports) to calibrate the model's Bayesian priors and detect ground-level anomalies.
 
 *   **Calibration:** If internal party data shows a high historical baseline for a specific demographic, that information is used to set the initial $\beta_0$ parameter.
-*   **Anomaly Scoring:** The engine identifies booths where the predicted volatility ($V_{\text{booth}}$) significantly diverges from the cadre's reported support.
-    $$ \text{Anomaly Score} = |V_{\text{booth}} - \text{Cadre Reported Support}| $$
+
+*   **Anomaly Scoring:** The engine identifies booths where the predicted volatility ($V_{booth}$) significantly diverges from the cadre's reported support.
+    $$ \text{Anomaly Score} = |V_{booth} - \text{Cadre Reported Support}| $$
+
