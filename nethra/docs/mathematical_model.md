@@ -1,43 +1,49 @@
 # Nethra: The Mathematical Foundation
 
-## 1. The Booth Volatility Index (BVI)
-The BVI is a composite score (0 to 1.0) calculated for every polling booth. 
-
-*Political Translation:* For party leadership, the BVI is simply presented as the **"ROI Score."** High BVI means spending ₹100 here will likely flip 5 votes. Low BVI means ₹100 will flip 0 votes.
+## 1. The Booth Volatility Index (BVI) / Opportunity Score
+For party leadership, the BVI is presented as the **"Opportunity Score"** (0-10).
 
 $$ BVI = \alpha \cdot M_{hist} + \beta \cdot S_{vol} + \gamma \cdot I_{unrest} $$
 
-- **$M_{hist}$ (Historical Margin):** Normalized historical victory margin.
-- **$S_{vol}$ (Sentiment Volatility):** Variance in sentiment over a 30-day window.
-- **$I_{unrest}$ (Issue Unrest):** Density of local grievances compared to regional averages.
+### Feature Vector Components:
+- **$M_{hist}$:** ECI Margin (1 - [Winner_Vote_Share - RunnerUp_Vote_Share]).
+- **$S_{vol}$:** Variance of sentiment across the survey demographic in the last 14 days.
+- **$I_{unrest}$:** Count of unique local grievance entities extracted via NLP, normalized per 1,000 voters.
 
-## 2. The "Dirty Data" Anomaly Detection
-Party workers often inflate support numbers to please their bosses. Nethra does not use hardcoded thresholds to catch this.
-- **Algorithm:** We utilize **Isolation Forests** and **Autoencoders**. The model is trained on the baseline of historical + AI Survey data. When a cadre report (e.g., "95% support in my street") is ingested, it is projected into this multidimensional space. If it falls outside the expected variance cluster, it is flagged as an anomaly, and its weight in the BVI is severely downgraded.
+## 2. Anomaly Detection: Anomaly (Dirty Data) Detector
+To catch "Over-Optimism Bias" (fabricated cadre reports):
+- **Model:** **Isolation Forest** (scikit-learn implementation).
+- **Features:** Reported Support %, Historical Support %, Local Survey Sentiment, Interaction Frequency.
+- **Threshold:** Anomalies (Score < -0.75) are automatically flagged, and the cadre report is discarded or severely down-weighted in the BVI calculation.
 
-## 3. Causal Inference & ROI Verification
-Simple A/B testing fails in politics due to the **Spillover Effect** (a voter in a treatment booth receives an ad and WhatsApps it to a cousin in a control booth).
+## 3. Causal Inference: ROI Measurement
+To solve the **"Spillover Effect"** (ads reaching the control group), we use **Synthetic Control Methods**.
 
-### Advanced Methodology: Synthetic Control / Difference-in-Differences
-Instead of randomized individual control, we use **Synthetic Control Methods**.
+### Library: `CausalImpact` (Python/R)
+Instead of a random control booth in the same district, we build a **"Synthetic Twin"** using a weighted average of booths from *other* districts that share identical demographics and historical voting patterns but are not exposed to the ad campaign.
 
 ```mermaid
 graph LR
-    subgraph Experiment Design
-        A[Select Target Booth: Tiruchi East-01]
-        A --> B[Algorithm finds 'Synthetic Twin' Booths]
-        B --> C[Treatment: Tiruchi East-01]
-        B --> D[Control: Weighted average of 5 similar booths across TN]
+    subgraph Experiment
+        A[Target Booth A]
+        B[Weighted Average of Booths B, C, D]
+        A --> C[Treatment: Nethra Active]
+        B --> D[Synthetic Control: Status Quo]
     end
     
-    subgraph Measurement
-        C --> E[Measure Pre/Post Intervention Sentiment Shift]
-        D --> E
-        E --> F[Calculate Causal Impact]
+    subgraph Result
+        C & D --> E[Difference-in-Differences Calculation]
+        E --> F[Causal ROI Report]
     end
 ```
 
-By comparing the targeted booth against a mathematically constructed "synthetic twin" that shares its exact historical and demographic profile, we isolate the true causal impact of the Nethra ad intervention.
+## 4. The "Business Case" ROI Example
+**Booth #210 (Targeted):**
+- **Spend:** ₹12,000 (Targeted Reels + WhatsApp).
+- **Causal Swung Votes:** +182 (Determined via Synthetic Control).
+- **Cost Per Vote (CPV):** **₹66**.
 
-## 4. Swing Voter Clustering
-Using DBSCAN/K-Means clustering on multidimensional sentiment vectors to identify the "Psychological Profile" of the swing voter (e.g., "Aspirational Youth", "Disgruntled Pensioner") to dictate the exact tone of the generated video scripts.
+**Traditional Rally (Comparison):**
+- **Estimated CPV:** **₹500 - ₹800** (Logistics, food, transportation, venue).
+
+*Conclusion:* Nethra is ~8x more efficient at securing the marginal vote required for victory.
