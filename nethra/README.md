@@ -1,30 +1,28 @@
 # Nethra: The Political Data Intelligence Engine
 
-> "Identify the Propensity. Quantify the Behavior. Optimized Voter Strategy."
+> "Project the Propensity. Quantify the Behavior. Optimized Voter Strategy."
 
 ## Executive Summary (Leadership & IT Cell Perspective)
-Nethra is a high-precision **Mathematical Intelligence Engine** designed to identify the **moveable middle** through individual propensity scoring. By utilizing advanced data modeling, Nethra provides a transparent and objective analysis of voter volatility, enabling strategic resource allocation based on data-driven insights.
+Nethra is a high-precision **Mathematical Intelligence Engine** that utilizes **Multilevel Regression and Poststratification (MRP)** to identify the "moveable middle" at the booth level. By utilizing advanced demographic modeling, Nethra provides a transparent and objective analysis of voter volatility, enabling strategic resource allocation based on projected swing counts.
 
-*   **Precision Modeling:** Transition from booth-level estimation to individual **Propensity Scores ($P_s$)**.
-*   **Algorithmic Governance:** Integrated **Algorithmic Fairness** audits ensure demographic parity and mitigate model bias.
+*   **Booth-Level Precision:** Transition from guessing to projected **Swing Voter Counts** per booth.
+*   **Privacy by Design:** Built on the MRP framework, ensuring 100% DPDP Act compliance by operating on demographic buckets rather than individual PII.
 *   **Strategic Deployment:** Facilitates the transition from analytical insights to ethically-validated engagement strategies.
 
 ## Technical Foundation (ML & Data Engineering Perspective)
 Nethra is a feature-rich data science platform built on a dual-track architecture.
 
-*   **Behavioral Feature Engineering:** Integrating cognitive biases (Loss Aversion, Salience) as **mathematical multipliers** in the propensity model.
-*   **Privacy-Preserving Hashing:** Utilizing SHA-256 and data minimization pipelines to ensure 100% DPDP Act compliance.
-*   **Dual-Track Strategy:**
-    *   *Track 1 (The ML Prototype):* Streamlit, Plotly, Synthetic Individual Voter Files, Heuristic/ML Scorer.
-    *   *Track 2 (The Production Vision):* AWS (EKS), ClickHouse, Kafka, real-time Social Listening Ingestion.
+*   **Multilevel Regression (MRP):** Projecting swing probabilities from survey/sentiment data onto actual demographic frames.
+*   **Behavioral Feature Engineering:** Integrating cognitive biases (Loss Aversion, Salience) as mathematical priors in the regression model.
+*   **Privacy-First ETL:** Count-based ingestion of public ECI and Census data.
 
 ## Project Structure
 *   `README.md`: Strategic project overview.
-*   `GEMINI.md`: Core mandates and the **5-Perspective Framework**.
+*   `GEMINI.md`: Core mandates (The 5-Perspective Framework).
 *   `docs/`:
-    *   `mathematical_model.md`: Individual Propensity Modeling, Behavioral Weights, and Fairness Constraints.
-    *   `data_engineering.md`: Individual-level schemas and the Data Minimization Pipeline.
-    *   `behavioral_psychology.md`: Psychological Traits as ML Features (Feature Engineering).
-    *   `privacy_and_ethics.md`: Algorithmic Fairness and the Compliance-Ethics Nexus.
-    *   `technical_specs.md`: Analytical Intel Requirements and Data Science Flow.
-    *   `visualization_specs.md`: Command Center UI (ML Intelligence Focus).
+    *   `mathematical_model.md`: MRP Methodology, Bayesian Regression, and Poststratification.
+    *   `data_engineering.md`: Poststratification Frames and Privacy-First ETL.
+    *   `behavioral_psychology.md`: Psychological Traits as Mathematical Multipliers.
+    *   `privacy_and_ethics.md`: Privacy by Design and the Compliance-Ethics Nexus.
+    *   `technical_specs.md`: Analytical Intel Requirements and MRP Data Flow.
+    *   `visualization_specs.md`: Strategic Dashboard UI (Analytical Focus).

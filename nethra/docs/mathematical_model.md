@@ -1,46 +1,40 @@
-# Nethra: The Mathematical Foundation
+# Nethra: The Mathematical Foundation (MRP)
 
-## 1. The Core Objective: Individual Swing Propensity ($P_s$)
-The essence of Nethra is to move from aggregate booth statistics to individual-level predictions. We calculate a **Propensity Score ($P_{s_i}$)** for every voter in the constituency.
-
-### The Individual Propensity Model
-$$ P_{s_i} = \sigma(\theta \cdot X_i) $$
-
-Where:
-*   **$X_i$:** A feature vector for voter $i$ containing demographic proxies, historical volatility, and issue affinity.
-*   **$\sigma$:** The logistic function, mapping the score to a probability (0-1).
-*   **$\theta$:** The weight vector learned from historical election data and sentiment shifts.
+## 1. The Core Methodology: Multilevel Regression & Poststratification (MRP)
+The Nethra intelligence engine utilizes **Multilevel Regression and Poststratification (MRP)** to accurately identify the "moveable middle" within a constituency. Unlike traditional polling, MRP allows us to project high-fidelity swing probabilities at the granular booth level using a combination of survey data and public demographic records.
 
 ---
 
-## 2. Behavioral Feature Engineering: The $\gamma$ Multiplier
-**Behavioral Psychology** is integrated directly into the math as a weight multiplier for issue saliency. We don't just measure if a voter cares about an issue; we measure their **Psychological Susceptibility** to that issue's framing.
+## 2. Step 1: The Multilevel Model (The Training Phase)
+We first train a Bayesian hierarchical model to learn the relationship between demographic characteristics and political volatility.
 
-### Behavioral Salience ($I_{s_i}$)
-$$ I_{s_i} = \sum_{j=1}^{n} (A_{ij} \cdot \omega_j \cdot \gamma_j) $$
+### The Regression Equation
+$$ P(\text{Swing}_{i}) = \text{logit}^{-1}(\beta_0 + \alpha_{\text{age}[i]} + \alpha_{\text{gender}[i]} + \alpha_{\text{income}[i]} + \dots + \gamma_{\text{booth}[i]}) $$
 
-*   **$A_{ij}$:** Affinity of voter $i$ to issue $j$.
-*   **$\omega_j$:** Global saliency of issue $j$.
-*   **$\gamma_j$ (The Behavioral Multiplier):** A weight assigned based on cognitive biases.
-    *   *Loss Aversion Issues* (e.g., Toll Price Hikes): $\gamma = 1.8$
-    *   *Gain Framing Issues* (e.g., New IT Parks): $\gamma = 1.0$
-    *   *Identity/Pride Issues*: $\gamma = 1.4$
+*   **$\alpha$ (Demographic Effects):** These parameters represent the learned swing probability for a specific demographic "bucket" or **stratum** (e.g., Males aged 18-25).
+*   **$\gamma$ (Geographic Effects):** A random effect that captures booth-level variation that demographics alone cannot explain (e.g., a specific local grievance like a closed factory).
+*   **Behavioral Weighting:** Cognitive multipliers (like the **Loss Aversion Index**) are integrated as priors in the Bayesian model, increasing the starting probability of volatility for demographics exposed to specific negative economic shifts.
 
 ---
 
-## 3. Ethical Constraints: Algorithmic Fairness
-To prevent the model from systematically "redlining" or ignoring specific demographics (which is both an ethical and a political risk), we introduce a **Fairness Constraint** during the model optimization.
+## 3. Step 2: Poststratification (The Projection Phase)
+Once we have learned the swing probabilities for every demographic stratum, we "poststratify" them across the actual population counts of the constituency.
 
-### Demographic Parity Constraint
-$$ |P(P_s > \tau | D = a) - P(P_s > \tau | D = b)| < \epsilon $$
+### Booth-Level Volatility Calculation
+$$ V_{\text{booth}} = \sum_{k=1}^{K} (N_{\text{booth}, k} \cdot \hat{P}_k) $$
 
-*   The difference in the probability of being identified as a "Swing Voter" ($P_s > \tau$) between any two demographic groups ($a, b$) must be less than a small threshold $\epsilon$. 
-*   This ensures the AI engine identifies the *true* moveable middle, rather than just reinforcing existing social biases in the data.
+*   **$K$:** The total number of demographic strata (cells).
+*   **$N_{\text{booth}, k}$:** The number of voters in Booth $X$ belonging to stratum $k$ (derived from ECI Voter Rolls and Census data).
+*   **$\hat{P}_k$:** The predicted swing probability for stratum $k$ from our Multilevel Model.
+
+**Outcome:** We generate a highly accurate projection of exactly how many "moveable" voters exist in every booth, without ever needing to violate the secrecy of the individual ballot.
 
 ---
 
-## 4. Anomaly Detection: Ground Truth Validation
-We use **Isolation Forests** to detect multi-dimensional outliers where ground reports from cadre ($C_{rep}$) significantly deviate from the predicted propensity distribution ($P_s$) and historical ECI baselines ($H_{base}$).
+## 4. Model Calibration & Anomaly Detection
+We utilize private party data (Cadre reports) to calibrate the model's Bayesian priors and detect ground-level anomalies.
 
-$$ \text{Anomaly Score}(i) = \text{IsolationForest}(C_{rep}, P_s, H_{base}) $$
-*   High scores flag booths where local reports are anomalous or inflated, providing leadership with objective, data-backed insights.
+*   **Calibration:** If internal party data shows a high historical baseline for a specific demographic, that information is used to set the initial $\beta_0$ parameter.
+*   **Anomaly Scoring:** The engine identifies booths where the predicted volatility ($V_{\text{booth}}$) significantly diverges from the cadre's reported support.
+    $$ \text{Anomaly Score} = |V_{\text{booth}} - \text{Cadre_Reported_Support}| $$
+    Large deltas provide leadership with objective, data-backed insights into potentially inaccurate ground reports.

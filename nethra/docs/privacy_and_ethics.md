@@ -1,25 +1,19 @@
-# Nethra: Ethics & Algorithmic Fairness
+# Nethra: Ethics & Privacy by Design (MRP)
 
-## 1. Ethics in the Mathematical Model
-Ethics in Nethra is not an afterthought; it is a **Constraint** built into our algorithms. We focus on two core pillars: **Data Minimization** and **Algorithmic Fairness**.
+## 1. Privacy by Design: The MRP Advantage
+Nethra utilizes **Multilevel Regression and Poststratification (MRP)** as its primary ethical safeguard. By architectural design, MRP eliminates the need for individual-level tracking and surveillance.
 
----
-
-## 2. Algorithmic Fairness: Avoiding Redlining
-Political micro-targeting often risks reinforcing social biases by ignoring or redlining certain demographic groups.
-
-*   **The Mandate:** The model must identify the "Moveable Middle" based on individual propensity, not by using protected demographic classes (e.g., religion, caste) as primary predictive features.
-*   **The Constraint:** We apply a **Demographic Parity** check to our $P_s$ scores. If the model identifies swing voters with a disproportionate demographic bias that cannot be explained by historical volatility or issue affinity, the weights are automatically adjusted to ensure equitable visibility across all cohorts.
-*   **The Goal:** To provide the political client with a "True Map" of opportunity, not a biased one.
+*   **Bucket-Level Scoring:** The intelligence engine operates entirely on demographic buckets (strata). It does not identify "Who" is a swing voter, but rather "What Demographic Profile" is currently volatile in a specific region.
+*   **Anonymized Targeting:** Campaign interventions are deployed by targeting demographic segments on ad platforms, rather than uploading lists of individual hashed IDs.
 
 ---
 
-## 3. Ethical Data Engineering: Minimization
-We adhere to the principle of **Data Minimization** to ensure voter privacy and comply with the **DPDP Act**.
+## 2. Ethical Data Engineering: Data Minimization
+We adhere to a strict policy of **Data Minimization** to comply with the **DPDP Act**.
 
-1.  **Feature Selection:** We only ingest demographic proxies (e.g., age bracket, broad income bands) rather than granular personal histories.
-2.  **Transient PII:** Personal Identifiable Information (Names, Phone Numbers) is used ONLY for the initial hashing and scoring process.
-3.  **The Automated Deletion Pipeline:** Once the `voter_id_hash` and `p_swing` are generated, the raw source record is purged from the environment. The resulting "Intelligence Dataset" contains no raw PII.
+1.  **Count-Based Ingestion:** We ingest only demographic *counts* from public voter rolls. Individual PII (Names, Phone Numbers) is never processed by the Nethra scoring engine.
+2.  **Zero-PII Analytics:** The analytics database contains only aggregate demographic cells (e.g., "Males, 18-25, Booth 04") and their associated volatility scores.
+3.  **Automated Deletion:** Any temporary files used during the ingestion of public records are cryptographically shredded immediately following the generation of the Poststratification Frame.
 
 ---
 
