@@ -47,20 +47,22 @@ The prototype UI is designed to demonstrate **Analytical Intelligence** over con
 ```
 
 ### Mockup 3: The Intervention (The Generator)
-*Goal: Show the transition from mathematical intelligence to approved action.*
+*Goal: Demonstrate the transition from analytical intelligence to ethically-vetted cohort targeting.*
 
 ```text
 +-------------------------------------------------------------+
 | [ GENERATE TARGETED INTERVENTION ]                          |
 +-------------------------------------------------------------+
-| TARGET: Individuals with P_s > 0.8 in Booth 04              |
-| PSYCH FRAME: Loss Aversion (High Salience: Toll Road Fees)  |
+| SOURCE STRATA: Male, 18-25, Other-Worker                    |
+| TARGET LOCATION: AC-125 Booth 04 (Pin: 600028)              |
+| PSYCH FRAME: Loss Aversion (High Salience: Toll Fees)       |
 +-------------------------------------------------------------+
-| INTERVENTION PREVIEW:                                       |
-| "Booth 04: Don't let your travel costs double. Vote..."     |
+| INTERVENTION PREVIEW (AI GENERATED):                        |
+| "Namaste Booth 04! Fed up of the toll prices? [Candidate]   |
+| has a plan to fix the infrastructure..."                    |
 +-------------------------------------------------------------+
-| [X] I certify this content matches the model's fairness gate. |
-| [ APPROVE INTERVENTION ]  [ RE-CALIBRATE MATH MODEL ]        |
+| [X] I certify this matches the demographic cohort filter.   |
+| [ APPROVE & DEPLOY TO META ] [ REGENERATE ] [ EXPORT ]      |
 +-------------------------------------------------------------+
 ```
 

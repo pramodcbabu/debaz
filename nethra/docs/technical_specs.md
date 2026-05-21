@@ -3,33 +3,34 @@
 ## 1. Dual-Track Architecture
 Nethra employs a dual-track strategy, prioritizing **Mathematical Precision** in the prototype.
 
-### Track 1: The Zero-Friction Prototype (The ML Asset)
-Designed to prove the effectiveness of the propensity engine.
-*   **Frontend:** **Streamlit**. Renders 3D geospatial maps and individual propensity distributions using PyDeck and Plotly.
-*   **Data Engine:** Static CSV/JSON. Uses `individual_voter_features.csv` as the primary ML input layer.
-*   **Model Core:** Simulated **Logistic Regression/XGBoost** scoring, incorporating behavioral multipliers and fairness constraints.
-*   **AI Intervention:** Minimal use of Gemini API to demonstrate the final output of the intelligence pipeline.
+### Track 1: The Zero-Friction Prototype (The MRP Asset)
+Designed to prove the effectiveness of the demographic projection engine.
+*   **Frontend:** **Streamlit**. Renders 3D geospatial maps and demographic volatility distributions.
+*   **Data Engine:** Static CSV/JSON. Uses `poststratification_frame.csv` as the primary ML input layer.
+*   **Model Core:** Simulated **Bayesian Multilevel Regression** scoring, incorporating behavioral multipliers and poststratification logic.
+*   **AI Intervention:** Use of Gemini API to generate scripts tailored to specific high-volatility demographic strata.
 
 ### Track 2: The Production Vision
 A scalable, cloud-native architecture for real-world political battlegrounds.
 *   **Cloud:** AWS (EKS, MSK).
-*   **Real-time Analytics:** **ClickHouse** (OLAP) for aggregating millions of individual $P_s$ scores instantly.
-*   **Security:** Native SHA-256 hashing at the point of ingestion.
+*   **Real-time Analytics:** **ClickHouse** (OLAP) for aggregating millions of strata-level probabilities instantly.
+*   **Security:** Privacy-by-design via count-based ingestion (Zero-PII).
 
 ---
 
 ## 2. Core Functional Requirements
 
 ### For the Political Leadership (Analytical Intel)
-*   **Individual Propensity Map:** 3D visualization of booths color-coded by voter volatility.
-*   **Fairness Audit:** Live tracking of the model's demographic parity metrics.
-*   **Anomaly Engine:** Flagging anomalous ground reports using multi-dimensional outlier detection.
+*   **Booth Volatility Map:** 3D visualization of booths color-coded by projected swing voter counts.
+*   **Demographic Sensitivity Audit:** Live tracking of which voter segments (strata) are most volatile.
+*   **Anomaly Engine:** Flagging anomalous ground reports by comparing MRP projections to Cadre logs.
+*   **Cohort Deployment:** One-click approval to push targeted ad parameters to external ad APIs.
 
 ### For the ML/Data Engineering Team (Technical Rigor)
-*   **Behavioral Weighting:** Integration of cognitive multipliers ($\gamma$) into the feature engineering pipeline.
-*   **Fairness Gates:** Automated mathematical constraints to prevent demographic redlining.
-*   **Data Minimization Pipeline:** Automated purging of raw PII post-scoring to ensure DPDP compliance.
-*   **State Machine:** A "Human-in-the-Loop" approval gate for the intervention deployment.
+*   **Bayesian Weighting:** Integration of cognitive multipliers ($\gamma$) as priors in the regression model.
+*   **Poststratification Pipelines:** Automated aggregation of strata-level probabilities to booth-level totals.
+*   **Privacy-by-Design ETL:** Count-based ingestion of demographic data from ECI/Census to ensure zero PII exposure.
+*   **Targeting API:** A technical state machine that translates high-probability strata ($k$) into Meta/Google Demographic API payloads.
 
 ---
 
@@ -38,19 +39,19 @@ A scalable, cloud-native architecture for real-world political battlegrounds.
 ```mermaid
 graph TD
     subgraph "Data Science Layer"
-        A[Raw Ingestion] --> B[SHA-256 Hashing]
-        B --> C[Feature Engineering - Psych Multipliers]
-        C --> D[Propensity Scoring - P_s_i]
-        D --> E[Fairness Constraint Check]
+        A[Public Count-Based Ingestion] --> B[Spatial Join - Census Overlay]
+        B --> C[Feature Engineering - Behavioral Priors]
+        C --> D[MRP Bayesian Scoring - Strata Probabilities]
     end
     
     subgraph "Visualization & Strategy"
-        E --> F[Booth Aggregation View]
-        F --> G[Fairness & Anomaly Metrics]
+        D --> E[Booth Aggregation View]
+        E --> F[Fairness & Anomaly Metrics]
     end
     
     subgraph "Action Gate"
-        G --> H[Human Review / Approval]
+        F --> G[Human Review / Approval]
+        G --> H[Demographic Cohort API Payload]
         H --> I[Deployment to Ad API]
     end
 ```
@@ -58,5 +59,5 @@ graph TD
 ---
 
 ## 4. Compliance & Security Standards
-*   **Zero-Exposure PII:** Raw phone numbers never cross the scoring boundary.
-*   **Audit Log:** Persistent record of model weights, fairness scores, and human approvals for every campaign.
+*   **Zero-PII Boundary:** No individual voter names or phone numbers enter the Nethra scoring boundary.
+*   **Audit Log:** Persistent record of model weights, strata-level probabilities, and human approvals for every campaign deployment.

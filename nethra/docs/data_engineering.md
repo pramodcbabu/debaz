@@ -1,44 +1,35 @@
 # Data Engineering & Feature Architecture (MRP)
 
-## 1. Prototype Strategy: The Poststratification Frame
-For the Phase 1 prototype, we focus on constructing the **Poststratification Frame**. This frame represents the demographic census of every booth in the constituency.
+## 1. Prototype Strategy: The 96-Strata Frame
+For the Phase 1 prototype, we construct a **Poststratification Frame** consisting of 96 demographic buckets (strata) per booth. This provides the optimal balance between political granularity and statistical stability.
 
-### `poststratification_frame.csv` Schema (ML Input Layer)
-| Column | Type | Data Source | Description |
-| :--- | :--- | :--- | :--- |
-| `booth_id` | STRING | ECI Voter Rolls | Unique ID for the booth |
-| `stratum_id` | STRING | Derived | ID for the demographic cell (e.g., `M_18-25_LowInc`) |
-| `voter_count` | INT | ECI / Census | Number of voters belonging to this stratum |
-| `historical_base` | FLOAT | ECI Form 20 | Historical vote share for this booth |
-| `est_swing_prob` | FLOAT | **MRP Model** | Predicted $\hat{P}_k$ for this stratum |
-
----
-
-## 2. Data Ingestion & Transformation
-Nethra's data engineering pipeline is divided into three distinct tracks to support the MRP architecture:
-
-1.  **Public Track (The Frame):**
-    *   **ECI Voter Rolls:** Provides age and gender distributions per booth.
-    *   **Census Overlays:** Provides income and social category proxies for the booth geography.
-2.  **External Track (The Sentiment):**
-    *   **Social Listening:** Aggregated sentiment scores by demographic keywords to estimate the $\alpha$ parameters (swing probabilities) for each stratum.
-3.  **Private Track (The Calibration):**
-    *   **Cadre Interaction Logs:** Anonymized logs from ground apps (SARAL/Shakti) are used to adjust the **Bayesian Priors** of the Multilevel Model.
+### Strata Definition (The 96-Way Split)
+The frame is calculated by multiplying the following categorical features:
+1.  **Gender (ECI):** Male, Female (2)
+2.  **Age (ECI):** 18-25, 26-35, 36-50, 50+ (4)
+3.  **Social Category (Census):** SC, ST, General/OBC (3)
+4.  **Economic/Occupation (Census):** Cultivator, Ag-Laborer, Other-Worker, Non-Worker (4)
+*   **Total Strata per Booth:** $2 \times 4 \times 3 \times 4 = \mathbf{96 \text{ Buckets}}$
 
 ---
 
-## 3. The Privacy-First ETL Pipeline
-A core advantage of the MRP approach is the elimination of the need to store or process individual PII during the scoring phase.
+## 2. The Spatial Bridge Pipeline
+Since ECI Electoral Rolls (Booth level) and Census Data (Village/Ward level) do not share common administrative boundaries, Nethra employs a **GIS Spatial Join** to bridge the datasets:
 
-1.  **Count-Based Ingestion:** We ingest only the *counts* of voters per demographic bucket from the ECI voter rolls.
-2.  **Demographic Stratification:** We create a multidimensional matrix (the Frame) that represents all demographic combinations.
-3.  **Result:** The final dataset used for visualization and strategy contains zero individual-level data, ensuring absolute compliance with the **DPDP Act**.
+1.  **Booth Centroids:** We extract the Latitude/Longitude of the polling station from the ECI Form 20 or PDF metadata.
+2.  **Census Overlay:** We perform a spatial point-in-polygon join to identify which Census Village/Ward boundary contains the booth.
+3.  **Attribute Imputation:** We project the socio-economic proportions (Social Category, Occupation) of the Census area onto the known Age/Gender counts of the ECI Booth Roll.
+
+---
+
+## 3. Mathematical Viability & Privacy Gate
+*   **Density Check:** In an average Indian booth (~900 voters), a 96-strata model yields an average of **~9.3 voters per bucket**. 
+*   **k-Anonymity Filter:** Nethra enforces a strict $k \ge 10$ privacy threshold. If a bucket's voter count falls below 10, the data pipeline automatically merges it into the nearest logical demographic bucket (e.g., merging "Male, SC, 18-25, Cultivator" with "Male, SC, 26-35, Cultivator") until the threshold is met.
+*   **Compliance:** This ensures zero individual-level tracking and total compliance with the **DPDP Act**.
 
 ---
 
 ## 4. Transformed Output: `mock_constituencies.csv`
-The individual stratum-level predictions are aggregated to provide the **Strategic Dashboard** view for leadership.
-
 | Column | Type | Derivation |
 | :--- | :--- | :--- |
 | `booth_id` | STRING | Primary Key |
