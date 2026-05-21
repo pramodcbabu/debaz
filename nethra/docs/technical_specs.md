@@ -1,57 +1,63 @@
 # Nethra: Technical Specifications
 
 ## System Architecture
-Nethra is designed as a modular, cloud-native platform prioritizing data privacy and real-time processing of high-velocity social signals.
+Nethra is designed as a modular, cloud-native platform prioritizing data privacy, real-time processing of high-velocity social signals, and multi-lingual NLP.
 
 ```mermaid
 graph LR
     subgraph Frontend
         UI[Command Center - React/Next.js]
+        PartyApp[Existing Party App API Hook]
+    end
+    
+    subgraph Event Streaming
+        Kafka[Apache Kafka - Real-time Ingestion]
     end
     
     subgraph Backend
         API[FastAPI Gateway]
         Worker[Celery Task Queue]
-        LLM[LLM Service - OpenAI/Anthropic]
+        LLM[Localized NLP Pipeline - Fine-tuned LLaMA-3]
     end
     
     subgraph Data Persistence
         DB[(PostgreSQL - MetaData)]
-        Vector[(Pinecone/Milvus - Sentiment Vectors)]
-        Cache[(Redis - Real-time Stats)]
+        OLAP[(ClickHouse - Real-time Analytics)]
+        Vector[(Milvus - Sentiment Vectors)]
     end
     
     subgraph Integrations
         Meta[Meta Ads API]
         Google[Google Ads API]
-        WA[WhatsApp Business API]
+        WA[WhatsApp Business API - Tiered]
     end
 
-    UI <--> API
-    API <--> Worker
+    UI & PartyApp <--> API
+    API --> Kafka
+    Kafka --> Worker
     Worker <--> DB
+    Worker <--> OLAP
     Worker <--> LLM
     Worker <--> Vector
     Worker <--> Integrations
 ```
 
 ## Technology Stack
-- **Backend:** Python 3.11+, FastAPI, Celery
-- **Frontend:** Next.js, TailwindCSS, Framer Motion
-- **AI/ML:** PyTorch, Transformers, LangChain
-- **Database:** PostgreSQL (Relational), Pinecone (Vector Search)
-- **Infrastructure:** AWS/Azure, Docker, Kubernetes
+- **Backend:** Python 3.11+, FastAPI, Celery, Apache Kafka (for streaming high-volume cadre inputs).
+- **Frontend:** Next.js, TailwindCSS.
+- **AI/ML:** PyTorch, HuggingFace (Fine-tuned local language models for code-mixed text like "Tanglish" or "Hinglish").
+- **Database:** PostgreSQL (Relational metadata), ClickHouse (OLAP for sub-second aggregations of 60k+ booths), Milvus (Vector Search).
 
 ## Core API Integration Strategy
 ### 1. Phone Number Targeting (Custom Audiences)
-Nethra uses First-Party Data matching via the `Meta Ads API` and `Google Customer Match`. Phone numbers are hashed using SHA-256 before transmission to ensure privacy compliance.
-- **Payload:** `{ "schema": ["PHONE"], "data": ["hash1", "hash2", "..."] }`
-- **Match Rate Goal:** 70%+ for Indian mobile numbers.
+Nethra uses First-Party Data matching via the `Meta Ads API` and `Google Customer Match`.
+- **Privacy:** Phone numbers are hashed (SHA-256) *client-side* before transmission.
+- **Identity Resolution:** To address the 60-70% match rate, Nethra uses probabilistic device-graphing based on shared IP and location data to model "household-level" targeting when individual matching fails.
 
-### 2. Dynamic Content Generation
-The system utilizes an LLM-based agent to analyze booth-level grievances and generate 15-second video scripts. These are passed to a synthetic media engine (or routed to content creators) to generate hyper-localized Reels and YouTube Shorts.
+### 2. WhatsApp Business API (Anti-Spam & Compliance)
+To prevent the party's official WhatsApp numbers from being banned:
+- Nethra utilizes **Tiered Opt-in flows** (e.g., missed call campaigns, physical QR scans at rallies) to trigger user-initiated messaging, which avoids Meta's spam filters.
+- **Silent Period Compliance Mode:** An automated cron job that hard-pauses all active API dispatches 48 hours before voting day to comply with ECI regulations.
 
-## Security & Privacy
-- **Data Isolation:** Each political client has a dedicated database schema.
-- **PII Protection:** All voter phone numbers are encrypted at rest. Access is strictly audited and restricted to the Audience Dispatcher service.
-- **Audit Logging:** Every interaction with ad platforms is logged to provide verifiable metrics for the ROI calculations.
+### 3. Party IT Cell Integration
+Nethra does not replace existing party cadre apps. It exposes REST/GraphQL endpoints that seamlessly ingest unstructured reports from the party's existing mobile apps into the Kafka stream.

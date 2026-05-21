@@ -1,43 +1,35 @@
 # AI-Driven Survey & Sentiment Engine
 
 ## The Problem with Traditional Polling
-Traditional political polling is plagued by three major failures in the Indian context:
-- **Social Desirability Bias:** Voters often give "correct" answers to strangers rather than revealing their true dissatisfaction.
-- **Latency:** Physical surveys take weeks to process, missing rapid shifts in digital sentiment.
-- **Cost/Scale:** Large-scale physical polling is prohibitively expensive for constant monitoring.
+- **Social Desirability Bias:** Voters lie to strangers.
+- **Latency:** Physical surveys take weeks.
+- **Cost/Scale:** Prohibitively expensive.
 
 ## The Nethra Solution: Conversational Micro-Surveys
-Nethra bypasses these issues by engaging voters through familiar channels: **WhatsApp, Instagram DMs, and Facebook Messenger**. Instead of a sterile 50-question form, Nethra uses AI agents to conduct natural, 2-minute conversations.
+Nethra engages voters through familiar channels. Instead of a sterile form, Nethra uses AI agents to conduct natural conversations.
 
 ```mermaid
 sequenceDiagram
     participant V as Voter
-    participant A as Social Media Ad / QR Code
-    participant N as Nethra AI Agent
+    participant A as Organic Hook (Missed Call/QR)
+    participant N as Nethra Localized NLP Agent
     participant M as Mathematical Model
     
-    V->>A: Clicks "Share Your Issue" Ad
+    V->>A: Gives Missed Call to Campaign Number
     A->>N: Trigger WhatsApp Conversation
-    N->>V: "Hi! I'm Nethra. We're looking at water issues in Tiruchi East. Is this affecting you?"
-    V->>N: "Yes, and the roads are also bad!"
+    N->>V: "Hi! We're looking at water issues in Tiruchi East. Is this affecting you?"
+    V->>N: "Aama, thanni varala, roads kooda mosam!" (Code-mixed Tanglish)
+    N->>N: Intent & Entity Extraction (Water, Roads)
     N->>V: "That sounds frustrating. Who do you feel is responsible for this?"
-    V->>N: "The local councilor is useless, but I like the CM's new scheme."
+    V->>N: "Local MLA is useless."
     N->>M: Push Structured Sentiment Data
-    M->>M: Update Swing Voter Probability (0.75 - High Volatility)
+    M->>M: Update Swing Voter Probability
 ```
 
-### Primary Data Extraction Points
-- **Issue Mapping:** Automatically extracting specific local grievances (e.g., "Youth Unemployment", "Water Supply").
-- **Sentiment Scoring:** Using NLP to quantify the intensity of support or anger (-1.0 to +1.0).
-- **Swing Classification:** Identifying voters who express cross-party support.
-- **Verified Contact:** Capturing the voter's phone number for follow-up intervention via Custom Audiences.
+### Advanced Data Extraction Points
+- **Code-Mixed NLP:** Off-the-shelf OpenAI models struggle with deep local slang (e.g., UP rural dialects, Tanglish). Nethra utilizes fine-tuned open-source models (e.g., LLaMA-3) specifically trained on regional social media corpora for highly accurate **Intent Classification**.
+- **Entity Extraction:** Separating the *Issue* (Water) from the *Target* (Local MLA vs. Chief Minister). A voter angry at the local MLA but supportive of the CM is a prime swing target.
+- **Opt-in Seeding Strategy (Political Reality):** To initiate these conversations without spamming, parties will use "Missed Call Campaigns", Influencer bio-links, and "Scan to complain" QR codes at local tea shops.
 
-## Implementation Strategy
-### 1. Triggering Participation
-Participation is incentivized through highly localized digital ads or physical QR codes at local hubs leading to a WhatsApp Business API interface.
-
-### 2. The AI Conversation Engine
-Uses LLMs (GPT-4o or Claude 3.5) with strict system prompts to maintain political neutrality during data collection.
-
-### 3. Feedback Loop
-Data flows directly into the mathematical model, providing real-time signals on which booths are "flipping".
+## Feedback Loop & Gamification
+Data flows directly into the model. To ensure continued participation, the AI agent provides a "resolution loop" (e.g., "Thank you. Your concern about the road has been logged as #452 and sent to the district secretary").
