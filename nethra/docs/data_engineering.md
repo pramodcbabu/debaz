@@ -1,51 +1,47 @@
 # Data Engineering & Simulation Strategy
 
-## 1. Data Ingestion Pipeline (Streaming & Batch)
+## 1. Prototype Strategy: Mock Data First
+To ensure a rapid BD cycle with **Gemini-CLI**, we bypass all complex ETL (Extract, Transform, Load) pipelines for the Phase 1 prototype. 
+
+**Action:** We will generate a single, high-fidelity CSV file (`mock_constituencies.csv`) that represents the *output* of the proposed production pipeline. 
+
+### `mock_constituencies.csv` Schema:
+| Column | Description |
+| :--- | :--- |
+| `id` | Constituency / Booth ID |
+| `lat` / `lon` | Geographic coordinates for mapping |
+| `swing_voter_est` | Estimated number of swing voters |
+| `swing_voter_pct` | Density percentage (powers the heatmap) |
+| `top_issue_1` | Primary local grievance (e.g., "Youth Jobs") |
+| `top_issue_2` | Secondary local grievance (e.g., "Water Supply") |
+| `cadre_report_val` | The "fake" report from local workers (for anomaly demo) |
+| `historical_baseline` | The ECI truth (for anomaly demo) |
+
+## 2. Production Architecture (The IT Cell Pitch)
+When presenting to the party's IT cell, we showcase the scalable vision for ingesting real-world data:
+
 ```mermaid
 graph TD
-    subgraph Public Batch Sources
-        A[ECI Portal - Form 20 PDFs]
-        B[Open Data Repositories - CSV/JSON]
+    subgraph Public Data
+        A[ECI Form 20 PDFs] --> B[Tabula / OCR Cleaner]
+        B --> C[PostgreSQL Unified Voter Roll]
     end
     
-    subgraph Real-Time Private Sources
-        C[Missed Call Campaigns & Survey Bots]
-        D[Internal Cadre Apps]
+    subgraph Private Data
+        D[Internal Cadre Apps - SARAL/Shakti] --> E[Kafka Stream]
+        E --> C
     end
     
-    subgraph ETL & Streaming Process
-        A & B --> F[Data Cleaner - Airflow / Tabula OCR]
-        C & D --> K[Apache Kafka Stream]
-        K --> G[PII Hashing Engine - SHA256]
-        F & G --> H[ClickHouse OLAP & PostgreSQL]
+    subgraph Narrative Extraction
+        F[Social Media Listening - Public APIs] --> G[NLP Sentiment Clustering]
+        G --> C
     end
     
-    subgraph Model Consumption
-        H --> I[Booth Volatility Model]
-        H --> J[Audience Matcher API]
-    end
+    C --> H[BVI Calculation Engine]
 ```
 
-## 2. Public Data Acquisition Strategy
-- **Official Source:** Election Commission of India (ECI) **Form 20**.
-- **Community Aggregators:** **DataMeet (GitHub)**, **OpenCity.in**, and **Harvard Dataverse**.
-- **Handling PDF Brittleness:** 
-    - Pipeline uses **Tabula-py** and AWS Textract for OCR.
-    - **HITL (Human-in-the-Loop):** Failed parsings are sent to a dedicated triage queue for manual data entry by 15-member verification teams.
-
-## 3. Private Data Ecosystems
-- **Cadre App Integration:** Direct API hooks for apps like *SARAL* or *Shakti*.
-- **Data Points:**
-    - **Caste/Religion:** Primary indicators for social engineering.
-    - **Labharthi (Beneficiary) Status:** Maps households to welfare schemes (Housing, Food, Health).
-- **Missed Call Tunnelling:** Automated ingestion of phone numbers from missed-call service providers into the Kafka "Top-of-Funnel" topic.
-
-## 4. Data Lifecycle & Ownership
-- **Mandate:** The Political Party retains 100% legal ownership of the raw data. Nethra owns the analytical weights and model code.
-- **Lifecycle Hook:** Automated cryptographic shredding (using AES-256 key destruction) of all PII and hashed mapping tables 7 days post-election.
-- **Serialization:** Uses **Protobuf** for Kafka message schemas to ensure strict data validation across producers (Survey bots) and consumers (Analytics models).
-
-## 5. Anomaly Simulation (Testing)
-To validate the **Anomaly Detector**, our synthetic data engine injects:
-- **"Over-Optimism Bias":** Inflating support scores by +40% for 15% of records.
-- **"Duplicate Injection":** Simulating a volunteer submitting the same report multiple times to "pad" activity metrics.
+## 3. Data Acquisition Strategy (Production)
+*   **Historical Accuracy:** Mirroring ECI data from state CEO portals, parsed using automated Python scrapers.
+*   **Identity Resolution:** Using SHA-256 client-side hashing on voter phone numbers to allow matching against Meta Custom Audiences without exposing raw PII.
+*   **Data Sovereignty:** A clear technical mandate that the political client maintains 100% legal ownership of the raw datasets. 
+*   **Lifecycle:** Automated "Lifecycle Hook" that cryptographically shreds all PII data 7 days post-election.

@@ -1,19 +1,23 @@
 # Nethra Project Strategic Operating Manual
 
-This document defines the foundational mandates and operational workflows for project **Nethra**, a Political AI Engine.
+This document defines the foundational mandates and operational workflows for project **Nethra**.
 
-## 1. Project Core Mandates
-- **Documentation Precedence:** No implementation of core AI logic or data pipelines shall occur without corresponding approved documentation in the `docs/` folder.
-- **Privacy First:** All Voter PII (Specifically Phone Numbers) must be hashed using SHA-256 before being stored or transmitted to external ad platforms.
-- **Verification over Assumption:** Every intervention strategy must be backed by the Causal Inference (Treatment vs. Control) methodology documented in `docs/mathematical_model.html`.
-- **Dirty Data Zero Tolerance:** All incoming cadre reports must pass through the AI Anomaly Detection filter before influencing the Booth Volatility Index.
+## 1. Product Management Mandate: Dual-Track Execution
+- **Track 1 (The Pitch Prototype):** Prioritize speed and visual impact for Business Development. 
+    - **Tech Stack:** Streamlit, Python, Static CSV/JSON, Gemini API.
+    - **Zero-Friction:** No complex infrastructure (Kafka, ClickHouse) or paid subscriptions during this phase.
+- **Track 2 (The Production Vision):** Maintain the scalable, cloud-native architecture documentation to prove technical competence to client IT cells.
 
-## 2. Operational Workflows
-1. **Research & Simulation:** Before targeting a new region (e.g., UP, AP, or TN), mirroring of public ECI data must be completed.
-2. **Review Cycle:** Any change to the `mathematical_model.html` or `survey_design_engine.html` requires a "Brutal Analysis" session with the Project Lead.
-3. **Data Integrity:** The `/data/` directory is partitioned into `/data/public/` (mirrored truth) and `/data/simulated/` (synthetic private signals). Never mix real voter sentiment with simulated data in the same pipeline without explicit flagging.
+## 2. Project Core Mandates (The Nethra Essence)
+- **Swing Focus:** The primary goal is to locate the **Swing Voter Population** and identify the **Key Issues** driving their volatility.
+- **Intervention:** Every identified swing booth must have a corresponding AI-generated engagement campaign (Reels/Shorts scripts).
+- **Privacy First (Production):** All Voter PII must be hashed using SHA-256 before storage or transmission to ad platforms.
 
-## 3. Tech Stack Constraints
-- **Backend:** FastAPI for high-concurrency API needs.
-- **Targeting:** Meta Custom Audiences and Google Customer Match for phone-number based targeting.
-- **LLM Usage:** Prompt engineering must prioritize political neutrality during data collection (Surveys) and high-velocity virality during intervention (Ad Scripting).
+## 3. Gemini-CLI Workflows
+- **Scaffolding:** Gemini-CLI is authorized to autonomously scaffold the Streamlit UI and generate the mock data files.
+- **Modularity:** Keep the prototype logic in simple, modular Python files to minimize context usage and prevent "hallucination creep."
+- **Data Integrity:** The `/data/` directory will be used for static mock data (`mock_constituencies.csv`) for the prototype.
+
+## 4. License Compliance
+- **Open Source:** All software used in the prototype (Streamlit, Pandas, PyDeck, etc.) must be 100% free and open-source (MIT/Apache 2.0). 
+- **Zero Paid Subscriptions:** The prototype must not require the user to sign up for paid services (e.g., Twilio, AWS) for the demo to function.

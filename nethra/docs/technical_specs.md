@@ -1,70 +1,39 @@
 # Nethra: Technical Specifications
 
-## 1. System Architecture
-Nethra is a modular, cloud-native platform prioritizing data privacy, real-time processing of high-velocity social signals, and multi-lingual NLP.
+## 1. Dual-Track Architecture
+As a Product Management imperative to prioritize speed to market, Nethra employs a dual-track architecture.
+
+### Track 1: The Zero-Friction Prototype (Weeks 1-4)
+Optimized for rapid development with **Gemini-CLI**, visual impact, and zero-infrastructure overhead.
+- **Frontend & UI:** **Streamlit (Python)**. Provides native geospatial mapping (PyDeck) and rapid KPI dashboards with zero manual routing configuration.
+- **Backend & Data:** Static CSV/JSON files. No database to provision or manage.
+- **AI Engine:** **Google Gemini API** (via Vertex AI or AI Studio). Used to generate hyper-localized ad scripts based on booth-level issues.
+- **Licenses:** 100% Free/Open-Source (MIT/Apache 2.0).
+
+### Track 2: The Production Vision
+The scalable, secure architecture designed for the political party's IT cell.
+- **Cloud:** AWS (EKS for compute, MSK for Kafka).
+- **Analytics:** **ClickHouse** (OLAP) for sub-second aggregations over millions of social signals.
+- **Intervention:** Official Meta/Google Ads API for Custom Audience matching.
+- **NLP:** Localized LLaMA-3 fine-tuned for regional dialects, served via vLLM.
+
+## 2. Core Prototype Features (The Demo Flow)
+1. **The Swing Map:** A geospatial visualization of a target district. Hex-bins are color-coded by **Swing Voter Density**.
+2. **Constituency Deep-Dive:** Clicking a region populates the sidebar with:
+   - Estimated Swing Voter Population count.
+   - Top 3 Key Issues driving that population (e.g., "Toll Road Prices", "Water Quality").
+3. **Engagement Generator:** A "Generate Intervention" button that calls the Gemini API to output a 15-second Instagram Reel storyboard and script tailored to that region's issues.
+
+## 3. Data Flow (Prototype)
 
 ```mermaid
 graph LR
-    subgraph Frontend
-        UI[Command Center - React/Next.js]
-        PartyApp[Existing Party App API Hook]
-    end
-    
-    subgraph Event Streaming
-        Kafka[Apache Kafka - Real-time Ingestion]
-    end
-    
-    subgraph Backend
-        API[FastAPI Gateway]
-        Worker[Celery Task Queue]
-        LLM[Localized NLP Pipeline - Fine-tuned LLaMA-3]
-    end
-    
-    subgraph Data Persistence
-        DB[(PostgreSQL - MetaData)]
-        OLAP[(ClickHouse - Real-time Analytics)]
-        Vector[(Milvus - Sentiment Vectors)]
-    end
-    
-    subgraph Integrations
-        Meta[Meta Ads API]
-        Google[Google Ads API]
-        WA[WhatsApp Business API - Tiered]
-    end
-
-    UI & PartyApp <--> API
-    API --> Kafka
-    Kafka --> Worker
-    Worker <--> DB
-    Worker <--> OLAP
-    Worker <--> LLM
-    Worker <--> Vector
-    Worker <--> Integrations
+    A[mock_constituencies.csv] --> B[Streamlit Dashboard]
+    B --> C[Gemini API]
+    C --> D[Targeted Ad Script Output]
 ```
 
-## 2. Technology Stack & Infrastructure
-- **Cloud Infrastructure:** AWS (EKS for compute orchestration, MSK for managed Kafka, RDS for Postgres, ElastiCache for Redis).
-- **Backend:** Python 3.11+, FastAPI, Celery (for asynchronous task management).
-- **Frontend:** Next.js (App Router), TailwindCSS, Shadcn/UI, Framer Motion.
-- **AI/ML:** PyTorch, HuggingFace. Localized LLM: `Llama-3-8B-Instruct` fine-tuned with PEFT/LoRA for regional languages, served via **vLLM** for optimized throughput.
-- **Database:** PostgreSQL (Relational metadata), ClickHouse (OLAP for sub-second aggregations over millions of events), Milvus (Vector storage for sentiment embeddings).
-
-## 3. Core API Integration & Rate Limiting
-### 3.1 Custom Audiences (Meta/Google)
-- **PII Hashing:** SHA-256 hashing is performed **client-side** or in an isolated environment before transmission to ensure raw phone numbers never hit external logs.
-- **Queuing:** Celery workers handle rate-limited API calls to Meta/Google, implementing exponential backoff to handle transient 429/500 errors.
-
-### 3.2 WhatsApp Business API (Tiered Anti-Spam)
-- **Anti-Spam:** Utilizes Tiered Opt-in flows (Missed Call -> Template Message -> Session Message).
-- **Silent Period Compliance Mode:** A high-priority background job hard-stops all active campaign dispatches 48 hours prior to the voting window to ensure ECI compliance.
-
-## 4. Business & Cost Estimation
-- **Data Silos:** Each political client is provisioned with a physically isolated database (tenant-per-database) to ensure zero cross-contamination.
-- **DPDP Act Compliance:** Built-in "Right to Erasure" and automated cryptographic shredding of PII post-election cycle.
-- **Estimated Operational Cost:**
-    - **Infrastructural Floor:** ~$1,200/month (Base Kafka/ClickHouse/LLM GPU cluster).
-    - **Variable Interaction Cost:** ₹0.45 per WhatsApp interaction (inclusive of Meta fees and LLM tokens).
-
-## 5. Security & Auditability
-- **SOC2 Ready:** Comprehensive logging of all PII access.
-- **Role-Based Access Control (RBAC):** District-level secretaries can only view data within their assigned jurisdiction.
+## 4. Security & Compliance (Production)
+- **DPDP Act Compliance:** Automated PII shredding 7 days post-election.
+- **SHA-256 Hashing:** All phone numbers are hashed client-side before being pushed to ad platforms.
+- **Silent Period Kill Switch:** A global red button to halt all external API calls 48 hours before polling day.

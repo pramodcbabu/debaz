@@ -1,49 +1,36 @@
 # Nethra: The Mathematical Foundation
 
-## 1. The Booth Volatility Index (BVI) / Opportunity Score
-For party leadership, the BVI is presented as the **"Opportunity Score"** (0-10).
+## 1. The Core Objective: Swing Voter Density
+The essence of the Nethra model is to locate the "Moveable Middle." The primary output is the **Swing Voter Density ($S_d$)** per booth/constituency.
 
-$$ BVI = \alpha \cdot M_{hist} + \beta \cdot S_{vol} + \gamma \cdot I_{unrest} $$
+### Prototype Implementation: The Heuristic Model
+For the Phase 1 prototype, we use a simplified heuristic formula applied to our static mock data to calculate believable swing estimates for the dashboard.
 
-### Feature Vector Components:
-- **$M_{hist}$:** ECI Margin (1 - [Winner_Vote_Share - RunnerUp_Vote_Share]).
-- **$S_{vol}$:** Variance of sentiment across the survey demographic in the last 14 days.
-- **$I_{unrest}$:** Count of unique local grievance entities extracted via NLP, normalized per 1,000 voters.
+$$ S_d = (\alpha \cdot M_{vol}) + (\beta \cdot I_{salience}) $$
 
-## 2. Anomaly Detection: Anomaly (Dirty Data) Detector
-To catch "Over-Optimism Bias" (fabricated cadre reports):
-- **Model:** **Isolation Forest** (scikit-learn implementation).
-- **Features:** Reported Support %, Historical Support %, Local Survey Sentiment, Interaction Frequency.
-- **Threshold:** Anomalies (Score < -0.75) are automatically flagged, and the cadre report is discarded or severely down-weighted in the BVI calculation.
+- **$M_{vol}$ (Historical Volatility):** Calculated from ECI Form 20 data (1 - victory margin). A thin margin suggests high volatility.
+- **$I_{salience}$ (Issue Saliency):** A weight assigned to the intensity of local issues (e.g., how often "Youth Unemployment" is discussed in local digital circles).
+- **$S_d$:** The resulting density (0-1), which determines the color intensity of the hex-bin map.
 
-## 3. Causal Inference: ROI Measurement
-To solve the **"Spillover Effect"** (ads reaching the control group), we use **Synthetic Control Methods**.
-
-### Library: `CausalImpact` (Python/R)
-Instead of a random control booth in the same district, we build a **"Synthetic Twin"** using a weighted average of booths from *other* districts that share identical demographics and historical voting patterns but are not exposed to the ad campaign.
+## 2. Issue Mapping & Influence Potential
+Once the swing population is identified, we map them to **Influence Topics**.
 
 ```mermaid
-graph LR
-    subgraph Experiment
-        A[Target Booth A]
-        B[Weighted Average of Booths B, C, D]
-        A --> C[Treatment: Nethra Active]
-        B --> D[Synthetic Control: Status Quo]
-    end
-    
-    subgraph Result
-        C & D --> E[Difference-in-Differences Calculation]
-        E --> F[Causal ROI Report]
-    end
+graph TD
+    A[Historical ECI Results] --> C[Swing Density Calculation]
+    B[Simulated Issue Data] --> C
+    C --> D[Identify Target Cohorts]
+    D --> E[Map Issues to Cohorts]
+    E --> F[Generate Ad Intervention Scripts]
 ```
 
-## 4. The "Business Case" ROI Example
-**Booth #210 (Targeted):**
-- **Spend:** ₹12,000 (Targeted Reels + WhatsApp).
-- **Causal Swung Votes:** +182 (Determined via Synthetic Control).
-- **Cost Per Vote (CPV):** **₹66**.
+## 3. Causal Inference: The ROI Narrative (The Pitch)
+To prove to political clients that Nethra actually wins elections, we sell the concept of **Synthetic Control.**
 
-**Traditional Rally (Comparison):**
-- **Estimated CPV:** **₹500 - ₹800** (Logistics, food, transportation, venue).
+- **The Logic:** We compare a booth where Nethra ads were active (Treatment) against a mathematically constructed "Twin Booth" (Control) that was identical in demographics and historical margins but did not receive the ads.
+- **The Result:** The difference in vote share between the two is the **Causal Impact** of the AI campaign.
 
-*Conclusion:* Nethra is ~8x more efficient at securing the marginal vote required for victory.
+## 4. Anomaly Detection (Dirty Data)
+Political cadre often inflate their success reports.
+- **Prototype:** We flag specific booths where cadre reports (90% support) contradict the historical baseline (40% support).
+- **Production:** Uses **Isolation Forest** algorithms to detect multi-dimensional outliers in reporting, ensuring the party leadership sees the "Ground Truth."
