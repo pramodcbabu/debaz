@@ -1,42 +1,39 @@
-# Nethra: Behavioral Psychology & Influence Strategy
+# Nethra: Behavioral Data Science & Feature Engineering
 
-## 1. The Behavioral Data Science Mandate
-Nethra does not just identify voters; it seeks to understand the cognitive drivers of their decisions. By applying behavioral science to demographic and issue data, we can create content that resonates at a primal level.
-
-## 2. Core Framework: Pragmatic Cognitive Framing
-For the Phase 1 prototype, we focus on three high-impact cognitive biases to influence the "Moveable Middle":
-
-### A. Loss Aversion vs. Gain Framing
-*   **The Science:** Humans are twice as sensitive to potential losses as they are to equivalent gains.
-*   **Application:** If the top issue is "Youth Unemployment," the AI generates two frames:
-    *   *Gain Frame:* "Vote for [Candidate] to bring 10,000 new jobs."
-    *   *Loss Frame:* "Stop the opposition from taking away your family's financial future."
-*   **Recommendation:** Default to Loss Aversion for maximum impact in volatile booths.
-
-### B. Issue Salience & Emotional Priming
-*   **The Science:** People vote based on the issues that are most "top of mind" (salient) at the moment of decision.
-*   **Application:** The `I_salience` score in the mathematical model determines the "Prime Topic." The behavioral engine then "primes" the voter with localized imagery and language specific to that grievance (e.g., using regional dialects for water supply issues).
-
-### C. In-Group Favoritism (Hyper-Localization)
-*   **The Science:** Voters are more likely to trust messages that feel "local" and reflect their immediate social group.
-*   **Application:** The AI generates scripts that reference specific local landmarks, booth-level problems, and communal identities, making the "War Room" messaging feel like a "Neighbor-to-Neighbor" conversation.
+## 1. Pivot: From Content to Mathematical Features
+In the Nethra Engine, **Behavioral Psychology** is not just for generating ad scripts; it is a core component of the **Mathematical Model**. We convert cognitive biases and behavioral traits into quantifiable **Features** that predict the probability of a voter swinging.
 
 ---
 
-## 3. The Behavioral Feedback Loop
-In the production vision, Nethra tracks engagement metrics (click-through rates, video watch time) across different psychological frames.
+## 2. Quantifying Cognitive Biases
+For the Phase 1 prototype, we focus on the **$\gamma$ multiplier** (Behavioral Susceptibility) applied to local issues.
 
-| Frame | Engagement Rate | Result |
+### A. The Loss Aversion Index ($\gamma = 1.8$)
+*   **Feature Logic:** We categorize issues based on whether they represent a perceived loss (e.g., price hikes, tax increases) or a potential gain (e.g., new infrastructure).
+*   **Impact on Math:** Issues categorized under Loss Aversion receive a 1.8x weight in the Propensity Score calculation, as behavioral data shows voters are significantly more volatile when facing perceived losses.
+
+### B. Group-Identity Saliency ($\gamma = 1.4$)
+*   **Feature Logic:** Individuals show higher susceptibility to issues that impact their primary in-group (e.g., communal, regional, or linguistic groups).
+*   **Impact on Math:** If an issue is flagged as "Identity-Critical," it receives a higher multiplier, increasing the probability that voters in those demographics will be identified as "Moveable."
+
+---
+
+## 3. Modeling Behavioral Susceptibility
+We calculate a **Behavioral Susceptibility Score** for various cohorts by analyzing historical data:
+1.  **Reaction to Economic Shocks:** Analyzing how a booth's vote share shifted in the election immediately following a major economic policy change.
+2.  **Engagement Volatility:** Analyzing the variance in social sentiment engagement for different framing styles (Fear vs. Hope).
+
+### Feature: `psych_multiplier`
+This column in our data schema reflects the individual's modeled reaction to the primary local issue.
+
+| Issue Category | Behavioral Mechanism | Weight ($\gamma$) |
 | :--- | :--- | :--- |
-| Loss Aversion | 4.2% | **Primary Frame** for Booth X |
-| Gain Framing | 1.8% | Deprioritize |
-| Community Pride | 3.1% | Secondary Frame |
+| Price Hike / Tolls | **Loss Aversion** | 1.8 |
+| New Job Parks | **Future Discounting** | 1.0 |
+| Cultural Identity | **In-Group Favoritism** | 1.4 |
+| Local Crime/Safety | **Salience Bias** | 1.6 |
 
 ---
 
-## 4. Algorithmic Prompt Engineering (Behavioral)
-The LLM prompt is structured to include:
-1.  **Target Identity:** (e.g., "Young first-time voter in semi-urban booth")
-2.  **Primary Trigger:** (e.g., "Loss Aversion regarding toll road prices")
-3.  **Local Context:** (e.g., "Mention the flyover project delay")
-4.  **Action Bias:** (e.g., "Direct Call to Action: Vote on Monday to save your wallet.")
+## 4. Behavioral Testing (Production)
+In Track 2, we validate these weights using micro-surveys and digital engagement metrics, iteratively adjusting the $\gamma$ multipliers to improve the accuracy of the $P_s$ (Propensity Score) over time.

@@ -1,37 +1,36 @@
-# Nethra: Ethics, Privacy & Compliance
+# Nethra: Ethics & Algorithmic Fairness
 
-## 1. The Compliance-Ethics Nexus
-In Nethra, **Compliance** is the floor, but **Ethics** is the ceiling. We treat data privacy not just as a legal hurdle, but as a moral imperative to protect the democratic process.
-
-*   **Legal Compliance (DPDP Act):** We utilize SHA-256 hashing and client-side encryption to ensure no PII is exposed to third-party platforms.
-*   **Ethical Mirror:** This technical compliance serves the ethical goal of **Voter Sovereignty**. By ensuring PII is never stored or shared in its raw form, we prevent the creation of permanent, invasive surveillance profiles.
+## 1. Ethics in the Mathematical Model
+Ethics in Nethra is not an afterthought; it is a **Constraint** built into our algorithms. We focus on two core pillars: **Data Minimization** and **Algorithmic Fairness**.
 
 ---
 
-## 2. The Ethical "Red Lines" (Prohibited Actions)
-To maintain the integrity of the election and the brand of the political client, the following actions are strictly prohibited:
+## 2. Algorithmic Fairness: Avoiding Redlining
+Political micro-targeting often risks reinforcing social biases by ignoring or redlining certain demographic groups.
 
-1.  **Deepfakes & Synthetic Voices:** No AI-generated imagery or audio of real people (candidates or opponents) may be created. AI is used only for script generation and generic visual assets.
-2.  **Voter Suppression:** No content may be generated with the intent to discourage a population from voting or provide false information about polling locations/times.
-3.  **Identity Deception:** AI-generated content must not masquerade as personal communication from a real individual unless explicitly authorized and reviewed by that individual.
-
----
-
-## 3. Truthful Contrast: The Ethical Boundary
-Nethra adopts a **Truthful Contrast** policy.
-*   **Permitted:** Generating hard-hitting ads that highlight an opponent's factual voting record, public statements, or failed policy outcomes.
-*   **Prohibited:** Generating defamatory lies, unverified conspiracy theories, or ad-hominem attacks unrelated to public service.
+*   **The Mandate:** The model must identify the "Moveable Middle" based on individual propensity, not by using protected demographic classes (e.g., religion, caste) as primary predictive features.
+*   **The Constraint:** We apply a **Demographic Parity** check to our $P_s$ scores. If the model identifies swing voters with a disproportionate demographic bias that cannot be explained by historical volatility or issue affinity, the weights are automatically adjusted to ensure equitable visibility across all cohorts.
+*   **The Goal:** To provide the political client with a "True Map" of opportunity, not a biased one.
 
 ---
 
-## 4. Human-in-the-Loop (HITL) Mandate
-**No AI-generated script or campaign is ever deployed automatically.**
-*   The IT Cell acts as the "Ethical Gatekeeper."
-*   Every output from the Gemini API must be manually reviewed and clicked "Approved" within the Nethra Command Center before being pushed to ad platforms.
-*   This ensures a human agent is always responsible for the final message.
+## 3. Ethical Data Engineering: Minimization
+We adhere to the principle of **Data Minimization** to ensure voter privacy and comply with the **DPDP Act**.
+
+1.  **Feature Selection:** We only ingest demographic proxies (e.g., age bracket, broad income bands) rather than granular personal histories.
+2.  **Transient PII:** Personal Identifiable Information (Names, Phone Numbers) is used ONLY for the initial hashing and scoring process.
+3.  **The "Scrub" Pipeline:** Once the `voter_id_hash` and `p_swing` are generated, the raw source record is purged from the environment. The resulting "Intelligence Dataset" contains no raw PII.
 
 ---
 
-## 5. Data Sovereignty & The Kill Switch
-*   **Sovereignty:** The political party maintains 100% legal and technical ownership of the raw data. Nethra is a tool, not a data broker.
-*   **The Kill Switch:** A prominent red button in the UI halts all outbound API calls to ad platforms. This is mandated for use 48 hours before polling (The Silent Period) to comply with ECI regulations and ethical norms.
+## 4. Human-in-the-Loop (HITL) for Interventions
+While the engine identifies *who* to target, we mandate human review for *how* they are targeted.
+
+*   **Approval Gate:** No intervention (ad, message, or campaign) is ever deployed to an external API without an explicit "Approved" flag from a human operator in the IT Cell.
+*   **Auditability:** Every intervention has a persistent ID linked to the model version and the human approver, ensuring total accountability for the campaign's ethical footprint.
+
+---
+
+## 5. Security & Sovereignty
+*   **Self-Custody:** All data (hashed or raw) remains within the political party's owned cloud infrastructure.
+*   **Zero Data Brokering:** Nethra is a closed-loop intelligence system. No data is ever sold or shared with third-party brokers.

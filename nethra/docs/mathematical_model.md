@@ -1,49 +1,46 @@
 # Nethra: The Mathematical Foundation
 
-## 1. The Core Objective: Swing Voter Density ($S_d$)
-The primary goal for both the **Political Leader** and the **ML Team** is to locate the "Moveable Middle." We calculate **Swing Voter Density ($S_d$)** at the booth level to determine where to deploy resources.
+## 1. The Core Objective: Individual Swing Propensity ($P_s$)
+The essence of Nethra is to move from aggregate booth statistics to individual-level predictions. We calculate a **Propensity Score ($P_{s_i}$)** for every voter in the constituency.
 
-### Prototype Implementation: The Heuristic Model
-$$ S_d = (\alpha \cdot M_{vol}) + (\beta \cdot I_{salience}) $$
+### The Individual Propensity Model
+$$ P_{s_i} = \sigma(\theta \cdot X_i) $$
 
-*   **$M_{vol}$ (Historical Volatility):** Calculated from ECI Form 20 data ($1 - \text{victory margin}$). A thin margin suggests high volatility.
-*   **$I_{salience}$ (Issue Saliency):** A weight (0-1) assigned to the intensity of local issues. This score is used by the **Behavioral Engine** to determine the primary emotional frame (e.g., High Salience + Negative Sentiment = Loss Aversion Frame).
-*   **$S_d$:** Resulting density (0-1), powering the heatmap visualization.
-
----
-
-## 2. Individual Identification: Deterministic Lookalike Pipeline
-While $S_d$ identifies **where** the swing voters are, the **Deterministic Lookalike Pipeline** identifies **who** they are to enable micro-targeting.
-
-### ML & Data Engineering Perspective: The Pipeline
-1.  **Seed Audience Extraction:** We ingest PII (Phone/Email) from internal Cadre Apps (e.g., voters marked as "Undecided" or "Influential" by ground workers).
-2.  **Privacy-Preserving Hashing:**
-    *   **Action:** Apply `SHA-256` hashing to raw PII *before* it leaves the secure environment.
-    *   **Logic:** `Hashed_ID = SHA256(Raw_Phone + Salt)`.
-3.  **Platform Matching:** Upload `Hashed_ID` lists to Meta/Google Custom Audiences.
-4.  **Lookalike Modeling ($L_m$):**
-    $$ L_m = \text{Top } 1\% \text{ of users matching demographics/interests of the Seed Audience in Booth } X. $$
-
-### Political & IT Cell Perspective: Security & Precision
-*   **DPDP Compliance:** No raw PII is ever uploaded to ad platforms. The hashing is irreversible.
-*   **Hyper-Precision:** Instead of spray-and-pray ads, the IT cell targets only those with a high mathematical propensity to swing, maximizing budget efficiency.
+Where:
+*   **$X_i$:** A feature vector for voter $i$ containing demographic proxies, historical volatility, and issue affinity.
+*   **$\sigma$:** The logistic function, mapping the score to a probability (0-1).
+*   **$\theta$:** The weight vector learned from historical election data and sentiment shifts.
 
 ---
 
-## 3. Causal Inference: ROI via Synthetic Control
-To prove to leadership that Nethra is winning elections, we use the **Synthetic Control Method**.
+## 2. Behavioral Feature Engineering: The $\gamma$ Multiplier
+**Behavioral Psychology** is integrated directly into the math as a weight multiplier for issue saliency. We don't just measure if a voter cares about an issue; we measure their **Psychological Susceptibility** to that issue's framing.
 
-*   **The Problem:** We cannot know what would have happened in Booth A if we *hadn't* run Nethra ads.
-*   **The Solution:**
-    1.  **Target Booth ($T$):** The booth receiving Nethra interventions.
-    2.  **Synthetic Control ($C^*$):** A weighted combination of other booths that didn't receive ads but historically mirrored Booth T's voting patterns.
-    3.  **Causal Impact:** $\Delta = \text{VoteShare}(T) - \text{VoteShare}(C^*)$.
-*   **ROI Narrative:** "For every ₹1 spent on Nethra, we generated a $\Delta$ of 150 votes compared to the baseline."
+### Behavioral Salience ($I_{s_i}$)
+$$ I_{s_i} = \sum_{j=1}^{n} (A_{ij} \cdot \omega_j \cdot \gamma_j) $$
+
+*   **$A_{ij}$:** Affinity of voter $i$ to issue $j$.
+*   **$\omega_j$:** Global saliency of issue $j$.
+*   **$\gamma_j$ (The Behavioral Multiplier):** A weight assigned based on cognitive biases.
+    *   *Loss Aversion Issues* (e.g., Toll Price Hikes): $\gamma = 1.8$
+    *   *Gain Framing Issues* (e.g., New IT Parks): $\gamma = 1.0$
+    *   *Identity/Pride Issues*: $\gamma = 1.4$
 
 ---
 
-## 4. Anomaly Detection (Ground Truth Validation)
-Political cadre often inflate success reports to please leadership.
+## 3. Ethical Constraints: Algorithmic Fairness
+To prevent the model from systematically "redlining" or ignoring specific demographics (which is both an ethical and a political risk), we introduce a **Fairness Constraint** during the model optimization.
 
-*   **Logic:** We flag booths where `Cadre_Report_Score` significantly deviates from the `Historical_Trend_Line` and `Social_Sentiment_Score`.
-*   **Implementation:** Using **Isolation Forest** algorithms to detect multi-dimensional outliers, protecting leadership from "dirty data."
+### Demographic Parity Constraint
+$$ |P(P_s > \tau | D = a) - P(P_s > \tau | D = b)| < \epsilon $$
+
+*   The difference in the probability of being identified as a "Swing Voter" ($P_s > \tau$) between any two demographic groups ($a, b$) must be less than a small threshold $\epsilon$. 
+*   This ensures the AI engine identifies the *true* moveable middle, rather than just reinforcing existing social biases in the data.
+
+---
+
+## 4. Anomaly Detection: Ground Truth Validation
+We use **Isolation Forests** to detect multi-dimensional outliers where ground reports from cadre ($C_{rep}$) significantly deviate from the predicted propensity distribution ($P_s$) and historical ECI baselines ($H_{base}$).
+
+$$ \text{Anomaly Score}(i) = \text{IsolationForest}(C_{rep}, P_s, H_{base}) $$
+*   High scores flag booths where local reports are likely "dirty" or inflated, protecting the leadership from making decisions based on false cadre optimism.

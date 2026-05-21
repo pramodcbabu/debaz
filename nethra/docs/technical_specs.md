@@ -1,63 +1,62 @@
 # Nethra: Technical Specifications
 
 ## 1. Dual-Track Architecture
-Nethra employs a dual-track strategy to balance immediate Business Development (BD) needs with long-term production scalability.
+Nethra employs a dual-track strategy, prioritizing **Mathematical Precision** in the prototype.
 
-### Track 1: The Zero-Friction Prototype (The BD Asset)
-Designed for visual impact and speed to market.
-*   **Frontend:** **Streamlit**. Provides the "Command Center" UI with native geospatial mapping.
-*   **Data Layer:** Static CSV/JSON. Simulates real-time pipelines using `mock_constituencies.csv`.
-*   **Security (Simulated):** Demonstrates the SHA-256 hashing pipeline using fake PII to prove privacy capabilities to IT cells.
-*   **AI Engine:** **Google Gemini API**. Generates hyper-localized social media interventions.
+### Track 1: The Zero-Friction Prototype (The ML Asset)
+Designed to prove the effectiveness of the propensity engine.
+*   **Frontend:** **Streamlit**. Renders 3D geospatial maps and individual propensity distributions using PyDeck and Plotly.
+*   **Data Engine:** Static CSV/JSON. Uses `individual_voter_features.csv` as the primary ML input layer.
+*   **Model Core:** Simulated **Logistic Regression/XGBoost** scoring, incorporating behavioral multipliers and fairness constraints.
+*   **AI Intervention:** Minimal use of Gemini API to demonstrate the final output of the intelligence pipeline.
 
-### Track 2: The Production Vision (The Enterprise Solution)
-A scalable, cloud-native architecture designed for the party's IT cell.
-*   **Cloud:** AWS (EKS for compute, MSK for Kafka).
-*   **Analytics Engine:** **ClickHouse** (OLAP) for sub-second aggregations over millions of voter/sentiment signals.
-*   **Security:** Native integration with internal Cadre Apps (SARAL/Shakti) via secure APIs.
-*   **Data Sovereignty:** All hashed data is stored in the party's VPC.
+### Track 2: The Production Vision
+A scalable, cloud-native architecture for real-world political battlegrounds.
+*   **Cloud:** AWS (EKS, MSK).
+*   **Real-time Analytics:** **ClickHouse** (OLAP) for aggregating millions of individual $P_s$ scores instantly.
+*   **Security:** Native SHA-256 hashing at the point of ingestion.
 
 ---
 
 ## 2. Core Functional Requirements
 
-### For the Political Leadership (Business Value)
-*   **Swing Voter Heatmap:** Real-time visualization of voter volatility.
-*   **Anomaly Detection:** Identification of fraudulent ground reports from cadre.
-*   **ROI Dashboard:** Proof of causal impact via **Synthetic Control** modeling.
-*   **Ethical Kill Switch:** Global "Silent Period" button to halt all AI ad deployments 48 hours before polling.
+### For the Political Leadership (Analytical Intel)
+*   **Individual Propensity Map:** 3D visualization of booths color-coded by voter volatility.
+*   **Fairness Audit:** Live tracking of the model's demographic parity metrics.
+*   **Anomaly Engine:** Flagging fraudulent ground reports using multi-dimensional outlier detection.
 
 ### For the ML/Data Engineering Team (Technical Rigor)
-*   **Deterministic Lookalike Pipeline:** SHA-256 hashing of phone numbers for privacy-preserving ad targeting.
-*   **Heuristic Logic:** Calculation of **Swing Voter Density ($S_d$)** using ECI margins and social saliency.
-*   **Data Contracts:** Strict JSON schemas for ingesting raw ground reports and social sentiment.
-*   **HITL Approval Gate:** A technical state machine requiring a manual "Approved" flag before the intervention output is sent to external ad APIs.
+*   **Behavioral Weighting:** Integration of cognitive multipliers ($\gamma$) into the feature engineering pipeline.
+*   **Fairness Gates:** Automated mathematical constraints to prevent demographic redlining.
+*   **Data Minimization Pipeline:** Automated purging of raw PII post-scoring to ensure DPDP compliance.
+*   **State Machine:** A "Human-in-the-Loop" approval gate for the intervention deployment.
 
 ---
 
 ## 3. Data & AI Integration Flow
 
 ```mermaid
-graph LR
-    subgraph "Data Engineering"
-        A[Raw PII / ECI Data] --> B[SHA-256 Hashing]
-        B --> C[Unified Analytics Layer]
+graph TD
+    subgraph "Data Science Layer"
+        A[Raw Ingestion] --> B[SHA-256 Hashing]
+        B --> C[Feature Engineering - Psych Multipliers]
+        C --> D[Propensity Scoring - P_s_i]
+        D --> E[Fairness Constraint Check]
     end
     
-    subgraph "ML & Visualization"
-        C --> D[Swing Density Calculation]
-        D --> E[Streamlit Dashboard]
+    subgraph "Visualization & Command"
+        E --> F[Booth Aggregation View]
+        F --> G[Fairness & Anomaly Metrics]
     end
     
-    subgraph "Intervention"
-        E --> F[Gemini API]
-        F --> G[Tailored Ad Script]
+    subgraph "Action Gate"
+        G --> H[Human Review / Approval]
+        H --> I[Deployment to Ad API]
     end
 ```
 
 ---
 
 ## 4. Compliance & Security Standards
-*   **DPDP Act 2023:** Full alignment via client-side hashing and automated data shredding.
-*   **Zero-Exposure PII:** No raw phone numbers or names ever leave the local transient memory during the hashing process.
-*   **Audit Log:** Full traceability of all AI-generated campaigns to prevent rogue messaging.
+*   **Zero-Exposure PII:** Raw phone numbers never cross the scoring boundary.
+*   **Audit Log:** Persistent record of model weights, fairness scores, and human approvals for every campaign.
