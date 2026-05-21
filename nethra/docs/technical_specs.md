@@ -23,7 +23,7 @@ A scalable, cloud-native architecture for real-world political battlegrounds.
 ### For the Political Leadership (Analytical Intel)
 *   **Individual Propensity Map:** 3D visualization of booths color-coded by voter volatility.
 *   **Fairness Audit:** Live tracking of the model's demographic parity metrics.
-*   **Anomaly Engine:** Flagging fraudulent ground reports using multi-dimensional outlier detection.
+*   **Anomaly Engine:** Flagging anomalous ground reports using multi-dimensional outlier detection.
 
 ### For the ML/Data Engineering Team (Technical Rigor)
 *   **Behavioral Weighting:** Integration of cognitive multipliers ($\gamma$) into the feature engineering pipeline.
@@ -44,7 +44,7 @@ graph TD
         D --> E[Fairness Constraint Check]
     end
     
-    subgraph "Visualization & Command"
+    subgraph "Visualization & Strategy"
         E --> F[Booth Aggregation View]
         F --> G[Fairness & Anomaly Metrics]
     end

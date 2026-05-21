@@ -1,13 +1,13 @@
 # Nethra: The Political Data Intelligence Engine
 
-> "Identify the Propensity. Quantify the Behavior. Secure the Vote."
+> "Identify the Propensity. Quantify the Behavior. Optimized Voter Strategy."
 
 ## Executive Summary (Leadership & IT Cell Perspective)
-Nethra is a high-precision **Mathematical Intelligence Engine** designed to identify the **Moveable Middle** at an individual level. By moving beyond aggregate polling, Nethra provides a transparent, data-driven map of exactly who is likely to swing and the mathematical factors driving their volatility.
+Nethra is a high-precision **Mathematical Intelligence Engine** designed to identify the **moveable middle** through individual propensity scoring. By utilizing advanced data modeling, Nethra provides a transparent and objective analysis of voter volatility, enabling strategic resource allocation based on data-driven insights.
 
-*   **Individual Precision:** Moving from booth-level guesses to individual **Propensity Scores ($P_s$)**.
-*   **Ethical Rigor:** Built-in **Algorithmic Fairness** audits to prevent demographic redlining and ensure equitable campaign visibility.
-*   **Actionable Intelligence:** One-click transition from identified swing cohorts to ethically-vetted interventions.
+*   **Precision Modeling:** Transition from booth-level estimation to individual **Propensity Scores ($P_s$)**.
+*   **Algorithmic Governance:** Integrated **Algorithmic Fairness** audits ensure demographic parity and mitigate model bias.
+*   **Strategic Deployment:** Facilitates the transition from analytical insights to ethically-validated engagement strategies.
 
 ## Technical Foundation (ML & Data Engineering Perspective)
 Nethra is a feature-rich data science platform built on a dual-track architecture.

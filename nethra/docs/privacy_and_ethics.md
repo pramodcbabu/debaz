@@ -19,7 +19,7 @@ We adhere to the principle of **Data Minimization** to ensure voter privacy and 
 
 1.  **Feature Selection:** We only ingest demographic proxies (e.g., age bracket, broad income bands) rather than granular personal histories.
 2.  **Transient PII:** Personal Identifiable Information (Names, Phone Numbers) is used ONLY for the initial hashing and scoring process.
-3.  **The "Scrub" Pipeline:** Once the `voter_id_hash` and `p_swing` are generated, the raw source record is purged from the environment. The resulting "Intelligence Dataset" contains no raw PII.
+3.  **The Automated Deletion Pipeline:** Once the `voter_id_hash` and `p_swing` are generated, the raw source record is purged from the environment. The resulting "Intelligence Dataset" contains no raw PII.
 
 ---
 

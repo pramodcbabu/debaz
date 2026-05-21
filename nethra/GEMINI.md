@@ -9,6 +9,7 @@ Every plan, architectural decision, and feature review MUST explicitly address t
 3.  **Behavioral Psychology:** Focus on **Quantifiable Traits** ( multipliers $\gamma$) and Behavioral Susceptibility features.
 4.  **Ethics & Data Privacy:** Focus on **Algorithmic Fairness**, Data Minimization, and HITL Safeguards.
 5.  **Product Management (PM):** Focus on Scope Control, Data Science Rigor, and implementation readiness.
+Every plan, revision, and documentation review MUST maintain a professional, neutral, and objective tone. Simple enough for the client to follow, but technically deep for the engineering team. Avoid dramatic or sensationalist terminology.
 
 ## 2. Product Management Mandate: Dual-Track Execution
 - **Track 1 (The ML Prototype):** Prioritize mathematical precision and individual-level scoring.

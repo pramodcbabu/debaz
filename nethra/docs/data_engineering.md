@@ -27,7 +27,7 @@ To ensure compliance with the **DPDP Act** and ethical standards, Nethra employs
 ---
 
 ## 3. Transformed Output: `mock_constituencies.csv`
-The individual scores are aggregated to provide the **War Room** view for leadership.
+The individual scores are aggregated to provide the **Strategic Dashboard** view for leadership.
 
 | Column | Type | Derivation |
 | :--- | :--- | :--- |

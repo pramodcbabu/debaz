@@ -1,6 +1,6 @@
 # Nethra Command Center: Visualization Specs
 
-## 1. Prototype UI Strategy (The War Room Aesthetic)
+## 1. Prototype UI Strategy (Strategic Command Interface)
 The prototype UI is designed to demonstrate **Analytical Intelligence** over content generation. It focuses on visualizing the distribution of individual propensity scores and the fairness of the underlying model.
 
 *   **Tech Stack:** Streamlit (Frontend), PyDeck (Geospatial Mapping), Plotly (ML Distribution Plots).
@@ -15,7 +15,7 @@ The prototype UI is designed to demonstrate **Analytical Intelligence** over con
 
 ```text
 +-------------------------------------------------------------+
-| NETHRA COMMAND CENTER | [Red Button] SILENT PERIOD KILL SWITCH |
+| NETHRA COMMAND CENTER | [Override] SILENT PERIOD DEPLOYMENT HALT |
 +-------------------------------------------------------------+
 |                                                             |
 |   [ 3D HEX-BIN MAP OF DISTRICT ]                            |

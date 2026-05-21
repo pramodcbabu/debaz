@@ -43,4 +43,4 @@ $$ |P(P_s > \tau | D = a) - P(P_s > \tau | D = b)| < \epsilon $$
 We use **Isolation Forests** to detect multi-dimensional outliers where ground reports from cadre ($C_{rep}$) significantly deviate from the predicted propensity distribution ($P_s$) and historical ECI baselines ($H_{base}$).
 
 $$ \text{Anomaly Score}(i) = \text{IsolationForest}(C_{rep}, P_s, H_{base}) $$
-*   High scores flag booths where local reports are likely "dirty" or inflated, protecting the leadership from making decisions based on false cadre optimism.
+*   High scores flag booths where local reports are anomalous or inflated, providing leadership with objective, data-backed insights.
