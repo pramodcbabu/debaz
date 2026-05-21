@@ -1,39 +1,63 @@
 # Nethra: Technical Specifications
 
 ## 1. Dual-Track Architecture
-As a Product Management imperative to prioritize speed to market, Nethra employs a dual-track architecture.
+Nethra employs a dual-track strategy to balance immediate Business Development (BD) needs with long-term production scalability.
 
-### Track 1: The Zero-Friction Prototype (Weeks 1-4)
-Optimized for rapid development with **Gemini-CLI**, visual impact, and zero-infrastructure overhead.
-- **Frontend & UI:** **Streamlit (Python)**. Provides native geospatial mapping (PyDeck) and rapid KPI dashboards with zero manual routing configuration.
-- **Backend & Data:** Static CSV/JSON files. No database to provision or manage.
-- **AI Engine:** **Google Gemini API** (via Vertex AI or AI Studio). Used to generate hyper-localized ad scripts based on booth-level issues.
-- **Licenses:** 100% Free/Open-Source (MIT/Apache 2.0).
+### Track 1: The Zero-Friction Prototype (The BD Asset)
+Designed for visual impact and speed to market.
+*   **Frontend:** **Streamlit**. Provides the "Command Center" UI with native geospatial mapping.
+*   **Data Layer:** Static CSV/JSON. Simulates real-time pipelines using `mock_constituencies.csv`.
+*   **Security (Simulated):** Demonstrates the SHA-256 hashing pipeline using fake PII to prove privacy capabilities to IT cells.
+*   **AI Engine:** **Google Gemini API**. Generates hyper-localized social media interventions.
 
-### Track 2: The Production Vision
-The scalable, secure architecture designed for the political party's IT cell.
-- **Cloud:** AWS (EKS for compute, MSK for Kafka).
-- **Analytics:** **ClickHouse** (OLAP) for sub-second aggregations over millions of social signals.
-- **Intervention:** Official Meta/Google Ads API for Custom Audience matching.
-- **NLP:** Localized LLaMA-3 fine-tuned for regional dialects, served via vLLM.
+### Track 2: The Production Vision (The Enterprise Solution)
+A scalable, cloud-native architecture designed for the party's IT cell.
+*   **Cloud:** AWS (EKS for compute, MSK for Kafka).
+*   **Analytics Engine:** **ClickHouse** (OLAP) for sub-second aggregations over millions of voter/sentiment signals.
+*   **Security:** Native integration with internal Cadre Apps (SARAL/Shakti) via secure APIs.
+*   **Data Sovereignty:** All hashed data is stored in the party's VPC.
 
-## 2. Core Prototype Features (The Demo Flow)
-1. **The Swing Map:** A geospatial visualization of a target district. Hex-bins are color-coded by **Swing Voter Density**.
-2. **Constituency Deep-Dive:** Clicking a region populates the sidebar with:
-   - Estimated Swing Voter Population count.
-   - Top 3 Key Issues driving that population (e.g., "Toll Road Prices", "Water Quality").
-3. **Engagement Generator:** A "Generate Intervention" button that calls the Gemini API to output a 15-second Instagram Reel storyboard and script tailored to that region's issues.
+---
 
-## 3. Data Flow (Prototype)
+## 2. Core Functional Requirements
+
+### For the Political Leadership (Business Value)
+*   **Swing Voter Heatmap:** Real-time visualization of voter volatility.
+*   **Anomaly Detection:** Identification of fraudulent ground reports from cadre.
+*   **ROI Dashboard:** Proof of causal impact via **Synthetic Control** modeling.
+*   **Ethical Kill Switch:** Global "Silent Period" button to halt all AI ad deployments 48 hours before polling.
+
+### For the ML/Data Engineering Team (Technical Rigor)
+*   **Deterministic Lookalike Pipeline:** SHA-256 hashing of phone numbers for privacy-preserving ad targeting.
+*   **Heuristic Logic:** Calculation of **Swing Voter Density ($S_d$)** using ECI margins and social saliency.
+*   **Data Contracts:** Strict JSON schemas for ingesting raw ground reports and social sentiment.
+*   **HITL Approval Gate:** A technical state machine requiring a manual "Approved" flag before the intervention output is sent to external ad APIs.
+
+---
+
+## 3. Data & AI Integration Flow
 
 ```mermaid
 graph LR
-    A[mock_constituencies.csv] --> B[Streamlit Dashboard]
-    B --> C[Gemini API]
-    C --> D[Targeted Ad Script Output]
+    subgraph "Data Engineering"
+        A[Raw PII / ECI Data] --> B[SHA-256 Hashing]
+        B --> C[Unified Analytics Layer]
+    end
+    
+    subgraph "ML & Visualization"
+        C --> D[Swing Density Calculation]
+        D --> E[Streamlit Dashboard]
+    end
+    
+    subgraph "Intervention"
+        E --> F[Gemini API]
+        F --> G[Tailored Ad Script]
+    end
 ```
 
-## 4. Security & Compliance (Production)
-- **DPDP Act Compliance:** Automated PII shredding 7 days post-election.
-- **SHA-256 Hashing:** All phone numbers are hashed client-side before being pushed to ad platforms.
-- **Silent Period Kill Switch:** A global red button to halt all external API calls 48 hours before polling day.
+---
+
+## 4. Compliance & Security Standards
+*   **DPDP Act 2023:** Full alignment via client-side hashing and automated data shredding.
+*   **Zero-Exposure PII:** No raw phone numbers or names ever leave the local transient memory during the hashing process.
+*   **Audit Log:** Full traceability of all AI-generated campaigns to prevent rogue messaging.

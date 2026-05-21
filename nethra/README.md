@@ -2,21 +2,21 @@
 
 > "Locate the Swing Voter. Identify their Issues. Generate the Influence Campaign."
 
-## Overview
+## Executive Summary (Leadership & IT Cell Perspective)
+Nethra is a next-generation political intelligence platform designed to maximize the **ROI of every campaign dollar**. By moving beyond traditional mass rallies, Nethra pinpoints the **"Moveable Middle"**—the swing voters who actually decide election outcomes. 
 
-Nethra is a next-generation political intelligence platform designed for the era of the **"Algorithm Election."** Inspired by the tectonic shifts in the May 2026 Tamil Nadu Assembly elections, Nethra moves beyond traditional rallies to focus on the only population that decides the outcome: **The Swing Voter.**
+*   **Actionable Intelligence:** Identify exactly which booths are volatile and why.
+*   **Security & Sovereignty:** Built with DPDP Act compliance in mind. All PII is hashed client-side (SHA-256), ensuring the party maintains 100% data sovereignty.
+*   **Rapid Intervention:** Transition from data discovery to AI-generated social media campaigns in seconds.
 
-## The Essence of the Prototype (Phase 1)
-Our first prototype is a high-impact, visual demonstration built for Business Development (BD). It answers three critical questions for any political party:
-1.  **Where are they?** A geospatial map pinpointing high-density swing voter constituencies and booths.
-2.  **What do they care about?** Real-time identification of the specific local issues (e.g., Youth Unemployment, Water Supply) driving the volatility in those areas.
-3.  **How do we influence them?** One-click generation of AI-crafted social media campaigns (Instagram Reels, YouTube Shorts) tailored to those specific voters and issues.
+## Technical & Strategic Foundation (The 5-Perspective Framework)
+Nethra is built on a multidisciplinary foundation to ensure total campaign success:
 
-## Product Strategy: The PM Perspective
-To accelerate time-to-market and ensure zero-friction development via **Gemini-CLI**, Nethra adopts a **Dual-Track Architecture**:
-
-*   **Track 1: The Pitch Prototype (Weeks 1-4):** Optimized for visual impact using **Streamlit**, **Static Mock Data**, and **Google Gemini API**. It requires zero manual infrastructure setup and zero paid licenses.
-*   **Track 2: The Production Vision:** A scalable, cloud-native architecture (Kafka, ClickHouse, Social Media Listening) designed to ingest real-world signals at scale.
+*   **Political Leadership:** Maximizing ad spend ROI and identifying volatile booths.
+*   **ML & Data Engineering:** Deterministic lookalike matching and scalable ingestion.
+*   **Behavioral Psychology:** Leveraging cognitive biases (Loss Aversion) for messaging resonance.
+*   **Ethics & Data Privacy:** Ensuring "Truthful Contrast" and DPDP-compliant privacy pipelines.
+*   **Product Management:** Maintaining the **Dual-Track Architecture** (Prototype vs. Production).
 
 ## Core Demo Flow
 
@@ -24,15 +24,16 @@ To accelerate time-to-market and ensure zero-friction development via **Gemini-C
 graph LR
     A[Constituency Map] --> B[Identify Swing Population]
     B --> C[Extract Local Key Issues]
-    C --> D[Generate Social Media Intervention]
+    C --> D[Generate Tailored AI Intervention]
 ```
 
 ## Project Structure
-*   `README.md`: Project overview and strategy.
-*   `GEMINI.md`: Project mandates and Gemini-CLI workflows.
+*   `README.md`: Project overview and strategic perspectives.
+*   `GEMINI.md`: Core mandates (The 5-Perspective Framework).
 *   `docs/`: Detailed architectural documentation.
     *   `technical_specs.md`: Architecture & Tech Stack (Dual-Track).
-    *   `mathematical_model.md`: Swing Density & Issue Logic.
-    *   `data_engineering.md`: Data strategy and Mock Generation.
-    *   `visualization_specs.md`: Command Center UI & Demo Script.
-*   `data/`: (Planned) Static mock datasets for the prototype.
+    *   `mathematical_model.md`: Swing Density & Individual Identification Logic.
+    *   `data_engineering.md`: Data Sources, Schemas, and Privacy Pipelines.
+    *   `visualization_specs.md`: Command Center UI Mockups & Demo Script.
+    *   `behavioral_psychology.md`: Cognitive Framing & Influence Strategy.
+    *   `privacy_and_ethics.md`: Compliance-Ethics Nexus & HITL Safeguards.

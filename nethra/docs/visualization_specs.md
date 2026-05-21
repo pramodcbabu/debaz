@@ -1,41 +1,82 @@
 # Nethra Command Center: Visualization Specs
 
-## 1. Prototype UI Strategy (Speed & Impact)
-The prototype UI must be highly polished visually but technically simple. It acts as a "clickable mockup" built using **Streamlit**.
+## 1. Prototype UI Strategy (The War Room Aesthetic)
+The prototype UI acts as a "clickable mockup" designed to impress **Political Leadership** while providing structured targets for the **ML/Data Engineering** team.
 
 *   **Tech Stack:** Streamlit (Frontend), PyDeck (Geospatial Mapping), Pandas (Data Handling).
-*   **Visual Standards:** Dark Mode primary for a "War Room" aesthetic. High-contrast colors for volatility/opportunity scores.
+*   **Aesthetic:** Dark Mode primary, high-contrast markers for "Swing Density," and clean metric cards for ROI-focused KPIs.
 
-## 2. The Core Demo Script (User Flow)
+---
+
+## 2. Visual Mockups (ASCII Wireframes)
+
+### Mockup 1: The Macro View (District Map)
+*Goal: Provide a high-level overview of volatility across the district.*
+
+```text
++-------------------------------------------------------------+
+| NETHRA COMMAND CENTER | [Red Button] SILENT PERIOD KILL SWITCH |
++-------------------------------------------------------------+
+|                                                             |
+|   [ HEX-BIN MAP OF DISTRICT ]                               |
+|   (Color gradient from Dark Blue to Neon Pink)              |
+|   Neon Pink = High Swing Density (Action Required)          |
+|                                                             |
++-------------------------------------------------------------+
+| DISTRICT STATS:                                             |
+| [ Total Swing Pop: 142k ] [ Avg Opportunity: 7.2 ]          |
++-------------------------------------------------------------+
+```
+
+### Mockup 2: The Deep-Dive (Constituency Sidebar)
+*Goal: Display actionable intelligence for a selected booth.*
+
+```text
++-----------------------+---------------------------------------+
+|  BOOTH INTELLIGENCE   | SELECTED: AC-125 BOOTH 04             |
++-----------------------+---------------------------------------+
+| Swing Density: 88%    | TOP ISSUES:                           |
+| Total Volatile: 1,400 | 1. [YOUTH JOBS]     (Salience: 0.9)   |
+| Opportunity Score: 9.1| 2. [TOLL ROAD FEES] (Salience: 0.7)   |
++-----------------------+---------------------------------------+
+| [!] ANOMALY DETECTED:                                         |
+| Cadre reports 95% support, but historical baseline is 40%.    |
+| Probability of Cadre Inflation: HIGH                          |
++-----------------------+---------------------------------------+
+```
+
+### Mockup 3: The Intervention (The Generator)
+*Goal: Demonstrate the transition from data to ethically-vetted, psychologically-resonant action.*
+
+```text
++-------------------------------------------------------------+
+| [ GENERATE SOCIAL MEDIA CAMPAIGN ]                          |
++-------------------------------------------------------------+
+| TARGET: Gen-Z Swing Voters in Booth 04                      |
+| THEME: Local Job Growth vs Opposition Record                |
+| PSYCH FRAME: [x] Loss Aversion [ ] Community Pride          |
++-------------------------------------------------------------+
+| CAMPAIGN SCRIPT (AI GENERATED):                             |
+| "Namaste Booth 04! Fed up of the toll prices and no jobs?   |
+| [Candidate Name] has a plan for the local IT park..."       |
++-------------------------------------------------------------+
+| [X] I certify this content contains NO DEEPFAKES.           |
+| [ APPROVE & SEND TO META ]  [ REGENERATE ] [ EXPORT ]       |
++-------------------------------------------------------------+
+```
+
+---
+
+## 3. Core Interaction Flow (The Demo Script)
 The salesperson will walk the political client through this exact flow:
 
-### Step 1: The Macro View (The Map)
-- **Visual:** A Mapbox-powered hex-bin map of a simulated district.
-- **Narrative:** "Here is your district. The purple and red areas indicate the highest concentration of **Swing Voters**—the people who will actually decide the election."
+1.  **Macro-Awareness:** "Behold your district. The pink zones are where the election will be won or lost tonight."
+2.  **Granular Intel:** "Look at Booth 04. Your cadre says everything is fine, but our AI sees a massive volatility spike due to toll road prices. 1,400 voters are in play."
+3.  **Instant Intervention:** "We don't just report—we act. With one click, we've generated a tailored script for that specific booth, ready for Instagram Reels."
 
-### Step 2: The Deep-Dive (Constituency Intel)
-- **Visual:** The user clicks a hex-bin. A sidebar populates with metrics.
-- **Metrics:** 
-    - **Opportunity Score:** 8.8 (High Priority)
-    - **Swing Population:** 14,200 Voters
-    - **Key Issues:** Youth Unemployment, Water Supply.
-- **Narrative:** "In this specific booth, your biggest problem isn't the opposition—it's that 14,000 people are undecided because of local water issues. Your cadre is reporting 90% support, but the AI detects a massive **Anomaly** based on historical baseline."
+---
 
-### Step 3: The Intervention (The Generator)
-- **Visual:** Clicking a "Generate Engagement" button. A loading spinner appears, then the **Gemini API** outputs a tailored campaign.
-- **Output:** 
-    - **Campaign Type:** Instagram Reel / WhatsApp Forward.
-    - **Targeting:** Unemployed Gen-Z voters in Booth X.
-    - **The Script:** A punchy, localized 15-second script addressing the specific water grievance and the party's solution.
-- **Narrative:** "With one click, we've moved from data to action. Your IT cell can now deploy this exact script to influence that specific population tonight."
-
-## 3. Visual Components
-- **`st.pydeck_chart`**: For the interactive 3D hex-bin map.
-- **`st.metric`**: For high-impact numbers (Swing population, Opportunity score).
-- **`st.expander`**: For the "Data Science" view showing the anomaly detection logic.
-- **`st.write_stream`**: To show the AI-generated ad script "typing out" in real-time for dramatic effect.
-
-## 4. Production Features (Post-Contract)
-- **Real-time Streaming:** Seeing sentiment shifts live during a rally.
-- **Silent Period Kill Switch:** A global red button in the header.
-- **Morning Briefing Export:** 1-click PDF summary for the leader's tablet.
+## 4. Visual Components for ML Team
+*   **`st.pydeck_chart`**: Renders the 3D hex-bins using `swing_voter_pct` from `mock_constituencies.csv`.
+*   **`st.metric`**: Used for high-impact numbers (Opportunity score, Volatile population).
+*   **`st.write_stream`**: Shows the AI script "typing out" in real-time, simulating live LLM generation.
