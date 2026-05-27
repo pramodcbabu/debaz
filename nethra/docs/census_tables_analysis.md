@@ -133,7 +133,7 @@ The selected census tables feed directly into the two-step Bayesian MRP equation
 ### Phase 1: The Hierarchical Regression Model
 The individual-level swing probability $P(\text{Swing}_i)$ is modeled using demographic strata and booth random effects:
 $$
-P(\text{Swing}_i) = \text{logit}^{-1}\left( \beta_0 + \alpha_{age[i]} + \alpha_{gender[i]} + \alpha_{social[i]} + \alpha_{occup[i]} + \gamma_{booth[i]} \right)
+P(\text{Swing}_i) = \text{logit}^{-1}\left( \beta_0 + \alpha_{age,i} + \alpha_{gender,i} + \alpha_{social,i} + \alpha_{occup,i} + \gamma_{booth,i} \right)
 $$
 
 Where the demographic strata parameters are modeled hierarchically:

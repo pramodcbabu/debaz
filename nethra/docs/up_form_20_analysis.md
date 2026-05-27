@@ -47,13 +47,13 @@ graph TD
 
 ### 2. ML / Data Engineering (Bayesian MRP & Feature Engineering)
 *   **Methodological Focus:** A pure demographic MRP model (using only age, caste, and gender) misses localized historical behaviors. Booth-level statistics are integrated as **Group-Level Predictors** (contextual covariates) in the multilevel model.
-*   **Model Integration:** In the hierarchical model, the logit probability $\theta_{j[i]}$ of voter $i$ in stratum $j$ voting for a target party is modeled as:
+*   **Model Integration:** In the hierarchical model, the logit probability $\theta_{i, j}$ of voter $i$ in stratum $j$ voting for a target party is modeled as:
     $$
-    \text{logit}(\theta_{j[i]}) = X_i \beta + \alpha_{\text{demographic}[j]} + \alpha_{\text{booth}[k[i]]}
+    \text{logit}(\theta_{i, j}) = X_i \beta + \alpha_{\text{demographic}, j} + \alpha_{\text{booth}, k(i)}
     $$
-    The booth-level random intercept $\alpha_{\text{booth}[k]}$ is modeled using Form 20 features:
+    The booth-level random intercept $\alpha_{\text{booth}, k}$ is modeled using Form 20 features:
     $$
-    \alpha_{\text{booth}[k]} \sim \mathcal{N}\left(\gamma_0 + \gamma_1 HV_k + \gamma_2 HM_k, \sigma^2_{\text{booth}}\right)
+    \alpha_{\text{booth}, k} \sim \mathcal{N}\left(\gamma_0 + \gamma_1 HV_k + \gamma_2 HM_k, \sigma^2_{\text{booth}}\right)
     $$
 *   **Feature Engineering:** Raw voter counts are converted to normalized shares to avoid bias driven by variable booth sizes or local turnout differentials.
 
@@ -122,7 +122,7 @@ Where:
     $$
 
 #### Mathematical Properties of $HV_{booth}$:
-*   **Boundedness:** $HV_{booth} \in [0, 1]$ (or $0\%$ to $100\%$).
+*   **Boundedness:** $0 \le HV_{booth} \le 1$ (or $0\%$ to $100\%$).
 *   **Interpretation:**
     *   $HV \to 0$: Perfect stability. The local electorate voted in identical proportions, indicating rigid partisan entrenchment.
     *   $HV \to 1$: Extreme volatility. A complete inversion of vote shares (e.g., a party going from 100% of the vote to 0%, and another going from 0% to 100%).
@@ -139,8 +139,8 @@ HM_{booth, t} = S_{[1], t} - S_{[2], t}
 $$
 
 Where:
-*   $S_{[1], t}$ represents the vote share of the highest-polling party at booth $k$ in election $t$.
-*   $S_{[2], t}$ represents the vote share of the second-highest-polling party at booth $k$ in election $t$.
+*   $S_{\text{first}, t}$ represents the vote share of the highest-polling party at booth $k$ in election $t$.
+*   $S_{\text{second}, t}$ represents the vote share of the second-highest-polling party at booth $k$ in election $t$.
 
 Nethra utilizes three variations of this margin:
 1.  **Latest Margin** ($HM_{booth, 2022}$): Captures the current competitive state.
@@ -282,13 +282,21 @@ However, pure demographic poststratification fails in Indian elections due to sp
 
 Let $Y_i \in \{0, 1\}$ be the vote choice of survey respondent $i$ (1 if voting for target candidate, 0 otherwise). The probability of support is $\theta_i$:
 
-$$Y_i \sim \text{Bernoulli}(\theta_i)$$
-$$\text{logit}(\theta_i) = \beta_0 + \beta_1 \text{Age}_i + \beta_2 \text{Education}_i + \alpha_{\text{Caste}[i]} + \alpha_{\text{Sub-Region}[i]} + \alpha_{\text{Booth}[k[i]]}$$
+$$
+Y_i \sim \text{Bernoulli}(\theta_i)
+$$
+$$
+\text{logit}(\theta_i) = \beta_0 + \beta_1 \text{Age}_i + \beta_2 \text{Education}_i + \alpha_{\text{Caste}, i} + \alpha_{\text{Sub-Region}, i} + \alpha_{\text{Booth}, k(i)}
+$$
 
-The booth-specific random intercept $\alpha_{\text{Booth}[k]}$ represents the localized deviation from demographic predictions. We model this random effect hierarchically:
+The booth-specific random intercept $\alpha_{\text{Booth}, k}$ represents the localized deviation from demographic predictions. We model this random effect hierarchically:
 
-$$\alpha_{\text{Booth}[k]} \sim \mathcal{N}\left(\mu_k, \sigma^2_{\text{booth}}\right)$$
-$$\mu_k = \gamma_0 + \gamma_1 \cdot HV_k + \gamma_2 \cdot HM_{\text{avg}, k} + \gamma_3 \cdot \text{Support\_Base}_{k, t-1}$$
+$$
+\alpha_{\text{Booth}, k} \sim \mathcal{N}\left(\mu_k, \sigma^2_{\text{booth}}\right)
+$$
+$$
+\mu_k = \gamma_0 + \gamma_1 \cdot HV_k + \gamma_2 \cdot HM_{\text{avg}, k} + \gamma_3 \cdot \text{Support\_Base}_{k, t-1}
+$$
 
 Where:
 *   $HV_k$ is the Historical Volatility Index of booth $k$, which handles shrinkage: booths with high historical volatility shrink less toward the regional average, signaling high localized responsiveness.
