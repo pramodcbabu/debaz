@@ -300,13 +300,13 @@ $$
 \alpha_{\text{Booth}, k} \sim \mathcal{N}\left(\mu_k, \sigma^2_{\text{booth}}\right)
 $$
 $$
-\mu_k = \gamma_0 + \gamma_1 \cdot HV_k + \gamma_2 \cdot HM_{\text{avg}, k} + \gamma_3 \cdot \text{Support\_Base}_{k, t-1}
+\mu_k = \gamma_0 + \gamma_1 \cdot HV_k + \gamma_2 \cdot HM_{\text{avg}, k} + \gamma_3 \cdot \text{SupportBase}_{k, t-1}
 $$
 
 Where:
 *   $HV_k$ is the Historical Volatility Index of booth $k$, which handles shrinkage: booths with high historical volatility shrink less toward the regional average, signaling high localized responsiveness.
 *   $HM_{\text{avg}, k}$ is the Historical Margin of Victory.
-*   $\text{Support\_Base}_{k, t-1}$ is the baseline share of the target party at that booth in the previous election.
+*   $\text{SupportBase}_{k, t-1}$ is the baseline share of the target party at that booth in the previous election.
 
 ### 2. Bayesian Shrinkage and Regularisation
 *   **Data Scarcity Mitigation:** In areas with few survey respondents, the hierarchical model uses Bayesian shrinkage. The estimate for a booth shrinks toward the demographic-regional mean.
