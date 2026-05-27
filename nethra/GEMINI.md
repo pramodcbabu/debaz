@@ -27,3 +27,14 @@ Every plan, revision, and documentation review MUST maintain a professional, neu
 - **Scaffolding:** Gemini-CLI is authorized to autonomously scaffold the Streamlit UI and generate the **Synthetic Poststratification Frames** (`poststratification_frame.csv`).
 - **Modularity:** Keep the MRP scoring logic decoupled from the UI for clarity and testability.
 - **Data Integrity:** The `/data/` directory will store the simulated demographic strata features.
+
+## 5. LaTeX & Markdown Quality Gate
+- **Zero LaTeX Errors:** Every LaTeX equation must be thoroughly checked for syntax errors. 
+- **Inline Math Syntax:** Never use spaces immediately after the opening `$` or immediately before the closing `$`. Always write `$equation$` instead of `$ equation $`.
+- **Block Math Syntax:** Use standard GitHub mathematical blocks:
+  $$
+  equation
+  $$
+  without empty lines inside the LaTeX content, ensuring clean rendering on GitHub.
+- **Verification:** Before pushing any documentation to GitHub, the agent must inspect the LaTeX syntax to guarantee 100% successful rendering on GitHub's native markdown processor.
+

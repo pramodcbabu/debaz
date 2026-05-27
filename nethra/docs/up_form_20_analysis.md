@@ -48,9 +48,13 @@ graph TD
 ### 2. ML / Data Engineering (Bayesian MRP & Feature Engineering)
 *   **Methodological Focus:** A pure demographic MRP model (using only age, caste, and gender) misses localized historical behaviors. Booth-level statistics are integrated as **Group-Level Predictors** (contextual covariates) in the multilevel model.
 *   **Model Integration:** In the hierarchical model, the logit probability $\theta_{j[i]}$ of voter $i$ in stratum $j$ voting for a target party is modeled as:
-    $$\text{logit}(\theta_{j[i]}) = X_i \beta + \alpha_{\text{demographic}[j]} + \alpha_{\text{booth}[k[i]]}$$
+    $$
+    \text{logit}(\theta_{j[i]}) = X_i \beta + \alpha_{\text{demographic}[j]} + \alpha_{\text{booth}[k[i]]}
+    $$
     The booth-level random intercept $\alpha_{\text{booth}[k]}$ is modeled using Form 20 features:
-    $$\alpha_{\text{booth}[k]} \sim \mathcal{N}\left(\gamma_0 + \gamma_1 HV_k + \gamma_2 HM_k, \sigma^2_{\text{booth}}\right)$$
+    $$
+    \alpha_{\text{booth}[k]} \sim \mathcal{N}\left(\gamma_0 + \gamma_1 HV_k + \gamma_2 HM_k, \sigma^2_{\text{booth}}\right)
+    $$
 *   **Feature Engineering:** Raw voter counts are converted to normalized shares to avoid bias driven by variable booth sizes or local turnout differentials.
 
 ### 3. Behavioral Psychology (Quantifiable Traits & Priors)
@@ -102,14 +106,20 @@ To convert raw counts into normalized, scale-free mathematical indices that repr
 
 The Historical Volatility Index at the booth level is based on the **Pedersen Volatility Index**, modified for multi-party electoral settings. It measures the net churn in party vote shares between two consecutive elections ($t-1$ and $t$) at the same polling booth:
 
-$$HV_{booth} = \frac{1}{2} \sum_{i \in \mathcal{P}} \left| S_{i, t} - S_{i, t-1} \right|$$
+$$
+HV_{booth} = \frac{1}{2} \sum_{i \in \mathcal{P}} \left| S_{i, t} - S_{i, t-1} \right|
+$$
 
 Where:
 *   $\mathcal{P}$ represents the set of all active electoral units, defined as $\mathcal{P} = \{\text{BJP}, \text{SP}, \text{BSP}, \text{INC}, \text{OTH}, \text{NOTA}\}$.
 *   $S_{i, t}$ is the vote share of party $i$ in election $t$ (e.g., 2022):
-    $$S_{i, t} = \frac{\text{Votes}_{i, t}}{\text{Total Valid Votes}_t}$$
+    $$
+    S_{i, t} = \frac{\text{Votes}_{i, t}}{\text{Total Valid Votes}_t}
+    $$
 *   $S_{i, t-1}$ is the vote share of party $i$ in election $t-1$ (e.g., 2017):
-    $$S_{i, t-1} = \frac{\text{Votes}_{i, t-1}}{\text{Total Valid Votes}_{t-1}}$$
+    $$
+    S_{i, t-1} = \frac{\text{Votes}_{i, t-1}}{\text{Total Valid Votes}_{t-1}}
+    $$
 
 #### Mathematical Properties of $HV_{booth}$:
 *   **Boundedness:** $HV_{booth} \in [0, 1]$ (or $0\%$ to $100\%$).
@@ -124,7 +134,9 @@ Where:
 
 The Margin of Victory measures the competitive distance between the first-place candidate and the runner-up at the individual booth level. It is formulated as:
 
-$$HM_{booth, t} = S_{[1], t} - S_{[2], t}$$
+$$
+HM_{booth, t} = S_{[1], t} - S_{[2], t}
+$$
 
 Where:
 *   $S_{[1], t}$ represents the vote share of the highest-polling party at booth $k$ in election $t$.
@@ -134,7 +146,9 @@ Nethra utilizes three variations of this margin:
 1.  **Latest Margin ($HM_{booth, 2022}$):** Captures the current competitive state.
 2.  **Historical Margin ($HM_{booth, 2017}$):** Captures the baseline competitiveness.
 3.  **Average Historical Margin ($HM_{booth, \text{avg}}$):** An index designed to capture long-term structural dominance:
-    $$HM_{booth, \text{avg}} = \frac{HM_{booth, 2022} + HM_{booth, 2017}}{2}$$
+    $$
+    HM_{booth, \text{avg}} = \frac{HM_{booth, 2022} + HM_{booth, 2017}}{2}
+    $$
 
 #### Strategic Classification based on $HM_{booth}$:
 *   **Stronghold ($HM_{booth} \ge 0.15$):** Highly resilient to campaign swings. Represents a safe zone for the leading party.

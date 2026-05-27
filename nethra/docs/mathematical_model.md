@@ -9,7 +9,9 @@ The Nethra intelligence engine utilizes **Multilevel Regression and Poststratifi
 We first train a Bayesian hierarchical model to learn the relationship between demographic characteristics and political volatility.
 
 ### The Regression Equation
-$$ P(\text{Swing}_i) = \text{logit}^{-1}(\beta_0 + \alpha_{age,i} + \alpha_{gender,i} + \alpha_{social,i} + \alpha_{occup,i} + \gamma_{booth,i}) $$
+$$
+P(\text{Swing}_i) = \text{logit}^{-1}(\beta_0 + \alpha_{age,i} + \alpha_{gender,i} + \alpha_{social,i} + \alpha_{occup,i} + \gamma_{booth,i})
+$$
 
 *   **$\alpha$ (Demographic Strata Parameters):** These are the learned swing probabilities for every combination of age, gender, social category, and occupation. 
 *   **Behavioral Weighting:** Cognitive multipliers (like the **Loss Aversion Index**) are integrated as priors in the Bayesian model, increasing the starting probability of volatility for demographics exposed to specific negative economic shifts.
@@ -21,7 +23,9 @@ $$ P(\text{Swing}_i) = \text{logit}^{-1}(\beta_0 + \alpha_{age,i} + \alpha_{gend
 Once we have learned the swing probabilities for every demographic stratum ($k$), we project them across the actual population counts of the constituency.
 
 ### Booth-Level Volatility Calculation ($V_{booth}$)
-$$ V_{booth} = \sum_{k=1}^{96} (N_{booth, k} \cdot \hat{P}_k) $$
+$$
+V_{booth} = \sum_{k=1}^{96} (N_{booth, k} \cdot \hat{P}_k)
+$$
 
 *   **$N_{booth, k}$:** The number of voters in Booth $X$ belonging to demographic stratum $k$ (derived from ECI Voter Rolls and Census data).
 *   **$\hat{P}_k$:** The predicted swing probability for stratum $k$ from our Multilevel Model.
@@ -50,10 +54,14 @@ We utilize public **ECI Form 20 (Final Result Sheets) past election results** an
 
 *   **ECI Form 20 Baseline Calibration:**
     Past election results at the polling station (booth) level are ingested to compute a **Historical Volatility Index** ($HV_{booth}$) and **Historical Margin of Victory** ($HM_{booth}$). These parameters are fed directly as booth-level covariates ($W_{booth}$) in the random effects model:
-    $$ \gamma_{booth} \sim \mathcal{N}(\theta_1 \cdot HV_{booth} + \theta_2 \cdot HM_{booth} + W_{booth, census} \theta, \sigma^2_{booth}) $$
+    $$
+    \gamma_{booth} \sim \mathcal{N}(\theta_1 \cdot HV_{booth} + \theta_2 \cdot HM_{booth} + W_{booth, census} \theta, \sigma^2_{booth})
+    $$
     Booths with historically volatile vote shares (high variance over the last 3 election cycles) or razor-thin margins naturally receive a higher baseline random effect prior, shifting all demographic swing probabilities upwards.
 
 *   **Anomaly Scoring:** The engine identifies booths where the predicted volatility ($V_{booth}$) significantly diverges from the cadre's reported support.
-    $$ \text{Anomaly Score} = |V_{booth} - \text{Cadre Reported Support}| $$
+    $$
+    \text{Anomaly Score} = |V_{booth} - \text{Cadre Reported Support}|
+    $$
 
 
