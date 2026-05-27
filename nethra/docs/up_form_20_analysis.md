@@ -47,14 +47,19 @@ graph TD
 
 ### 2. ML / Data Engineering (Bayesian MRP & Feature Engineering)
 *   **Methodological Focus:** A pure demographic MRP model (using only age, caste, and gender) misses localized historical behaviors. Booth-level statistics are integrated as **Group-Level Predictors** (contextual covariates) in the multilevel model.
+
 *   **Model Integration:** In the hierarchical model, the logit probability $\theta_{i, j}$ of voter $i$ in stratum $j$ voting for a target party is modeled as:
-    $$
-    \text{logit}(\theta_{i, j}) = X_i \beta + \alpha_{\text{demographic}, j} + \alpha_{\text{booth}, k(i)}
-    $$
-    The booth-level random intercept $\alpha_{\text{booth}, k}$ is modeled using Form 20 features:
-    $$
-    \alpha_{\text{booth}, k} \sim \mathcal{N}\left(\gamma_0 + \gamma_1 HV_k + \gamma_2 HM_k, \sigma^2_{\text{booth}}\right)
-    $$
+
+$$
+\text{logit}(\theta_{i, j}) = X_i \beta + \alpha_{\text{demographic}, j} + \alpha_{\text{booth}, k(i)}
+$$
+
+The booth-level random intercept $\alpha_{\text{booth}, k}$ is modeled using Form 20 features:
+
+$$
+\alpha_{\text{booth}, k} \sim \mathcal{N}\left(\gamma_0 + \gamma_1 HV_k + \gamma_2 HM_k, \sigma^2_{\text{booth}}\right)
+$$
+
 *   **Feature Engineering:** Raw voter counts are converted to normalized shares to avoid bias driven by variable booth sizes or local turnout differentials.
 
 ### 3. Behavioral Psychology (Quantifiable Traits & Priors)
