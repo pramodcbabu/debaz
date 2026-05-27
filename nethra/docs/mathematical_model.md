@@ -46,10 +46,14 @@ If the model identifies that **Strata $k$ (Males, 18-25, Low Income)** in **Boot
 ---
 
 ## 5. Model Calibration & Anomaly Detection
-We utilize private party data (Cadre reports) to calibrate the model's Bayesian priors and detect ground-level anomalies.
+We utilize public **ECI Form 20 (Final Result Sheets) past election results** and private party data (Cadre reports) to calibrate the model's Bayesian priors and detect ground-level anomalies.
 
-*   **Calibration:** If internal party data shows a high historical baseline for a specific demographic, that information is used to set the initial $\beta_0$ parameter.
+*   **ECI Form 20 Baseline Calibration:**
+    Past election results at the polling station (booth) level are ingested to compute a **Historical Volatility Index** ($HV_{booth}$) and **Historical Margin of Victory** ($HM_{booth}$). These parameters are fed directly as booth-level covariates ($W_{booth}$) in the random effects model:
+    $$ \gamma_{booth} \sim \mathcal{N}(\theta_1 \cdot HV_{booth} + \theta_2 \cdot HM_{booth} + W_{booth, census} \theta, \sigma^2_{booth}) $$
+    Booths with historically volatile vote shares (high variance over the last 3 election cycles) or razor-thin margins naturally receive a higher baseline random effect prior, shifting all demographic swing probabilities upwards.
 
 *   **Anomaly Scoring:** The engine identifies booths where the predicted volatility ($V_{booth}$) significantly diverges from the cadre's reported support.
     $$ \text{Anomaly Score} = |V_{booth} - \text{Cadre Reported Support}| $$
+
 

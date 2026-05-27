@@ -120,6 +120,7 @@ For the Bayesian MRP engine, the tables are divided into two distinct functional
 | | **Housing Conditions** | HH-01, HH-02, HH-04 | Measures structural deprivation via house condition (dilapidated) and crowding density. |
 | | **Sanitation & Power** | HH-06, HH-07, HH-09, HH-11 | Quantifies infrastructural deprivation based on lack of electricity, tap water, and latrines. |
 | | **Village Infrastructure** | DCHB Village Directory | Incorporates distance to commercial banks, road connectivity, power availability, and mobile coverage. |
+| | **Historical Volatility** | ECI Form 20 (Final Results) | Tracks booth-level historical swing variance ($HV_{booth}$) and margin of victory ($HM_{booth}$) over past elections. |
 
 ---
 
@@ -137,9 +138,9 @@ Where the demographic strata parameters are modeled hierarchically:
 *   $\alpha_{social} \sim \mathcal{N}(0, \sigma^2_{social})$
 *   $\alpha_{occup} \sim \mathcal{N}(0, \sigma^2_{occup})$
 
-And the booth-level random effect incorporates the regional covariates vector ($W_{booth}$) derived from **HH-12, HH-01, HH-06, HH-09, and the Village Directory**:
-$$ \gamma_{booth} \sim \mathcal{N}(W_{booth} \theta, \sigma^2_{booth}) $$
-Where $\theta$ represents the learned coefficients indicating how strongly regional deprivation and asset indicators affect political volatility.
+And the booth-level random effect incorporates the regional covariates vector ($W_{booth}$) and **ECI Form 20 past election statistics** ($HV_{booth}$ and $HM_{booth}$):
+$$ \gamma_{booth} \sim \mathcal{N}(\theta_1 \cdot HV_{booth} + \theta_2 \cdot HM_{booth} + W_{booth, census} \theta, \sigma^2_{booth}) $$
+Where $\theta$ represents the coefficients indicating how strongly regional deprivation, asset indicators, and historical volatility influence voting volatility.
 
 ### Phase 2: Poststratification
 Using the raked demographic counts $N_{booth, k}$ from the **PCA, C-09, and B-04 tables**, the aggregate booth-level volatility ($V_{booth}$) is projected:
@@ -164,7 +165,7 @@ This file is generated at the Booth/Village/Ward level by raking marginal distri
 *   `n_voters` (INT): Total estimated eligible voters matching this exact stratum in the booth.
 
 ### Schema 2: Booth-Level Regional Covariates (`booth_covariates.csv`)
-Derived directly from **HH-Series and DCHB Village Directories**.
+Derived from **HH-Series, DCHB Village Directories, and ECI Form 20 final results**.
 *   `booth_id` (PK / INT): Administrative booth identifier.
 *   `wealth_index` (FLOAT): Standardized score derived from asset ownership (HH-12).
 *   `dilapidated_house_ratio` (FLOAT): Percentage of households in dilapidated structures (HH-01).
@@ -173,3 +174,5 @@ Derived directly from **HH-Series and DCHB Village Directories**.
 *   `bank_distance_km` (FLOAT): Travel distance to nearest commercial/co-operative bank (Village Directory).
 *   `mobile_coverage_status` (INT): `1` if village has mobile coverage, `0` otherwise (Village Directory).
 *   `power_hours_domestic` (INT): Average daily hours of domestic power supply (Village Directory).
+*   `historical_volatility_index` (FLOAT): Standard deviation of major party vote share over the last 3 elections (ECI Form 20).
+*   `historical_margin_of_victory` (FLOAT): Average victory margin percentage in the booth (ECI Form 20).

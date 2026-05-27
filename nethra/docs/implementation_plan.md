@@ -34,8 +34,8 @@ The primary poststratification dataset mapped down to the booth and village leve
 * Contains columns: `booth_id`, `age_group`, `gender`, `social_group`, `religion`, `education`, `occupation`, `n_voters`.
 
 #### [NEW] [booth_covariates.csv](file:///Users/vinodh/debaz/nethra/data/booth_covariates.csv)
-Booth-level socio-economic indicators and village directories.
-* Contains columns: `booth_id`, `wealth_index`, `dilapidated_house_ratio`, `electricity_access_ratio`, `sanitation_deprivation_ratio`, `bank_distance_km`, `mobile_coverage_status`, `power_hours_domestic`.
+Booth-level socio-economic indicators, village directories, and ECI Form 20 past election stats.
+* Contains columns: `booth_id`, `wealth_index`, `dilapidated_house_ratio`, `electricity_access_ratio`, `sanitation_deprivation_ratio`, `bank_distance_km`, `mobile_coverage_status`, `power_hours_domestic`, `historical_volatility_index`, `historical_margin_of_victory`.
 
 #### [NEW] [mrp_engine.py](file:///Users/vinodh/debaz/nethra/src/mrp_engine.py)
 The decoupled mathematical core.
