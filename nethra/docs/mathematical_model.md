@@ -13,7 +13,7 @@ $$
 P(\text{Swing}_i) = \text{logit}^{-1}(\beta_0 + \alpha_{age,i} + \alpha_{gender,i} + \alpha_{social,i} + \alpha_{occup,i} + \gamma_{booth,i})
 $$
 
-*   **$\alpha$ (Demographic Strata Parameters):** These are the learned swing probabilities for every combination of age, gender, social category, and occupation. 
+*   **Demographic Strata Parameters** ($\alpha$): These are the learned swing probabilities for every combination of age, gender, social category, and occupation.  
 *   **Behavioral Weighting:** Cognitive multipliers (like the **Loss Aversion Index**) are integrated as priors in the Bayesian model, increasing the starting probability of volatility for demographics exposed to specific negative economic shifts.
 *   **Bayesian Shrinkage:** The model handles "sparse" buckets (e.g., a bucket with only 2 voters) by mathematically shrinking the estimate toward the broader demographic mean, ensuring model stability.
 

@@ -113,12 +113,12 @@ For the Bayesian MRP engine, the tables are divided into two distinct functional
 
 | Structural Parameter | Feature Dimensions | Target Census Tables | Analytical Function in MRP |
 | :--- | :--- | :--- | :--- |
-| **Demographic Strata ($\alpha_{k}$)** | **Age** | C-14, C-13, C-02 | Categorizes voters into five core cohorts (18-25, 26-35, 36-50, 51-65, 66+). |
+| **Demographic Strata** ($\alpha_{k}$) | **Age** | C-14, C-13, C-02 | Categorizes voters into five core cohorts (18-25, 26-35, 36-50, 51-65, 66+). |
 | | **Gender** | PCA, C-14, B-01 | Binary gender classifications crossed with age and work participation. |
 | | **Social Category** | PCA, C-01, SC-01, ST-01 | Categorizes by Caste (General/OBC, SC, ST) and Religion (Hindu, Muslim, Christian, etc.). |
 | | **Education** | C-08, C-09, B-03 | Divides into four tiers: Illiterate, Primary/Middle, Matric/Secondary, Graduate & Above. |
 | | **Occupation** | B-04, SC-01, ST-01 | Divides into Cultivator, Agricultural Laborer, Household Industry, Other, and Non-Worker. |
-| **Regional Covariates ($W_{booth}$)** | **Wealth & Asset Index** | HH-12 | Calculates a composite wealth score based on ownership of television, computer, internet, vehicles, and banking. |
+| **Regional Covariates** ($W_{booth}$) | **Wealth & Asset Index** | HH-12 | Calculates a composite wealth score based on ownership of television, computer, internet, vehicles, and banking. |
 | | **Housing Conditions** | HH-01, HH-02, HH-04 | Measures structural deprivation via house condition (dilapidated) and crowding density. |
 | | **Sanitation & Power** | HH-06, HH-07, HH-09, HH-11 | Quantifies infrastructural deprivation based on lack of electricity, tap water, and latrines. |
 | | **Village Infrastructure** | DCHB Village Directory | Incorporates distance to commercial banks, road connectivity, power availability, and mobile coverage. |
