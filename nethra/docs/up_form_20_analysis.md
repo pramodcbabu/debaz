@@ -41,14 +41,13 @@ graph TD
 *   **Strategic Objective:** Identify high-yield intervention zones. Instead of spreading campaign resources uniformly, the IT Cell requires high-resolution intelligence on **Swing Booths** where small resource injections yield maximum shift.
 *   **Anomaly Detection:** By tracking voting distributions across booths, Nethra identifies outliers—booths showing sudden, mathematically improbable swings (e.g., a candidate gaining 95% of votes in a historically balanced booth). This flags possible local influence, coercion, or data transcription errors.
 *   **Resource ROI:** $HM_{booth}$ and $HV_{booth}$ allow the campaign to classify booths into three tiers:
-    1.  *Loyal Strongholds* ($HM \gg 0$, $HV \approx 0$): Low persuasion spending, focus on mobilization (turnout).
-    2.  *Lost Cause* ($HM \ll 0$, $HV \approx 0$): Zero spending.
-    3.  *Battleground/Swing* ($HV \gg 0$ or $HM \approx 0$): Maximum campaign ROI; target of intensive micro-targeting and ground activity.
+    1.  *Loyal Strongholds* ($HM\gg 0$, $HV\approx 0$): Low persuasion spending, focus on mobilization (turnout).
+    2.  *Lost Cause* ($HM\ll 0$, $HV\approx 0$): Zero spending.
+    3.  *Battleground/Swing* ($HV\gg 0$ or $HM\approx 0$): Maximum campaign ROI; target of intensive micro-targeting and ground activity.
 
 ### 2. ML / Data Engineering (Bayesian MRP & Feature Engineering)
 *   **Methodological Focus:** A pure demographic MRP model (using only age, caste, and gender) misses localized historical behaviors. Booth-level statistics are integrated as **Group-Level Predictors** (contextual covariates) in the multilevel model.
 
-*   **Model Integration:** In the hierarchical model, the logit probability $\theta_{i, j}$ of voter $i$ in stratum $j$ voting for a target party is modeled as:
 
 $$
 \text{logit}(\theta_{i, j}) = X_i \beta + \alpha_{\text{demographic}, j} + \alpha_{\text{booth}, k(i)}
