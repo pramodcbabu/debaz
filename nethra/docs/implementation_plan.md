@@ -25,7 +25,20 @@ There are no remaining blockages. Once you approve this plan, I will immediately
 
 ## Proposed Changes
 
-We will group our file additions and modifications into the core layers: Data/Model Engine, Strategy Documents, and Frontend UI.
+We will group our file additions and modifications into the core layers: Data Crawling, Data/Model Engine, Strategy Documents, and Frontend UI.
+
+### 0. Data Crawling & Ingestion (UP 2027)
+
+To support the prototype development for the 2027 UP Assembly Elections, we will implement a dedicated data crawler and ingestion engine.
+
+#### [NEW] [up_data_scraper.py](file:///Users/vinodh/debaz/nethra/src/up_data_scraper.py)
+A multi-threaded Python scraping pipeline inside `src/`.
+*   **Voter Roll PDF Scraper:** Crawls the Chief Electoral Officer (CEO) UP website (`ceouttarpradesh.nic.in`) to download assembly constituency voter roll PDFs. Employs a custom parsing script to extract age-gender counts per booth, securely discarding the PII immediately.
+*   **ECI Form 20 Crawler:** Fetches historical booth-level election results (2017 & 2022 UP Legislative Assembly) from ECI and TCPD portals, parsing Excel/PDF files to construct the raw votes database.
+*   **Census Table Downloader:** Downloads and extracts district-level UP Census 2011 Excel files (PCA, C-09 Education/Religion, B-04 economic, and HH-12 asset tables) directly from the ORGI portal.
+*   **Geolocation Centroid Solver:** Geocodes polling station location address strings using OpenStreetMap/Nominatim to extract latitude/longitude centroids for spatial GIS overlays.
+
+---
 
 ### 1. Model & Data Engineering Layer
 
