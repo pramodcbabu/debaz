@@ -166,6 +166,7 @@ with st.sidebar:
             "⚡ TN Assembly Elections (Exhaustive 234 ACs)",
             "🌐 Lok Sabha Parliaments (Exhaustive 39 PCs)",
             "🛡️ Spam Filter & Data Quality Gate",
+            "📖 Help & Documentation",
         ],
         index=0,
     )
@@ -274,9 +275,17 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+# SCREEN 5: HELP & DOCUMENTATION
+# ══════════════════════════════════════════════════════════════════════════════
+if "Help" in election_target:
+    st.markdown('<div class="section-header">📖 Help & Documentation Hub</div>', unsafe_allow_html=True)
+    help_md = Path("docs/dashboard_help.md").read_text()
+    st.markdown(help_md)
+
+# ══════════════════════════════════════════════════════════════════════════════
 # SCREEN 4: SPAM FILTER & DATA QUALITY GATE
 # ══════════════════════════════════════════════════════════════════════════════
-if "Spam Filter" in election_target:
+elif "Spam Filter" in election_target:
     st.markdown('<div class="section-header">🛡️ Spam Filter & Data Quality Gate Audit Engine</div>', unsafe_allow_html=True)
     st.caption("Filters out bot farm attacks, repetitive hashtag spams (>10/min), unverified rumors, and commercial promotional noise to protect Nethra's score integrity.")
 
