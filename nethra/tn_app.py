@@ -678,6 +678,13 @@ else:
         LAMBDA = 0.35 # Smoothing Factor
         months = ["Feb 2026", "Mar 2026", "Apr 2026", "May 2026", "Jun 2026", "Jul 2026", "Aug 2026"]
         def calc_ema_series(base, target, steps=7):
+            if base is None or pd.isna(base):
+                # No historical baseline exists (e.g. TVK didn't contest)
+                s = [None] * (steps - 1)
+                s.append(round(target, 1) if not (target is None or pd.isna(target)) else None)
+                return s
+            if target is None or pd.isna(target):
+                return [base] * steps
             s = [base]
             for _ in range(1, steps):
                 # S_t = lambda * Target + (1 - lambda) * S_{t-1}

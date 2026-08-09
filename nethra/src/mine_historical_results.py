@@ -58,10 +58,19 @@ List of Units:
             elif not df_p[df_p["name"] == u].empty: row = df_p[df_p["name"] == u].iloc[0]
             
             if row is not None:
-                wp = row.get('tvk_share_actual', row.get('tvk_share_2026', 0.15)) * 100
-                dp = row.get('dmk_share_actual', row.get('dmk_share_2026', 0.45)) * 100
-                ap = row.get('aiadmk_share_actual', row.get('aiadmk_share_2026', 0.40)) * 100
-                parties = {"TVK": wp, "DMK": dp, "AIADMK": ap}
+                tvk_s = row.get('tvk_share_actual', row.get('tvk_share_2026', 0.15))
+                dmk_s = row.get('dmk_share_actual', row.get('dmk_share_2026', 0.45))
+                adk_s = row.get('aiadmk_share_actual', row.get('aiadmk_share_2026', 0.40))
+                
+                if pd.isna(tvk_s) or tvk_s == "": tvk_s = None
+                else: tvk_s = tvk_s * 100
+                
+                dmk_s = dmk_s * 100
+                adk_s = adk_s * 100
+                
+                parties = {"DMK": dmk_s, "AIADMK": adk_s}
+                if tvk_s is not None: parties["TVK"] = tvk_s
+                
                 sorted_parties = sorted(parties.items(), key=lambda item: item[1], reverse=True)
                 
                 winner = sorted_parties[0][0]

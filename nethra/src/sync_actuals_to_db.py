@@ -21,7 +21,12 @@ def sync_baselines():
             name = row['name']
             
             # Universal actuals
-            tvk_fav = round(float(row.get('tvk_share_actual', 0.15)) * 100, 1)
+            tvk_s = row.get('tvk_share_actual')
+            if pd.isna(tvk_s) or tvk_s == "":
+                tvk_fav = None
+            else:
+                tvk_fav = round(float(tvk_s) * 100, 1)
+                
             dmk_fav = round(float(row.get('dmk_share_actual', 0.40)) * 100, 1)
             aiadmk_fav = round(float(row.get('aiadmk_share_actual', 0.45)) * 100, 1)
             

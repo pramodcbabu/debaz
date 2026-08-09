@@ -11,22 +11,22 @@ def standardize_wards():
         # In 2022 GCC Elections, DMK won a huge majority.
         winner = "DMK" if random.random() > 0.15 else "AIADMK"
         
-        # Realistic shares (TVK 15% default anchor)
-        tvk_share = 0.15
+        # TVK did not contest - mathematically null
+        tvk_share = None
         if winner == "DMK":
-            dmk_share = round(random.uniform(0.40, 0.55), 3)
-            aiadmk_share = round(0.85 - dmk_share, 3)
+            dmk_share = round(random.uniform(0.50, 0.65), 3)
+            aiadmk_share = round(1.0 - dmk_share, 3)
         else:
-            aiadmk_share = round(random.uniform(0.40, 0.50), 3)
-            dmk_share = round(0.85 - aiadmk_share, 3)
+            aiadmk_share = round(random.uniform(0.50, 0.60), 3)
+            dmk_share = round(1.0 - aiadmk_share, 3)
             
         df.at[idx, 'winner_actual'] = winner
         df.at[idx, 'tvk_share_actual'] = tvk_share
         df.at[idx, 'dmk_share_actual'] = dmk_share
         df.at[idx, 'aiadmk_share_actual'] = aiadmk_share
         
-        # Lock baseline _fav columns
-        df.at[idx, 'tvk_fav'] = round(tvk_share * 100, 1)
+        # Lock baseline _fav columns (leave TVK as None/NaN)
+        df.at[idx, 'tvk_fav'] = None
         df.at[idx, 'dmk_fav'] = round(dmk_share * 100, 1)
         df.at[idx, 'aiadmk_fav'] = round(aiadmk_share * 100, 1)
         
@@ -42,10 +42,10 @@ def standardize_parliament():
         # In 2024 Lok Sabha, DMK alliance swept all 39 seats in TN.
         winner = "DMK"
         
-        # Realistic shares (TVK 15% default anchor)
-        tvk_share = 0.15
-        dmk_share = round(random.uniform(0.45, 0.60), 3)
-        aiadmk_share = round(0.85 - dmk_share, 3)
+        # TVK did not contest - mathematically null
+        tvk_share = None
+        dmk_share = round(random.uniform(0.55, 0.70), 3)
+        aiadmk_share = round(1.0 - dmk_share, 3)
             
         df.at[idx, 'winner_actual'] = winner
         df.at[idx, 'tvk_share_actual'] = tvk_share
@@ -54,12 +54,12 @@ def standardize_parliament():
         
         # Lock baseline _proj columns (parliament uses proj in CSV)
         if 'tvk_proj' in df.columns:
-            df.at[idx, 'tvk_proj'] = round(tvk_share * 100, 1)
+            df.at[idx, 'tvk_proj'] = None
             df.at[idx, 'dmk_proj'] = round(dmk_share * 100, 1)
             df.at[idx, 'aiadmk_proj'] = round(aiadmk_share * 100, 1)
         
         # Lock baseline _fav columns
-        df.at[idx, 'tvk_fav'] = round(tvk_share * 100, 1)
+        df.at[idx, 'tvk_fav'] = None
         df.at[idx, 'dmk_fav'] = round(dmk_share * 100, 1)
         df.at[idx, 'aiadmk_fav'] = round(aiadmk_share * 100, 1)
         
