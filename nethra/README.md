@@ -26,3 +26,9 @@ Nethra is a feature-rich data science platform built on a dual-track architectur
     *   `privacy_and_ethics.md`: Privacy by Design and the Compliance-Ethics Nexus.
     *   `technical_specs.md`: Analytical Intel Requirements and MRP Data Flow.
     *   `visualization_specs.md`: Strategic Dashboard UI (Analytical Focus).
+
+## TN Byelection 434-Unit Hyper-Local Data Mining Pipeline
+Project Nethra has been scaled to include an autonomous, 434-unit sequential scraping engine (`src/mine_verified_sources.py`). 
+* Mines civic grievance data from open sources (Google News RSS, Reddit).
+* Uses Frontier AI (Gemini 1.5) to rigorously score each post for `geo_relevance` and `authenticity`. 
+* Feeds directly into a live interactive tracking dashboard (`tn_app.py`) covering all 234 assembly constituencies and 200 Greater Chennai Corporation wards.

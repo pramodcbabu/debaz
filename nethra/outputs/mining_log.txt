@@ -1,0 +1,239 @@
+[2026-08-08 20:03:43] INFO ✅ verified_sources table ready
+/Users/vinodh/Library/Python/3.9/lib/python/site-packages/google/api_core/_python_version_support.py:242: FutureWarning: You are using a non-supported Python version (3.9.0). Google will not post any further updates to google.api_core supporting this Python version. Please upgrade to the latest Python version, or at least Python 3.10, and then update google.api_core.
+  warnings.warn(message, FutureWarning)
+/Users/vinodh/Library/Python/3.9/lib/python/site-packages/google/auth/__init__.py:54: FutureWarning: You are using a Python version 3.9 past its end of life. Google will update google-auth with critical bug fixes on a best-effort basis, but not with any other fixes or features. Please upgrade your Python version, and then update google-auth.
+  warnings.warn(eol_message.format("3.9"), FutureWarning)
+/Users/vinodh/Library/Python/3.9/lib/python/site-packages/google/oauth2/__init__.py:40: FutureWarning: You are using a Python version 3.9 past its end of life. Google will update google-auth with critical bug fixes on a best-effort basis, but not with any other fixes or features. Please upgrade your Python version, and then update google-auth.
+  warnings.warn(eol_message.format("3.9"), FutureWarning)
+/Users/vinodh/debaz/nethra/src/mine_verified_sources.py:510: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+[2026-08-08 20:03:43] INFO Gemini initialized with model: gemini-3.5-flash
+[2026-08-08 20:03:43] INFO 
+🚀 Starting Nethra Mining Pipeline
+[2026-08-08 20:03:43] INFO    Targets: 10 units
+[2026-08-08 20:03:43] INFO    Mode: FULL (with Gemini verification)
+[2026-08-08 20:03:43] INFO    Database: data/nethra_campaign.db
+[2026-08-08 20:03:43] INFO    Timestamp: 2026-08-08T20:03:43.431615
+[2026-08-08 20:03:43] INFO 
+[1/10] 
+[2026-08-08 20:03:43] INFO 
+======================================================================
+[2026-08-08 20:03:43] INFO MINING: Karur (constituency)
+[2026-08-08 20:03:43] INFO District: Karur
+[2026-08-08 20:03:43] INFO Key Issues: Thirumanilayur bus stand construction, Karuppampalayam bus body MSME GST reduction, Karur TVK stampede High Court ruling, Amaravathi river dyeing effluent pollution
+[2026-08-08 20:03:43] INFO ======================================================================
+[2026-08-08 20:03:43] INFO   → Query 1/10: "Karur" "Thirumanilayur" bus stand
+[2026-08-08 20:03:43] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:03:46] INFO     Google News RSS: 3 items (titles only, redirect URLs skipped)
+[2026-08-08 20:03:49] INFO     Found 0 candidate URLs
+[2026-08-08 20:03:51] INFO   → Query 2/10: "Karur" "Thirumanilayur" bus stand site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:03:52] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:03:55] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:03:57] INFO     Found 0 candidate URLs
+[2026-08-08 20:04:00] INFO   → Query 3/10: "Karuppampalayam" bus body GST Karur
+[2026-08-08 20:04:01] INFO     DuckDuckGo: 8 direct URLs
+[2026-08-08 20:04:04] INFO     Google News RSS: 0 items (titles only, redirect URLs skipped)
+[2026-08-08 20:04:06] INFO     Found 8 candidate URLs
+[2026-08-08 20:04:09] INFO   → Query 4/10: "Karuppampalayam" bus body GST Karur site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:04:09] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:04:12] INFO     Google News RSS: 4 items (titles only, redirect URLs skipped)
+[2026-08-08 20:04:15] INFO     Found 0 candidate URLs
+[2026-08-08 20:04:17] INFO   → Query 5/10: Karur stampede TVK High Court 2025
+[2026-08-08 20:04:18] INFO     DuckDuckGo: 8 direct URLs
+[2026-08-08 20:04:22] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:04:24] INFO     Found 8 candidate URLs
+[2026-08-08 20:04:27] INFO   → Query 6/10: Karur stampede TVK High Court 2025 site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:04:27] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:04:30] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:04:33] INFO     Found 0 candidate URLs
+[2026-08-08 20:04:35] INFO   → Query 7/10: Karur byelection Tamil Nadu 2026
+[2026-08-08 20:04:36] INFO     DuckDuckGo: 8 direct URLs
+[2026-08-08 20:04:39] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:04:42] INFO     Found 8 candidate URLs
+[2026-08-08 20:04:44] INFO   → Query 8/10: Karur byelection Tamil Nadu 2026 site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:04:45] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:04:48] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:04:51] INFO     Found 0 candidate URLs
+[2026-08-08 20:04:53] INFO   → Query 9/10: Amaravathi river pollution Karur dyeing effluent
+[2026-08-08 20:04:54] INFO     DuckDuckGo: 8 direct URLs
+[2026-08-08 20:04:57] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:05:00] INFO     Found 8 candidate URLs
+[2026-08-08 20:05:02] INFO   → Query 10/10: Amaravathi river pollution Karur dyeing effluent site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:05:02] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:05:06] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:05:08] INFO     Found 0 candidate URLs
+[2026-08-08 20:05:11] INFO   Total unique candidates: 32
+[2026-08-08 20:05:11] INFO     [1] SKIP (already mined): https://www.aninews.in/news/national/general-news/fire-breaks-out-at-bus-body-bu
+[2026-08-08 20:05:11] INFO     [2] SKIP (already mined): https://m.dailyhunt.in/news/india/english/ani+english-epaper-anieng/fire+breaks+
+[2026-08-08 20:05:11] INFO     [3] SKIP (already mined): https://www.latestly.com/agency-news/india-news-fire-breaks-out-at-bus-body-buil
+[2026-08-08 20:05:11] INFO     [4] Fetching: https://www.msn.com/en-in/news/india/fire-breaks-out-at-bus-body-building-unit-i...
+[2026-08-08 20:05:11] INFO       HTTP 200 ✓  Title: MSN
+[2026-08-08 20:05:11] INFO       ⚠️ Thin content (0 chars), skipping
+[2026-08-08 20:05:14] INFO     [5] SKIP (already mined): https://rrhevirex.in/contact/
+[2026-08-08 20:05:14] INFO     [6] SKIP (already mined): https://thenewsmill.com/2026/07/fire-destroys-three-buses-at-karur-bus-body-buil
+[2026-08-08 20:05:14] INFO     [7] SKIP (already mined): https://www.deccanchronicle.com/southern-states/tamil-nadu/massive-fire-at-coimb
+[2026-08-08 20:05:14] INFO     [8] SKIP (already mined): https://www.youtube.com/watch?v=2zurp9H7MNM
+[2026-08-08 20:05:14] INFO     [9] SKIP (already mined): https://en.wikipedia.org/wiki/2025_Karur_crowd_crush
+[2026-08-08 20:05:14] INFO     [10] SKIP (already mined): https://ntvtelugu.com/news/karur-stampede-tvk-petition-hearing-in-madras-high-co
+[2026-08-08 20:05:14] INFO     [11] SKIP (already mined): https://www.thehindu.com/news/national/tamil-nadu/tvk-vijay-rally-karur-updates-
+[2026-08-08 20:05:14] INFO     [12] Fetching: https://indianexpress.com/article/cities/chennai/madras-high-court-sit-vijay-ral...
+[2026-08-08 20:05:14] INFO       HTTP 200 ✓  Title: ‘Leader vanished, no remorse, it shows his and party’s menta
+[2026-08-08 20:05:17] INFO     [13] Fetching: https://lawbeat.in/pdf_upload/karur-stampede-judgment-2086037.pdf...
+[2026-08-08 20:05:18] INFO       HTTP 200 ✓  Title: 
+[2026-08-08 20:05:18] INFO       ⚠️ Thin content (0 chars), skipping
+[2026-08-08 20:05:21] INFO     [14] Fetching: https://www.indiatvnews.com/tamil-nadu/chennai-vijay-karur-rally-stampede-tvk-pl...
+[2026-08-08 20:05:21] INFO       HTTP 200 ✓  Title: Karur stampede: Madras High Court to hear today Vijay's TVK'
+[2026-08-08 20:05:24] INFO     [15] SKIP (already mined): https://www.news9live.com/state/tamil-nadu/supreme-court-reserves-order-on-vijay
+[2026-08-08 20:05:24] INFO     [16] Fetching: https://www.livelaw.in/high-court/madras-high-court/madras-high-court-tvk-karur-...
+[2026-08-08 20:05:26] INFO       HTTP 200 ✓  Title: Karur Stampede Tragedy | Madras High Court Calls Off Urgent 
+[2026-08-08 20:05:28] INFO     [17] SKIP (already mined): https://karur.nic.in/election-2026/
+[2026-08-08 20:05:28] INFO     [18] SKIP (already mined): https://www.indiatoday.in/elections/assembly/tamil-nadu/karur-constituency-resul
+[2026-08-08 20:05:28] INFO     [19] SKIP (already mined): https://www.news18.com/elections/karur-tamil-nadu-contesting-candidates-parties-
+[2026-08-08 20:05:28] INFO     [20] Fetching: https://tnelectionresult.com/districts/Karur...
+[2026-08-08 20:05:29] INFO       HTTP 200 ✓  Title: Karur District Election Result 2026 — Seats, winners, margin
+[2026-08-08 20:05:31] INFO     [21] Fetching: https://en.wikipedia.org/wiki/2026_Tamil_Nadu_Legislative_Assembly_election...
+[2026-08-08 20:05:34] INFO       HTTP 200 ✓  Title: 2026 Tamil Nadu Legislative Assembly election - Wikipedia
+[2026-08-08 20:05:36] INFO     [22] Fetching: https://results.eci.gov.in/ResultAcGenMay2026/candidateswise-S22135.htm...
+[2026-08-08 20:05:37] INFO       HTTP 200 ✓  Title: Election Commission of India
+[2026-08-08 20:05:39] INFO     [23] Fetching: https://tnverdict.in/assembly/2026/district/karur...
+[2026-08-08 20:05:40] INFO       HTTP 200 ✓  Title: Karur TN 2026 election result — 4 ACs decoded
+[2026-08-08 20:05:43] INFO     [24] Fetching: https://indiaelectionpolls.com/upcoming-election/tamil-nadu/2026/karur/...
+[2026-08-08 20:05:43] INFO       HTTP 200 ✓  Title: Karur Constituency 2026 — Candidates, Parties & Electors | T
+[2026-08-08 20:05:45] INFO     [25] Fetching: https://link.springer.com/article/10.1007/s10653-025-02775-4...
+[2026-08-08 20:05:46] INFO       HTTP 200 ✓  Title: Client Challenge
+[2026-08-08 20:05:46] INFO       ⚠️ Thin content (0 chars), skipping
+[2026-08-08 20:05:48] INFO     [26] Fetching: https://www.journalijdr.com/sites/default/files/issue-pdf/9673.pdf...
+[2026-08-08 20:05:51] INFO       HTTP 200 ✓  Title: 
+[2026-08-08 20:05:51] INFO       ⚠️ Thin content (0 chars), skipping
+[2026-08-08 20:05:54] INFO     [27] Fetching: https://www.downtoearth.org.in/environment/farmers-affected-by-karurs-dye-indust...
+[2026-08-08 20:05:54] INFO       HTTP 200 ✓  Title: Farmers affected by Karur’s dye industry to exercise NOTA
+[2026-08-08 20:05:56] INFO     [28] Fetching: https://www.researchgate.net/publication/221813098_Impact_of_textile_dyeing_indu...
+[2026-08-08 20:05:56] INFO       HTTP 403 ✗  Title: 
+[2026-08-08 20:05:59] INFO     [29] Fetching: https://www.indiaenvironmentportal.org.in/search/pages/?cat_id=3132&depth=5...
+[2026-08-08 20:06:00] INFO       HTTP 200 ✓  Title: India Environment Portal
+[2026-08-08 20:06:00] INFO       ⚠️ Thin content (0 chars), skipping
+[2026-08-08 20:06:02] INFO     [30] Fetching: https://docslib.org/doc/8423533/impact-of-dyeing-industrial-effluents-on-the-gro...
+[2026-08-08 20:06:03] INFO       HTTP 200 ✓  Title: Impact of Dyeing Industrial Effluents on the Groundwater Qua
+[2026-08-08 20:06:03] INFO       ⚠️ Thin content (0 chars), skipping
+[2026-08-08 20:06:05] INFO     [31] Fetching: https://www.journalijdr.com/impact-dyeing-industrial-effluents-groundwater-quali...
+[2026-08-08 20:06:06] INFO       HTTP 200 ✓  Title: Impact of dyeing industrial effluents on the groundwater qua
+[2026-08-08 20:06:09] INFO     [32] Fetching: https://www.researchgate.net/publication/321217905_Water_quality_concern_in_the_...
+[2026-08-08 20:06:09] INFO       HTTP 403 ✗  Title: 
+[2026-08-08 20:06:12] INFO   Successfully fetched: 10 articles with real content
+[2026-08-08 20:06:12] INFO 
+  ── Gemini Verification (10 articles) ──
+[2026-08-08 20:06:12] INFO     [1/10] Verifying: ‘Leader vanished, no remorse, it shows his and party’s menta...
+[2026-08-08 20:06:17] INFO       ✅ VERIFIED  Geo: 1.00  Auth: 0.70
+[2026-08-08 20:06:17] INFO       Category: Legal & Court Orders
+[2026-08-08 20:06:17] INFO       Reasoning: The article directly addresses the Madras High Court's ruling and observations on the TVK rally stam
+[2026-08-08 20:06:18] INFO     [2/10] Verifying: Karur stampede: Madras High Court to hear today Vijay's TVK'...
+[2026-08-08 20:06:22] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.70
+[2026-08-08 20:06:22] INFO       Category: Legal & Court Orders
+[2026-08-08 20:06:22] INFO       Reasoning: Duplicate issue
+[2026-08-08 20:06:23] INFO     [3/10] Verifying: Karur Stampede Tragedy | Madras High Court Calls Off Urgent ...
+[2026-08-08 20:06:27] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.70
+[2026-08-08 20:06:27] INFO       Category: Legal & Court Orders
+[2026-08-08 20:06:27] INFO       Reasoning: Duplicate issue. This article discusses the Madras High Court ruling regarding the TVK stampede in K
+[2026-08-08 20:06:28] INFO     [4/10] Verifying: Karur District Election Result 2026 — Seats, winners, margin...
+[2026-08-08 20:06:34] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.10
+[2026-08-08 20:06:34] INFO       Category: Electoral & Political
+[2026-08-08 20:06:34] INFO       Reasoning: The article focuses on the broader Karur district election results rather than the specific Karur co
+[2026-08-08 20:06:35] INFO     [5/10] Verifying: 2026 Tamil Nadu Legislative Assembly election - Wikipedia...
+[2026-08-08 20:06:39] INFO       ❌ REJECTED  Geo: 0.10  Auth: 0.40
+[2026-08-08 20:06:39] INFO       Category: Electoral & Political
+[2026-08-08 20:06:39] INFO       Reasoning: The article is about Tamil Nadu politics generally and does not mention Karur district, Karur consti
+[2026-08-08 20:06:41] INFO     [6/10] Verifying: Election Commission of India...
+[2026-08-08 20:06:46] INFO       ❌ REJECTED  Geo: 0.10  Auth: 0.40
+[2026-08-08 20:06:46] INFO       Category: Electoral & Political
+[2026-08-08 20:06:46] INFO       Reasoning: The URL contains the constituency code S22135 which corresponds to Karur, but the actual text conten
+[2026-08-08 20:06:47] INFO     [7/10] Verifying: Karur TN 2026 election result — 4 ACs decoded...
+[2026-08-08 20:06:52] INFO       ✅ VERIFIED  Geo: 0.70  Auth: 0.70
+[2026-08-08 20:06:52] INFO       Category: Electoral & Political
+[2026-08-08 20:06:52] INFO       Reasoning: The article specifically discusses the election results for the constituencies within Karur district
+[2026-08-08 20:06:53] INFO     [8/10] Verifying: Karur Constituency 2026 — Candidates, Parties & Electors | T...
+[2026-08-08 20:06:59] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.10
+[2026-08-08 20:06:59] INFO       Category: Electoral & Political
+[2026-08-08 20:06:59] INFO       Reasoning: The article specifically references the Karur Assembly Constituency (AC #135) by name, giving it a h
+[2026-08-08 20:07:01] INFO     [9/10] Verifying: Farmers affected by Karur’s dye industry to exercise NOTA...
+[2026-08-08 20:07:06] INFO       ✅ VERIFIED  Geo: 1.00  Auth: 1.00
+[2026-08-08 20:07:06] INFO       Category: Environmental Protection
+[2026-08-08 20:07:06] INFO       Reasoning: The article is highly relevant as it directly discusses the Amaravathi river dyeing effluent polluti
+[2026-08-08 20:07:08] INFO     [10/10] Verifying: Impact of dyeing industrial effluents on the groundwater qua...
+[2026-08-08 20:07:11] INFO       ❌ REJECTED  Geo: 0.00  Auth: 1.00
+[2026-08-08 20:07:11] INFO       Category: Environmental Protection
+[2026-08-08 20:07:11] INFO       Reasoning: Duplicate issue. The environmental impact of dyeing effluents on the Amaravathi River in Karur is al
+[2026-08-08 20:07:13] INFO 
+  RESULTS: 3 verified / 10 fetched
+[2026-08-08 20:07:13] INFO   🏆 Best article: Farmers affected by Karur’s dye industry to exercise NOTA
+[2026-08-08 20:07:13] INFO      URL: https://www.downtoearth.org.in/environment/farmers-affected-by-karurs-dye-industry-to-exercise-nota-44103
+[2026-08-08 20:07:13] INFO      Scores: Geo=1.00 Auth=1.00
+[2026-08-08 20:07:13] INFO   📝 Generating campaign messages...
+[2026-08-08 20:07:20] INFO   ✅ Updated constituencies for Karur with best link: https://www.downtoearth.org.in/environment/farmers-affected-by-karurs-dye-indust...
+[2026-08-08 20:07:20] INFO 
+[2/10] 
+[2026-08-08 20:07:20] INFO 
+======================================================================
+[2026-08-08 20:07:20] INFO MINING: Tiruchirappalli (East) (constituency)
+[2026-08-08 20:07:20] INFO District: Tiruchirappalli
+[2026-08-08 20:07:20] INFO Key Issues: Gandhi Market on-site upgrade vs Panjapur relocation, BHEL Thuvakudi MSME industrial gas supply, Trichy East byelection
+[2026-08-08 20:07:20] INFO ======================================================================
+[2026-08-08 20:07:20] INFO   → Query 1/10: "Gandhi Market" Trichy upgrade OR relocation
+[2026-08-08 20:07:21] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:07:24] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:07:26] INFO     Found 0 candidate URLs
+[2026-08-08 20:07:29] INFO   → Query 2/10: "Gandhi Market" Trichy upgrade OR relocation site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:07:29] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:07:33] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:07:35] INFO     Found 0 candidate URLs
+[2026-08-08 20:07:38] INFO   → Query 3/10: "Gandhi Market" Panjapur Tiruchirappalli
+[2026-08-08 20:07:38] INFO     DuckDuckGo: 8 direct URLs
+[2026-08-08 20:07:41] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:07:44] INFO     Found 8 candidate URLs
+[2026-08-08 20:07:46] INFO   → Query 4/10: "Gandhi Market" Panjapur Tiruchirappalli site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:07:47] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:07:50] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:07:52] INFO     Found 0 candidate URLs
+[2026-08-08 20:07:55] INFO   → Query 5/10: BHEL Thuvakudi MSME industrial gas Trichy
+[2026-08-08 20:07:56] INFO     DuckDuckGo: 8 direct URLs
+[2026-08-08 20:07:59] INFO     Google News RSS: 0 items (titles only, redirect URLs skipped)
+[2026-08-08 20:08:01] INFO     Found 8 candidate URLs
+[2026-08-08 20:08:04] INFO   → Query 6/10: BHEL Thuvakudi MSME industrial gas Trichy site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:08:04] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:08:07] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:08:09] INFO     Found 0 candidate URLs
+[2026-08-08 20:08:12] INFO   → Query 7/10: Tiruchirappalli East byelection 2026
+[2026-08-08 20:08:13] INFO     DuckDuckGo: 8 direct URLs
+[2026-08-08 20:08:16] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:08:19] INFO     Found 8 candidate URLs
+[2026-08-08 20:08:21] INFO   → Query 8/10: Tiruchirappalli East byelection 2026 site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:08:21] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:08:25] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:08:27] INFO     Found 0 candidate URLs
+[2026-08-08 20:08:30] INFO   → Query 9/10: "Gandhi Market" traders protest Trichy
+[2026-08-08 20:08:30] INFO     DuckDuckGo: 5 direct URLs
+[2026-08-08 20:08:33] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:08:36] INFO     Found 5 candidate URLs
+[2026-08-08 20:08:38] INFO   → Query 10/10: "Gandhi Market" traders protest Trichy site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:08:39] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:08:42] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:08:44] INFO     Found 0 candidate URLs
+[2026-08-08 20:08:47] INFO   Total unique candidates: 28
+[2026-08-08 20:08:47] INFO     [1] Fetching: https://www.dtnext.in/news/tamilnadu/tiruchy-vendors-write-to-cm-vijay-to-halt-p...
+[2026-08-08 20:08:47] INFO       HTTP 200 ✓  Title: Tiruchy vendors write to CM Vijay to halt Panjapur market pr
+[2026-08-08 20:08:50] INFO     [2] Fetching: https://www.thehindu.com/news/cities/Tiruchirapalli/gandhi-market-traders-wary-o...
+[2026-08-08 20:08:50] INFO       HTTP 200 ✓  Title: Gandhi Market traders wary of ongoing construction of integr
+[2026-08-08 20:08:53] INFO     [3] Fetching: https://www.pressreader.com/india/the-hindu-tiruchirapalli-9WWf/20250902/2816167...
+[2026-08-08 20:08:53] INFO       HTTP 200 ✓  Title: PressReader.com - Digital Newspaper & Magazine Subscriptions
+[2026-08-08 20:08:53] INFO       ⚠️ Thin content (0 chars), skipping
+[2026-08-08 20:08:56] INFO     [4] Fetching: https://www.pressreader.com/india/the-hindu-tiruchirapalli-9WWf/20250503/2816167...
+[2026-08-08 20:08:57] INFO       HTTP 200 ✓  Title: PressReader.com - Digital Newspaper & Magazine Subscriptions
+[2026-08-08 20:08:57] INFO       ⚠️ Thin content (0 chars), skipping
+[2026-08-08 20:08:59] INFO     [5] Fetching: https://www.thehindu.com/news/cities/Tiruchirapalli/no-decision-yet-on-shifting-...
+[2026-08-08 20:09:00] INFO       HTTP 200 ✓  Title: ‘No decision yet on shifting traders of Gandhi Market to new

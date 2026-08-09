@@ -105,7 +105,7 @@ The current example in `docs/mathematical_model.md` outlines the following cohor
 ### 2. Track 1 (Streamlit Prototype) Compliant Adjustments
 *   **Strata Visualization:** Streamlit dashboards must display compliant platform capabilities. 
 *   **Visual Safety Labels:** Highlight which strata projections can be legally targeted on which platform. For example:
-    *   Strata $k$ (Males, 18-25) in Booth $B$: Mark as **"Google Targeting Eligible (PIN + Age + Gender)"** but **"Meta Target-Restricted (Requires Custom Audience or Creative-Led Target)"**.
+    *   Strata $k$(Males, 18-25) in Booth$B$: Mark as **"Google Targeting Eligible (PIN + Age + Gender)"** but **"Meta Target-Restricted (Requires Custom Audience or Creative-Led Target)"**.
 
 ### 3. Track 2 (Production Vision) Targeting API Architecture
 The **Targeting API State Machine** must dynamically bifurcate the MRP strata ($k$) into distinct platform payloads.

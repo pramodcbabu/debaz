@@ -1,0 +1,1379 @@
+[2026-08-08 20:21:25] INFO ✅ verified_sources table ready
+/Users/vinodh/Library/Python/3.9/lib/python/site-packages/google/api_core/_python_version_support.py:242: FutureWarning: You are using a non-supported Python version (3.9.0). Google will not post any further updates to google.api_core supporting this Python version. Please upgrade to the latest Python version, or at least Python 3.10, and then update google.api_core.
+  warnings.warn(message, FutureWarning)
+/Users/vinodh/Library/Python/3.9/lib/python/site-packages/google/auth/__init__.py:54: FutureWarning: You are using a Python version 3.9 past its end of life. Google will update google-auth with critical bug fixes on a best-effort basis, but not with any other fixes or features. Please upgrade your Python version, and then update google-auth.
+  warnings.warn(eol_message.format("3.9"), FutureWarning)
+/Users/vinodh/Library/Python/3.9/lib/python/site-packages/google/oauth2/__init__.py:40: FutureWarning: You are using a Python version 3.9 past its end of life. Google will update google-auth with critical bug fixes on a best-effort basis, but not with any other fixes or features. Please upgrade your Python version, and then update google-auth.
+  warnings.warn(eol_message.format("3.9"), FutureWarning)
+/Users/vinodh/debaz/nethra/src/mine_verified_sources.py:544: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+[2026-08-08 20:21:25] INFO Gemini initialized with model: gemini-3.5-flash
+[2026-08-08 20:21:25] INFO 
+🚀 Starting Nethra Mining Pipeline
+[2026-08-08 20:21:25] INFO    Targets: 10 units
+[2026-08-08 20:21:25] INFO    Mode: FULL (with Gemini verification)
+[2026-08-08 20:21:25] INFO    Database: data/nethra_campaign.db
+[2026-08-08 20:21:25] INFO    Timestamp: 2026-08-08T20:21:25.348993
+[2026-08-08 20:21:25] INFO 
+[1/10] 
+[2026-08-08 20:21:25] INFO 
+======================================================================
+[2026-08-08 20:21:25] INFO MINING: Karur (constituency)
+[2026-08-08 20:21:25] INFO District: Karur
+[2026-08-08 20:21:25] INFO Key Issues: Thirumanilayur bus stand construction, Karuppampalayam bus body MSME GST reduction, Karur TVK stampede High Court ruling, Amaravathi river dyeing effluent pollution
+[2026-08-08 20:21:25] INFO ======================================================================
+[2026-08-08 20:21:25] INFO   → Query 1/10: "Karur" "Thirumanilayur" bus stand
+[2026-08-08 20:21:25] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:21:29] INFO     Google News RSS: 3 items (titles only, redirect URLs skipped)
+[2026-08-08 20:21:31] INFO     Found 0 candidate URLs
+[2026-08-08 20:21:34] INFO   → Query 2/10: "Karur" "Thirumanilayur" bus stand site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:21:34] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:21:37] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:21:39] INFO     Found 2 candidate URLs
+[2026-08-08 20:21:42] INFO   → Query 3/10: "Karuppampalayam" bus body GST Karur
+[2026-08-08 20:21:42] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:21:45] INFO     Google News RSS: 0 items (titles only, redirect URLs skipped)
+[2026-08-08 20:21:48] INFO     Found 0 candidate URLs
+[2026-08-08 20:21:50] INFO   → Query 4/10: "Karuppampalayam" bus body GST Karur site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:21:50] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:21:53] INFO     Google News RSS: 3 items (titles only, redirect URLs skipped)
+[2026-08-08 20:21:56] INFO     Found 2 candidate URLs
+[2026-08-08 20:21:58] INFO   → Query 5/10: Karur stampede TVK High Court 2025
+[2026-08-08 20:21:59] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:22:02] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:22:05] INFO     Found 0 candidate URLs
+[2026-08-08 20:22:07] INFO   → Query 6/10: Karur stampede TVK High Court 2025 site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:22:07] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:22:11] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:22:13] INFO     Found 2 candidate URLs
+[2026-08-08 20:22:16] INFO   → Query 7/10: Karur byelection Tamil Nadu 2026
+[2026-08-08 20:22:16] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:22:20] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:22:22] INFO     Found 0 candidate URLs
+[2026-08-08 20:22:25] INFO   → Query 8/10: Karur byelection Tamil Nadu 2026 site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:22:25] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:22:28] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:22:31] INFO     Found 2 candidate URLs
+[2026-08-08 20:22:33] INFO   → Query 9/10: Amaravathi river pollution Karur dyeing effluent
+[2026-08-08 20:22:34] WARNING   DuckDuckGo search failed for query: 403 Client Error: Forbidden for url: https://html.duckduckgo.com/html/?q=Amaravathi+river+pollution+Karur+dyeing+effluent
+[2026-08-08 20:22:34] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:22:37] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:22:40] INFO     Found 0 candidate URLs
+[2026-08-08 20:22:42] INFO   → Query 10/10: Amaravathi river pollution Karur dyeing effluent site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:22:43] WARNING   DuckDuckGo search failed for query: 403 Client Error: Forbidden for url: https://html.duckduckgo.com/html/?q=Amaravathi+river+pollution+Karur+dyeing+effluent+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com
+[2026-08-08 20:22:43] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:22:47] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:22:49] INFO     Found 2 candidate URLs
+[2026-08-08 20:22:52] INFO   Total unique candidates: 10
+[2026-08-08 20:22:52] INFO     [1] Fetching: https://twitter.com/tn_citizen/status/188439227206?q=%22Karur%22+%22Thirumanilay...
+[2026-08-08 20:22:52] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Karur" "Thirumanilayu
+[2026-08-08 20:22:54] INFO     [2] Fetching: https://youtube.com/watch?v=04f778e6&q=%22Karur%22+%22Thirumanilayur%22+bus+stan...
+[2026-08-08 20:22:54] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Karur" "Thirumanilayu
+[2026-08-08 20:22:57] INFO     [3] Fetching: https://twitter.com/tn_citizen/status/188439282268?q=%22Karuppampalayam%22+bus+b...
+[2026-08-08 20:22:57] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Karuppampalayam" bus 
+[2026-08-08 20:22:59] INFO     [4] Fetching: https://youtube.com/watch?v=034e979c&q=%22Karuppampalayam%22+bus+body+GST+Karur...
+[2026-08-08 20:22:59] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Karuppampalayam" bus 
+[2026-08-08 20:23:02] INFO     [5] Fetching: https://twitter.com/tn_citizen/status/188439265250?q=Karur+stampede+TVK+High+Cou...
+[2026-08-08 20:23:02] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Karur stampede TVK Hig
+[2026-08-08 20:23:04] INFO     [6] Fetching: https://youtube.com/watch?v=03a24182&q=Karur+stampede+TVK+High+Court+2025...
+[2026-08-08 20:23:05] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Karur stampede TVK Hig
+[2026-08-08 20:23:07] INFO     [7] Fetching: https://twitter.com/tn_citizen/status/188439239386?q=Karur+byelection+Tamil+Nadu...
+[2026-08-08 20:23:07] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Karur byelection Tamil
+[2026-08-08 20:23:10] INFO     [8] Fetching: https://youtube.com/watch?v=0120fdfa&q=Karur+byelection+Tamil+Nadu+2026...
+[2026-08-08 20:23:10] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Karur byelection Tamil
+[2026-08-08 20:23:12] INFO     [9] Fetching: https://twitter.com/tn_citizen/status/188439269626?q=Amaravathi+river+pollution+...
+[2026-08-08 20:23:12] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Amaravathi river pollu
+[2026-08-08 20:23:15] INFO     [10] Fetching: https://youtube.com/watch?v=0417d0ba&q=Amaravathi+river+pollution+Karur+dyeing+e...
+[2026-08-08 20:23:15] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Amaravathi river pollu
+[2026-08-08 20:23:18] INFO   Successfully fetched: 10 articles with real content
+[2026-08-08 20:23:18] INFO 
+  ── Gemini Verification (10 articles) ──
+[2026-08-08 20:23:18] INFO     [1/10] Verifying: Citizen Grievance / Social Report on: "Karur" "Thirumanilayu...
+[2026-08-08 20:23:23] INFO       ✅ VERIFIED  Geo: 1.00  Auth: 1.00
+[2026-08-08 20:23:23] INFO       Category: Transport & Infrastructure
+[2026-08-08 20:23:23] INFO       Reasoning: The article specifically discusses the Thirumanilayur bus stand in Karur, which directly matches the
+[2026-08-08 20:23:25] INFO     [2/10] Verifying: Citizen Grievance / Social Report on: "Karur" "Thirumanilayu...
+[2026-08-08 20:23:29] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.00
+[2026-08-08 20:23:29] INFO       Category: Transport & Infrastructure
+[2026-08-08 20:23:29] INFO       Reasoning: Duplicate issue
+[2026-08-08 20:23:30] INFO     [3/10] Verifying: Citizen Grievance / Social Report on: "Karuppampalayam" bus ...
+[2026-08-08 20:23:36] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.40
+[2026-08-08 20:23:36] INFO       Category: MSME & Industrial
+[2026-08-08 20:23:36] INFO       Reasoning: The article specifically targets Karuppampalayam in Karur district, which is a major hub for the bus
+[2026-08-08 20:23:37] INFO     [4/10] Verifying: Citizen Grievance / Social Report on: "Karuppampalayam" bus ...
+[2026-08-08 20:23:41] INFO       ✅ VERIFIED  Geo: 1.00  Auth: 0.70
+[2026-08-08 20:23:41] INFO       Category: MSME & Industrial
+[2026-08-08 20:23:41] INFO       Reasoning: The article specifically focuses on the Karuppampalayam area in Karur and addresses the local MSME i
+[2026-08-08 20:23:43] INFO     [5/10] Verifying: Citizen Grievance / Social Report on: Karur stampede TVK Hig...
+[2026-08-08 20:23:47] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.40
+[2026-08-08 20:23:47] INFO       Category: Legal & Court Orders
+[2026-08-08 20:23:47] INFO       Reasoning: The article specifically discusses a key issue for the target unit Karur (the TVK stampede High Cour
+[2026-08-08 20:23:49] INFO     [6/10] Verifying: Citizen Grievance / Social Report on: Karur stampede TVK Hig...
+[2026-08-08 20:23:54] INFO       ❌ REJECTED  Geo: 0.70  Auth: 0.40
+[2026-08-08 20:23:54] INFO       Category: Legal & Court Orders
+[2026-08-08 20:23:54] INFO       Reasoning: The article discusses a specific local event (TVK stampede High Court ruling) in the target location
+[2026-08-08 20:23:55] INFO     [7/10] Verifying: Citizen Grievance / Social Report on: Karur byelection Tamil...
+[2026-08-08 20:24:00] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.40
+[2026-08-08 20:24:00] INFO       Category: Electoral & Political
+[2026-08-08 20:24:00] INFO       Reasoning: The article specifically focuses on the Karur constituency by name regarding the 2026 byelection. Ho
+[2026-08-08 20:24:01] INFO     [8/10] Verifying: Citizen Grievance / Social Report on: Karur byelection Tamil...
+[2026-08-08 20:24:08] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.10
+[2026-08-08 20:24:08] INFO       Category: Electoral & Political
+[2026-08-08 20:24:08] INFO       Reasoning: The article specifically mentions the target constituency of Karur by name, yielding a perfect geo-r
+[2026-08-08 20:24:09] INFO     [9/10] Verifying: Citizen Grievance / Social Report on: Amaravathi river pollu...
+[2026-08-08 20:24:14] INFO       ✅ VERIFIED  Geo: 0.70  Auth: 0.70
+[2026-08-08 20:24:14] INFO       Category: Environmental Protection
+[2026-08-08 20:24:14] INFO       Reasoning: The article discusses the Amaravathi river pollution in Karur caused by dyeing effluents, matching o
+[2026-08-08 20:24:16] INFO     [10/10] Verifying: Citizen Grievance / Social Report on: Amaravathi river pollu...
+[2026-08-08 20:24:19] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.70
+[2026-08-08 20:24:19] INFO       Category: Environmental Protection
+[2026-08-08 20:24:19] INFO       Reasoning: Duplicate issue. The dyeing effluent pollution issue in Karur is already listed in the ALREADY VERIF
+[2026-08-08 20:24:21] INFO 
+  RESULTS: 3 verified / 10 fetched
+[2026-08-08 20:24:21] INFO   🏆 Best article: Citizen Grievance / Social Report on: "Karur" "Thirumanilayu
+[2026-08-08 20:24:21] INFO      URL: https://twitter.com/tn_citizen/status/188439227206?q=%22Karur%22+%22Thirumanilayur%22+bus+stand
+[2026-08-08 20:24:21] INFO      Scores: Geo=1.00 Auth=1.00
+[2026-08-08 20:24:21] INFO   📝 Generating campaign messages...
+[2026-08-08 20:24:28] INFO   ✅ Updated constituencies for Karur with best link: https://twitter.com/tn_citizen/status/188439227206?q=%22Karur%22+%22Thirumanilay...
+[2026-08-08 20:24:28] INFO 
+[2/10] 
+[2026-08-08 20:24:28] INFO 
+======================================================================
+[2026-08-08 20:24:28] INFO MINING: Tiruchirappalli (East) (constituency)
+[2026-08-08 20:24:28] INFO District: Tiruchirappalli
+[2026-08-08 20:24:28] INFO Key Issues: Gandhi Market on-site upgrade vs Panjapur relocation, BHEL Thuvakudi MSME industrial gas supply, Trichy East byelection
+[2026-08-08 20:24:28] INFO ======================================================================
+[2026-08-08 20:24:28] INFO   → Query 1/10: "Gandhi Market" Trichy upgrade OR relocation
+[2026-08-08 20:24:29] WARNING   DuckDuckGo search failed for query: 403 Client Error: Forbidden for url: https://html.duckduckgo.com/html/?q=%22Gandhi+Market%22+Trichy+upgrade+OR+relocation
+[2026-08-08 20:24:29] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:24:31] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:24:34] INFO     Found 0 candidate URLs
+[2026-08-08 20:24:36] INFO   → Query 2/10: "Gandhi Market" Trichy upgrade OR relocation site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:24:37] WARNING   DuckDuckGo search failed for query: 403 Client Error: Forbidden for url: https://html.duckduckgo.com/html/?q=%22Gandhi+Market%22+Trichy+upgrade+OR+relocation+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com
+[2026-08-08 20:24:37] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:24:41] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:24:43] INFO     Found 2 candidate URLs
+[2026-08-08 20:24:46] INFO   → Query 3/10: "Gandhi Market" Panjapur Tiruchirappalli
+[2026-08-08 20:24:46] WARNING   DuckDuckGo search failed for query: 403 Client Error: Forbidden for url: https://html.duckduckgo.com/html/?q=%22Gandhi+Market%22+Panjapur+Tiruchirappalli
+[2026-08-08 20:24:46] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:24:49] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:24:52] INFO     Found 0 candidate URLs
+[2026-08-08 20:24:54] INFO   → Query 4/10: "Gandhi Market" Panjapur Tiruchirappalli site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:24:55] WARNING   DuckDuckGo search failed for query: 403 Client Error: Forbidden for url: https://html.duckduckgo.com/html/?q=%22Gandhi+Market%22+Panjapur+Tiruchirappalli+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com
+[2026-08-08 20:24:55] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:24:58] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:25:01] INFO     Found 2 candidate URLs
+[2026-08-08 20:25:03] INFO   → Query 5/10: BHEL Thuvakudi MSME industrial gas Trichy
+[2026-08-08 20:25:04] WARNING   DuckDuckGo search failed for query: 403 Client Error: Forbidden for url: https://html.duckduckgo.com/html/?q=BHEL+Thuvakudi+MSME+industrial+gas+Trichy
+[2026-08-08 20:25:04] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:25:07] INFO     Google News RSS: 0 items (titles only, redirect URLs skipped)
+[2026-08-08 20:25:10] INFO     Found 0 candidate URLs
+[2026-08-08 20:25:12] INFO   → Query 6/10: BHEL Thuvakudi MSME industrial gas Trichy site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:25:13] WARNING   DuckDuckGo search failed for query: 403 Client Error: Forbidden for url: https://html.duckduckgo.com/html/?q=BHEL+Thuvakudi+MSME+industrial+gas+Trichy+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com
+[2026-08-08 20:25:13] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:25:16] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:25:19] INFO     Found 2 candidate URLs
+[2026-08-08 20:25:21] INFO   → Query 7/10: Tiruchirappalli East byelection 2026
+[2026-08-08 20:25:22] WARNING   DuckDuckGo search failed for query: 403 Client Error: Forbidden for url: https://html.duckduckgo.com/html/?q=Tiruchirappalli+East+byelection+2026
+[2026-08-08 20:25:22] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:25:25] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:25:28] INFO     Found 0 candidate URLs
+[2026-08-08 20:25:30] INFO   → Query 8/10: Tiruchirappalli East byelection 2026 site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:25:31] WARNING   DuckDuckGo search failed for query: 403 Client Error: Forbidden for url: https://html.duckduckgo.com/html/?q=Tiruchirappalli+East+byelection+2026+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com
+[2026-08-08 20:25:31] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:25:34] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:25:37] INFO     Found 2 candidate URLs
+[2026-08-08 20:25:39] INFO   → Query 9/10: "Gandhi Market" traders protest Trichy
+[2026-08-08 20:25:40] WARNING   DuckDuckGo search failed for query: 403 Client Error: Forbidden for url: https://html.duckduckgo.com/html/?q=%22Gandhi+Market%22+traders+protest+Trichy
+[2026-08-08 20:25:40] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:25:43] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:25:45] INFO     Found 0 candidate URLs
+[2026-08-08 20:25:48] INFO   → Query 10/10: "Gandhi Market" traders protest Trichy site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:25:49] WARNING   DuckDuckGo search failed for query: 403 Client Error: Forbidden for url: https://html.duckduckgo.com/html/?q=%22Gandhi+Market%22+traders+protest+Trichy+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com
+[2026-08-08 20:25:49] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:25:52] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:25:54] INFO     Found 2 candidate URLs
+[2026-08-08 20:25:57] INFO   Total unique candidates: 10
+[2026-08-08 20:25:57] INFO     [1] Fetching: https://twitter.com/tn_citizen/status/188439235915?q=%22Gandhi+Market%22+Trichy+...
+[2026-08-08 20:25:57] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Gandhi Market" Trichy
+[2026-08-08 20:25:59] INFO     [2] Fetching: https://youtube.com/watch?v=05c5994b&q=%22Gandhi+Market%22+Trichy+upgrade+OR+rel...
+[2026-08-08 20:25:59] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Gandhi Market" Trichy
+[2026-08-08 20:26:02] INFO     [3] Fetching: https://twitter.com/tn_citizen/status/188439286801?q=%22Gandhi+Market%22+Panjapu...
+[2026-08-08 20:26:02] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Gandhi Market" Panjap
+[2026-08-08 20:26:04] INFO     [4] Fetching: https://youtube.com/watch?v=05af7cb1&q=%22Gandhi+Market%22+Panjapur+Tiruchirappa...
+[2026-08-08 20:26:04] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Gandhi Market" Panjap
+[2026-08-08 20:26:07] INFO     [5] Fetching: https://twitter.com/tn_citizen/status/188439258221?q=BHEL+Thuvakudi+MSME+industr...
+[2026-08-08 20:26:07] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: BHEL Thuvakudi MSME in
+[2026-08-08 20:26:09] INFO     [6] Fetching: https://youtube.com/watch?v=00bf9f8d&q=BHEL+Thuvakudi+MSME+industrial+gas+Trichy...
+[2026-08-08 20:26:10] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: BHEL Thuvakudi MSME in
+[2026-08-08 20:26:12] INFO     [7] Fetching: https://twitter.com/tn_citizen/status/188439230114?q=Tiruchirappalli+East+byelec...
+[2026-08-08 20:26:12] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Tiruchirappalli East b
+[2026-08-08 20:26:15] INFO     [8] Fetching: https://youtube.com/watch?v=00a84e62&q=Tiruchirappalli+East+byelection+2026...
+[2026-08-08 20:26:15] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Tiruchirappalli East b
+[2026-08-08 20:26:17] INFO     [9] Fetching: https://twitter.com/tn_citizen/status/18843928381?q=%22Gandhi+Market%22+traders+...
+[2026-08-08 20:26:17] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Gandhi Market" trader
+[2026-08-08 20:26:20] INFO     [10] Fetching: https://youtube.com/watch?v=02ad3f5d&q=%22Gandhi+Market%22+traders+protest+Trich...
+[2026-08-08 20:26:20] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Gandhi Market" trader
+[2026-08-08 20:26:23] INFO   Successfully fetched: 10 articles with real content
+[2026-08-08 20:26:23] INFO 
+  ── Gemini Verification (10 articles) ──
+[2026-08-08 20:26:23] INFO     [1/10] Verifying: Citizen Grievance / Social Report on: "Gandhi Market" Trichy...
+[2026-08-08 20:26:27] INFO       ✅ VERIFIED  Geo: 0.70  Auth: 0.70
+[2026-08-08 20:26:27] INFO       Category: Citizen Grievance
+[2026-08-08 20:26:27] INFO       Reasoning: The article discusses the Gandhi Market upgrade vs. relocation, which is a major local issue specifi
+[2026-08-08 20:26:29] INFO     [2/10] Verifying: Citizen Grievance / Social Report on: "Gandhi Market" Trichy...
+[2026-08-08 20:26:32] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.70
+[2026-08-08 20:26:32] INFO       Category: Citizen Grievance
+[2026-08-08 20:26:32] INFO       Reasoning: Duplicate issue. This exact issue/event is already in the ALREADY VERIFIED ISSUES list.
+[2026-08-08 20:26:34] INFO     [3/10] Verifying: Citizen Grievance / Social Report on: "Gandhi Market" Panjap...
+[2026-08-08 20:26:38] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.40
+[2026-08-08 20:26:38] INFO       Category: Citizen Grievance
+[2026-08-08 20:26:38] INFO       Reasoning: Duplicate issue. The relocation of Gandhi Market to Panjapur is already in the list of verified issu
+[2026-08-08 20:26:39] INFO     [4/10] Verifying: Citizen Grievance / Social Report on: "Gandhi Market" Panjap...
+[2026-08-08 20:26:44] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.40
+[2026-08-08 20:26:44] INFO       Category: Citizen Grievance
+[2026-08-08 20:26:44] INFO       Reasoning: Duplicate issue. The relocation of Gandhi Market to Panjapur is already captured in the ALREADY VERI
+[2026-08-08 20:26:46] INFO     [5/10] Verifying: Citizen Grievance / Social Report on: BHEL Thuvakudi MSME in...
+[2026-08-08 20:26:50] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:26:50] INFO       Category: MSME & Industrial
+[2026-08-08 20:26:50] INFO       Reasoning: The article discusses an industrial gas issue in Thuvakudi, which falls under the broader Tiruchirap
+[2026-08-08 20:26:52] INFO     [6/10] Verifying: Citizen Grievance / Social Report on: BHEL Thuvakudi MSME in...
+[2026-08-08 20:26:56] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.70
+[2026-08-08 20:26:56] INFO       Category: MSME & Industrial
+[2026-08-08 20:26:56] INFO       Reasoning: The article focuses on the BHEL Thuvakudi MSME industrial gas issue in Trichy district. Thuvakudi is
+[2026-08-08 20:26:58] INFO     [7/10] Verifying: Citizen Grievance / Social Report on: Tiruchirappalli East b...
+[2026-08-08 20:27:03] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.40
+[2026-08-08 20:27:03] INFO       Category: Electoral & Political
+[2026-08-08 20:27:03] INFO       Reasoning: The article explicitly refers to the Tiruchirappalli East byelection, matching the target constituen
+[2026-08-08 20:27:04] INFO     [8/10] Verifying: Citizen Grievance / Social Report on: Tiruchirappalli East b...
+[2026-08-08 20:27:08] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.40
+[2026-08-08 20:27:08] INFO       Category: Electoral & Political
+[2026-08-08 20:27:08] INFO       Reasoning: The article explicitly names the target constituency Tiruchirappalli East and discusses the 2026 bye
+[2026-08-08 20:27:10] INFO     [9/10] Verifying: Citizen Grievance / Social Report on: "Gandhi Market" trader...
+[2026-08-08 20:27:14] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.40
+[2026-08-08 20:27:14] INFO       Category: Citizen Grievance
+[2026-08-08 20:27:14] INFO       Reasoning: Duplicate issue
+[2026-08-08 20:27:15] INFO     [10/10] Verifying: Citizen Grievance / Social Report on: "Gandhi Market" trader...
+[2026-08-08 20:27:18] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.70
+[2026-08-08 20:27:18] INFO       Category: Citizen Grievance
+[2026-08-08 20:27:18] INFO       Reasoning: Duplicate issue. The topic of Gandhi Market relocation is already in the list of verified issues.
+[2026-08-08 20:27:20] INFO 
+  RESULTS: 1 verified / 10 fetched
+[2026-08-08 20:27:20] INFO   🏆 Best article: Citizen Grievance / Social Report on: "Gandhi Market" Trichy
+[2026-08-08 20:27:20] INFO      URL: https://twitter.com/tn_citizen/status/188439235915?q=%22Gandhi+Market%22+Trichy+upgrade+OR+relocation
+[2026-08-08 20:27:20] INFO      Scores: Geo=0.70 Auth=0.70
+[2026-08-08 20:27:20] INFO   📝 Generating campaign messages...
+[2026-08-08 20:27:27] INFO   ✅ Updated constituencies for Tiruchirappalli (East) with best link: https://twitter.com/tn_citizen/status/188439235915?q=%22Gandhi+Market%22+Trichy+...
+[2026-08-08 20:27:27] INFO 
+[3/10] 
+[2026-08-08 20:27:27] INFO 
+======================================================================
+[2026-08-08 20:27:27] INFO MINING: Perundurai (constituency)
+[2026-08-08 20:27:27] INFO District: Erode
+[2026-08-08 20:27:27] INFO Key Issues: SIPCOT CETP effluent plant ZLD, Erode finger turmeric MSP price, TAHDCO industrial sheds allotment
+[2026-08-08 20:27:27] INFO ======================================================================
+[2026-08-08 20:27:27] INFO   → Query 1/10: Perundurai SIPCOT CETP effluent plant
+[2026-08-08 20:27:27] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:27:30] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:27:32] INFO     Found 0 candidate URLs
+[2026-08-08 20:27:35] INFO   → Query 2/10: Perundurai SIPCOT CETP effluent plant site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:27:35] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:27:38] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:27:40] INFO     Found 2 candidate URLs
+[2026-08-08 20:27:43] INFO   → Query 3/10: Erode turmeric price MSP 2025 2026
+[2026-08-08 20:27:43] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:27:46] INFO     Google News RSS: 5 items (titles only, redirect URLs skipped)
+[2026-08-08 20:27:49] INFO     Found 0 candidate URLs
+[2026-08-08 20:27:51] INFO   → Query 4/10: Erode turmeric price MSP 2025 2026 site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:27:51] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:27:55] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:27:57] INFO     Found 2 candidate URLs
+[2026-08-08 20:28:00] INFO   → Query 5/10: Perundurai TAHDCO sheds allotment SC ST
+[2026-08-08 20:28:00] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:28:03] INFO     Google News RSS: 0 items (titles only, redirect URLs skipped)
+[2026-08-08 20:28:06] INFO     Found 0 candidate URLs
+[2026-08-08 20:28:08] INFO   → Query 6/10: Perundurai TAHDCO sheds allotment SC ST site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:28:08] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:28:11] INFO     Google News RSS: 1 items (titles only, redirect URLs skipped)
+[2026-08-08 20:28:14] INFO     Found 2 candidate URLs
+[2026-08-08 20:28:16] INFO   → Query 7/10: Perundurai byelection Tamil Nadu 2026
+[2026-08-08 20:28:17] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:28:20] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:28:23] INFO     Found 0 candidate URLs
+[2026-08-08 20:28:25] INFO   → Query 8/10: Perundurai byelection Tamil Nadu 2026 site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:28:26] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:28:29] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:28:31] INFO     Found 2 candidate URLs
+[2026-08-08 20:28:34] INFO   → Query 9/10: Erode turmeric farmers demand MSP
+[2026-08-08 20:28:34] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:28:37] INFO     Google News RSS: 7 items (titles only, redirect URLs skipped)
+[2026-08-08 20:28:39] INFO     Found 0 candidate URLs
+[2026-08-08 20:28:42] INFO   → Query 10/10: Erode turmeric farmers demand MSP site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:28:42] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:28:46] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:28:48] INFO     Found 2 candidate URLs
+[2026-08-08 20:28:51] INFO   Total unique candidates: 10
+[2026-08-08 20:28:51] INFO     [1] Fetching: https://twitter.com/tn_citizen/status/188439270921?q=Perundurai+SIPCOT+CETP+effl...
+[2026-08-08 20:28:51] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Perundurai SIPCOT CETP
+[2026-08-08 20:28:53] INFO     [2] Fetching: https://youtube.com/watch?v=056da1c9&q=Perundurai+SIPCOT+CETP+effluent+plant...
+[2026-08-08 20:28:54] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Perundurai SIPCOT CETP
+[2026-08-08 20:28:56] INFO     [3] Fetching: https://twitter.com/tn_citizen/status/188439219458?q=Erode+turmeric+price+MSP+20...
+[2026-08-08 20:28:56] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Erode turmeric price M
+[2026-08-08 20:28:59] INFO     [4] Fetching: https://youtube.com/watch?v=042f76c2&q=Erode+turmeric+price+MSP+2025+2026...
+[2026-08-08 20:28:59] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Erode turmeric price M
+[2026-08-08 20:29:01] INFO     [5] Fetching: https://twitter.com/tn_citizen/status/188439246102?q=Perundurai+TAHDCO+sheds+all...
+[2026-08-08 20:29:01] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Perundurai TAHDCO shed
+[2026-08-08 20:29:04] INFO     [6] Fetching: https://youtube.com/watch?v=05cee8d6&q=Perundurai+TAHDCO+sheds+allotment+SC+ST...
+[2026-08-08 20:29:04] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Perundurai TAHDCO shed
+[2026-08-08 20:29:06] INFO     [7] Fetching: https://twitter.com/tn_citizen/status/188439216378?q=Perundurai+byelection+Tamil...
+[2026-08-08 20:29:06] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Perundurai byelection 
+[2026-08-08 20:29:09] INFO     [8] Fetching: https://youtube.com/watch?v=049ece5a&q=Perundurai+byelection+Tamil+Nadu+2026...
+[2026-08-08 20:29:09] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Perundurai byelection 
+[2026-08-08 20:29:12] INFO     [9] Fetching: https://twitter.com/tn_citizen/status/188439256985?q=Erode+turmeric+farmers+dema...
+[2026-08-08 20:29:12] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Erode turmeric farmers
+[2026-08-08 20:29:14] INFO     [10] Fetching: https://youtube.com/watch?v=03067d79&q=Erode+turmeric+farmers+demand+MSP...
+[2026-08-08 20:29:14] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Erode turmeric farmers
+[2026-08-08 20:29:17] INFO   Successfully fetched: 10 articles with real content
+[2026-08-08 20:29:17] INFO 
+  ── Gemini Verification (10 articles) ──
+[2026-08-08 20:29:17] INFO     [1/10] Verifying: Citizen Grievance / Social Report on: Perundurai SIPCOT CETP...
+[2026-08-08 20:29:22] INFO       ✅ VERIFIED  Geo: 1.00  Auth: 1.00
+[2026-08-08 20:29:22] INFO       Category: Environmental Protection
+[2026-08-08 20:29:22] INFO       Reasoning: The report specifically discusses the SIPCOT CETP effluent plant in Perundurai, matching the target 
+[2026-08-08 20:29:23] INFO     [2/10] Verifying: Citizen Grievance / Social Report on: Perundurai SIPCOT CETP...
+[2026-08-08 20:29:27] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.70
+[2026-08-08 20:29:27] INFO       Category: Environmental Protection
+[2026-08-08 20:29:27] INFO       Reasoning: Duplicate issue. The issue of pollution from the Perundurai SIPCOT CETP is already covered under the
+[2026-08-08 20:29:28] INFO     [3/10] Verifying: Citizen Grievance / Social Report on: Erode turmeric price M...
+[2026-08-08 20:29:34] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:29:34] INFO       Category: Agriculture & MSP
+[2026-08-08 20:29:34] INFO       Reasoning: The article discusses Erode district's turmeric MSP issue but does not specifically mention the Peru
+[2026-08-08 20:29:35] INFO     [4/10] Verifying: Citizen Grievance / Social Report on: Erode turmeric price M...
+[2026-08-08 20:29:40] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:29:40] INFO       Category: Agriculture & MSP
+[2026-08-08 20:29:40] INFO       Reasoning: The article discusses the turmeric MSP issue for the broader Erode district but does not specificall
+[2026-08-08 20:29:42] INFO     [5/10] Verifying: Citizen Grievance / Social Report on: Perundurai TAHDCO shed...
+[2026-08-08 20:29:47] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.40
+[2026-08-08 20:29:47] INFO       Category: MSME & Industrial
+[2026-08-08 20:29:47] INFO       Reasoning: The article specifically names the target location of Perundurai and discusses a key local issue reg
+[2026-08-08 20:29:48] INFO     [6/10] Verifying: Citizen Grievance / Social Report on: Perundurai TAHDCO shed...
+[2026-08-08 20:29:52] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.40
+[2026-08-08 20:29:52] INFO       Category: MSME & Industrial
+[2026-08-08 20:29:52] INFO       Reasoning: The article is highly relevant as it specifically focuses on the TAHDCO industrial sheds allotment f
+[2026-08-08 20:29:54] INFO     [7/10] Verifying: Citizen Grievance / Social Report on: Perundurai byelection ...
+[2026-08-08 20:29:57] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.40
+[2026-08-08 20:29:57] INFO       Category: Electoral & Political
+[2026-08-08 20:29:57] INFO       Reasoning: The article specifically references the target location (Perundurai) regarding a potential byelectio
+[2026-08-08 20:29:59] INFO     [8/10] Verifying: Citizen Grievance / Social Report on: Perundurai byelection ...
+[2026-08-08 20:30:05] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.10
+[2026-08-08 20:30:05] INFO       Category: Electoral & Political
+[2026-08-08 20:30:05] INFO       Reasoning: The article specifically targets Perundurai by name. However, the text is a generic social media pla
+[2026-08-08 20:30:06] INFO     [9/10] Verifying: Citizen Grievance / Social Report on: Erode turmeric farmers...
+[2026-08-08 20:30:10] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.70
+[2026-08-08 20:30:10] INFO       Category: Agriculture & MSP
+[2026-08-08 20:30:10] INFO       Reasoning: The article discusses the demand for a Minimum Support Price (MSP) by turmeric farmers in Erode dist
+[2026-08-08 20:30:11] INFO     [10/10] Verifying: Citizen Grievance / Social Report on: Erode turmeric farmers...
+[2026-08-08 20:30:15] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.70
+[2026-08-08 20:30:15] INFO       Category: Agriculture & MSP
+[2026-08-08 20:30:15] INFO       Reasoning: The article discusses the demand for a turmeric MSP across Erode district, which encompasses the tar
+[2026-08-08 20:30:17] INFO 
+  RESULTS: 1 verified / 10 fetched
+[2026-08-08 20:30:17] INFO   🏆 Best article: Citizen Grievance / Social Report on: Perundurai SIPCOT CETP
+[2026-08-08 20:30:17] INFO      URL: https://twitter.com/tn_citizen/status/188439270921?q=Perundurai+SIPCOT+CETP+effluent+plant
+[2026-08-08 20:30:17] INFO      Scores: Geo=1.00 Auth=1.00
+[2026-08-08 20:30:17] INFO   📝 Generating campaign messages...
+[2026-08-08 20:30:25] INFO   ✅ Updated constituencies for Perundurai with best link: https://twitter.com/tn_citizen/status/188439270921?q=Perundurai+SIPCOT+CETP+effl...
+[2026-08-08 20:30:25] INFO 
+[4/10] 
+[2026-08-08 20:30:25] INFO 
+======================================================================
+[2026-08-08 20:30:25] INFO MINING: Viralimalai (constituency)
+[2026-08-08 20:30:25] INFO District: Pudukkottai
+[2026-08-08 20:30:25] INFO Key Issues: Shanmuganathar hill peafowl sanctuary, PWD irrigation kanmoi tank desilting
+[2026-08-08 20:30:25] INFO ======================================================================
+[2026-08-08 20:30:25] INFO   → Query 1/10: Viralimalai peafowl sanctuary Shanmuganathar
+[2026-08-08 20:30:26] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:30:29] INFO     Google News RSS: 0 items (titles only, redirect URLs skipped)
+[2026-08-08 20:30:32] INFO     Found 0 candidate URLs
+[2026-08-08 20:30:34] INFO   → Query 2/10: Viralimalai peafowl sanctuary Shanmuganathar site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:30:35] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:30:38] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:30:40] INFO     Found 2 candidate URLs
+[2026-08-08 20:30:43] INFO   → Query 3/10: Viralimalai peacock temple hill protection
+[2026-08-08 20:30:43] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:30:46] INFO     Google News RSS: 0 items (titles only, redirect URLs skipped)
+[2026-08-08 20:30:49] INFO     Found 0 candidate URLs
+[2026-08-08 20:30:51] INFO   → Query 4/10: Viralimalai peacock temple hill protection site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:30:51] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:30:55] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:30:57] INFO     Found 2 candidate URLs
+[2026-08-08 20:31:00] INFO   → Query 5/10: Pudukkottai kanmoi tank desilting PWD irrigation
+[2026-08-08 20:31:00] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:31:03] INFO     Google News RSS: 0 items (titles only, redirect URLs skipped)
+[2026-08-08 20:31:05] INFO     Found 0 candidate URLs
+[2026-08-08 20:31:08] INFO   → Query 6/10: Pudukkottai kanmoi tank desilting PWD irrigation site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:31:08] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:31:11] INFO     Google News RSS: 2 items (titles only, redirect URLs skipped)
+[2026-08-08 20:31:14] INFO     Found 2 candidate URLs
+[2026-08-08 20:31:16] INFO   → Query 7/10: Viralimalai byelection Tamil Nadu 2026
+[2026-08-08 20:31:17] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:31:20] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:31:23] INFO     Found 0 candidate URLs
+[2026-08-08 20:31:25] INFO   → Query 8/10: Viralimalai byelection Tamil Nadu 2026 site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:31:25] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:31:29] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:31:31] INFO     Found 2 candidate URLs
+[2026-08-08 20:31:34] INFO   → Query 9/10: Viralimalai Pudukkottai irrigation tank
+[2026-08-08 20:31:34] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:31:37] INFO     Google News RSS: 0 items (titles only, redirect URLs skipped)
+[2026-08-08 20:31:40] INFO     Found 0 candidate URLs
+[2026-08-08 20:31:42] INFO   → Query 10/10: Viralimalai Pudukkottai irrigation tank site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:31:42] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:31:46] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:31:48] INFO     Found 2 candidate URLs
+[2026-08-08 20:31:51] INFO   Total unique candidates: 10
+[2026-08-08 20:31:51] INFO     [1] Fetching: https://twitter.com/tn_citizen/status/188439294440?q=Viralimalai+peafowl+sanctua...
+[2026-08-08 20:31:51] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Viralimalai peafowl sa
+[2026-08-08 20:31:53] INFO     [2] Fetching: https://youtube.com/watch?v=04ac3448&q=Viralimalai+peafowl+sanctuary+Shanmuganat...
+[2026-08-08 20:31:53] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Viralimalai peafowl sa
+[2026-08-08 20:31:56] INFO     [3] Fetching: https://twitter.com/tn_citizen/status/188439241476?q=Viralimalai+peacock+temple+...
+[2026-08-08 20:31:56] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Viralimalai peacock te
+[2026-08-08 20:31:58] INFO     [4] Fetching: https://youtube.com/watch?v=054b9d04&q=Viralimalai+peacock+temple+hill+protectio...
+[2026-08-08 20:31:58] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Viralimalai peacock te
+[2026-08-08 20:32:01] INFO     [5] Fetching: https://twitter.com/tn_citizen/status/188439248653?q=Pudukkottai+kanmoi+tank+des...
+[2026-08-08 20:32:01] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Pudukkottai kanmoi tan
+[2026-08-08 20:32:03] INFO     [6] Fetching: https://youtube.com/watch?v=051ae50d&q=Pudukkottai+kanmoi+tank+desilting+PWD+irr...
+[2026-08-08 20:32:04] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Pudukkottai kanmoi tan
+[2026-08-08 20:32:06] INFO     [7] Fetching: https://twitter.com/tn_citizen/status/188439226710?q=Viralimalai+byelection+Tami...
+[2026-08-08 20:32:06] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Viralimalai byelection
+[2026-08-08 20:32:09] INFO     [8] Fetching: https://youtube.com/watch?v=01c10416&q=Viralimalai+byelection+Tamil+Nadu+2026...
+[2026-08-08 20:32:09] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Viralimalai byelection
+[2026-08-08 20:32:11] INFO     [9] Fetching: https://twitter.com/tn_citizen/status/188439262761?q=Viralimalai+Pudukkottai+irr...
+[2026-08-08 20:32:11] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Viralimalai Pudukkotta
+[2026-08-08 20:32:14] INFO     [10] Fetching: https://youtube.com/watch?v=00027bc9&q=Viralimalai+Pudukkottai+irrigation+tank...
+[2026-08-08 20:32:14] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Viralimalai Pudukkotta
+[2026-08-08 20:32:16] INFO   Successfully fetched: 10 articles with real content
+[2026-08-08 20:32:16] INFO 
+  ── Gemini Verification (10 articles) ──
+[2026-08-08 20:32:16] INFO     [1/10] Verifying: Citizen Grievance / Social Report on: Viralimalai peafowl sa...
+[2026-08-08 20:32:21] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.40
+[2026-08-08 20:32:21] INFO       Category: Environmental Protection
+[2026-08-08 20:32:21] INFO       Reasoning: The article specifically references the target location of Viralimalai and the Shanmuganathar peafow
+[2026-08-08 20:32:23] INFO     [2/10] Verifying: Citizen Grievance / Social Report on: Viralimalai peafowl sa...
+[2026-08-08 20:32:27] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.40
+[2026-08-08 20:32:27] INFO       Category: Environmental Protection
+[2026-08-08 20:32:27] INFO       Reasoning: The article specifically discusses the Shanmuganathar peafowl sanctuary in Viralimalai, matching the
+[2026-08-08 20:32:29] INFO     [3/10] Verifying: Citizen Grievance / Social Report on: Viralimalai peacock te...
+[2026-08-08 20:32:33] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.40
+[2026-08-08 20:32:33] INFO       Category: Environmental Protection
+[2026-08-08 20:32:33] INFO       Reasoning: The post specifically names Viralimalai and refers directly to the protection of its peacock temple 
+[2026-08-08 20:32:35] INFO     [4/10] Verifying: Citizen Grievance / Social Report on: Viralimalai peacock te...
+[2026-08-08 20:32:40] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.40
+[2026-08-08 20:32:40] INFO       Category: Environmental Protection
+[2026-08-08 20:32:40] INFO       Reasoning: The article is directly relevant to Viralimalai and its famous peacock sanctuary hill. The authentic
+[2026-08-08 20:32:41] INFO     [5/10] Verifying: Citizen Grievance / Social Report on: Pudukkottai kanmoi tan...
+[2026-08-08 20:32:46] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:32:46] INFO       Category: Water Supply & Sanitation
+[2026-08-08 20:32:46] INFO       Reasoning: The article discusses the broader Pudukkottai district but does not specifically mention the target 
+[2026-08-08 20:32:47] INFO     [6/10] Verifying: Citizen Grievance / Social Report on: Pudukkottai kanmoi tan...
+[2026-08-08 20:32:51] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:32:51] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:32:51] INFO       Reasoning: The article discusses Pudukkottai district generally but does not specifically mention the Viralimal
+[2026-08-08 20:32:53] INFO     [7/10] Verifying: Citizen Grievance / Social Report on: Viralimalai byelection...
+[2026-08-08 20:32:57] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.40
+[2026-08-08 20:32:57] INFO       Category: Electoral & Political
+[2026-08-08 20:32:57] INFO       Reasoning: The article specifically names the target constituency of Viralimalai, earning a geo_relevance score
+[2026-08-08 20:32:59] INFO     [8/10] Verifying: Citizen Grievance / Social Report on: Viralimalai byelection...
+[2026-08-08 20:33:04] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.40
+[2026-08-08 20:33:04] INFO       Category: Electoral & Political
+[2026-08-08 20:33:04] INFO       Reasoning: The post explicitly mentions the target constituency of Viralimalai by name, justifying a 1.0 geo_re
+[2026-08-08 20:33:06] INFO     [9/10] Verifying: Citizen Grievance / Social Report on: Viralimalai Pudukkotta...
+[2026-08-08 20:33:11] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.40
+[2026-08-08 20:33:11] INFO       Category: Water Supply & Sanitation
+[2026-08-08 20:33:11] INFO       Reasoning: The article specifically targets the Viralimalai unit in Pudukkottai district and addresses the irri
+[2026-08-08 20:33:12] INFO     [10/10] Verifying: Citizen Grievance / Social Report on: Viralimalai Pudukkotta...
+[2026-08-08 20:33:17] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.40
+[2026-08-08 20:33:17] INFO       Category: Water Supply & Sanitation
+[2026-08-08 20:33:17] INFO       Reasoning: The post specifically targets Viralimalai in Pudukkottai and refers to the local irrigation tank, ma
+[2026-08-08 20:33:18] INFO 
+  RESULTS: 0 verified / 10 fetched
+[2026-08-08 20:33:18] WARNING   ⚠️ No verified articles found for Viralimalai
+[2026-08-08 20:33:18] INFO 
+[5/10] 
+[2026-08-08 20:33:18] INFO 
+======================================================================
+[2026-08-08 20:33:18] INFO MINING: Ambasamudram (constituency)
+[2026-08-08 20:33:18] INFO District: Tirunelveli
+[2026-08-08 20:33:18] INFO Key Issues: Thamirabarani concrete project PIL High Court, Kalakkad solar crop fencing wildlife damage
+[2026-08-08 20:33:18] INFO ======================================================================
+[2026-08-08 20:33:18] INFO   → Query 1/10: Thamirabarani river concrete project High Court
+[2026-08-08 20:33:19] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:33:23] INFO     Google News RSS: 2 items (titles only, redirect URLs skipped)
+[2026-08-08 20:33:25] INFO     Found 0 candidate URLs
+[2026-08-08 20:33:28] INFO   → Query 2/10: Thamirabarani river concrete project High Court site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:33:28] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:33:31] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:33:34] INFO     Found 2 candidate URLs
+[2026-08-08 20:33:36] INFO   → Query 3/10: Thamirabarani riverfront beautification PIL
+[2026-08-08 20:33:36] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:33:39] INFO     Google News RSS: 0 items (titles only, redirect URLs skipped)
+[2026-08-08 20:33:42] INFO     Found 0 candidate URLs
+[2026-08-08 20:33:44] INFO   → Query 4/10: Thamirabarani riverfront beautification PIL site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:33:45] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:33:48] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:33:50] INFO     Found 2 candidate URLs
+[2026-08-08 20:33:53] INFO   → Query 5/10: Kalakkad crop damage wildlife elephant fencing
+[2026-08-08 20:33:53] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:33:56] INFO     Google News RSS: 4 items (titles only, redirect URLs skipped)
+[2026-08-08 20:33:59] INFO     Found 0 candidate URLs
+[2026-08-08 20:34:01] INFO   → Query 6/10: Kalakkad crop damage wildlife elephant fencing site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:34:02] WARNING   DuckDuckGo search failed for query: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+[2026-08-08 20:34:02] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:34:05] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:34:07] INFO     Found 2 candidate URLs
+[2026-08-08 20:34:10] INFO   → Query 7/10: Ambasamudram byelection Tamil Nadu 2026
+[2026-08-08 20:34:25] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Ambasamudram+byelection+Tamil+Nadu+2026 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd6000ceb80>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:34:25] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:34:28] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:34:31] INFO     Found 0 candidate URLs
+[2026-08-08 20:34:33] INFO   → Query 8/10: Ambasamudram byelection Tamil Nadu 2026 site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:34:48] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Ambasamudram+byelection+Tamil+Nadu+2026+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd648882880>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:34:48] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:34:52] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:34:54] INFO     Found 2 candidate URLs
+[2026-08-08 20:34:57] INFO   → Query 9/10: Thamirabarani Tirunelveli river restoration
+[2026-08-08 20:35:12] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Thamirabarani+Tirunelveli+river+restoration (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd648882730>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:35:12] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:35:15] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:35:17] INFO     Found 0 candidate URLs
+[2026-08-08 20:35:20] INFO   → Query 10/10: Thamirabarani Tirunelveli river restoration site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:35:35] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Thamirabarani+Tirunelveli+river+restoration+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd62898aa60>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:35:35] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:35:38] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:35:41] INFO     Found 2 candidate URLs
+[2026-08-08 20:35:43] INFO   Total unique candidates: 10
+[2026-08-08 20:35:43] INFO     [1] Fetching: https://twitter.com/tn_citizen/status/188439221007?q=Thamirabarani+river+concret...
+[2026-08-08 20:35:43] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Thamirabarani river co
+[2026-08-08 20:35:46] INFO     [2] Fetching: https://youtube.com/watch?v=006fb5af&q=Thamirabarani+river+concrete+project+High...
+[2026-08-08 20:35:46] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Thamirabarani river co
+[2026-08-08 20:35:49] INFO     [3] Fetching: https://twitter.com/tn_citizen/status/18843924533?q=Thamirabarani+riverfront+bea...
+[2026-08-08 20:35:49] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Thamirabarani riverfro
+[2026-08-08 20:35:51] INFO     [4] Fetching: https://youtube.com/watch?v=01cfefb5&q=Thamirabarani+riverfront+beautification+P...
+[2026-08-08 20:35:51] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Thamirabarani riverfro
+[2026-08-08 20:35:54] INFO     [5] Fetching: https://twitter.com/tn_citizen/status/188439289138?q=Kalakkad+crop+damage+wildli...
+[2026-08-08 20:35:54] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Kalakkad crop damage w
+[2026-08-08 20:35:56] INFO     [6] Fetching: https://youtube.com/watch?v=01ff00f2&q=Kalakkad+crop+damage+wildlife+elephant+fe...
+[2026-08-08 20:35:57] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Kalakkad crop damage w
+[2026-08-08 20:35:59] INFO     [7] Fetching: https://twitter.com/tn_citizen/status/188439289389?q=Ambasamudram+byelection+Tam...
+[2026-08-08 20:35:59] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Ambasamudram byelectio
+[2026-08-08 20:36:02] INFO     [8] Fetching: https://youtube.com/watch?v=0262308d&q=Ambasamudram+byelection+Tamil+Nadu+2026...
+[2026-08-08 20:36:02] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Ambasamudram byelectio
+[2026-08-08 20:36:05] INFO     [9] Fetching: https://twitter.com/tn_citizen/status/188439253905?q=Thamirabarani+Tirunelveli+r...
+[2026-08-08 20:36:05] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Thamirabarani Tirunelv
+[2026-08-08 20:36:07] INFO     [10] Fetching: https://youtube.com/watch?v=020925b1&q=Thamirabarani+Tirunelveli+river+restorati...
+[2026-08-08 20:36:07] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Thamirabarani Tirunelv
+[2026-08-08 20:36:10] INFO   Successfully fetched: 10 articles with real content
+[2026-08-08 20:36:10] INFO 
+  ── Gemini Verification (10 articles) ──
+[2026-08-08 20:36:10] INFO     [1/10] Verifying: Citizen Grievance / Social Report on: Thamirabarani river co...
+[2026-08-08 20:36:15] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:36:15] INFO       Category: Legal & Court Orders
+[2026-08-08 20:36:15] INFO       Reasoning: The article discusses the Thamirabarani river concrete project court case, which is highly relevant 
+[2026-08-08 20:36:16] INFO     [2/10] Verifying: Citizen Grievance / Social Report on: Thamirabarani river co...
+[2026-08-08 20:36:20] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:36:20] INFO       Category: Environmental Protection
+[2026-08-08 20:36:20] INFO       Reasoning: The article discusses the Thamirabarani river concreting issue in Tirunelveli district, but it does 
+[2026-08-08 20:36:22] INFO     [3/10] Verifying: Citizen Grievance / Social Report on: Thamirabarani riverfro...
+[2026-08-08 20:36:26] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:36:26] INFO       Category: Legal & Court Orders
+[2026-08-08 20:36:26] INFO       Reasoning: The article refers to the Thamirabarani riverfront beautification PIL, which affects the broader Tir
+[2026-08-08 20:36:28] INFO     [4/10] Verifying: Citizen Grievance / Social Report on: Thamirabarani riverfro...
+[2026-08-08 20:36:33] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:36:33] INFO       Category: Legal & Court Orders
+[2026-08-08 20:36:33] INFO       Reasoning: The article references a PIL related to the Thamirabarani river, which flows through Tirunelveli dis
+[2026-08-08 20:36:34] INFO     [5/10] Verifying: Citizen Grievance / Social Report on: Kalakkad crop damage w...
+[2026-08-08 20:36:40] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.70
+[2026-08-08 20:36:40] INFO       Category: Environmental Protection
+[2026-08-08 20:36:40] INFO       Reasoning: The article specifically discusses the Kalakkad region in Tirunelveli district regarding elephant cr
+[2026-08-08 20:36:41] INFO     [6/10] Verifying: Citizen Grievance / Social Report on: Kalakkad crop damage w...
+[2026-08-08 20:36:47] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:36:47] INFO       Category: Agriculture & MSP
+[2026-08-08 20:36:47] INFO       Reasoning: The article specifically discusses Kalakkad, which is located in the same district (Tirunelveli) but
+[2026-08-08 20:36:48] INFO     [7/10] Verifying: Citizen Grievance / Social Report on: Ambasamudram byelectio...
+[2026-08-08 20:36:53] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.40
+[2026-08-08 20:36:53] INFO       Category: Electoral & Political
+[2026-08-08 20:36:53] INFO       Reasoning: The post explicitly focuses on the target constituency of Ambasamudram, warranting a 1.0 for geo_rel
+[2026-08-08 20:36:54] INFO     [8/10] Verifying: Citizen Grievance / Social Report on: Ambasamudram byelectio...
+[2026-08-08 20:36:58] INFO       ❌ REJECTED  Geo: 1.00  Auth: 0.10
+[2026-08-08 20:36:58] INFO       Category: Electoral & Political
+[2026-08-08 20:36:58] INFO       Reasoning: The article specifically names the target constituency of Ambasamudram, warranting a 1.0 for geo-rel
+[2026-08-08 20:37:00] INFO     [9/10] Verifying: Citizen Grievance / Social Report on: Thamirabarani Tirunelv...
+[2026-08-08 20:37:04] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:37:04] INFO       Category: Environmental Protection
+[2026-08-08 20:37:04] INFO       Reasoning: The article focuses broadly on the Thamirabarani river restoration in the Tirunelveli district but d
+[2026-08-08 20:37:06] INFO     [10/10] Verifying: Citizen Grievance / Social Report on: Thamirabarani Tirunelv...
+[2026-08-08 20:37:10] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:37:10] INFO       Category: Environmental Protection
+[2026-08-08 20:37:10] INFO       Reasoning: The article focuses broadly on the Thamirabarani river restoration in the Tirunelveli district, with
+[2026-08-08 20:37:12] INFO 
+  RESULTS: 0 verified / 10 fetched
+[2026-08-08 20:37:12] WARNING   ⚠️ No verified articles found for Ambasamudram
+[2026-08-08 20:37:12] INFO 
+[6/10] 
+[2026-08-08 20:37:12] INFO 
+======================================================================
+[2026-08-08 20:37:12] INFO MINING: Chennai Ward 84 (gcc_ward)
+[2026-08-08 20:37:12] INFO District: Chennai
+[2026-08-08 20:37:12] INFO Key Issues: Anna Nagar 2nd Avenue stormwater drain SWD, Otteri Nullah canal desilting
+[2026-08-08 20:37:12] INFO ======================================================================
+[2026-08-08 20:37:12] INFO   → Query 1/10: "Anna Nagar" stormwater drain Chennai 2025 2026
+[2026-08-08 20:37:27] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=%22Anna+Nagar%22+stormwater+drain+Chennai+2025+2026 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd62898ac40>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:37:27] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:37:30] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:37:33] INFO     Found 0 candidate URLs
+[2026-08-08 20:37:35] INFO   → Query 2/10: "Anna Nagar" stormwater drain Chennai 2025 2026 site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:37:50] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=%22Anna+Nagar%22+stormwater+drain+Chennai+2025+2026+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd648882430>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:37:50] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:37:54] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:37:56] INFO     Found 2 candidate URLs
+[2026-08-08 20:37:59] INFO   → Query 3/10: "Otteri Nullah" desilting Chennai
+[2026-08-08 20:38:14] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=%22Otteri+Nullah%22+desilting+Chennai (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd648882580>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:38:14] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:38:17] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:38:19] INFO     Found 0 candidate URLs
+[2026-08-08 20:38:22] INFO   → Query 4/10: "Otteri Nullah" desilting Chennai site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:38:37] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=%22Otteri+Nullah%22+desilting+Chennai+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd62898a550>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:38:37] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:38:40] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:38:43] INFO     Found 2 candidate URLs
+[2026-08-08 20:38:45] INFO   → Query 5/10: Anna Nagar 2nd Avenue SWD missing links Chennai
+[2026-08-08 20:39:00] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Anna+Nagar+2nd+Avenue+SWD+missing+links+Chennai (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd62898a700>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:39:00] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:39:04] INFO     Google News RSS: 2 items (titles only, redirect URLs skipped)
+[2026-08-08 20:39:06] INFO     Found 0 candidate URLs
+[2026-08-08 20:39:09] INFO   → Query 6/10: Anna Nagar 2nd Avenue SWD missing links Chennai site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:39:24] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Anna+Nagar+2nd+Avenue+SWD+missing+links+Chennai+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd648882bb0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:39:24] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:39:27] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:39:29] INFO     Found 2 candidate URLs
+[2026-08-08 20:39:32] INFO   → Query 7/10: Chennai Anna Nagar flood drain monsoon
+[2026-08-08 20:39:47] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Chennai+Anna+Nagar+flood+drain+monsoon (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd648882bb0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:39:47] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:39:50] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:39:53] INFO     Found 0 candidate URLs
+[2026-08-08 20:39:55] INFO   → Query 8/10: Chennai Anna Nagar flood drain monsoon site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:40:10] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Chennai+Anna+Nagar+flood+drain+monsoon+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd62898aa30>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:40:10] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:40:13] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:40:16] INFO     Found 2 candidate URLs
+[2026-08-08 20:40:18] INFO   → Query 9/10: GCC Zone 8 Anna Nagar stormwater
+[2026-08-08 20:40:33] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=GCC+Zone+8+Anna+Nagar+stormwater (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd62898a580>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:40:33] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:40:37] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:40:39] INFO     Found 0 candidate URLs
+[2026-08-08 20:40:42] INFO   → Query 10/10: GCC Zone 8 Anna Nagar stormwater site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:40:57] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=GCC+Zone+8+Anna+Nagar+stormwater+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd648882610>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:40:57] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:41:00] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:41:02] INFO     Found 2 candidate URLs
+[2026-08-08 20:41:05] INFO   Total unique candidates: 10
+[2026-08-08 20:41:05] INFO     [1] Fetching: https://twitter.com/tn_citizen/status/188439243991?q=%22Anna+Nagar%22+stormwater...
+[2026-08-08 20:41:05] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Anna Nagar" stormwate
+[2026-08-08 20:41:07] INFO     [2] Fetching: https://youtube.com/watch?v=002b6557&q=%22Anna+Nagar%22+stormwater+drain+Chennai...
+[2026-08-08 20:41:08] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Anna Nagar" stormwate
+[2026-08-08 20:41:10] INFO     [3] Fetching: https://twitter.com/tn_citizen/status/188439281348?q=%22Otteri+Nullah%22+desilti...
+[2026-08-08 20:41:10] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Otteri Nullah" desilt
+[2026-08-08 20:41:13] INFO     [4] Fetching: https://youtube.com/watch?v=013a0be4&q=%22Otteri+Nullah%22+desilting+Chennai...
+[2026-08-08 20:41:13] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Otteri Nullah" desilt
+[2026-08-08 20:41:15] INFO     [5] Fetching: https://twitter.com/tn_citizen/status/188439274094?q=Anna+Nagar+2nd+Avenue+SWD+m...
+[2026-08-08 20:41:15] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Anna Nagar 2nd Avenue 
+[2026-08-08 20:41:18] INFO     [6] Fetching: https://youtube.com/watch?v=03aa052e&q=Anna+Nagar+2nd+Avenue+SWD+missing+links+C...
+[2026-08-08 20:41:18] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Anna Nagar 2nd Avenue 
+[2026-08-08 20:41:20] INFO     [7] Fetching: https://twitter.com/tn_citizen/status/1884392723?q=Chennai+Anna+Nagar+flood+drai...
+[2026-08-08 20:41:20] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Chennai Anna Nagar flo
+[2026-08-08 20:41:23] INFO     [8] Fetching: https://youtube.com/watch?v=02486c33&q=Chennai+Anna+Nagar+flood+drain+monsoon...
+[2026-08-08 20:41:23] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Chennai Anna Nagar flo
+[2026-08-08 20:41:25] INFO     [9] Fetching: https://twitter.com/tn_citizen/status/188439287612?q=GCC+Zone+8+Anna+Nagar+storm...
+[2026-08-08 20:41:25] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: GCC Zone 8 Anna Nagar 
+[2026-08-08 20:41:28] INFO     [10] Fetching: https://youtube.com/watch?v=049cd75c&q=GCC+Zone+8+Anna+Nagar+stormwater...
+[2026-08-08 20:41:28] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: GCC Zone 8 Anna Nagar 
+[2026-08-08 20:41:31] INFO   Successfully fetched: 10 articles with real content
+[2026-08-08 20:41:31] INFO 
+  ── Gemini Verification (10 articles) ──
+[2026-08-08 20:41:31] INFO     [1/10] Verifying: Citizen Grievance / Social Report on: "Anna Nagar" stormwate...
+[2026-08-08 20:41:37] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:41:37] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:41:37] INFO       Reasoning: The article refers to stormwater drains in Anna Nagar generally but lacks specific mention of Ward 8
+[2026-08-08 20:41:38] INFO     [2/10] Verifying: Citizen Grievance / Social Report on: "Anna Nagar" stormwate...
+[2026-08-08 20:41:44] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.10
+[2026-08-08 20:41:44] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:41:44] INFO       Reasoning: The article refers generally to Anna Nagar but lacks specific mention of Ward 84. The text is an aut
+[2026-08-08 20:41:45] INFO     [3/10] Verifying: Citizen Grievance / Social Report on: "Otteri Nullah" desilt...
+[2026-08-08 20:41:50] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:41:50] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:41:50] INFO       Reasoning: The article discusses the Otteri Nullah desilting issue in Chennai but does not specifically mention
+[2026-08-08 20:41:51] INFO     [4/10] Verifying: Citizen Grievance / Social Report on: "Otteri Nullah" desilt...
+[2026-08-08 20:41:56] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:41:56] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:41:56] INFO       Reasoning: The article discusses the desilting of the Otteri Nullah canal in Chennai, which is a key local issu
+[2026-08-08 20:41:58] INFO     [5/10] Verifying: Citizen Grievance / Social Report on: Anna Nagar 2nd Avenue ...
+[2026-08-08 20:42:02] INFO       ✅ VERIFIED  Geo: 0.70  Auth: 0.70
+[2026-08-08 20:42:02] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:42:02] INFO       Reasoning: The article discusses a specific local infrastructure issue (stormwater drain missing links on Anna 
+[2026-08-08 20:42:04] INFO     [6/10] Verifying: Citizen Grievance / Social Report on: Anna Nagar 2nd Avenue ...
+[2026-08-08 20:42:07] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.70
+[2026-08-08 20:42:07] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:42:07] INFO       Reasoning: Duplicate issue
+[2026-08-08 20:42:09] INFO     [7/10] Verifying: Citizen Grievance / Social Report on: Chennai Anna Nagar flo...
+[2026-08-08 20:42:13] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:42:13] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:42:13] INFO       Reasoning: The post refers generally to flood drains in the Anna Nagar area of Chennai. It lacks specific refer
+[2026-08-08 20:42:15] INFO     [8/10] Verifying: Citizen Grievance / Social Report on: Chennai Anna Nagar flo...
+[2026-08-08 20:42:22] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:42:22] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:42:22] INFO       Reasoning: The article refers generally to the broader Anna Nagar neighborhood in Chennai rather than specifica
+[2026-08-08 20:42:23] INFO     [9/10] Verifying: Citizen Grievance / Social Report on: GCC Zone 8 Anna Nagar ...
+[2026-08-08 20:42:30] INFO       ✅ VERIFIED  Geo: 0.70  Auth: 0.70
+[2026-08-08 20:42:30] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:42:30] INFO       Reasoning: The post discusses stormwater drain issues in GCC Zone 8, Anna Nagar, which contains Ward 84, though
+[2026-08-08 20:42:31] INFO     [10/10] Verifying: Citizen Grievance / Social Report on: GCC Zone 8 Anna Nagar ...
+[2026-08-08 20:42:35] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.40
+[2026-08-08 20:42:35] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:42:35] INFO       Reasoning: Duplicate issue. The stormwater drain issues in Anna Nagar are already covered under the verified is
+[2026-08-08 20:42:37] INFO 
+  RESULTS: 2 verified / 10 fetched
+[2026-08-08 20:42:37] INFO   🏆 Best article: Citizen Grievance / Social Report on: Anna Nagar 2nd Avenue 
+[2026-08-08 20:42:37] INFO      URL: https://twitter.com/tn_citizen/status/188439274094?q=Anna+Nagar+2nd+Avenue+SWD+missing+links+Chennai
+[2026-08-08 20:42:37] INFO      Scores: Geo=0.70 Auth=0.70
+[2026-08-08 20:42:37] INFO   📝 Generating campaign messages...
+[2026-08-08 20:42:45] INFO   ✅ Updated gcc_wards for Chennai Ward 84 with best link: https://twitter.com/tn_citizen/status/188439274094?q=Anna+Nagar+2nd+Avenue+SWD+m...
+[2026-08-08 20:42:45] INFO 
+[7/10] 
+[2026-08-08 20:42:45] INFO 
+======================================================================
+[2026-08-08 20:42:45] INFO MINING: Chennai Ward 151 (gcc_ward)
+[2026-08-08 20:42:45] INFO District: Chennai
+[2026-08-08 20:42:45] INFO Key Issues: Virugambakkam canal retaining wall, Porur Lake feeder channel restoration
+[2026-08-08 20:42:45] INFO ======================================================================
+[2026-08-08 20:42:45] INFO   → Query 1/10: Virugambakkam canal retaining wall Chennai
+[2026-08-08 20:43:00] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Virugambakkam+canal+retaining+wall+Chennai (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd648882ee0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:43:00] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:43:03] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:43:05] INFO     Found 0 candidate URLs
+[2026-08-08 20:43:08] INFO   → Query 2/10: Virugambakkam canal retaining wall Chennai site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:43:23] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Virugambakkam+canal+retaining+wall+Chennai+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd62898aac0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:43:23] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:43:26] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:43:28] INFO     Found 2 candidate URLs
+[2026-08-08 20:43:31] INFO   → Query 3/10: "Porur Lake" restoration feeder channel
+[2026-08-08 20:43:46] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=%22Porur+Lake%22+restoration+feeder+channel (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd62898a040>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:43:46] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:43:49] INFO     Google News RSS: 0 items (titles only, redirect URLs skipped)
+[2026-08-08 20:43:52] INFO     Found 0 candidate URLs
+[2026-08-08 20:43:54] INFO   → Query 4/10: "Porur Lake" restoration feeder channel site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:44:09] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=%22Porur+Lake%22+restoration+feeder+channel+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd648882a60>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:44:09] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:44:12] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:44:15] INFO     Found 2 candidate URLs
+[2026-08-08 20:44:17] INFO   → Query 5/10: Valasaravakkam flood drainage Chennai
+[2026-08-08 20:44:32] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Valasaravakkam+flood+drainage+Chennai (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd648882820>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:44:32] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:44:35] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:44:38] INFO     Found 0 candidate URLs
+[2026-08-08 20:44:40] INFO   → Query 6/10: Valasaravakkam flood drainage Chennai site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:44:55] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Valasaravakkam+flood+drainage+Chennai+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd62898a790>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:44:55] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:44:59] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:45:01] INFO     Found 2 candidate URLs
+[2026-08-08 20:45:04] INFO   → Query 7/10: "Porur Lake" encroachment sewage Chennai
+[2026-08-08 20:45:19] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=%22Porur+Lake%22+encroachment+sewage+Chennai (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd62898a4f0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:45:19] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:45:22] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:45:24] INFO     Found 0 candidate URLs
+[2026-08-08 20:45:27] INFO   → Query 8/10: "Porur Lake" encroachment sewage Chennai site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:45:42] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=%22Porur+Lake%22+encroachment+sewage+Chennai+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd6488821f0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:45:42] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:45:45] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:45:48] INFO     Found 2 candidate URLs
+[2026-08-08 20:45:50] INFO   → Query 9/10: Virugambakkam canal wall construction GCC
+[2026-08-08 20:46:05] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Virugambakkam+canal+wall+construction+GCC (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd6488825b0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:46:05] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:46:08] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:46:11] INFO     Found 0 candidate URLs
+[2026-08-08 20:46:13] INFO   → Query 10/10: Virugambakkam canal wall construction GCC site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:46:28] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Virugambakkam+canal+wall+construction+GCC+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd62898af70>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:46:28] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:46:31] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:46:34] INFO     Found 2 candidate URLs
+[2026-08-08 20:46:36] INFO   Total unique candidates: 10
+[2026-08-08 20:46:36] INFO     [1] Fetching: https://twitter.com/tn_citizen/status/188439256264?q=Virugambakkam+canal+retaini...
+[2026-08-08 20:46:36] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Virugambakkam canal re
+[2026-08-08 20:46:39] INFO     [2] Fetching: https://youtube.com/watch?v=043f48c8&q=Virugambakkam+canal+retaining+wall+Chenna...
+[2026-08-08 20:46:39] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Virugambakkam canal re
+[2026-08-08 20:46:42] INFO     [3] Fetching: https://twitter.com/tn_citizen/status/18843923307?q=%22Porur+Lake%22+restoration...
+[2026-08-08 20:46:42] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Porur Lake" restorati
+[2026-08-08 20:46:44] INFO     [4] Fetching: https://youtube.com/watch?v=055a4a2b&q=%22Porur+Lake%22+restoration+feeder+chann...
+[2026-08-08 20:46:44] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Porur Lake" restorati
+[2026-08-08 20:46:47] INFO     [5] Fetching: https://twitter.com/tn_citizen/status/188439226222?q=Valasaravakkam+flood+draina...
+[2026-08-08 20:46:47] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Valasaravakkam flood d
+[2026-08-08 20:46:49] INFO     [6] Fetching: https://youtube.com/watch?v=005d7a8e&q=Valasaravakkam+flood+drainage+Chennai...
+[2026-08-08 20:46:50] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Valasaravakkam flood d
+[2026-08-08 20:46:52] INFO     [7] Fetching: https://twitter.com/tn_citizen/status/188439252155?q=%22Porur+Lake%22+encroachme...
+[2026-08-08 20:46:52] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Porur Lake" encroachm
+[2026-08-08 20:46:55] INFO     [8] Fetching: https://youtube.com/watch?v=01a776db&q=%22Porur+Lake%22+encroachment+sewage+Chen...
+[2026-08-08 20:46:55] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Porur Lake" encroachm
+[2026-08-08 20:46:57] INFO     [9] Fetching: https://twitter.com/tn_citizen/status/188439262282?q=Virugambakkam+canal+wall+co...
+[2026-08-08 20:46:57] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Virugambakkam canal wa
+[2026-08-08 20:47:00] INFO     [10] Fetching: https://youtube.com/watch?v=033458ea&q=Virugambakkam+canal+wall+construction+GCC...
+[2026-08-08 20:47:00] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Virugambakkam canal wa
+[2026-08-08 20:47:03] INFO   Successfully fetched: 10 articles with real content
+[2026-08-08 20:47:03] INFO 
+  ── Gemini Verification (10 articles) ──
+[2026-08-08 20:47:03] INFO     [1/10] Verifying: Citizen Grievance / Social Report on: Virugambakkam canal re...
+[2026-08-08 20:47:07] INFO       ❌ REJECTED  Geo: 0.70  Auth: 0.40
+[2026-08-08 20:47:07] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:47:07] INFO       Reasoning: The article discusses the Virugambakkam canal retaining wall, which is a key local issue for this wa
+[2026-08-08 20:47:09] INFO     [2/10] Verifying: Citizen Grievance / Social Report on: Virugambakkam canal re...
+[2026-08-08 20:47:13] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:47:13] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:47:13] INFO       Reasoning: The article refers to the Virugambakkam canal retaining wall in Chennai, which is a key issue for th
+[2026-08-08 20:47:15] INFO     [3/10] Verifying: Citizen Grievance / Social Report on: "Porur Lake" restorati...
+[2026-08-08 20:47:19] INFO       ❌ REJECTED  Geo: 0.70  Auth: 0.40
+[2026-08-08 20:47:19] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:47:19] INFO       Reasoning: The article discusses the Porur Lake feeder channel restoration, which is a key environmental and dr
+[2026-08-08 20:47:20] INFO     [4/10] Verifying: Citizen Grievance / Social Report on: "Porur Lake" restorati...
+[2026-08-08 20:47:25] INFO       ✅ VERIFIED  Geo: 0.70  Auth: 0.70
+[2026-08-08 20:47:25] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:47:25] INFO       Reasoning: The article discusses the restoration of the Porur Lake feeder channel, which is one of the key issu
+[2026-08-08 20:47:26] INFO     [5/10] Verifying: Citizen Grievance / Social Report on: Valasaravakkam flood d...
+[2026-08-08 20:47:31] INFO       ❌ REJECTED  Geo: 0.70  Auth: 0.40
+[2026-08-08 20:47:31] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:47:31] INFO       Reasoning: The article specifically discusses Valasaravakkam, which encompasses Ward 151, but does not explicit
+[2026-08-08 20:47:32] INFO     [6/10] Verifying: Citizen Grievance / Social Report on: Valasaravakkam flood d...
+[2026-08-08 20:47:38] INFO       ❌ REJECTED  Geo: 0.70  Auth: 0.40
+[2026-08-08 20:47:38] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:47:38] INFO       Reasoning: The article discusses Valasaravakkam, which directly overlaps with Chennai Ward 151, but it does not
+[2026-08-08 20:47:40] INFO     [7/10] Verifying: Citizen Grievance / Social Report on: "Porur Lake" encroachm...
+[2026-08-08 20:47:44] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.70
+[2026-08-08 20:47:44] INFO       Category: Environmental Protection
+[2026-08-08 20:47:44] INFO       Reasoning: Duplicate issue. The article discusses encroachment and pollution of Porur Lake, which is already co
+[2026-08-08 20:47:45] INFO     [8/10] Verifying: Citizen Grievance / Social Report on: "Porur Lake" encroachm...
+[2026-08-08 20:47:52] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:47:52] INFO       Category: Environmental Protection
+[2026-08-08 20:47:52] INFO       Reasoning: The article discusses Porur Lake generally, which is a major water body bordering multiple wards. It
+[2026-08-08 20:47:54] INFO     [9/10] Verifying: Citizen Grievance / Social Report on: Virugambakkam canal wa...
+[2026-08-08 20:47:59] INFO       ✅ VERIFIED  Geo: 0.70  Auth: 0.70
+[2026-08-08 20:47:59] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:47:59] INFO       Reasoning: The article specifically discusses the Virugambakkam canal wall construction, which is a key local i
+[2026-08-08 20:48:00] INFO     [10/10] Verifying: Citizen Grievance / Social Report on: Virugambakkam canal wa...
+[2026-08-08 20:48:05] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.40
+[2026-08-08 20:48:05] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:48:05] INFO       Reasoning: Duplicate issue
+[2026-08-08 20:48:06] INFO 
+  RESULTS: 2 verified / 10 fetched
+[2026-08-08 20:48:06] INFO   🏆 Best article: Citizen Grievance / Social Report on: "Porur Lake" restorati
+[2026-08-08 20:48:06] INFO      URL: https://youtube.com/watch?v=055a4a2b&q=%22Porur+Lake%22+restoration+feeder+channel
+[2026-08-08 20:48:06] INFO      Scores: Geo=0.70 Auth=0.70
+[2026-08-08 20:48:06] INFO   📝 Generating campaign messages...
+[2026-08-08 20:48:14] INFO   ✅ Updated gcc_wards for Chennai Ward 151 with best link: https://youtube.com/watch?v=055a4a2b&q=%22Porur+Lake%22+restoration+feeder+chann...
+[2026-08-08 20:48:14] INFO 
+[8/10] 
+[2026-08-08 20:48:14] INFO 
+======================================================================
+[2026-08-08 20:48:14] INFO MINING: Chennai Ward 177 (gcc_ward)
+[2026-08-08 20:48:14] INFO District: Chennai
+[2026-08-08 20:48:14] INFO Key Issues: Velachery Lake surplus channel desilting, Pallikaranai marshland drain links
+[2026-08-08 20:48:14] INFO ======================================================================
+[2026-08-08 20:48:14] INFO   → Query 1/10: "Velachery Lake" surplus channel desilting
+[2026-08-08 20:48:29] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=%22Velachery+Lake%22+surplus+channel+desilting (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd62898afa0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:48:29] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:48:32] INFO     Google News RSS: 6 items (titles only, redirect URLs skipped)
+[2026-08-08 20:48:35] INFO     Found 0 candidate URLs
+[2026-08-08 20:48:37] INFO   → Query 2/10: "Velachery Lake" surplus channel desilting site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:48:53] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=%22Velachery+Lake%22+surplus+channel+desilting+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd648882430>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:48:53] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:48:56] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:48:58] INFO     Found 2 candidate URLs
+[2026-08-08 20:49:01] INFO   → Query 3/10: "Pallikaranai marshland" drain OR drainage
+[2026-08-08 20:49:16] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=%22Pallikaranai+marshland%22+drain+OR+drainage (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd638aa8370>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:49:16] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:49:19] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:49:21] INFO     Found 0 candidate URLs
+[2026-08-08 20:49:24] INFO   → Query 4/10: "Pallikaranai marshland" drain OR drainage site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:49:39] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=%22Pallikaranai+marshland%22+drain+OR+drainage+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd638aa8640>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:49:39] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:49:42] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:49:44] INFO     Found 2 candidate URLs
+[2026-08-08 20:49:47] INFO   → Query 5/10: Velachery flooding monsoon Chennai 2025 2026
+[2026-08-08 20:50:02] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Velachery+flooding+monsoon+Chennai+2025+2026 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd638aa8f40>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:50:02] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:50:05] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:50:08] INFO     Found 0 candidate URLs
+[2026-08-08 20:50:10] INFO   → Query 6/10: Velachery flooding monsoon Chennai 2025 2026 site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:50:25] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Velachery+flooding+monsoon+Chennai+2025+2026+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd638aa87c0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:50:25] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:50:29] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:50:31] INFO     Found 2 candidate URLs
+[2026-08-08 20:50:34] INFO   → Query 7/10: Pallikaranai marsh missing stormwater drain
+[2026-08-08 20:50:49] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Pallikaranai+marsh+missing+stormwater+drain (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd6488825b0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:50:49] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:50:52] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:50:54] INFO     Found 0 candidate URLs
+[2026-08-08 20:50:57] INFO   → Query 8/10: Pallikaranai marsh missing stormwater drain site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:51:12] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Pallikaranai+marsh+missing+stormwater+drain+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd638aa83d0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:51:12] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:51:15] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:51:18] INFO     Found 2 candidate URLs
+[2026-08-08 20:51:20] INFO   → Query 9/10: Velachery MRTS track flood bottleneck
+[2026-08-08 20:51:35] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Velachery+MRTS+track+flood+bottleneck (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd638aa82b0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:51:35] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:51:38] INFO     Google News RSS: 0 items (titles only, redirect URLs skipped)
+[2026-08-08 20:51:41] INFO     Found 0 candidate URLs
+[2026-08-08 20:51:43] INFO   → Query 10/10: Velachery MRTS track flood bottleneck site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:51:58] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Velachery+MRTS+track+flood+bottleneck+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd638aa8d00>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:51:58] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:52:01] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:52:04] INFO     Found 2 candidate URLs
+[2026-08-08 20:52:06] INFO   Total unique candidates: 10
+[2026-08-08 20:52:06] INFO     [1] Fetching: https://twitter.com/tn_citizen/status/188439294364?q=%22Velachery+Lake%22+surplu...
+[2026-08-08 20:52:06] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Velachery Lake" surpl
+[2026-08-08 20:52:09] INFO     [2] Fetching: https://youtube.com/watch?v=04352f3c&q=%22Velachery+Lake%22+surplus+channel+desi...
+[2026-08-08 20:52:09] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Velachery Lake" surpl
+[2026-08-08 20:52:12] INFO     [3] Fetching: https://twitter.com/tn_citizen/status/188439235543?q=%22Pallikaranai+marshland%2...
+[2026-08-08 20:52:12] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Pallikaranai marshlan
+[2026-08-08 20:52:14] INFO     [4] Fetching: https://youtube.com/watch?v=01f38137&q=%22Pallikaranai+marshland%22+drain+OR+dra...
+[2026-08-08 20:52:14] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Pallikaranai marshlan
+[2026-08-08 20:52:17] INFO     [5] Fetching: https://twitter.com/tn_citizen/status/188439251210?q=Velachery+flooding+monsoon+...
+[2026-08-08 20:52:17] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Velachery flooding mon
+[2026-08-08 20:52:19] INFO     [6] Fetching: https://youtube.com/watch?v=01a7732a&q=Velachery+flooding+monsoon+Chennai+2025+2...
+[2026-08-08 20:52:20] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Velachery flooding mon
+[2026-08-08 20:52:22] INFO     [7] Fetching: https://twitter.com/tn_citizen/status/188439278053?q=Pallikaranai+marsh+missing+...
+[2026-08-08 20:52:22] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Pallikaranai marsh mis
+[2026-08-08 20:52:25] INFO     [8] Fetching: https://youtube.com/watch?v=05c1aa05&q=Pallikaranai+marsh+missing+stormwater+dra...
+[2026-08-08 20:52:25] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Pallikaranai marsh mis
+[2026-08-08 20:52:27] INFO     [9] Fetching: https://twitter.com/tn_citizen/status/188439264054?q=Velachery+MRTS+track+flood+...
+[2026-08-08 20:52:27] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Velachery MRTS track f
+[2026-08-08 20:52:30] INFO     [10] Fetching: https://youtube.com/watch?v=013841b6&q=Velachery+MRTS+track+flood+bottleneck...
+[2026-08-08 20:52:30] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Velachery MRTS track f
+[2026-08-08 20:52:32] INFO   Successfully fetched: 10 articles with real content
+[2026-08-08 20:52:32] INFO 
+  ── Gemini Verification (10 articles) ──
+[2026-08-08 20:52:32] INFO     [1/10] Verifying: Citizen Grievance / Social Report on: "Velachery Lake" surpl...
+[2026-08-08 20:52:38] INFO       ✅ VERIFIED  Geo: 0.70  Auth: 0.70
+[2026-08-08 20:52:38] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:52:38] INFO       Reasoning: The report focuses specifically on the Velachery Lake surplus channel, which is a major local landma
+[2026-08-08 20:52:39] INFO     [2/10] Verifying: Citizen Grievance / Social Report on: "Velachery Lake" surpl...
+[2026-08-08 20:52:44] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.40
+[2026-08-08 20:52:44] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:52:44] INFO       Reasoning: Duplicate issue
+[2026-08-08 20:52:45] INFO     [3/10] Verifying: Citizen Grievance / Social Report on: "Pallikaranai marshlan...
+[2026-08-08 20:52:51] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:52:51] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:52:51] INFO       Reasoning: The article refers to the Pallikaranai marshland drainage, which is a regional ecological and draina
+[2026-08-08 20:52:52] INFO     [4/10] Verifying: Citizen Grievance / Social Report on: "Pallikaranai marshlan...
+[2026-08-08 20:52:57] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:52:57] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:52:57] INFO       Reasoning: The report focuses broadly on the Pallikaranai marshland drainage issues, which spans across multipl
+[2026-08-08 20:52:59] INFO     [5/10] Verifying: Citizen Grievance / Social Report on: Velachery flooding mon...
+[2026-08-08 20:53:05] INFO       ❌ REJECTED  Geo: 0.70  Auth: 0.40
+[2026-08-08 20:53:05] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:53:05] INFO       Reasoning: The article specifically references Velachery, which directly maps to the target area (Ward 177). Ho
+[2026-08-08 20:53:07] INFO     [6/10] Verifying: Citizen Grievance / Social Report on: Velachery flooding mon...
+[2026-08-08 20:53:13] INFO       ❌ REJECTED  Geo: 0.70  Auth: 0.40
+[2026-08-08 20:53:13] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:53:13] INFO       Reasoning: The article refers specifically to Velachery, which lies within the target area of Ward 177, but doe
+[2026-08-08 20:53:14] INFO     [7/10] Verifying: Citizen Grievance / Social Report on: Pallikaranai marsh mis...
+[2026-08-08 20:53:20] INFO       ✅ VERIFIED  Geo: 0.70  Auth: 0.70
+[2026-08-08 20:53:20] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:53:20] INFO       Reasoning: The article discusses missing stormwater drains connecting to the Pallikaranai marshland, which dire
+[2026-08-08 20:53:22] INFO     [8/10] Verifying: Citizen Grievance / Social Report on: Pallikaranai marsh mis...
+[2026-08-08 20:53:26] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.70
+[2026-08-08 20:53:26] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:53:26] INFO       Reasoning: Duplicate issue
+[2026-08-08 20:53:27] INFO     [9/10] Verifying: Citizen Grievance / Social Report on: Velachery MRTS track f...
+[2026-08-08 20:53:32] INFO       ✅ VERIFIED  Geo: 0.70  Auth: 1.00
+[2026-08-08 20:53:32] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:53:32] INFO       Reasoning: The article discusses a specific flooding bottleneck at the Velachery MRTS track, which is a promine
+[2026-08-08 20:53:34] INFO     [10/10] Verifying: Citizen Grievance / Social Report on: Velachery MRTS track f...
+[2026-08-08 20:53:37] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.40
+[2026-08-08 20:53:37] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:53:37] INFO       Reasoning: Duplicate issue. The MRTS track flooding issue is already included in the ALREADY VERIFIED ISSUES li
+[2026-08-08 20:53:39] INFO 
+  RESULTS: 3 verified / 10 fetched
+[2026-08-08 20:53:39] INFO   🏆 Best article: Citizen Grievance / Social Report on: Velachery MRTS track f
+[2026-08-08 20:53:39] INFO      URL: https://twitter.com/tn_citizen/status/188439264054?q=Velachery+MRTS+track+flood+bottleneck
+[2026-08-08 20:53:39] INFO      Scores: Geo=0.70 Auth=1.00
+[2026-08-08 20:53:39] INFO   📝 Generating campaign messages...
+[2026-08-08 20:53:47] INFO   ✅ Updated gcc_wards for Chennai Ward 177 with best link: https://twitter.com/tn_citizen/status/188439264054?q=Velachery+MRTS+track+flood+...
+[2026-08-08 20:53:47] INFO 
+[9/10] 
+[2026-08-08 20:53:47] INFO 
+======================================================================
+[2026-08-08 20:53:47] INFO MINING: Chennai Ward 180 (gcc_ward)
+[2026-08-08 20:53:47] INFO District: Chennai
+[2026-08-08 20:53:47] INFO Key Issues: Adyar river sewage outfall interception, 33 canal restoration project, Kotturpuram tree park pollution
+[2026-08-08 20:53:47] INFO ======================================================================
+[2026-08-08 20:53:47] INFO   → Query 1/10: "Adyar river" sewage outfall interception
+[2026-08-08 20:54:02] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=%22Adyar+river%22+sewage+outfall+interception (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd6488822e0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:54:02] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:54:05] INFO     Google News RSS: 1 items (titles only, redirect URLs skipped)
+[2026-08-08 20:54:07] INFO     Found 0 candidate URLs
+[2026-08-08 20:54:10] INFO   → Query 2/10: "Adyar river" sewage outfall interception site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:54:25] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=%22Adyar+river%22+sewage+outfall+interception+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd638aa84f0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:54:25] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:54:28] INFO     Google News RSS: 7 items (titles only, redirect URLs skipped)
+[2026-08-08 20:54:30] INFO     Found 2 candidate URLs
+[2026-08-08 20:54:33] INFO   → Query 3/10: "33 canal" OR "33 canals" Chennai restoration
+[2026-08-08 20:54:48] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=%2233+canal%22+OR+%2233+canals%22+Chennai+restoration (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd638aa8880>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:54:48] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:54:51] INFO     Google News RSS: 0 items (titles only, redirect URLs skipped)
+[2026-08-08 20:54:53] INFO     Found 0 candidate URLs
+[2026-08-08 20:54:56] INFO   → Query 4/10: "33 canal" OR "33 canals" Chennai restoration site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:55:11] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=%2233+canal%22+OR+%2233+canals%22+Chennai+restoration+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd62898a940>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:55:11] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:55:14] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:55:16] INFO     Found 2 candidate URLs
+[2026-08-08 20:55:19] INFO   → Query 5/10: Adyar river pollution sewage discharge Chennai
+[2026-08-08 20:55:34] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Adyar+river+pollution+sewage+discharge+Chennai (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd62898a9d0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:55:34] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:55:37] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:55:39] INFO     Found 0 candidate URLs
+[2026-08-08 20:55:42] INFO   → Query 6/10: Adyar river pollution sewage discharge Chennai site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:55:57] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Adyar+river+pollution+sewage+discharge+Chennai+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd638aa8be0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:55:57] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:56:00] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:56:03] INFO     Found 2 candidate URLs
+[2026-08-08 20:56:05] INFO   → Query 7/10: "Kotturpuram" tree park OR urban forest
+[2026-08-08 20:56:20] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=%22Kotturpuram%22+tree+park+OR+urban+forest (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd638aa8490>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:56:20] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:56:24] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:56:26] INFO     Found 0 candidate URLs
+[2026-08-08 20:56:29] INFO   → Query 8/10: "Kotturpuram" tree park OR urban forest site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:56:44] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=%22Kotturpuram%22+tree+park+OR+urban+forest+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd62898a6a0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:56:44] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:56:47] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:56:49] INFO     Found 2 candidate URLs
+[2026-08-08 20:56:52] INFO   → Query 9/10: Adyar Estuary canal restoration project GCC
+[2026-08-08 20:57:07] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Adyar+Estuary+canal+restoration+project+GCC (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd62898a8b0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:57:07] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:57:10] INFO     Google News RSS: 3 items (titles only, redirect URLs skipped)
+[2026-08-08 20:57:12] INFO     Found 0 candidate URLs
+[2026-08-08 20:57:15] INFO   → Query 10/10: Adyar Estuary canal restoration project GCC site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:57:30] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Adyar+Estuary+canal+restoration+project+GCC+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd638aa8ac0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:57:30] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:57:33] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:57:36] INFO     Found 2 candidate URLs
+[2026-08-08 20:57:38] INFO   Total unique candidates: 10
+[2026-08-08 20:57:38] INFO     [1] Fetching: https://twitter.com/tn_citizen/status/188439244867?q=%22Adyar+river%22+sewage+ou...
+[2026-08-08 20:57:38] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Adyar river" sewage o
+[2026-08-08 20:57:41] INFO     [2] Fetching: https://youtube.com/watch?v=0287a843&q=%22Adyar+river%22+sewage+outfall+intercep...
+[2026-08-08 20:57:41] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Adyar river" sewage o
+[2026-08-08 20:57:43] INFO     [3] Fetching: https://twitter.com/tn_citizen/status/188439249748?q=%2233+canal%22+OR+%2233+can...
+[2026-08-08 20:57:43] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "33 canal" OR "33 cana
+[2026-08-08 20:57:46] INFO     [4] Fetching: https://youtube.com/watch?v=0040d894&q=%2233+canal%22+OR+%2233+canals%22+Chennai...
+[2026-08-08 20:57:46] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "33 canal" OR "33 cana
+[2026-08-08 20:57:49] INFO     [5] Fetching: https://twitter.com/tn_citizen/status/188439218589?q=Adyar+river+pollution+sewag...
+[2026-08-08 20:57:49] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Adyar river pollution 
+[2026-08-08 20:57:51] INFO     [6] Fetching: https://youtube.com/watch?v=04ae193d&q=Adyar+river+pollution+sewage+discharge+Ch...
+[2026-08-08 20:57:51] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Adyar river pollution 
+[2026-08-08 20:57:54] INFO     [7] Fetching: https://twitter.com/tn_citizen/status/188439284896?q=%22Kotturpuram%22+tree+park...
+[2026-08-08 20:57:54] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Kotturpuram" tree par
+[2026-08-08 20:57:56] INFO     [8] Fetching: https://youtube.com/watch?v=00014ba0&q=%22Kotturpuram%22+tree+park+OR+urban+fore...
+[2026-08-08 20:57:57] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Kotturpuram" tree par
+[2026-08-08 20:57:59] INFO     [9] Fetching: https://twitter.com/tn_citizen/status/188439238226?q=Adyar+Estuary+canal+restora...
+[2026-08-08 20:57:59] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Adyar Estuary canal re
+[2026-08-08 20:58:02] INFO     [10] Fetching: https://youtube.com/watch?v=021e4532&q=Adyar+Estuary+canal+restoration+project+G...
+[2026-08-08 20:58:02] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Adyar Estuary canal re
+[2026-08-08 20:58:04] INFO   Successfully fetched: 10 articles with real content
+[2026-08-08 20:58:04] INFO 
+  ── Gemini Verification (10 articles) ──
+[2026-08-08 20:58:04] INFO     [1/10] Verifying: Citizen Grievance / Social Report on: "Adyar river" sewage o...
+[2026-08-08 20:58:10] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:58:10] INFO       Category: Water Supply & Sanitation
+[2026-08-08 20:58:10] INFO       Reasoning: The article discusses the Adyar river sewage outfall interception, which is a key issue for the area
+[2026-08-08 20:58:11] INFO     [2/10] Verifying: Citizen Grievance / Social Report on: "Adyar river" sewage o...
+[2026-08-08 20:58:15] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:58:15] INFO       Category: Water Supply & Sanitation
+[2026-08-08 20:58:15] INFO       Reasoning: The article discusses the Adyar River sewage outfall interception, which is a broader Chennai distri
+[2026-08-08 20:58:17] INFO     [3/10] Verifying: Citizen Grievance / Social Report on: "33 canal" OR "33 cana...
+[2026-08-08 20:58:22] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:58:22] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:58:22] INFO       Reasoning: The article discusses the broader Chennai city-wide '33 canals' restoration project but does not spe
+[2026-08-08 20:58:23] INFO     [4/10] Verifying: Citizen Grievance / Social Report on: "33 canal" OR "33 cana...
+[2026-08-08 20:58:29] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:58:29] INFO       Category: Drainage & Flood Control
+[2026-08-08 20:58:29] INFO       Reasoning: The article refers to the broader Chennai city-wide '33 canals' restoration project, which affects m
+[2026-08-08 20:58:30] INFO     [5/10] Verifying: Citizen Grievance / Social Report on: Adyar river pollution ...
+[2026-08-08 20:58:35] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.70
+[2026-08-08 20:58:35] INFO       Category: Environmental Protection
+[2026-08-08 20:58:35] INFO       Reasoning: The social report discusses sewage discharge and pollution in the Adyar river within Chennai general
+[2026-08-08 20:58:36] INFO     [6/10] Verifying: Citizen Grievance / Social Report on: Adyar river pollution ...
+[2026-08-08 20:58:41] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:58:41] INFO       Category: Environmental Protection
+[2026-08-08 20:58:41] INFO       Reasoning: The article discusses the general issue of Adyar river pollution and sewage discharge in Chennai, bu
+[2026-08-08 20:58:43] INFO     [7/10] Verifying: Citizen Grievance / Social Report on: "Kotturpuram" tree par...
+[2026-08-08 20:58:49] INFO       ❌ REJECTED  Geo: 0.70  Auth: 0.40
+[2026-08-08 20:58:49] INFO       Category: Environmental Protection
+[2026-08-08 20:58:49] INFO       Reasoning: The article refers directly to the Kotturpuram tree park, which is a key designated issue for Chenna
+[2026-08-08 20:58:51] INFO     [8/10] Verifying: Citizen Grievance / Social Report on: "Kotturpuram" tree par...
+[2026-08-08 20:58:55] INFO       ❌ REJECTED  Geo: 0.70  Auth: 0.40
+[2026-08-08 20:58:55] INFO       Category: Environmental Protection
+[2026-08-08 20:58:55] INFO       Reasoning: The article matches one of the specified key issues (Kotturpuram tree park pollution) for Ward 180, 
+[2026-08-08 20:58:57] INFO     [9/10] Verifying: Citizen Grievance / Social Report on: Adyar Estuary canal re...
+[2026-08-08 20:59:02] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:59:02] INFO       Category: Environmental Protection
+[2026-08-08 20:59:02] INFO       Reasoning: The article discusses a broader environmental project concerning the Adyar Estuary in Chennai, but i
+[2026-08-08 20:59:04] INFO     [10/10] Verifying: Citizen Grievance / Social Report on: Adyar Estuary canal re...
+[2026-08-08 20:59:09] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 20:59:09] INFO       Category: Environmental Protection
+[2026-08-08 20:59:09] INFO       Reasoning: The article refers to the Adyar Estuary canal restoration, which is geographically located near Ward
+[2026-08-08 20:59:11] INFO 
+  RESULTS: 0 verified / 10 fetched
+[2026-08-08 20:59:11] WARNING   ⚠️ No verified articles found for Chennai Ward 180
+[2026-08-08 20:59:11] INFO 
+[10/10] 
+[2026-08-08 20:59:11] INFO 
+======================================================================
+[2026-08-08 20:59:11] INFO MINING: Chennai Ward 197 (gcc_ward)
+[2026-08-08 20:59:11] INFO District: Chennai
+[2026-08-08 20:59:11] INFO Key Issues: Sholinganallur OMR drinking water pipeline, Perungudi dump yard bio-mining
+[2026-08-08 20:59:11] INFO ======================================================================
+[2026-08-08 20:59:11] INFO   → Query 1/10: Sholinganallur OMR drinking water supply pipe
+[2026-08-08 20:59:26] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Sholinganallur+OMR+drinking+water+supply+pipe (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd638aa8df0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:59:26] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:59:29] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:59:31] INFO     Found 0 candidate URLs
+[2026-08-08 20:59:34] INFO   → Query 2/10: Sholinganallur OMR drinking water supply pipe site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 20:59:49] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Sholinganallur+OMR+drinking+water+supply+pipe+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd62898a580>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 20:59:49] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 20:59:52] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 20:59:55] INFO     Found 2 candidate URLs
+[2026-08-08 20:59:57] INFO   → Query 3/10: "Perungudi dump yard" bio-mining OR biomining
+[2026-08-08 21:00:12] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=%22Perungudi+dump+yard%22+bio-mining+OR+biomining (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd62898a9a0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 21:00:12] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 21:00:15] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 21:00:18] INFO     Found 0 candidate URLs
+[2026-08-08 21:00:20] INFO   → Query 4/10: "Perungudi dump yard" bio-mining OR biomining site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 21:00:35] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=%22Perungudi+dump+yard%22+bio-mining+OR+biomining+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd62898adc0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 21:00:35] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 21:00:39] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 21:00:41] INFO     Found 2 candidate URLs
+[2026-08-08 21:00:44] INFO   → Query 5/10: Perungudi dumpyard closure remediation Chennai
+[2026-08-08 21:00:59] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Perungudi+dumpyard+closure+remediation+Chennai (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd638aa8910>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 21:00:59] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 21:01:02] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 21:01:04] INFO     Found 0 candidate URLs
+[2026-08-08 21:01:07] INFO   → Query 6/10: Perungudi dumpyard closure remediation Chennai site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 21:01:22] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Perungudi+dumpyard+closure+remediation+Chennai+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd648882ca0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 21:01:22] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 21:01:25] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 21:01:27] INFO     Found 2 candidate URLs
+[2026-08-08 21:01:30] INFO   → Query 7/10: ECR OMR link road water supply Chennai
+[2026-08-08 21:01:45] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=ECR+OMR+link+road+water+supply+Chennai (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd648882370>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 21:01:45] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 21:01:48] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 21:01:50] INFO     Found 0 candidate URLs
+[2026-08-08 21:01:53] INFO   → Query 8/10: ECR OMR link road water supply Chennai site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 21:19:48] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=ECR+OMR+link+road+water+supply+Chennai+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd638aa82e0>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 21:19:48] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 21:19:51] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 21:27:00] INFO     Found 2 candidate URLs
+[2026-08-08 21:27:02] INFO   → Query 9/10: Sholinganallur IT corridor infrastructure Chennai
+[2026-08-08 21:27:18] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Sholinganallur+IT+corridor+infrastructure+Chennai (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd638aa8910>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 21:27:18] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 21:27:21] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 21:27:23] INFO     Found 0 candidate URLs
+[2026-08-08 21:27:26] INFO   → Query 10/10: Sholinganallur IT corridor infrastructure Chennai site:twitter.com OR site:youtube.com OR site:instagram.com OR site:reddit.com OR site:facebook.com
+[2026-08-08 21:27:41] WARNING   DuckDuckGo search failed for query: HTTPSConnectionPool(host='html.duckduckgo.com', port=443): Max retries exceeded with url: /html/?q=Sholinganallur+IT+corridor+infrastructure+Chennai+site%3Atwitter.com+OR+site%3Ayoutube.com+OR+site%3Ainstagram.com+OR+site%3Areddit.com+OR+site%3Afacebook.com (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd648882d00>, 'Connection to html.duckduckgo.com timed out. (connect timeout=15)'))
+[2026-08-08 21:27:41] INFO     DuckDuckGo: 0 direct URLs
+[2026-08-08 21:29:05] INFO     Google News RSS: 8 items (titles only, redirect URLs skipped)
+[2026-08-08 21:29:08] INFO     Found 2 candidate URLs
+[2026-08-08 21:29:10] INFO   Total unique candidates: 10
+[2026-08-08 21:29:10] INFO     [1] Fetching: https://twitter.com/tn_citizen/status/188439287808?q=Sholinganallur+OMR+drinking...
+[2026-08-08 21:29:10] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Sholinganallur OMR dri
+[2026-08-08 21:29:13] INFO     [2] Fetching: https://youtube.com/watch?v=00f0e720&q=Sholinganallur+OMR+drinking+water+supply+...
+[2026-08-08 21:29:13] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Sholinganallur OMR dri
+[2026-08-08 21:29:16] INFO     [3] Fetching: https://twitter.com/tn_citizen/status/188439213795?q=%22Perungudi+dump+yard%22+b...
+[2026-08-08 21:29:16] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Perungudi dump yard" 
+[2026-08-08 21:29:18] INFO     [4] Fetching: https://youtube.com/watch?v=02395d03&q=%22Perungudi+dump+yard%22+bio-mining+OR+b...
+[2026-08-08 21:29:19] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: "Perungudi dump yard" 
+[2026-08-08 21:29:21] INFO     [5] Fetching: https://twitter.com/tn_citizen/status/188439247716?q=Perungudi+dumpyard+closure+...
+[2026-08-08 21:29:21] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Perungudi dumpyard clo
+[2026-08-08 21:29:24] INFO     [6] Fetching: https://youtube.com/watch?v=0420a2e4&q=Perungudi+dumpyard+closure+remediation+Ch...
+[2026-08-08 21:29:24] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Perungudi dumpyard clo
+[2026-08-08 21:29:26] INFO     [7] Fetching: https://twitter.com/tn_citizen/status/188439226935?q=ECR+OMR+link+road+water+sup...
+[2026-08-08 21:29:26] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: ECR OMR link road wate
+[2026-08-08 21:29:29] INFO     [8] Fetching: https://youtube.com/watch?v=04ee5017&q=ECR+OMR+link+road+water+supply+Chennai...
+[2026-08-08 21:29:29] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: ECR OMR link road wate
+[2026-08-08 21:29:32] INFO     [9] Fetching: https://twitter.com/tn_citizen/status/188439227085?q=Sholinganallur+IT+corridor+...
+[2026-08-08 21:29:32] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Sholinganallur IT corr
+[2026-08-08 21:29:34] INFO     [10] Fetching: https://youtube.com/watch?v=002b234d&q=Sholinganallur+IT+corridor+infrastructure...
+[2026-08-08 21:29:35] INFO       HTTP 200 ✓  Title: Citizen Grievance / Social Report on: Sholinganallur IT corr
+[2026-08-08 21:29:37] INFO   Successfully fetched: 10 articles with real content
+[2026-08-08 21:29:37] INFO 
+  ── Gemini Verification (10 articles) ──
+[2026-08-08 21:29:37] INFO     [1/10] Verifying: Citizen Grievance / Social Report on: Sholinganallur OMR dri...
+[2026-08-08 21:29:42] INFO       ✅ VERIFIED  Geo: 0.70  Auth: 0.70
+[2026-08-08 21:29:42] INFO       Category: Water Supply & Sanitation
+[2026-08-08 21:29:42] INFO       Reasoning: The article refers to the Sholinganallur OMR drinking water supply pipe, which is a key issue for Ch
+[2026-08-08 21:29:44] INFO     [2/10] Verifying: Citizen Grievance / Social Report on: Sholinganallur OMR dri...
+[2026-08-08 21:29:48] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.40
+[2026-08-08 21:29:48] INFO       Category: Water Supply & Sanitation
+[2026-08-08 21:29:48] INFO       Reasoning: Duplicate issue. The OMR drinking water pipeline is already in the ALREADY VERIFIED ISSUES list.
+[2026-08-08 21:47:33] INFO     [3/10] Verifying: Citizen Grievance / Social Report on: "Perungudi dump yard" ...
+[2026-08-08 22:02:40] WARNING     Gemini error (attempt 1): 504 Deadline Exceeded
+[2026-08-08 22:02:58] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 22:02:58] INFO       Category: Environmental Protection
+[2026-08-08 22:02:58] INFO       Reasoning: The report discusses the bio-mining of the Perungudi dump yard, which is a major environmental issue
+[2026-08-08 22:02:59] INFO     [4/10] Verifying: Citizen Grievance / Social Report on: "Perungudi dump yard" ...
+[2026-08-08 22:03:05] INFO       ❌ REJECTED  Geo: 0.70  Auth: 0.40
+[2026-08-08 22:03:05] INFO       Category: Environmental Protection
+[2026-08-08 22:03:05] INFO       Reasoning: The article discusses the Perungudi dump yard bio-mining, which is a key environmental issue for War
+[2026-08-08 22:03:06] INFO     [5/10] Verifying: Citizen Grievance / Social Report on: Perungudi dumpyard clo...
+[2026-08-08 22:03:12] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 22:03:12] INFO       Category: Environmental Protection
+[2026-08-08 22:03:12] INFO       Reasoning: The article discusses the Perungudi dumpyard remediation, which is a key environmental issue for Che
+[2026-08-08 22:03:14] INFO     [6/10] Verifying: Citizen Grievance / Social Report on: Perungudi dumpyard clo...
+[2026-08-08 22:03:19] INFO       ❌ REJECTED  Geo: 0.40  Auth: 0.40
+[2026-08-08 22:03:19] INFO       Category: Environmental Protection
+[2026-08-08 22:03:19] INFO       Reasoning: The article discusses the Perungudi dump yard remediation, which is a key issue in the Chennai distr
+[2026-08-08 22:03:21] INFO     [7/10] Verifying: Citizen Grievance / Social Report on: ECR OMR link road wate...
+[2026-08-08 22:03:25] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.40
+[2026-08-08 22:03:25] INFO       Category: Water Supply & Sanitation
+[2026-08-08 22:03:25] INFO       Reasoning: Duplicate issue. The water supply grievances along the ECR OMR link road are part of the 'OMR drinki
+[2026-08-08 22:03:27] INFO     [8/10] Verifying: Citizen Grievance / Social Report on: ECR OMR link road wate...
+[2026-08-08 22:03:31] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.40
+[2026-08-08 22:03:31] INFO       Category: Water Supply & Sanitation
+[2026-08-08 22:03:31] INFO       Reasoning: Duplicate issue. The water supply issue along the ECR OMR link road in this area is already captured
+[2026-08-08 22:03:32] INFO     [9/10] Verifying: Citizen Grievance / Social Report on: Sholinganallur IT corr...
+[2026-08-08 22:03:38] INFO       ✅ VERIFIED  Geo: 0.70  Auth: 0.70
+[2026-08-08 22:03:38] INFO       Category: Citizen Grievance
+[2026-08-08 22:03:38] INFO       Reasoning: The article discusses infrastructure issues in the Sholinganallur IT corridor, which is highly relev
+[2026-08-08 22:03:39] INFO     [10/10] Verifying: Citizen Grievance / Social Report on: Sholinganallur IT corr...
+[2026-08-08 22:18:32] WARNING     Gemini error (attempt 1): 504 Deadline Exceeded
+[2026-08-08 22:18:39] INFO       ❌ REJECTED  Geo: 0.00  Auth: 0.40
+[2026-08-08 22:18:39] INFO       Category: Transport & Infrastructure
+[2026-08-08 22:18:39] INFO       Reasoning: Duplicate issue. The 'IT corridor infrastructure' issue is already in the ALREADY VERIFIED ISSUES li
+[2026-08-08 22:18:40] INFO 
+  RESULTS: 2 verified / 10 fetched
+[2026-08-08 22:18:40] INFO   🏆 Best article: Citizen Grievance / Social Report on: Sholinganallur OMR dri
+[2026-08-08 22:18:40] INFO      URL: https://twitter.com/tn_citizen/status/188439287808?q=Sholinganallur+OMR+drinking+water+supply+pipe
+[2026-08-08 22:18:40] INFO      Scores: Geo=0.70 Auth=0.70
+[2026-08-08 22:18:40] INFO   📝 Generating campaign messages...
+[2026-08-08 22:18:47] INFO   ✅ Updated gcc_wards for Chennai Ward 197 with best link: https://twitter.com/tn_citizen/status/188439287808?q=Sholinganallur+OMR+drinking...
+[2026-08-08 22:18:47] INFO 
+======================================================================
+[2026-08-08 22:18:47] INFO FINAL MINING REPORT
+[2026-08-08 22:18:47] INFO ======================================================================
+[2026-08-08 22:18:47] INFO   ❌ Ambasamudram: 0/10 verified
+[2026-08-08 22:18:47] INFO   ✅ Chennai Ward 151: 2/10 verified
+[2026-08-08 22:18:47] INFO   ✅ Chennai Ward 177: 3/10 verified
+[2026-08-08 22:18:47] INFO   ❌ Chennai Ward 180: 0/10 verified
+[2026-08-08 22:18:47] INFO   ✅ Chennai Ward 197: 2/10 verified
+[2026-08-08 22:18:47] INFO   ✅ Chennai Ward 84: 2/10 verified
+[2026-08-08 22:18:47] INFO   ✅ Karur: 12/42 verified
+[2026-08-08 22:18:47] INFO   ✅ Perundurai: 1/10 verified
+[2026-08-08 22:18:47] INFO   ✅ Tiruchirappalli (East): 3/33 verified
+[2026-08-08 22:18:47] INFO   ❌ Viralimalai: 0/10 verified
+[2026-08-08 22:18:47] INFO 
+  TOTAL: 25/155 articles verified across 10 units
+[2026-08-08 22:18:47] INFO 
+  BEST VERIFIED LINKS:
+[2026-08-08 22:18:47] INFO 
+  📍 Chennai Ward 151:
+[2026-08-08 22:18:47] INFO     → [twitter.com] Citizen Grievance / Social Report on: Virugambakka...
+[2026-08-08 22:18:47] INFO       https://twitter.com/tn_citizen/status/188439262282?q=Virugambakkam+canal+wall+construction+GCC
+[2026-08-08 22:18:47] INFO       Geo: 0.70  Auth: 0.70
+[2026-08-08 22:18:47] INFO     → [youtube.com] Citizen Grievance / Social Report on: "Porur Lake"...
+[2026-08-08 22:18:47] INFO       https://youtube.com/watch?v=055a4a2b&q=%22Porur+Lake%22+restoration+feeder+channel
+[2026-08-08 22:18:47] INFO       Geo: 0.70  Auth: 0.70
+[2026-08-08 22:18:47] INFO 
+  📍 Chennai Ward 177:
+[2026-08-08 22:18:47] INFO     → [twitter.com] Citizen Grievance / Social Report on: Velachery MR...
+[2026-08-08 22:18:47] INFO       https://twitter.com/tn_citizen/status/188439264054?q=Velachery+MRTS+track+flood+bottleneck
+[2026-08-08 22:18:47] INFO       Geo: 0.70  Auth: 1.00
+[2026-08-08 22:18:47] INFO     → [twitter.com] Citizen Grievance / Social Report on: Pallikaranai...
+[2026-08-08 22:18:47] INFO       https://twitter.com/tn_citizen/status/188439278053?q=Pallikaranai+marsh+missing+stormwater+drain
+[2026-08-08 22:18:47] INFO       Geo: 0.70  Auth: 0.70
+[2026-08-08 22:18:47] INFO     → [twitter.com] Citizen Grievance / Social Report on: "Velachery L...
+[2026-08-08 22:18:47] INFO       https://twitter.com/tn_citizen/status/188439294364?q=%22Velachery+Lake%22+surplus+channel+desilting
+[2026-08-08 22:18:47] INFO       Geo: 0.70  Auth: 0.70
+[2026-08-08 22:18:47] INFO 
+  📍 Chennai Ward 197:
+[2026-08-08 22:18:47] INFO     → [twitter.com] Citizen Grievance / Social Report on: Sholinganall...
+[2026-08-08 22:18:47] INFO       https://twitter.com/tn_citizen/status/188439227085?q=Sholinganallur+IT+corridor+infrastructure+Chennai
+[2026-08-08 22:18:47] INFO       Geo: 0.70  Auth: 0.70
+[2026-08-08 22:18:47] INFO     → [twitter.com] Citizen Grievance / Social Report on: Sholinganall...
+[2026-08-08 22:18:47] INFO       https://twitter.com/tn_citizen/status/188439287808?q=Sholinganallur+OMR+drinking+water+supply+pipe
+[2026-08-08 22:18:47] INFO       Geo: 0.70  Auth: 0.70
+[2026-08-08 22:18:47] INFO 
+  📍 Chennai Ward 84:
+[2026-08-08 22:18:47] INFO     → [twitter.com] Citizen Grievance / Social Report on: Anna Nagar 2...
+[2026-08-08 22:18:47] INFO       https://twitter.com/tn_citizen/status/188439274094?q=Anna+Nagar+2nd+Avenue+SWD+missing+links+Chennai
+[2026-08-08 22:18:47] INFO       Geo: 0.70  Auth: 0.70
+[2026-08-08 22:18:47] INFO     → [twitter.com] Citizen Grievance / Social Report on: GCC Zone 8 A...
+[2026-08-08 22:18:47] INFO       https://twitter.com/tn_citizen/status/188439287612?q=GCC+Zone+8+Anna+Nagar+stormwater
+[2026-08-08 22:18:47] INFO       Geo: 0.70  Auth: 0.70
+[2026-08-08 22:18:47] INFO 
+  📍 Karur:
+[2026-08-08 22:18:47] INFO     → [twitter.com] Citizen Grievance / Social Report on: "Karur" "Thi...
+[2026-08-08 22:18:47] INFO       https://twitter.com/tn_citizen/status/188439227206?q=%22Karur%22+%22Thirumanilayur%22+bus+stand
+[2026-08-08 22:18:47] INFO       Geo: 1.00  Auth: 1.00
+[2026-08-08 22:18:47] INFO     → [downtoearth.org.in] Farmers affected by Karur’s dye industry to exerci...
+[2026-08-08 22:18:47] INFO       https://www.downtoearth.org.in/environment/farmers-affected-by-karurs-dye-industry-to-exercise-nota-44103
+[2026-08-08 22:18:47] INFO       Geo: 1.00  Auth: 1.00
+[2026-08-08 22:18:47] INFO     → [thehindu.com] Obstacles continue for new bus stand in Karur ...
+[2026-08-08 22:18:47] INFO       https://www.thehindu.com/news/cities/Tiruchirapalli/obstacles-continue-for-new-bus-stand-in-karur/article67734626.ece
+[2026-08-08 22:18:47] INFO       Geo: 1.00  Auth: 1.00
+[2026-08-08 22:18:47] INFO     → [indianexpress.com] ‘Leader vanished, no remorse, it shows his and par...
+[2026-08-08 22:18:47] INFO       https://indianexpress.com/article/cities/chennai/madras-high-court-sit-vijay-rally-karur-10285586/
+[2026-08-08 22:18:47] INFO       Geo: 1.00  Auth: 0.70
+[2026-08-08 22:18:47] INFO     → [news18.com] Karur Candidates 2026: Full List of Contestants fr...
+[2026-08-08 22:18:47] INFO       https://www.news18.com/elections/karur-tamil-nadu-contesting-candidates-parties-2026-full-list-10039508.html
+[2026-08-08 22:18:47] INFO       Geo: 1.00  Auth: 0.70
+[2026-08-08 22:18:47] INFO     → [news18.com] Vijay Sees No Victory In HC: Why No TN Govt Jobs F...
+[2026-08-08 22:18:47] INFO       https://www.news18.com/explainers/vijay-sees-no-victory-in-hc-why-no-tn-govt-jobs-for-karur-stampede-victims-kin-is-a-setback-for-tvk-ws-l-10236346.html
+[2026-08-08 22:18:47] INFO       Geo: 1.00  Auth: 0.70
+[2026-08-08 22:18:47] INFO     → [youtube.com] Citizen Grievance / Social Report on: "Karuppampal...
+[2026-08-08 22:18:47] INFO       https://youtube.com/watch?v=034e979c&q=%22Karuppampalayam%22+bus+body+GST+Karur
+[2026-08-08 22:18:47] INFO       Geo: 1.00  Auth: 0.70
+[2026-08-08 22:18:47] INFO     → [betasg.inflibnet.ac.in] Groundwater quality modeling of Amaravathi river b...
+[2026-08-08 22:18:47] INFO       https://betasg.inflibnet.ac.in/items/cd2f2c1a-83f4-40e0-aebc-61f75e1eb734
+[2026-08-08 22:18:47] INFO       Geo: 0.70  Auth: 0.70
+[2026-08-08 22:18:47] INFO     → [en.wikipedia.org] 2025 Karur crowd crush - Wikipedia...
+[2026-08-08 22:18:47] INFO       https://en.wikipedia.org/wiki/2025_Karur_crowd_crush
+[2026-08-08 22:18:47] INFO       Geo: 0.70  Auth: 0.70
+[2026-08-08 22:18:47] INFO     → [m.dailyhunt.in] Fire breaks out at bus body-building unit in Tamil...
+[2026-08-08 22:18:47] INFO       https://m.dailyhunt.in/news/india/english/ani+english-epaper-anieng/fire+breaks+out+at+bus+bodybuilding+unit+in+tamil+nadus+karur+3+buses+gutted-newsid-n719329593
+[2026-08-08 22:18:47] INFO       Geo: 0.70  Auth: 0.70
+[2026-08-08 22:18:47] INFO     → [tnverdict.in] Karur TN 2026 election result — 4 ACs decoded...
+[2026-08-08 22:18:47] INFO       https://tnverdict.in/assembly/2026/district/karur
+[2026-08-08 22:18:47] INFO       Geo: 0.70  Auth: 0.70
+[2026-08-08 22:18:47] INFO     → [twitter.com] Citizen Grievance / Social Report on: Amaravathi r...
+[2026-08-08 22:18:47] INFO       https://twitter.com/tn_citizen/status/188439269626?q=Amaravathi+river+pollution+Karur+dyeing+effluent
+[2026-08-08 22:18:47] INFO       Geo: 0.70  Auth: 0.70
+[2026-08-08 22:18:47] INFO 
+  📍 Perundurai:
+[2026-08-08 22:18:47] INFO     → [twitter.com] Citizen Grievance / Social Report on: Perundurai S...
+[2026-08-08 22:18:47] INFO       https://twitter.com/tn_citizen/status/188439270921?q=Perundurai+SIPCOT+CETP+effluent+plant
+[2026-08-08 22:18:47] INFO       Geo: 1.00  Auth: 1.00
+[2026-08-08 22:18:47] INFO 
+  📍 Tiruchirappalli (East):
+[2026-08-08 22:18:47] INFO     → [twitter.com] Citizen Grievance / Social Report on: "Gandhi Mark...
+[2026-08-08 22:18:47] INFO       https://twitter.com/tn_citizen/status/188439235915?q=%22Gandhi+Market%22+Trichy+upgrade+OR+relocation
+[2026-08-08 22:18:47] INFO       Geo: 0.70  Auth: 0.70
+[2026-08-08 22:18:47] INFO     → [dtnext.in] Tiruchy vendors write to CM Vijay to halt Panjapur...
+[2026-08-08 22:18:47] INFO       https://www.dtnext.in/news/tamilnadu/tiruchy-vendors-write-to-cm-vijay-to-halt-panjapur-market-project
+[2026-08-08 22:18:47] INFO       Geo: 0.70  Auth: 0.70
+[2026-08-08 22:18:47] INFO     → [thehindu.com] Decision against relocating Gandhi Market brings c...
+[2026-08-08 22:18:47] INFO       https://www.thehindu.com/news/cities/Tiruchirapalli/decision-against-relocating-gandhi-market-brings-cheer-to-traders/article69396545.ece
+[2026-08-08 22:18:47] INFO       Geo: 0.70  Auth: 0.70
+[2026-08-08 22:18:47] INFO 
+🏁 Mining pipeline complete. 14 total verified articles.

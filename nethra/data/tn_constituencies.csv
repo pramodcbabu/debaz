@@ -1,0 +1,21 @@
+id,name,district,lat,lon,tvk_2026,dmk_2026,aiadmk_2026,others_2026,tvk_prev,dmk_prev,aiadmk_prev,total_voters,turnout,margin,winner,note,tvk_lead_over_2nd,hv,total_votes_cast,tvk_status
+1,Perambur,Chennai,13.1143,80.2329,0.48,0.22,0.18,0.12,0.0,0.45,0.38,198450,0.71,12340,TVK,Vijay's own constituency — won comfortably,0.26,0.02999999999999997,140899,TVK Safe (>8K margin)
+2,Tiruchi East,Tiruchirappalli,10.805,78.694,0.46,0.25,0.2,0.09,0.0,0.42,0.4,215300,0.74,9870,TVK,Second seat Vijay contested — won,0.21000000000000002,0.040000000000000036,159322,TVK Safe (>8K margin)
+3,Coimbatore South,Coimbatore,11.0168,76.9558,0.42,0.2,0.22,0.16,0.0,0.38,0.42,241800,0.68,8120,TVK,Urban Coimbatore — BJP also significant here,0.19999999999999998,0.03999999999999998,164424,TVK Safe (>8K margin)
+4,Madurai Central,Madurai,9.9252,78.1198,0.44,0.24,0.19,0.13,0.0,0.4,0.41,189200,0.72,7650,TVK,TVK strong in Madurai urban belt,0.2,0.03999999999999998,136224,TVK Comfortable (3–8K)
+5,Salem West,Salem,11.6643,78.146,0.38,0.28,0.24,0.1,0.0,0.41,0.44,176500,0.7,4320,TVK,Narrower TVK win — DMK competitive,0.09999999999999998,0.02999999999999997,123549,TVK Comfortable (3–8K)
+6,Kumbakonam,Thanjavur,10.9617,79.3788,0.36,0.35,0.2,0.09,0.0,0.44,0.38,214700,0.76,679,TVK,Won by only 679 votes — critical swing seat,0.010000000000000009,0.08000000000000002,163172,TVK Marginal (<3K)
+7,Vellore,Vellore,12.9165,79.1325,0.35,0.33,0.22,0.1,0.0,0.46,0.35,198100,0.73,1240,TVK,Very narrow — DMK base strong here,0.019999999999999962,0.11000000000000004,144613,TVK Marginal (<3K)
+8,Dharmapuri,Dharmapuri,12.1211,78.1582,0.34,0.3,0.28,0.08,0.0,0.38,0.48,167400,0.71,2100,TVK,Three-way contest — thin TVK lead,0.040000000000000036,0.03999999999999998,118854,TVK Marginal (<3K)
+9,Erode East,Erode,11.341,77.7172,0.35,0.32,0.24,0.09,0.0,0.43,0.4,188900,0.72,1850,TVK,DMK strong historically — TVK narrowly flipped,0.02999999999999997,0.08000000000000002,136008,TVK Marginal (<3K)
+10,Villupuram,Villupuram,11.9401,79.4861,0.33,0.34,0.23,0.1,0.0,0.47,0.36,193200,0.74,-980,DMK,TVK lost narrowly — DMK stronghold,-0.010000000000000009,0.13999999999999996,142968,TVK Lost
+11,Chidambaram,Cuddalore,11.3993,79.6928,0.3,0.4,0.2,0.1,0.0,0.48,0.35,201300,0.75,-8200,DMK,DMK stronghold — TVK not competitive,-0.10000000000000003,0.18,150975,TVK Lost
+12,Mayiladuthurai,Mayiladuthurai,11.1035,79.6515,0.28,0.42,0.21,0.09,0.0,0.5,0.33,178600,0.77,-10400,DMK,Delta region — DMK dominant,-0.13999999999999996,0.21999999999999997,137522,TVK Lost
+13,Pollachi,Coimbatore,10.6591,77.0073,0.29,0.18,0.38,0.15,0.0,0.32,0.52,221400,0.69,-7100,AIADMK,AIADMK rural base held — TVK weak,-0.09000000000000002,0.030000000000000027,152766,TVK Lost
+14,Tirunelveli,Tirunelveli,8.7139,77.7567,0.31,0.22,0.36,0.11,0.0,0.35,0.46,209800,0.71,-4200,AIADMK,South TN — AIADMK resilient,-0.04999999999999999,0.03999999999999998,148958,TVK Lost
+15,Ramanathapuram,Ramanathapuram,9.3639,78.8395,0.27,0.25,0.33,0.15,0.0,0.38,0.44,167900,0.68,-4600,AIADMK,Coastal belt — AIADMK dominant,-0.06,0.10999999999999999,114172,TVK Lost
+16,Chennai North,Chennai,13.1467,80.2893,0.45,0.26,0.16,0.13,0.0,0.44,0.32,224500,0.62,8900,TVK,Urban Chennai — TVK swept the city,0.19,0.010000000000000009,139190,TVK Safe (>8K margin)
+17,Velachery,Chennai,12.9815,80.218,0.43,0.24,0.17,0.16,0.0,0.42,0.31,231800,0.61,11200,TVK,IT corridor — young urban voter base,0.19,0.010000000000000009,141398,TVK Safe (>8K margin)
+18,Anna Nagar,Chennai,13.085,80.2101,0.47,0.21,0.15,0.17,0.0,0.4,0.34,218300,0.63,14700,TVK,Upper-middle class Chennai — strong TVK,0.26,0.06999999999999995,137529,TVK Safe (>8K margin)
+19,Namakkal,Namakkal,11.221,78.1674,0.36,0.29,0.27,0.08,0.0,0.4,0.45,183400,0.73,3200,TVK,Three-way — TVK flipped from AIADMK,0.07,0.040000000000000036,133882,TVK Comfortable (3–8K)
+20,Krishnagiri,Krishnagiri,12.5186,78.2137,0.34,0.31,0.26,0.09,0.0,0.39,0.46,194700,0.72,1980,TVK,"Border district — volatile, thin margin",0.030000000000000027,0.04999999999999999,140184,TVK Marginal (<3K)

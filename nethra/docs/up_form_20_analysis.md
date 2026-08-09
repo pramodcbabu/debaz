@@ -40,29 +40,20 @@ graph TD
 ### 1. Political Leadership & IT Cell (Analytical Intelligence & ROI)
 *   **Strategic Objective:** Identify high-yield intervention zones. Instead of spreading campaign resources uniformly, the IT Cell requires high-resolution intelligence on **Swing Booths** where small resource injections yield maximum shift.
 *   **Anomaly Detection:** By tracking voting distributions across booths, Nethra identifies outliers—booths showing sudden, mathematically improbable swings (e.g., a candidate gaining 95% of votes in a historically balanced booth). This flags possible local influence, coercion, or data transcription errors.
-*   **Resource ROI:** $HM_{booth}$ and $HV_{booth}$ allow the campaign to classify booths into three tiers:
-    1.  *Loyal Strongholds* ($HM\gg 0$, $HV\approx 0$): Low persuasion spending, focus on mobilization (turnout).
-    2.  *Lost Cause* ($HM\ll 0$, $HV\approx 0$): Zero spending.
-    3.  *Battleground/Swing* ($HV\gg 0$ or $HM\approx 0$): Maximum campaign ROI; target of intensive micro-targeting and ground activity.
+*   **Resource ROI:** $HM_{booth}$and$HV_{booth}$ allow the campaign to classify booths into three tiers:
+    1.  *Loyal Strongholds* ($HM \gg 0$, $HV \approx 0$): Low persuasion spending, focus on mobilization (turnout).
+    2.  *Lost Cause* ($HM \ll 0$, $HV \approx 0$): Zero spending.
+    3.  *Battleground/Swing* ($HV \gg 0$or$HM \approx 0$): Maximum campaign ROI; target of intensive micro-targeting and ground activity.
 
 ### 2. ML / Data Engineering (Bayesian MRP & Feature Engineering)
 *   **Methodological Focus:** A pure demographic MRP model (using only age, caste, and gender) misses localized historical behaviors. Booth-level statistics are integrated as **Group-Level Predictors** (contextual covariates) in the multilevel model.
 
-
-$$
-\text{logit}(\theta_{i, j}) = X_i \beta + \alpha_{\text{demographic}, j} + \alpha_{\text{booth}, k(i)}
-$$
-
-The booth-level random intercept $\alpha_{\text{booth}, k}$ is modeled using Form 20 features:
-
-$$
-\alpha_{\text{booth}, k} \sim \mathcal{N}\left(\gamma_0 + \gamma_1 HV_k + \gamma_2 HM_k, \sigma^2_{\text{booth}}\right)
-$$
+*   **Model Integration:** In the hierarchical model, the logit probability $\theta_{i, j}$of voter$i$in stratum$j$voting for a target party is modeled as:$$\text{logit}(\theta_{i, j}) = X_i \beta + \alpha_{\text{demographic}, j} + \alpha_{\text{booth}, k(i)}$$The booth-level random intercept$\alpha_{\text{booth}, k}$is modeled using Form 20 features:$$\alpha_{\text{booth}, k} \sim \mathcal{N}\left(\gamma_0 + \gamma_1 HV_k + \gamma_2 HM_k, \sigma^2_{\text{booth}}\right)$$
 
 *   **Feature Engineering:** Raw voter counts are converted to normalized shares to avoid bias driven by variable booth sizes or local turnout differentials.
 
 ### 3. Behavioral Psychology (Quantifiable Traits & Priors)
-*   **Psychological Priors:** Volatility ($HV_{booth}$) serves as a direct proxy for **Loyalty Elasticity** (behavioral friction). A high $HV$ indicates a booth with low partisan attachment (high cognitive openness to campaign messaging), while a low $HV$ indicates entrenched political tribalism.
+*   **Psychological Priors:** Volatility ($HV_{booth}$) serves as a direct proxy for **Loyalty Elasticity** (behavioral friction). A high $HV$indicates a booth with low partisan attachment (high cognitive openness to campaign messaging), while a low$HV$ indicates entrenched political tribalism.
 *   **Multiplier Integration ($\gamma$):** We model candidate preference multipliers based on historical margins. A booth with narrow margins ($HM \approx 0$) indicates low social conformity pressure (pluralistic environment), whereas a lopsided margin ($HM \gg 0$) indicates a "spiral of silence," where minority voters align with the dominant local faction to avoid social friction. We adjust psychological behavioral priors ($\gamma$) downwards in low-conformity swing booths, signaling high responsiveness to campaign policy pitches.
 
 ### 4. Ethics & Data Privacy (Privacy by Design & DPDP Compliance)
@@ -108,25 +99,16 @@ To convert raw counts into normalized, scale-free mathematical indices that repr
 
 ### 1. Historical Volatility Index ($HV_{booth}$)
 
-The Historical Volatility Index at the booth level is based on the **Pedersen Volatility Index**, modified for multi-party electoral settings. It measures the net churn in party vote shares between two consecutive elections ($t-1$ and $t$) at the same polling booth:
+The Historical Volatility Index at the booth level is based on the **Pedersen Volatility Index**, modified for multi-party electoral settings. It measures the net churn in party vote shares between two consecutive elections ($t-1$and$t$) at the same polling booth:
 
 $$
 HV_{booth} = \frac{1}{2} \sum_{i \in \mathcal{P}} \left| S_{i, t} - S_{i, t-1} \right|
 $$
 
 Where:
-*   $\mathcal{P}$ represents the set of all active electoral units, defined as $\mathcal{P} = \{\text{BJP}, \text{SP}, \text{BSP}, \text{INC}, \text{OTH}, \text{NOTA}\}$.
-*   $S_{i, t}$ is the vote share of party $i$ in election $t$ (e.g., 2022):
-    $$
-    S_{i, t} = \frac{\text{Votes}_{i, t}}{\text{Total Valid Votes}_t}
-    $$
-*   $S_{i, t-1}$ is the vote share of party $i$ in election $t-1$ (e.g., 2017):
-    $$
-    S_{i, t-1} = \frac{\text{Votes}_{i, t-1}}{\text{Total Valid Votes}_{t-1}}
-    $$
-
-#### Mathematical Properties of $HV_{booth}$:
-*   **Boundedness:** $0 \le HV_{booth} \le 1$ (or $0\%$ to $100\%$).
+*   $\mathcal{P}$represents the set of all active electoral units, defined as$\mathcal{P} = \{\text{BJP}, \text{SP}, \text{BSP}, \text{INC}, \text{OTH}, \text{NOTA}\}$.
+*   $S_{i, t}$is the vote share of party$i$in election$t$(e.g., 2022):$$S_{i, t} = \frac{\text{Votes}_{i, t}}{\text{Total Valid Votes}_t}$$*$S_{i, t-1}$is the vote share of party$i$in election$t-1$(e.g., 2017):$$S_{i, t-1} = \frac{\text{Votes}_{i, t-1}}{\text{Total Valid Votes}_{t-1}}$$#### Mathematical Properties of$HV_{booth}$:
+*   **Boundedness:** $0 \le HV_{booth} \le 1$(or$0\%$to$100\%$).
 *   **Interpretation:**
     *   $HV \to 0$: Perfect stability. The local electorate voted in identical proportions, indicating rigid partisan entrenchment.
     *   $HV \to 1$: Extreme volatility. A complete inversion of vote shares (e.g., a party going from 100% of the vote to 0%, and another going from 0% to 100%).
@@ -143,18 +125,16 @@ HM_{booth, t} = S_{[1], t} - S_{[2], t}
 $$
 
 Where:
-*   $S_{\text{first}, t}$ represents the vote share of the highest-polling party at booth $k$ in election $t$.
-*   $S_{\text{second}, t}$ represents the vote share of the second-highest-polling party at booth $k$ in election $t$.
+*   $S_{\text{first}, t}$represents the vote share of the highest-polling party at booth$k$in election$t$.
+*   $S_{\text{second}, t}$represents the vote share of the second-highest-polling party at booth$k$in election$t$.
 
 Nethra utilizes three variations of this margin:
 1.  **Latest Margin** ($HM_{booth, 2022}$): Captures the current competitive state.
 2.  **Historical Margin** ($HM_{booth, 2017}$): Captures the baseline competitiveness.
 3.  **Average Historical Margin** ($HM_{booth, \text{avg}}$): An index designed to capture long-term structural dominance:
-    $$
-    HM_{booth, \text{avg}} = \frac{HM_{booth, 2022} + HM_{booth, 2017}}{2}
-    $$
-
-#### Strategic Classification based on $HM_{booth}$:
+$$
+HM_{booth, \text{avg}} = \frac{HM_{booth, 2022} + HM_{booth, 2017}}{2}$$#### Strategic Classification based on$HM_{booth}$:
+$$
 *   **Stronghold** ($HM_{booth} \ge 0.15$): Highly resilient to campaign swings. Represents a safe zone for the leading party.
 *   **Toss-up / Battleground** ($HM_{booth} < 0.05$): High susceptibility to minor voter shifts. Highly sensitive to campaign mobilization and micro-targeting.
 
@@ -181,19 +161,9 @@ To demonstrate the mathematical derivation of these indices, we trace three spec
 
 #### 1. Share Calculations
 *   **2017 Electorate Behaviour ($Total\_Valid = 573$):**
-    *   $S_{\text{BJP}, 2017} = \frac{280}{573} = 48.87\%$
-    *   $S_{\text{SP}, 2017} = \frac{210}{573} = 36.65\%$
-    *   $S_{\text{BSP}, 2017} = \frac{55}{573} = 9.60\%$
-    *   $S_{\text{INC}, 2017} = \frac{10}{573} = 1.75\%$
-    *   $S_{\text{OTH}, 2017} = \frac{12}{573} = 2.09\%$
-    *   $S_{\text{NOTA}, 2017} = \frac{6}{573} = 1.05\%$
+    *   $S_{\text{BJP}, 2017} = \frac{280}{573} = 48.87\%$*$S_{\text{SP}, 2017} = \frac{210}{573} = 36.65\%$*$S_{\text{BSP}, 2017} = \frac{55}{573} = 9.60\%$*$S_{\text{INC}, 2017} = \frac{10}{573} = 1.75\%$*$S_{\text{OTH}, 2017} = \frac{12}{573} = 2.09\%$*$S_{\text{NOTA}, 2017} = \frac{6}{573} = 1.05\%$
 *   **2022 Electorate Behaviour ($Total\_Valid = 578$):**
-    *   $S_{\text{BJP}, 2022} = \frac{320}{578} = 55.36\%$
-    *   $S_{\text{SP}, 2022} = \frac{195}{578} = 33.74\%$
-    *   $S_{\text{BSP}, 2022} = \frac{35}{578} = 6.06\%$
-    *   $S_{\text{INC}, 2022} = \frac{15}{578} = 2.59\%$
-    *   $S_{\text{OTH}, 2022} = \frac{8}{578} = 1.38\%$
-    *   $S_{\text{NOTA}, 2022} = \frac{5}{578} = 0.87\%$
+    *   $S_{\text{BJP}, 2022} = \frac{320}{578} = 55.36\%$*$S_{\text{SP}, 2022} = \frac{195}{578} = 33.74\%$*$S_{\text{BSP}, 2022} = \frac{35}{578} = 6.06\%$*$S_{\text{INC}, 2022} = \frac{15}{578} = 2.59\%$*$S_{\text{OTH}, 2022} = \frac{8}{578} = 1.38\%$*$S_{\text{NOTA}, 2022} = \frac{5}{578} = 0.87\%$
 
 #### 2. Index Computations
 *   **Historical Margin of Victory ($HM$):**
@@ -201,14 +171,7 @@ To demonstrate the mathematical derivation of these indices, we trace three spec
     *   $HM_{2022} = 55.36\% - 33.74\% = \mathbf{21.62\%}$ (Winner: BJP)
     *   $HM_{\text{avg}} = \frac{12.22\% + 21.62\%}{2} = \mathbf{16.92\%}$
 *   **Historical Volatility ($HV$):**
-    *   $\Delta S_{\text{BJP}} = |55.36\% - 48.87\%| = 6.49\%$
-    *   $\Delta S_{\text{SP}} = |33.74\% - 36.65\%| = 2.91\%$
-    *   $\Delta S_{\text{BSP}} = |6.06\% - 9.60\%| = 3.54\%$
-    *   $\Delta S_{\text{INC}} = |2.59\% - 1.75\%| = 0.84\%$
-    *   $\Delta S_{\text{OTH}} = |1.38\% - 2.09\%| = 0.71\%$
-    *   $\Delta S_{\text{NOTA}} = |0.87\% - 1.05\%| = 0.18\%$
-    *   $Sum\ of\ \Delta S = 6.49 + 2.91 + 3.54 + 0.84 + 0.71 + 0.18 = 14.67\%$
-    *   $HV_{\text{booth}} = \frac{14.67\%}{2} = \mathbf{7.34\%}$ (or $0.0734$)
+    *   $\Delta S_{\text{BJP}} = |55.36\% - 48.87\%| = 6.49\%$*$\Delta S_{\text{SP}} = |33.74\% - 36.65\%| = 2.91\%$*$\Delta S_{\text{BSP}} = |6.06\% - 9.60\%| = 3.54\%$*$\Delta S_{\text{INC}} = |2.59\% - 1.75\%| = 0.84\%$*$\Delta S_{\text{OTH}} = |1.38\% - 2.09\%| = 0.71\%$*$\Delta S_{\text{NOTA}} = |0.87\% - 1.05\%| = 0.18\%$*$Sum\ of\ \Delta S = 6.49 + 2.91 + 3.54 + 0.84 + 0.71 + 0.18 = 14.67\%$*$HV_{\text{booth}} = \frac{14.67\%}{2} = \mathbf{7.34\%}$(or$0.0734$)
 
 ---
 
@@ -223,13 +186,9 @@ To demonstrate the mathematical derivation of these indices, we trace three spec
 
 #### 2. Index Computations
 *   **Historical Margin of Victory ($HM$):**
-    *   $HM_{2017} = 61.54\% - 28.85\% = \mathbf{32.69\%}$
-    *   $HM_{2022} = 71.03\% - 22.43\% = \mathbf{48.60\%}$
-    *   $HM_{\text{avg}} = \mathbf{40.65\%}$
+    *   $HM_{2017} = 61.54\% - 28.85\% = \mathbf{32.69\%}$*$HM_{2022} = 71.03\% - 22.43\% = \mathbf{48.60\%}$*$HM_{\text{avg}} = \mathbf{40.65\%}$
 *   **Historical Volatility ($HV$):**
-    *   $\Delta S_{\text{BJP}} = 9.49\%$, $\Delta S_{\text{SP}} = 6.42\%$, $\Delta S_{\text{BSP}} = 2.99\%$, $\Delta S_{\text{INC}} = 0.54\%$, $\Delta S_{\text{OTH}} = 0.40\%$, $\Delta S_{\text{NOTA}} = 0.21\%$
-    *   $Sum\ of\ \Delta S = 20.05\%$
-    *   $HV_{\text{booth}} = \frac{20.05\%}{2} = \mathbf{10.03\%}$
+    *   $\Delta S_{\text{BJP}} = 9.49\%$, $\Delta S_{\text{SP}} = 6.42\%$, $\Delta S_{\text{BSP}} = 2.99\%$, $\Delta S_{\text{INC}} = 0.54\%$, $\Delta S_{\text{OTH}} = 0.40\%$, $\Delta S_{\text{NOTA}} = 0.21\%$*$Sum\ of\ \Delta S = 20.05\%$*$HV_{\text{booth}} = \frac{20.05\%}{2} = \mathbf{10.03\%}$
 *   *Note:* Though volatility is 10.03%, it is asymmetric, resulting in an even stronger consolidation for the incumbent BJP candidate. This is classified as a **Solid Stronghold - Low Intervention Priority**.
 
 ---
@@ -239,11 +198,9 @@ To demonstrate the mathematical derivation of these indices, we trace three spec
 
 #### 1. Share Calculations
 *   **2017 ($Total\_Valid = 607$):**
-    *   $S_{\text{BJP}, 2017} = \frac{240}{607} = 39.54\%$
-    *   $S_{\text{SP}, 2017} = \frac{250}{607} = 41.19\%$ (Winner at booth level: SP by a slim margin of 1.65%)
+    *   $S_{\text{BJP}, 2017} = \frac{240}{607} = 39.54\%$*$S_{\text{SP}, 2017} = \frac{250}{607} = 41.19\%$ (Winner at booth level: SP by a slim margin of 1.65%)
 *   **2022 ($Total\_Valid = 587$):**
-    *   $S_{\text{BJP}, 2022} = \frac{270}{587} = 46.00\%$
-    *   $S_{\text{SP}, 2022} = \frac{230}{587} = 39.18\%$ (Winner at booth level: BJP by 6.82%)
+    *   $S_{\text{BJP}, 2022} = \frac{270}{587} = 46.00\%$*$S_{\text{SP}, 2022} = \frac{230}{587} = 39.18\%$ (Winner at booth level: BJP by 6.82%)
 
 #### 2. Index Computations
 *   **Historical Margin of Victory ($HM$):**
@@ -251,9 +208,7 @@ To demonstrate the mathematical derivation of these indices, we trace three spec
     *   $HM_{2022} = 46.00\% - 39.18\% = \mathbf{6.82\%}$ (BJP favored)
     *   $HM_{\text{avg}} = \mathbf{4.24\%}$
 *   **Historical Volatility ($HV$):**
-    *   $\Delta S_{\text{BJP}} = 6.46\%$, $\Delta S_{\text{SP}} = 2.01\%$, $\Delta S_{\text{BSP}} = 3.86\%$, $\Delta S_{\text{INC}} = 0.78\%$, $\Delta S_{\text{OTH}} = 1.25\%$, $\Delta S_{\text{NOTA}} = 0.12\%$
-    *   $Sum\ of\ \Delta S = 14.48\%$
-    *   $HV_{\text{booth}} = \frac{14.48\%}{2} = \mathbf{7.24\%}$
+    *   $\Delta S_{\text{BJP}} = 6.46\%$, $\Delta S_{\text{SP}} = 2.01\%$, $\Delta S_{\text{BSP}} = 3.86\%$, $\Delta S_{\text{INC}} = 0.78\%$, $\Delta S_{\text{OTH}} = 1.25\%$, $\Delta S_{\text{NOTA}} = 0.12\%$*$Sum\ of\ \Delta S = 14.48\%$*$HV_{\text{booth}} = \frac{14.48\%}{2} = \mathbf{7.24\%}$
 *   **Strategic Action:** This booth flipped from SP to BJP. The low average margin ($4.24\%$) combined with moderate volatility ($7.24\%$) classifies this as a **Prime Target Battleground**. A marginal shift in local voter turnout or persuasion will flip this booth.
 
 ---
@@ -284,26 +239,20 @@ However, pure demographic poststratification fails in Indian elections due to sp
 
 ### 1. Hierarchical Mathematical Framework
 
-Let $Y_i \in \{0, 1\}$ be the vote choice of survey respondent $i$ (1 if voting for target candidate, 0 otherwise). The probability of support is $\theta_i$:
+Let $Y_i \in \{0, 1\}$be the vote choice of survey respondent$i$(1 if voting for target candidate, 0 otherwise). The probability of support is$\theta_i$:
 
 $$
 Y_i \sim \text{Bernoulli}(\theta_i)
 $$
 $$
-\text{logit}(\theta_i) = \beta_0 + \beta_1 \text{Age}_i + \beta_2 \text{Education}_i + \alpha_{\text{Caste}, i} + \alpha_{\text{Sub-Region}, i} + \alpha_{\text{Booth}, k(i)}
-$$
-
-The booth-specific random intercept $\alpha_{\text{Booth}, k}$ represents the localized deviation from demographic predictions. We model this random effect hierarchically:
-
-$$
-\alpha_{\text{Booth}, k} \sim \mathcal{N}\left(\mu_k, \sigma^2_{\text{booth}}\right)
+\text{logit}(\theta_i) = \beta_0 + \beta_1 \text{Age}_i + \beta_2 \text{Education}_i + \alpha_{\text{Caste}, i} + \alpha_{\text{Sub-Region}, i} + \alpha_{\text{Booth}, k(i)}$$The booth-specific random intercept$\alpha_{\text{Booth}, k}$represents the localized deviation from demographic predictions. We model this random effect hierarchically:$$\alpha_{\text{Booth}, k} \sim \mathcal{N}\left(\mu_k, \sigma^2_{\text{booth}}\right)
 $$
 $$
 \mu_k = \gamma_0 + \gamma_1 \cdot HV_k + \gamma_2 \cdot HM_{\text{avg}, k} + \gamma_3 \cdot \text{SupportBase}_{k, t-1}
 $$
 
 Where:
-*   $HV_k$ is the Historical Volatility Index of booth $k$, which handles shrinkage: booths with high historical volatility shrink less toward the regional average, signaling high localized responsiveness.
+*   $HV_k$is the Historical Volatility Index of booth$k$, which handles shrinkage: booths with high historical volatility shrink less toward the regional average, signaling high localized responsiveness.
 *   $HM_{\text{avg}, k}$ is the Historical Margin of Victory.
 *   $\text{SupportBase}_{k, t-1}$ is the baseline share of the target party at that booth in the previous election.
 

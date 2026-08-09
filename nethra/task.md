@@ -1,0 +1,10 @@
+- [ ] Create data crawling module (`src/data_crawler.py`) and download helper (`src/utils/download_helper.py`)
+- [ ] Complete mock data generation (`src/generate_mock_data.py`)
+- [ ] Implement MRP engine (`src/mrp_engine.py`) and config (`src/model_config.py`)
+- [ ] Scaffold Streamlit UI (`app.py`) and premium CSS (`assets/style.css`)
+- [ ] Implement LaTeX linter (`src/latex_linter.py`) and run on docs
+- [ ] Set up perspective reviewer subagent (`agents/perspective_reviewer/`)
+- [ ] Write unit tests (`tests/test_mrp_engine.py`, `tests/test_app.py`)
+- [ ] Run data generation, tests, and UI verification
+- [ ] Generate perspective review report (`docs/perspective_review.md`)
+- [ ] Final verification and documentation

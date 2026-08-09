@@ -24,11 +24,8 @@ Once we have learned the swing probabilities for every demographic stratum ($k$)
 
 ### Booth-Level Volatility Calculation ($V_{booth}$)
 $$
-V_{booth} = \sum_{k=1}^{96} (N_{booth, k} \cdot \hat{P}_k)
+V_{booth} = \sum_{k=1}^{96} (N_{booth, k} \cdot \hat{P}_k)$$*   **$N_{booth, k}$:** The number of voters in Booth$X$belonging to demographic stratum$k$ (derived from ECI Voter Rolls and Census data).$$*   **$\hat{P}_k$:** The predicted swing probability for stratum$k$ from our Multilevel Model.
 $$
-
-*   **$N_{booth, k}$:** The number of voters in Booth $X$ belonging to demographic stratum $k$ (derived from ECI Voter Rolls and Census data).
-*   **$\hat{P}_k$:** The predicted swing probability for stratum $k$ from our Multilevel Model.
 
 ---
 
@@ -38,8 +35,7 @@ A strategic advantage of the MRP framework is its ability to drive hyper-localiz
 ### The Strategic Shift
 Instead of uploading a list of individual phone numbers (Custom Audiences), Nethra provides the ad platforms (Meta/Google) with the exact demographic and geographic parameters of the highly volatile strata.
 
-### Example: Targeting High-Volatility Strata $k$
-If the model identifies that **Strata $k$ (Males, 18-25, Low Income)** in **Booth 04** has a 75% swing probability, the IT Cell approves a deployment with the following parameters:
+### Example: Targeting High-Volatility Strata $k$If the model identifies that **Strata$k$ (Males, 18-25, Low Income)** in **Booth 04** has a 75% swing probability, the IT Cell approves a deployment with the following parameters:
 
 *   **Geographic Filter:** Pin Code matching Booth 04 (e.g., `600028`).
 *   **Demographic Filter:** Gender: `Male`, Age: `18-25`.
@@ -54,14 +50,14 @@ We utilize public **ECI Form 20 (Final Result Sheets) past election results** an
 
 *   **ECI Form 20 Baseline Calibration:**
     Past election results at the polling station (booth) level are ingested to compute a **Historical Volatility Index** ($HV_{booth}$) and **Historical Margin of Victory** ($HM_{booth}$). These parameters are fed directly as booth-level covariates ($W_{booth}$) in the random effects model:
-    $$
-    \gamma_{booth} \sim \mathcal{N}(\theta_1 \cdot HV_{booth} + \theta_2 \cdot HM_{booth} + W_{booth, census} \theta, \sigma^2_{booth})
-    $$
+$$
+\gamma_{booth} \sim \mathcal{N}(\theta_1 \cdot HV_{booth} + \theta_2 \cdot HM_{booth} + W_{booth, census} \theta, \sigma^2_{booth})
+$$
     Booths with historically volatile vote shares (high variance over the last 3 election cycles) or razor-thin margins naturally receive a higher baseline random effect prior, shifting all demographic swing probabilities upwards.
 
 *   **Anomaly Scoring:** The engine identifies booths where the predicted volatility ($V_{booth}$) significantly diverges from the cadre's reported support.
-    $$
-    \text{Anomaly Score} = |V_{booth} - \text{Cadre Reported Support}|
-    $$
+$$
+\text{Anomaly Score} = |V_{booth} - \text{Cadre Reported Support}|
+$$
 
 

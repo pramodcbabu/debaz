@@ -36,4 +36,4 @@ This column in our data schema reflects the individual's modeled reaction to the
 ---
 
 ## 4. Behavioral Testing (Production)
-In Track 2, we validate these weights using micro-surveys and digital engagement metrics, iteratively adjusting the $\gamma$ multipliers to improve the accuracy of the $P_s$ (Propensity Score) over time.
+In Track 2, we validate these weights using micro-surveys and digital engagement metrics, iteratively adjusting the $\gamma$multipliers to improve the accuracy of the$P_s$ (Propensity Score) over time.

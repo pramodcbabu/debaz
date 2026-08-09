@@ -17,9 +17,9 @@ As mandated by Project Nethra's Strategic Operating Manual, all data engineering
 *   **Demographic Strata Cells ($k$):** High-precision MRP requires a multi-dimensional Cartesian cell structure. Combining Census age, gender, social category (SC/ST/General), education, and occupation tables creates a high-fidelity Poststratification Frame of $K$ distinct demographic cells.
 *   **Poststratification Raking:** Since the Census does not publish a 5-way joint distribution at the booth level, data engineering will execute **Iterative Proportional Fitting (IPF) / Raking** on marginal tables (e.g., C-09 for Education × Religion, B-4 for Occupation × Age) to reconstruct a synthetically complete booth-level poststratification frame (`poststratification_frame.csv`).
 *   **Regional Covariates ($W_{booth}$):** Aggregate village amenities and household asset profiles are extracted as numeric vectors to feed the booth-level random effects model:
-    $$
-    \gamma_{booth} \sim \mathcal{N}(W_{booth} \theta, \sigma^2_{booth})
-    $$
+$$
+\gamma_{booth} \sim \mathcal{N}(W_{booth} \theta, \sigma^2_{booth})
+$$
 
 ### 3. Behavioral Psychology Perspective
 *   **Quantifiable Traits & Priors:** The Bayesian model utilizes census distress indicators as mathematical priors. For example, high concentrations of educated non-workers seeking employment (from Table B-8) or dilapidated housing conditions (from Table HH-1) serve as priors that shift the baseline swing volatility parameter ($\beta_0$) upwards.
@@ -131,29 +131,13 @@ For the Bayesian MRP engine, the tables are divided into two distinct functional
 The selected census tables feed directly into the two-step Bayesian MRP equation:
 
 ### Phase 1: The Hierarchical Regression Model
-The individual-level swing probability $P(\text{Swing}_i)$ is modeled using demographic strata and booth random effects:
-$$
-P(\text{Swing}_i) = \text{logit}^{-1}\left( \beta_0 + \alpha_{age,i} + \alpha_{gender,i} + \alpha_{social,i} + \alpha_{occup,i} + \gamma_{booth,i} \right)
-$$
+The individual-level swing probability $P(\text{Swing}_i)$is modeled using demographic strata and booth random effects:$$P(\text{Swing}_i) = \text{logit}^{-1}\left( \beta_0 + \alpha_{age,i} + \alpha_{gender,i} + \alpha_{social,i} + \alpha_{occup,i} + \gamma_{booth,i} \right)$$
 
 Where the demographic strata parameters are modeled hierarchically:
-*   $\alpha_{age} \sim \mathcal{N}(0, \sigma^2_{age})$
-*   $\alpha_{gender} \sim \mathcal{N}(0, \sigma^2_{gender})$
-*   $\alpha_{social} \sim \mathcal{N}(0, \sigma^2_{social})$
-*   $\alpha_{occup} \sim \mathcal{N}(0, \sigma^2_{occup})$
-
-And the booth-level random effect incorporates the regional covariates vector ($W_{booth}$) and **ECI Form 20 past election statistics** ($HV_{booth}$ and $HM_{booth}$):
-$$
-\gamma_{booth} \sim \mathcal{N}(\theta_1 \cdot HV_{booth} + \theta_2 \cdot HM_{booth} + W_{booth, census} \theta, \sigma^2_{booth})
-$$
-Where $\theta$ represents the coefficients indicating how strongly regional deprivation, asset indicators, and historical volatility influence voting volatility.
+*   $\alpha_{age} \sim \mathcal{N}(0, \sigma^2_{age})$*$\alpha_{gender} \sim \mathcal{N}(0, \sigma^2_{gender})$*$\alpha_{social} \sim \mathcal{N}(0, \sigma^2_{social})$*$\alpha_{occup} \sim \mathcal{N}(0, \sigma^2_{occup})$And the booth-level random effect incorporates the regional covariates vector ($W_{booth}$) and **ECI Form 20 past election statistics** ($HV_{booth}$and$HM_{booth}$):$$\gamma_{booth} \sim \mathcal{N}(\theta_1 \cdot HV_{booth} + \theta_2 \cdot HM_{booth} + W_{booth, census} \theta, \sigma^2_{booth})$$Where$\theta$ represents the coefficients indicating how strongly regional deprivation, asset indicators, and historical volatility influence voting volatility.$$
 
 ### Phase 2: Poststratification
-Using the raked demographic counts $N_{booth, k}$ from the **PCA, C-09, and B-04 tables**, the aggregate booth-level volatility ($V_{booth}$) is projected:
-$$
-V_{booth} = \sum_{k=1}^{K} \left( N_{booth, k} \cdot \hat{P}_k \right)
-$$
-Where $\hat{P}_k$ is the estimated probability of swing for stratum $k$ derived from the fitted regression model.
+Using the raked demographic counts $N_{booth, k}$from the **PCA, C-09, and B-04 tables**, the aggregate booth-level volatility ($V_{booth}$) is projected:$$V_{booth} = \sum_{k=1}^{K} \left( N_{booth, k} \cdot \hat{P}_k \right)$$Where$\hat{P}_k$is the estimated probability of swing for stratum$k$ derived from the fitted regression model.
 
 ---
 
