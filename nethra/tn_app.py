@@ -77,6 +77,12 @@ st.markdown("""
 [data-testid="stHeader"] { display: none; }
 #MainMenu { visibility: hidden; }
 footer { visibility: hidden; }
+.help-bubble {
+    background: #334155; color: #facc15 !important; border-radius: 50%;
+    padding: 1px 6px; font-size: 0.75rem; text-decoration: none;
+    margin-left: 5px; transition: all 0.2s; font-weight: bold;
+}
+.help-bubble:hover { background: #facc15; color: #450a0a !important; transform: scale(1.1); }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
@@ -162,6 +168,16 @@ aiadmk_trend = [20, 19, 19, 18, 20, 19, 17, 16]
 # ══════════════════════════════════════════════════════════════════════════════
 # SIDEBAR NAVIGATION & SPAM FILTER METRICS
 # ══════════════════════════════════════════════════════════════════════════════
+# ── Query Params Routing Engine ───────────────────────────────────────────────
+default_nav_index = 0
+if "nav" in st.query_params:
+    nav_val = st.query_params["nav"]
+    if nav_val == "Guide": default_nav_index = 4
+    elif nav_val == "Audit": default_nav_index = 3
+    elif nav_val == "Assembly": default_nav_index = 0
+    elif nav_val == "Local": default_nav_index = 1
+    elif nav_val == "LokSabha": default_nav_index = 2
+
 with st.sidebar:
     st.markdown("### 🗳️ Select Election Screen")
     election_target = st.radio(
@@ -173,7 +189,7 @@ with st.sidebar:
             "🛡️ Intelligence Audit",
             "📖 System Guide",
         ],
-        index=0,
+        index=default_nav_index,
     )
 
     st.divider()
@@ -227,7 +243,7 @@ with k1:
     </div>""", unsafe_allow_html=True)
 with k2:
     st.markdown(f"""<div class="metric-card">
-      <div class="label">Statewide Favorability</div>
+      <div class="label">Statewide Favorability <a href="/?nav=Guide&section=mrp-model" target="_self" class="help-bubble">?</a></div>
       <div class="value" style="color:#f59e0b">{tvk_trend[-1]}%</div>
       <div class="sublbl">+{(tvk_trend[-1]-tvk_trend[0])}pt shift since June</div>
     </div>""", unsafe_allow_html=True)
@@ -245,7 +261,7 @@ with k4:
     </div>""", unsafe_allow_html=True)
 with k5:
     st.markdown(f"""<div class="metric-card">
-      <div class="label">Spam Block Rate</div>
+      <div class="label">Spam Block Rate <a href="/?nav=Guide&section=architecture" target="_self" class="help-bubble">?</a></div>
       <div class="value" style="color:#22c55e">100% Clean</div>
       <div class="sublbl">{len(df_spam_logs)} Bot Spams Blocked</div>
     </div>""", unsafe_allow_html=True)
@@ -257,9 +273,16 @@ st.markdown("<br>", unsafe_allow_html=True)
 # SCREEN 5: HELP & DOCUMENTATION
 # ══════════════════════════════════════════════════════════════════════════════
 if "System Guide" in election_target:
-    st.markdown('<div class="section-header">📖 Help & Documentation Hub</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-header">📖 TVK System Architecture & Math Whitepaper</div>', unsafe_allow_html=True)
     help_md = Path("docs/dashboard_help.md").read_text()
-    st.markdown(help_md)
+    st.markdown(help_md, unsafe_allow_html=True)
+    
+    if "section" in st.query_params:
+        target_section = st.query_params["section"]
+        st.components.v1.html(
+            f"<script>window.parent.document.getElementById('{target_section}').scrollIntoView();</script>",
+            height=0, width=0
+        )
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SCREEN 4: SPAM FILTER & DATA QUALITY GATE
@@ -630,7 +653,7 @@ else:
               📌 TOP VERIFIED ISSUE SUMMARY — {auth_row['name'].upper()}
             </span>
             <span style="color:#22c55e;font-size:0.85rem;font-weight:700">
-              ✅ NLP Confidence: {auth_row['confidence']}%
+              ✅ NLP Confidence: {auth_row['confidence']}% <a href="/?nav=Guide&section=nlp-confidence" target="_self" class="help-bubble">?</a>
             </span>
           </div>
           <div style="margin-top:10px;font-size:1.15rem;font-weight:800;color:#f8fafc">
