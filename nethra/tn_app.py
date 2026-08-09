@@ -382,9 +382,11 @@ else:
         for idx, row in df_active.iterrows():
             if pd.notna(row.get("winner_party")):
                 col_tvk = "tvk_fav" if "tvk_fav" in df_active.columns else "tvk_proj"
-                if row["winner_party"] != "TVK" and row.get(col_tvk, 0) > 40.0:
+                tvk_val = row.get(col_tvk)
+                if pd.isna(tvk_val): tvk_val = 0.0
+                if row["winner_party"] != "TVK" and tvk_val > 40.0:
                     dampening = 0.85
-                    original_tvk = row[col_tvk]
+                    original_tvk = tvk_val
                     df_active.at[idx, col_tvk] = round(original_tvk * dampening, 1)
                     winner_col = None
                     if row["winner_party"] == "AIADMK": winner_col = "aiadmk_fav" if "aiadmk_fav" in df_active.columns else "aiadmk_proj"
