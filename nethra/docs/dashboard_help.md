@@ -155,4 +155,25 @@ This score does not exist in a vacuum. It mathematically dictates the dashboard'
 *   **High Confidence (>85%):** Guarantees multi-source corroboration (e.g., news + social chatter). The system passes the full weight of the $\gamma_{\text{sentiment}}$ modifier into the Bar Charts.
 *   **Low Confidence (<50%):** The AI flags potential hallucination or a highly isolated rumor. The system mathematically *discounts* the $\gamma$ modifiers, preventing the dashboard favorability projections from overreacting to unverified noise. It also flags the AI Campaign Strategy generation to advise "caution" in messaging.
 
+---
+
+<a id="math-historical-tuning"></a>
+## 8. Historical Verification Engine & Parameter Tuning
+<a href="/?nav=Assembly" target="_self" style="background:#facc15;color:#450a0a;padding:4px 10px;border-radius:4px;text-decoration:none;font-weight:bold;font-size:0.8rem">🔙 Return to Dashboard</a>
+
+To prevent NLP models from hallucinating ungrounded political shifts due to digital noise (e.g., projecting a TVK landslide in a deeply entrenched AIADMK stronghold), Nethra employs a **Historical Verification Engine**.
+
+The engine continually mines actual past election results (2021 Assembly, 2022 Local Body, 2024 Lok Sabha) and stores them as an immutable baseline in a dedicated database.
+
+**The Dampening Coefficient ($D$):**
+If the NLP model projects a TVK favorability surge (e.g. > 40%) in a constituency where they historically did not win, the system automatically applies a mathematical dampening penalty to anchor the projection closer to reality:
+
+$$
+\text{Tuned TVK Projection} = \text{Raw TVK Projection} \times D
+$$
+*(Where $D$ is currently calibrated to $0.85$ for extreme outliers).*
+
+**Zero-Sum Redistribution:**
+Because elections are zero-sum, the penalty subtracted from TVK is mathematically redistributed back to the historical incumbent (e.g., AIADMK or DMK). This ensures the baseline remains logically anchored to entrenched voting history while still reflecting real-time digital momentum.
+
 <br><br><br>
