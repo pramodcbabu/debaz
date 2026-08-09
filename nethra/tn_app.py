@@ -167,8 +167,8 @@ with st.sidebar:
     election_target = st.radio(
         "Campaign Navigator:",
         [
-            "🏛️ Local Body (200 GCC Wards)",
             "🔥 Assembly Elections (234 Seats)",
+            "🏛️ Local Body (200 GCC Wards)",
             "🌐 Lok Sabha (39 Seats)",
             "🛡️ Intelligence Audit",
             "📖 System Guide",
