@@ -161,6 +161,14 @@ try:
 except:
     df_verified = pd.DataFrame(columns=["unit_name", "article_url", "publisher", "article_title", "geo_relevance_score", "authenticity_score", "is_verified", "platform"])
 
+HIST_DB_PATH = "data/former_election_results.db"
+if os.path.exists(HIST_DB_PATH):
+    conn_hist = sqlite3.connect(HIST_DB_PATH)
+    df_historical = pd.read_sql_query("SELECT * FROM historical_results", conn_hist)
+    conn_hist.close()
+else:
+    df_historical = pd.DataFrame(columns=["unit_name", "election_type", "winner_party", "winner_pct", "runner_party", "runner_pct"])
+
 # ── Global Weekly Trend Data ───────────────────────────────────────────────────
 WEEKS = [f"Week {i+1}\nJul/Aug" for i in range(8)]
 tvk_trend  = [52, 54, 53, 56, 55, 57, 59, 61]
@@ -368,6 +376,22 @@ else:
         lambda x: "⚡ 🔍 DEEP GROUND AUDITED (2025–2026 REAL DATA)" if x == 1 else "📊 Standard Geo-Baseline"
     )
 
+    # ── HISTORICAL REALITY-CHECK TUNING ──────────────────────────────────────────
+    if not df_historical.empty:
+        df_active = df_active.merge(df_historical, left_on="name", right_on="unit_name", how="left")
+        for idx, row in df_active.iterrows():
+            if pd.notna(row.get("winner_party")):
+                col_tvk = "tvk_fav" if "tvk_fav" in df_active.columns else "tvk_proj"
+                if row["winner_party"] != "TVK" and row.get(col_tvk, 0) > 40.0:
+                    dampening = 0.85
+                    original_tvk = row[col_tvk]
+                    df_active.at[idx, col_tvk] = round(original_tvk * dampening, 1)
+                    winner_col = None
+                    if row["winner_party"] == "AIADMK": winner_col = "aiadmk_fav" if "aiadmk_fav" in df_active.columns else "aiadmk_proj"
+                    elif row["winner_party"] == "DMK": winner_col = "dmk_fav" if "dmk_fav" in df_active.columns else "dmk_proj"
+                    if winner_col and winner_col in df_active.columns:
+                        df_active.at[idx, winner_col] = round(row.get(winner_col, 0) + (original_tvk - df_active.at[idx, col_tvk]), 1)
+
     # ── DETECT SIDEBAR DROPDOWN SELECTION SYNCHRONIZATION ───────────────────────
     sidebar_unit = None
     if "Assembly" in election_target and selected_constituency not in ["All Constituencies", "🔥 5 Target Byelection Seats"]:
@@ -494,6 +518,9 @@ else:
             <b>Region:</b> {display_spotlight['region']} &nbsp;·&nbsp; 
             <b>TVK Fav:</b> <span style="color:#f59e0b;font-weight:700">{display_spotlight.get('tvk_fav', display_spotlight.get('tvk_proj', 0))}%</span> &nbsp;·&nbsp; 
             <b>DMK Baseline:</b> <span style="color:#ef4444">{display_spotlight.get('dmk_fav', display_spotlight.get('dmk_proj', 0))}%</span>
+          </div>
+          <div style="color:#94a3b8;font-size:0.8rem;margin-top:4px">
+            <b>🏛️ Historical Baseline:</b> Winner: {display_spotlight.get('winner_party', 'N/A')} ({display_spotlight.get('winner_pct', 0)}%)
           </div>
           <div style="color:#94a3b8;font-size:0.8rem;margin-top:4px">
             <b>Geo-Fenced Real Issue (Aug 2026):</b> {display_spotlight['top_issue']} (Messaging Gap: <span style="color:#ef4444;font-weight:700">{display_spotlight['gap']}pt</span>)
