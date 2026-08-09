@@ -78,14 +78,14 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
 .block-container { padding-top: 1rem; padding-bottom: 2rem; }
 
 .tvk-header-card {
-    background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 50%, #450a0a 100%);
-    border: 1px solid #b45309; border-radius: 16px;
+    background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);
+    border: 1px solid #facc15; border-radius: 16px;
     padding: 1.2rem 1.6rem; color: #f8fafc;
-    box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.15);
+    box-shadow: 0 10px 25px -5px rgba(250, 204, 21, 0.15);
     margin-bottom: 1rem;
 }
 .tvk-badge {
-    background: #f59e0b; color: #0f172a; font-weight: 800;
+    background: #facc15; color: #450a0a; font-weight: 800;
     padding: 4px 12px; border-radius: 999px; font-size: 0.75rem;
     letter-spacing: 0.05em; text-transform: uppercase;
 }
@@ -99,19 +99,19 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
 }
 
 .metric-card {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    border: 1px solid #334155; border-radius: 14px;
+    background: linear-gradient(135deg, #2a0a0a 0%, #110303 100%);
+    border: 1px solid #450a0a; border-radius: 14px;
     padding: 1.1rem 1.2rem; color: #f1f5f9;
     transition: all 0.2s ease-in-out;
 }
-.metric-card:hover { border-color: #f59e0b; transform: translateY(-2px); }
+.metric-card:hover { border-color: #facc15; transform: translateY(-2px); }
 .metric-card .label  { font-size: 0.72rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
 .metric-card .value  { font-size: 1.9rem; font-weight: 800; line-height: 1.15; margin-top: 2px; }
 .metric-card .sublbl { font-size: 0.75rem; color: #64748b; margin-top: 4px; }
 
 .section-header {
     font-size: 1.1rem; font-weight: 700; color: #f8fafc;
-    border-left: 4px solid #f59e0b; padding-left: 0.7rem;
+    border-left: 4px solid #facc15; padding-left: 0.7rem;
     margin: 1.4rem 0 0.7rem 0; letter-spacing: -0.01em;
 }
 .source-link {
@@ -122,8 +122,8 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
 """, unsafe_allow_html=True)
 
 # ── Color Palette ──────────────────────────────────────────────────────────────
-TVK_GOLD    = "#f59e0b"
-TVK_RED     = "#dc2626"
+TVK_GOLD    = "#facc15"
+TVK_RED     = "#7f1d1d"
 DMK_RED     = "#ef4444"
 AIADMK_BLUE = "#38bdf8"
 BJP_SAFFRON = "#fb923c"
@@ -160,13 +160,13 @@ aiadmk_trend = [20, 19, 19, 18, 20, 19, 17, 16]
 with st.sidebar:
     st.markdown("### 🗳️ Select Election Screen")
     election_target = st.radio(
-        "TVK Focused Election Hub:",
+        "Campaign Navigator:",
         [
-            "🏛️ TN Local Body Elections 2027 (All 200 GCC Wards)",
-            "⚡ TN Assembly Elections (Exhaustive 234 ACs)",
-            "🌐 Lok Sabha Parliaments (Exhaustive 39 PCs)",
-            "🛡️ Spam Filter & Data Quality Gate",
-            "📖 Help & Documentation",
+            "🏛️ Local Body (200 GCC Wards)",
+            "🔥 Assembly Elections (234 Seats)",
+            "🌐 Lok Sabha (39 Seats)",
+            "🛡️ Intelligence Audit",
+            "📖 System Guide",
         ],
         index=0,
     )
@@ -192,30 +192,6 @@ with st.sidebar:
         selected_constituency = "All"
 
     st.divider()
-    st.markdown("### 📡 Live Intelligence Feed")
-    st.caption("SQL DB Querying: `nethra_campaign.db` · Real-time geo-fenced sentiment.")
-    live_week = st.slider("Select Tracking Week", 1, 8, 8, format="Week %d")
-
-    st.markdown(f"""
-    <div style="background:#1e293b;border:1px solid #334155;border-radius:10px;padding:0.9rem">
-    <div style="font-size:0.75rem;color:#94a3b8;font-weight:700;text-transform:uppercase">Statewide TVK Favorability (W{live_week})</div>
-    <div style="margin-top:6px;display:flex;justify-content:space-between;align-items:baseline">
-      <span style="color:#f59e0b;font-size:1.4rem;font-weight:800">{tvk_trend[live_week-1]}% TVK</span>
-      <span style="color:#22c55e;font-size:0.8rem;font-weight:700">+{(tvk_trend[live_week-1]-tvk_trend[0])}% trend</span>
-    </div>
-    <div style="font-size:0.78rem;color:#94a3b8;margin-top:4px">
-      DMK {dmk_trend[live_week-1]}% · AIADMK {aiadmk_trend[live_week-1]}%
-    </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.divider()
-    st.markdown("### 🔗 Real Verified Sources")
-    st.markdown("• [<span class='source-link'>The Hindu TN Bureau</span>](https://thehindu.com/news/national/tamil-nadu/)", unsafe_allow_html=True)
-    st.markdown("• [<span class='source-link'>New Indian Express TN</span>](https://newindianexpress.com/states/tamil-nadu)", unsafe_allow_html=True)
-    st.markdown("• [<span class='source-link'>ECI CEO Tamil Nadu</span>](https://elections.tn.gov.in)", unsafe_allow_html=True)
-    st.markdown("• [<span class='source-link'>Puthiya Thalaimurai Stream</span>](https://youtube.com/@PuthiyathalaimuraiTV)", unsafe_allow_html=True)
-    st.markdown("• [<span class='source-link'>Reddit r/TamilNadu</span>](https://reddit.com/r/TamilNadu)", unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════════════════════════
 # TOP HEADER & GLOBAL STATEWIDE TVK FAVORABILITY STATUS
@@ -225,13 +201,11 @@ st.markdown("""
   <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
     <div>
       <span class="tvk-badge">தமிழக வெற்றிக் கழகம்</span>
-      <span class="tvk-badge-red" style="margin-left:6px">SQLite Engine: nethra_campaign.db</span>
-      <span class="tvk-badge-green" style="margin-left:6px">Spam Filter Active</span>
       <div style="font-size:1.85rem;font-weight:800;color:#f8fafc;margin-top:6px;line-height:1.1">
-        Nethra · Geo-Fenced & Database-Driven Intelligence Suite
+        TVK Nethra: Central Command
       </div>
       <div style="font-size:0.85rem;color:#cbd5e1;margin-top:4px">
-        Database Engine: <b>234 ACs · 39 PCs · 200 GCC Wards · 50 Verified Events · 20 Spam Logs</b>
+        Live Political Intelligence Engine: <b>234 ACs · 39 PCs · 200 GCC Wards</b>
       </div>
     </div>
   </div>
@@ -277,7 +251,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 # ══════════════════════════════════════════════════════════════════════════════
 # SCREEN 5: HELP & DOCUMENTATION
 # ══════════════════════════════════════════════════════════════════════════════
-if "Help" in election_target:
+if "System Guide" in election_target:
     st.markdown('<div class="section-header">📖 Help & Documentation Hub</div>', unsafe_allow_html=True)
     help_md = Path("docs/dashboard_help.md").read_text()
     st.markdown(help_md)
@@ -285,7 +259,7 @@ if "Help" in election_target:
 # ══════════════════════════════════════════════════════════════════════════════
 # SCREEN 4: SPAM FILTER & DATA QUALITY GATE
 # ══════════════════════════════════════════════════════════════════════════════
-elif "Spam Filter" in election_target:
+elif "Intelligence Audit" in election_target:
     st.markdown('<div class="section-header">🛡️ Spam Filter & Data Quality Gate Audit Engine</div>', unsafe_allow_html=True)
     st.caption("Filters out bot farm attacks, repetitive hashtag spams (>10/min), unverified rumors, and commercial promotional noise to protect Nethra's score integrity.")
 
