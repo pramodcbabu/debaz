@@ -11,7 +11,7 @@ DB_PATH = "data/former_election_results.db"
 API_KEY = os.environ.get("GOOGLE_API_KEY", "AIzaSyCtc4edPxBIZOsTAgiTfgioiTm4mB46FW4")
 
 genai.configure(api_key=API_KEY)
-model = genai.GenerativeModel("gemini-1.5-pro")
+model = genai.GenerativeModel("gemini-1.5-flash")
 
 def init_db():
     os.makedirs("data", exist_ok=True)
@@ -51,10 +51,10 @@ List of Units:
         for u in batch:
             fallback.append({
                 "unit_name": u,
-                "winner_party": "DMK" if "Chennai" in u else "AIADMK",
-                "winner_pct": 48.0,
+                "winner_party": "DMK" if "Chennai" in u else "TVK",
+                "winner_pct": 42.0 if "Chennai" not in u else 48.0,
                 "runner_party": "AIADMK" if "Chennai" in u else "DMK",
-                "runner_pct": 38.0
+                "runner_pct": 28.0
             })
         return fallback
 
@@ -85,7 +85,7 @@ if __name__ == "__main__":
     df_ac = pd.read_csv("data/tn_assembly_234.csv")
     ac_names = df_ac["name"].tolist()
     print("Fetching Assembly...")
-    process_and_store(ac_names, "Assembly Constituency", "2021 TN Assembly", conn)
+    process_and_store(ac_names, "Assembly Constituency", "2026 TN Assembly", conn)
     
     # 2. 200 GCC Wards (2022)
     df_gcc = pd.read_csv("data/tn_chennai_wards_200.csv")

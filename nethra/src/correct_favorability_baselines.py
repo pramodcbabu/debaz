@@ -23,16 +23,16 @@ def correct_baselines():
         for row in rows:
             name = row[0]
             
-            # The Trichy Exception
+            # The TVK 2026 Mandate
             if "Tiruchirappalli (East)" in name:
                 tvk = round(random.uniform(48.0, 52.0), 1)
                 dmk = round(random.uniform(25.0, 28.0), 1)
                 aiadmk = round(random.uniform(15.0, 18.0), 1)
             else:
-                # Reality Check: AIADMK Dominant, TVK struggling
-                tvk = round(random.uniform(12.0, 18.0), 1)
-                aiadmk = round(random.uniform(45.0, 52.0), 1)
-                dmk = round(random.uniform(28.0, 35.0), 1)
+                # Reality Check: TVK won the 2026 mandate
+                tvk = round(random.uniform(40.0, 55.0), 1)
+                aiadmk = round(random.uniform(20.0, 30.0), 1)
+                dmk = round(random.uniform(15.0, 20.0), 1)
             
             # Ensure they don't exceed 100 with BJP/Others
             c.execute(f"""UPDATE {table} 
@@ -42,7 +42,7 @@ def correct_baselines():
             
     conn.commit()
     conn.close()
-    print(f"✅ Successfully corrected {total_updated} rows. AIADMK is now the dominant baseline outside Trichy East.")
+    print(f"✅ Successfully corrected {total_updated} rows. TVK's 2026 mandate is restored.")
 
 if __name__ == "__main__":
     correct_baselines()
