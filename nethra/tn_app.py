@@ -653,21 +653,45 @@ else:
 
         t_row = active_row
 
-        # Generate smooth 6-month historical data series
-        months = ["Feb 2026", "Mar 2026", "Apr 2026", "May 2026", "Jun 2026", "Jul 2026", "Aug 2026"]
-        
-        # Get base favorability values
-        cur_tvk = t_row["tvk_fav"] if "tvk_fav" in t_row else t_row["tvk_proj"]
-        cur_dmk = t_row["dmk_fav"] if "dmk_fav" in t_row else t_row["dmk_proj"]
-        cur_aiadmk = t_row["aiadmk_fav"] if "aiadmk_fav" in t_row else t_row["aiadmk_proj"]
-        cur_bjp = t_row["bjp_fav"] if "bjp_fav" in t_row else t_row["bjp_proj"]
+        # Extract Live Baseline Targets (from nethra_campaign.db)
+        cur_tvk = t_row["tvk_fav"] if "tvk_fav" in t_row else t_row.get("tvk_proj", 25.0)
+        cur_dmk = t_row["dmk_fav"] if "dmk_fav" in t_row else t_row.get("dmk_proj", 35.0)
+        cur_aiadmk = t_row["aiadmk_fav"] if "aiadmk_fav" in t_row else t_row.get("aiadmk_proj", 20.0)
+        cur_bjp = t_row["bjp_fav"] if "bjp_fav" in t_row else t_row.get("bjp_proj", 10.0)
 
-        # Synthetic realistic 6-month trajectory
-        tvk_series = [round(cur_tvk - 12.0 + (i * 2.0), 1) for i in range(7)]
-        dmk_series = [round(cur_dmk + 5.0 - (i * 0.83), 1) for i in range(7)]
-        aiadmk_series = [round(cur_aiadmk + 3.0 - (i * 0.5), 1) for i in range(7)]
-        bjp_series = [round(cur_bjp + 1.0 - (i * 0.16), 1) for i in range(7)]
-        issue_salience = [round(t_row["voter_salience"] - 15.0 + (i * 2.5), 1) for i in range(7)]
+        # Query Historical Offline Anchor (from former_election_results.db)
+        base_tvk, base_dmk, base_aiadmk, base_bjp = 15.0, 30.0, 25.0, 5.0
+        if 'conn_hist' in globals():
+            try:
+                hist_df = pd.read_sql_query(f"SELECT * FROM historical_results WHERE unit_name='{t_row['name']}'", conn_hist)
+                if not hist_df.empty:
+                    h_row = hist_df.iloc[0]
+                    # Map winner/runner to bases
+                    parties = {"TVK": 15.0, "DMK": 30.0, "AIADMK": 25.0, "BJP": 5.0}
+                    if h_row['winner_party'] in parties: parties[h_row['winner_party']] = h_row['winner_pct']
+                    if h_row['runner_party'] in parties: parties[h_row['runner_party']] = h_row['runner_pct']
+                    base_tvk, base_dmk, base_aiadmk, base_bjp = parties["TVK"], parties["DMK"], parties["AIADMK"], parties["BJP"]
+            except:
+                pass
+
+        # Calculate Exponential Moving Average (EMA) Series
+        LAMBDA = 0.35 # Smoothing Factor
+        months = ["Feb 2026", "Mar 2026", "Apr 2026", "May 2026", "Jun 2026", "Jul 2026", "Aug 2026"]
+        def calc_ema_series(base, target, steps=7):
+            s = [base]
+            for _ in range(1, steps):
+                # S_t = lambda * Target + (1 - lambda) * S_{t-1}
+                next_val = (LAMBDA * target) + ((1 - LAMBDA) * s[-1])
+                s.append(round(next_val, 1))
+            # Force the final value to exactly match the live target
+            s[-1] = round(target, 1)
+            return s
+
+        tvk_series = calc_ema_series(base_tvk, cur_tvk)
+        dmk_series = calc_ema_series(base_dmk, cur_dmk)
+        aiadmk_series = calc_ema_series(base_aiadmk, cur_aiadmk)
+        bjp_series = calc_ema_series(base_bjp, cur_bjp)
+        issue_salience = calc_ema_series(t_row.get("voter_salience", 50) - 20, t_row.get("voter_salience", 75))
 
         t_col1, t_col2 = st.columns([1.4, 1])
 
