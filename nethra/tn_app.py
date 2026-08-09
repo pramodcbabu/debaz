@@ -686,7 +686,12 @@ else:
         default_tvk = None if unit_label != "Assembly Constituency" else 15.0
         base_tvk, base_dmk, base_aiadmk, base_bjp = default_tvk, 30.0, 25.0, 5.0
         try:
-            hist_df = pd.read_sql_query(f"SELECT * FROM historical_results WHERE unit_name='{t_row['name']}'", conn_hist)
+            # Match the exact string formatting used in former_election_results.db
+            hist_query_name = t_row['name']
+            if unit_label == "Lok Sabha Parliament" or unit_label == "Lok Sabha Seat":
+                hist_query_name = f"{t_row['name']} Lok Sabha"
+                
+            hist_df = pd.read_sql_query(f"SELECT * FROM historical_results WHERE unit_name='{hist_query_name}'", conn_hist)
             if not hist_df.empty:
                     h_row = hist_df.iloc[0]
                     
@@ -703,7 +708,7 @@ else:
                     elif h_row['winner_party'] == 'AIADMK': base_aiadmk = h_row['winner_pct']
                     elif h_row['runner_party'] == 'AIADMK': base_aiadmk = h_row['runner_pct']
         except Exception as e:
-            pass
+            st.error(f"Error in base_tvk extraction: {e}")
 
         # Calculate Exponential Moving Average (EMA) Series
         LAMBDA = 0.35 # Smoothing Factor
@@ -712,17 +717,18 @@ else:
             if base is None or pd.isna(base):
                 # No historical baseline exists (e.g. TVK didn't contest)
                 s = [None] * (steps - 1)
-                s.append(round(target, 1) if not (target is None or pd.isna(target)) else None)
+                s.append(float(round(target, 1)) if not (target is None or pd.isna(target)) else None)
                 return s
             if target is None or pd.isna(target):
-                return [base] * steps
-            s = [base]
+                return [float(base)] * steps
+            
+            base_f = float(base)
+            target_f = float(target)
+            s = [base_f]
             for _ in range(1, steps):
-                # S_t = lambda * Target + (1 - lambda) * S_{t-1}
-                next_val = (LAMBDA * target) + ((1 - LAMBDA) * s[-1])
-                s.append(round(next_val, 1))
-            # Force the final value to exactly match the live target
-            s[-1] = round(target, 1)
+                next_val = (LAMBDA * target_f) + ((1 - LAMBDA) * s[-1])
+                s.append(float(round(next_val, 1)))
+            s[-1] = float(round(target_f, 1))
             return s
 
         tvk_series = calc_ema_series(base_tvk, cur_tvk)
@@ -736,6 +742,7 @@ else:
 
         with t_col1:
             st.markdown(f"**Party Favorability Trajectory (% Share) — {t_row['name']}** <a href='/?nav=Guide&section=math-trend-line' target='_self' class='help-bubble' title='View Math'>?</a>", unsafe_allow_html=True)
+            st.write(f"TVK SERIES: {tvk_series}")
             fig_trend = go.Figure()
             fig_trend.add_trace(go.Scatter(x=months, y=tvk_series, mode="lines+markers", name="TVK Favorability", line=dict(color=TVK_GOLD, width=3)))
             fig_trend.add_trace(go.Scatter(x=months, y=dmk_series, mode="lines+markers", name="DMK Favorability", line=dict(color="#ef4444", width=2)))
