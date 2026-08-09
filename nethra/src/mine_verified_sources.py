@@ -567,16 +567,17 @@ Score this article on two dimensions:
    - 0.4 = Opinion piece, press release, or thin content
    - 0.1 = Clickbait, AI-generated filler, or spam
 
-Also provide:
 - issue_category: One of ["Drainage & Flood Control", "MSME & Industrial",
   "Agriculture & MSP", "Transport & Infrastructure", "Legal & Court Orders",
   "Water Supply & Sanitation", "Environmental Protection", "Electoral & Political", "Citizen Grievance"]
 - core_issue_summary: A 2-to-4 word description of the specific event/issue (e.g. "Bus factory fire", "CETP effluent leak").
+- sentiment_polarity: (-1.0 to 1.0) Negative if the article expresses anger/frustration towards the incumbent ruling party (DMK/AIADMK), positive if praising.
+- salience_score: (1 to 10) How severe/widespread is this issue locally? (10 = massive protest/crisis).
 - summary: 1-2 sentence factual summary of the article
 - reasoning: Brief explanation of your scores, or "Duplicate issue" if geo_relevance is 0.0 due to duplication.
 
 Respond in valid JSON only (no markdown fences, no extra text):
-{{"geo_relevance": 0.0, "authenticity": 0.0, "issue_category": "", "core_issue_summary": "", "summary": "", "reasoning": ""}}"""
+{{"geo_relevance": 0.0, "authenticity": 0.0, "sentiment_polarity": 0.0, "salience_score": 0, "issue_category": "", "core_issue_summary": "", "summary": "", "reasoning": ""}}"""
 
     for attempt in range(3):
         try:
@@ -727,7 +728,7 @@ def insert_verified_source(conn: sqlite3.Connection, record: dict):
 
 def update_main_tables(conn: sqlite3.Connection, target: dict, best_article: dict,
                        messages: dict):
-    """Update the main constituency/gcc_ward table with the best verified source."""
+    """Update the main constituency/gcc_ward table with the best verified source and apply NLP tuning."""
     if target["unit_type"] == "constituency":
         table = "constituencies"
         where_clause = "name = ?"
@@ -737,9 +738,38 @@ def update_main_tables(conn: sqlite3.Connection, target: dict, best_article: dic
         where_clause = "name LIKE ?"
         where_val = f"%{target['unit_name'].split()[-1]}%"  # Match ward number
 
+    # 1. Calculate NLP Tuning (Gamma Modifiers)
+    sentiment = best_article.get("sentiment_polarity", -0.5)
+    salience = best_article.get("salience_score", 5) / 10.0
+    
+    # Penalty calculation: Max 5% shift per run
+    raw_shift = sentiment * salience * 5.0
+    
+    # 2. Fetch current baselines
+    c = conn.cursor()
+    c.execute(f"SELECT tvk_fav, dmk_fav, aiadmk_fav FROM {table} WHERE {where_clause}", (where_val,))
+    row = c.fetchone()
+    if not row: return
+    tvk_base, dmk_base, aiadmk_base = row
+
+    # 3. Apply Zero-Sum Math (Assuming DMK is the state incumbent taking the hit for civic issues)
+    dmk_new = max(0.0, dmk_base + raw_shift)
+    lost_share = dmk_base - dmk_new
+    aiadmk_new = aiadmk_base + (lost_share / 2.0)
+    tvk_new = tvk_base + (lost_share / 2.0)
+    
+    if raw_shift > 0:
+        gain = min(100.0, dmk_base + raw_shift) - dmk_base
+        aiadmk_new = max(0.0, aiadmk_base - (gain / 2.0))
+        tvk_new = max(0.0, tvk_base - (gain / 2.0))
+        dmk_new = dmk_base + gain
+
     updates = {
         "source_url": best_article["article_url"],
         "source_name": f"{best_article.get('publisher', 'Verified Source')} (Geo:{best_article['geo_relevance_score']:.1f} Auth:{best_article['authenticity_score']:.1f})",
+        "tvk_fav": round(tvk_new, 1),
+        "dmk_fav": round(dmk_new, 1),
+        "aiadmk_fav": round(aiadmk_new, 1),
     }
 
     if messages.get("whatsapp_tamil"):
@@ -755,6 +785,7 @@ def update_main_tables(conn: sqlite3.Connection, target: dict, best_article: dic
     conn.execute(f"UPDATE {table} SET {set_clause} WHERE {where_clause}", values)
     conn.commit()
     log.info(f"  ✅ Updated {table} for {target['unit_name']} with best link: {best_article['article_url'][:80]}...")
+    log.info(f"  🧠 NLP TUNING APPLIED: DMK {dmk_base}% -> {round(dmk_new,1)}% (Shift: {round(raw_shift,2)}%)")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
