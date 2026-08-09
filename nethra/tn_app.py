@@ -206,7 +206,7 @@ with st.sidebar:
         constituency_list = ["All Constituencies", "🔥 5 Target Byelection Seats"] + sorted(df_ac_234["name"].unique().tolist())
         selected_constituency = st.selectbox("Filter Constituency", constituency_list)
         selected_region = "All"
-    elif "Parliament" in election_target:
+    elif "Lok Sabha" in election_target:
         region_list = ["All Parliaments"] + sorted(df_pc_39["region"].unique().tolist())
         selected_region = st.selectbox("Filter Region", region_list)
         selected_constituency = "All"
