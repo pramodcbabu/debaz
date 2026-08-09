@@ -391,6 +391,23 @@ else:
     active_unit_name = st.session_state["global_selected_unit"]
     active_row = df_active[df_active["name"] == active_unit_name].iloc[0] if active_unit_name in df_active["name"].values else df_active.iloc[0]
 
+    # Handle Lasso/Box Multi-Selection Aggregation
+    map_state_key = f"map_select_{key_suffix}"
+    if map_state_key in st.session_state:
+        map_state = st.session_state[map_state_key]
+        if map_state and "selection" in map_state and "points" in map_state["selection"]:
+            pts = map_state["selection"]["points"]
+            if len(pts) > 1:
+                indices = [p.get("point_index", 0) for p in pts]
+                df_multi = df_active.iloc[indices]
+                agg_row = df_multi.iloc[0].copy()
+                agg_row["name"] = f"Regional Aggregate ({len(pts)} Nodes)"
+                agg_row["voters"] = df_multi["voters"].sum()
+                for c in ["tvk_fav", "tvk_proj", "dmk_fav", "dmk_proj", "aiadmk_fav", "aiadmk_proj", "bjp_fav", "bjp_proj"]:
+                    if c in df_multi.columns: agg_row[c] = round(df_multi[c].mean(), 1)
+                if "top_issue" in df_multi.columns: agg_row["top_issue"] = df_multi["top_issue"].mode()[0]
+                active_row = agg_row
+
     # Map Center & Zoom Logic
     if len(df_active) == 1 or sidebar_unit is not None:
         map_center = {"lat": active_row["lat"], "lon": active_row["lon"]}
@@ -410,13 +427,16 @@ else:
         st.markdown(f"**📍 Visual Map Command ({unit_label} Level)** <a href='/?nav=Guide&section=math-geo-map' target='_self' class='help-bubble' title='View Math'>?</a>", unsafe_allow_html=True)
         st.caption("Click any marker on the map or select from sidebar dropdown to inspect that unit below!")
 
+        # Apply logarithmic scalar for map node visual differentiation
+        df_active["scaled_voters"] = np.log10(df_active["voters"].clip(lower=1)) * 5
+
         color_col = "tvk_fav" if "tvk_fav" in df_active.columns else "tvk_proj"
         fig_map = px.scatter_mapbox(
             df_active,
             lat="lat", lon="lon",
             color=color_col,
             color_continuous_scale="YlOrRd",
-            size="voters",
+            size="scaled_voters",
             size_max=28,
             zoom=map_zoom,
             center=map_center,
@@ -450,7 +470,7 @@ else:
         selected_from_map = None
         if map_event and "selection" in map_event and "points" in map_event["selection"]:
             points = map_event["selection"]["points"]
-            if points and len(points) > 0:
+            if points and len(points) == 1:
                 p_idx = points[0].get("point_index", 0)
                 if 0 <= p_idx < len(df_active):
                     selected_from_map = df_active.iloc[p_idx]
@@ -458,6 +478,8 @@ else:
                     st.session_state["global_selected_unit"] = clicked_name
                     # Force update the selectbox widget state key so dropdown updates instantly!
                     st.session_state[f"global_unit_selector_{key_suffix}"] = clicked_name
+            elif points and len(points) > 1:
+                selected_from_map = active_row
 
         display_spotlight = selected_from_map if selected_from_map is not None else active_row
 
