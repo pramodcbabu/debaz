@@ -750,6 +750,9 @@ else:
                 height=340, margin=dict(t=10, b=10)
             )
             st.plotly_chart(fig_trend, use_container_width=True)
+            
+            if unit_label != "Assembly Constituency":
+                st.info(f"**Geospatial Baseline Interpolation:** TVK did not formally contest the historical elections for this {unit_label}. The historical anchor points on this curve are algorithmically estimated using a K-Nearest Neighbors (KNN) geospatial mapping of the closest 2026 Assembly Constituencies. The current target is mathematically driven by real-time NLP data mining of local issues. [See System Guide for exact mathematical proofs ↗](/?nav=Guide)", icon="🌍")
 
         with t_col2:
             st.markdown(f"**📜 Key Issue Evolution Timeline — {t_row['name']}**")

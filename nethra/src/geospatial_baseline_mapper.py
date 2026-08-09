@@ -41,7 +41,7 @@ if __name__ == "__main__":
         df_gcc.at[idx, 'dmk_share_actual'] = dmk_est
         df_gcc.at[idx, 'aiadmk_share_actual'] = aiadmk_est
         
-        df_gcc.at[idx, 'tvk_fav'] = None  # Live Target is None until NLP scrape
+        df_gcc.at[idx, 'tvk_fav'] = round(tvk_est * 100, 1)  # Initialize live target to estimated baseline
         df_gcc.at[idx, 'dmk_fav'] = round(dmk_est * 100, 1)
         df_gcc.at[idx, 'aiadmk_fav'] = round(aiadmk_est * 100, 1)
         
@@ -62,11 +62,11 @@ if __name__ == "__main__":
         df_pc.at[idx, 'aiadmk_share_actual'] = aiadmk_est
         
         if 'tvk_proj' in df_pc.columns:
-            df_pc.at[idx, 'tvk_proj'] = None
+            df_pc.at[idx, 'tvk_proj'] = round(tvk_est * 100, 1)
             df_pc.at[idx, 'dmk_proj'] = round(dmk_est * 100, 1)
             df_pc.at[idx, 'aiadmk_proj'] = round(aiadmk_est * 100, 1)
             
-        df_pc.at[idx, 'tvk_fav'] = None
+        df_pc.at[idx, 'tvk_fav'] = round(tvk_est * 100, 1)
         df_pc.at[idx, 'dmk_fav'] = round(dmk_est * 100, 1)
         df_pc.at[idx, 'aiadmk_fav'] = round(aiadmk_est * 100, 1)
         
