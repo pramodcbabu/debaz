@@ -408,7 +408,7 @@ else:
         # Enable click events on Plotly map via on_select="rerun"
         map_event = st.plotly_chart(
             fig_map,
-            width='stretch',
+            use_container_width=True,
             on_select="rerun",
             key=f"map_select_{election_target.replace(' ', '_')}"
         )
@@ -465,7 +465,7 @@ else:
             legend=dict(bgcolor="rgba(0,0,0,0)"),
             height=420, margin=dict(t=10, b=10)
         )
-        st.plotly_chart(fig_bar, width='stretch')
+        st.plotly_chart(fig_bar, use_container_width=True)
 
     # ── MULTI-UNIT CONSOLIDATED INTELLIGENCE BANNER ────────────────────────────────
     if 1 < len(df_active) <= 15:
@@ -551,7 +551,7 @@ else:
                 font=dict(color="#e2e8f0"), legend=dict(bgcolor="rgba(0,0,0,0)"),
                 height=360, margin=dict(t=10, b=10)
             )
-            st.plotly_chart(fig_gap, width='stretch')
+            st.plotly_chart(fig_gap, use_container_width=True)
 
         with table_col:
             st.markdown(f"**🗂️ Detailed Exhaustive Table ({len(df_active)} Units Queried from DB)**")
@@ -602,7 +602,7 @@ else:
                 font=dict(color="#e2e8f0"), legend=dict(bgcolor="rgba(0,0,0,0)"),
                 height=340, margin=dict(t=10, b=10)
             )
-            st.plotly_chart(fig_trend, width='stretch')
+            st.plotly_chart(fig_trend, use_container_width=True)
 
         with t_col2:
             st.markdown(f"**📜 Key Issue Evolution Timeline — {t_row['name']}**")
