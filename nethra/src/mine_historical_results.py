@@ -48,13 +48,19 @@ List of Units:
         print(f"Error fetching batch: {e}")
         fallback = []
         df_ac = pd.read_csv("data/tn_assembly_234.csv")
+        df_w = pd.read_csv("data/tn_chennai_wards_200.csv")
+        df_p = pd.read_csv("data/tn_parliament_39.csv")
+        
         for u in batch:
-            row_match = df_ac[df_ac["name"] == u]
-            if not row_match.empty:
-                row = row_match.iloc[0]
-                wp = row['tvk_share_2026'] * 100
-                dp = row['dmk_share_2026'] * 100
-                ap = row['aiadmk_share_2026'] * 100
+            row = None
+            if not df_ac[df_ac["name"] == u].empty: row = df_ac[df_ac["name"] == u].iloc[0]
+            elif not df_w[df_w["name"] == u].empty: row = df_w[df_w["name"] == u].iloc[0]
+            elif not df_p[df_p["name"] == u].empty: row = df_p[df_p["name"] == u].iloc[0]
+            
+            if row is not None:
+                wp = row.get('tvk_share_actual', row.get('tvk_share_2026', 0.15)) * 100
+                dp = row.get('dmk_share_actual', row.get('dmk_share_2026', 0.45)) * 100
+                ap = row.get('aiadmk_share_actual', row.get('aiadmk_share_2026', 0.40)) * 100
                 parties = {"TVK": wp, "DMK": dp, "AIADMK": ap}
                 sorted_parties = sorted(parties.items(), key=lambda item: item[1], reverse=True)
                 
@@ -63,8 +69,8 @@ List of Units:
                 runner = sorted_parties[1][0]
                 rp_val = sorted_parties[1][1]
             else:
-                # Default for non-assembly units if they sneak in
-                winner = "TVK"; runner = "DMK"; wp_val = 45.0; rp_val = 35.0
+                # Absolute fallback
+                winner = "DMK"; runner = "AIADMK"; wp_val = 45.0; rp_val = 40.0
 
             fallback.append({
                 "unit_name": u,

@@ -1,37 +1,41 @@
 import sqlite3
 import pandas as pd
-import random
 
 DB_PATH = "data/nethra_campaign.db"
-ASSEMBLY_CSV = "data/tn_assembly_234.csv"
 
 def sync_baselines():
-    print("Syncing Assembly Database baselines to CSV Ground Truth Vote Shares...")
+    print("Syncing Universal Baselines to nethra_campaign.db...")
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
 
-    df_ac = pd.read_csv(ASSEMBLY_CSV)
+    datasets = [
+        ("data/tn_assembly_234.csv", "constituencies"),
+        ("data/tn_chennai_wards_200.csv", "gcc_wards"),
+        ("data/tn_parliament_39.csv", "parliaments")
+    ]
     
-    total_updated = 0
-    for _, row in df_ac.iterrows():
-        name = row['name']
-        
-        # Multiply actual vote share by 100 to get exact favorability
-        tvk_fav = round(float(row['tvk_share_2026']) * 100, 1)
-        dmk_fav = round(float(row['dmk_share_2026']) * 100, 1)
-        aiadmk_fav = round(float(row['aiadmk_share_2026']) * 100, 1)
-        
-        c.execute("""
-            UPDATE constituencies 
-            SET tvk_fav = ?, dmk_fav = ?, aiadmk_fav = ?
-            WHERE name = ?
-        """, (tvk_fav, dmk_fav, aiadmk_fav, name))
-        
-        total_updated += 1
+    for csv_file, table_name in datasets:
+        df = pd.read_csv(csv_file)
+        total_updated = 0
+        for _, row in df.iterrows():
+            name = row['name']
+            
+            # Universal actuals
+            tvk_fav = round(float(row.get('tvk_share_actual', 0.15)) * 100, 1)
+            dmk_fav = round(float(row.get('dmk_share_actual', 0.40)) * 100, 1)
+            aiadmk_fav = round(float(row.get('aiadmk_share_actual', 0.45)) * 100, 1)
+            
+            if table_name == "parliaments":
+                c.execute(f"UPDATE {table_name} SET tvk_proj = ?, dmk_proj = ?, aiadmk_proj = ? WHERE name = ?", (tvk_fav, dmk_fav, aiadmk_fav, name))
+            else:
+                c.execute(f"UPDATE {table_name} SET tvk_fav = ?, dmk_fav = ?, aiadmk_fav = ? WHERE name = ?", (tvk_fav, dmk_fav, aiadmk_fav, name))
+            
+            total_updated += 1
+            
+        print(f"✅ Synced {total_updated} rows in {table_name}.")
         
     conn.commit()
     conn.close()
-    print(f"✅ Successfully synced {total_updated} assembly constituencies with exact ground-truth 2026 vote shares.")
 
 if __name__ == "__main__":
     sync_baselines()
