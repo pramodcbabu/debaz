@@ -185,7 +185,7 @@ with st.sidebar:
         selected_constituency = "All"
     elif "Assembly" in election_target:
         by_election_seats = ["Karur", "Tiruchirappalli (East)", "Perundurai", "Viralimalai", "Ambasamudram"]
-        constituency_list = ["All Constituencies", "🔥 5 HC Stayed Byelection Seats"] + sorted(df_ac_234["name"].unique().tolist())
+        constituency_list = ["All Constituencies", "🔥 5 Target Byelection Seats"] + sorted(df_ac_234["name"].unique().tolist())
         selected_constituency = st.selectbox("Filter Constituency", constituency_list)
         selected_region = "All"
     elif "Parliament" in election_target:
@@ -312,14 +312,14 @@ else:
 
     elif "Assembly" in election_target:
         df_active = df_ac_234.copy()
-        if selected_constituency == "🔥 5 HC Stayed Byelection Seats":
+        if selected_constituency == "🔥 5 Target Byelection Seats":
             by_election_names = ["Karur", "Tiruchirappalli (East)", "Perundurai", "Viralimalai", "Ambasamudram"]
             df_active = df_active[df_active["name"].isin(by_election_names)]
         elif selected_constituency != "All Constituencies":
             df_active = df_active[df_active["name"] == selected_constituency]
 
         screen_title = f"⚡ TN Assembly Elections & Byelections — ({len(df_active)} / 234 Constituencies Tracked)"
-        screen_subtitle = "Constituency-level database intelligence. (5 Key Byelection Seats stayed by Madras HC till Aug 24, 2026: Karur, Trichy East, Perundurai, Viralimalai, Ambasamudram)."
+        screen_subtitle = "Constituency-level database intelligence. (5 Target Byelection Seats: Karur, Trichy East, Perundurai, Viralimalai, Ambasamudram)."
         unit_label = "Assembly Constituency"
 
     else:
@@ -337,7 +337,7 @@ else:
 
     # ── DETECT SIDEBAR DROPDOWN SELECTION SYNCHRONIZATION ───────────────────────
     sidebar_unit = None
-    if "Assembly" in election_target and selected_constituency not in ["All Constituencies", "🔥 5 HC Stayed Byelection Seats"]:
+    if "Assembly" in election_target and selected_constituency not in ["All Constituencies", "🔥 5 Target Byelection Seats"]:
         sidebar_unit = selected_constituency
     elif "Local Body" in election_target and selected_region not in ["All Wards (200)", "⚡ 5 Deep-Audited GCC Wards"]:
         # If user picked a specific ward zone or single ward
