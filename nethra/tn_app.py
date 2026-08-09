@@ -73,6 +73,11 @@ st.set_page_config(
 # ── CSS Styling ────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
+/* Hide Streamlit Default Top Header & Deploy Menu */
+[data-testid="stHeader"] { display: none; }
+#MainMenu { visibility: hidden; }
+footer { visibility: hidden; }
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
 .block-container { padding-top: 1rem; padding-bottom: 2rem; }
@@ -223,13 +228,13 @@ with k1:
 with k2:
     st.markdown(f"""<div class="metric-card">
       <div class="label">Statewide Favorability</div>
-      <div class="value" style="color:#f59e0b">{tvk_trend[live_week-1]}%</div>
-      <div class="sublbl">+{(tvk_trend[live_week-1]-tvk_trend[0])}pt shift since June</div>
+      <div class="value" style="color:#f59e0b">{tvk_trend[-1]}%</div>
+      <div class="sublbl">+{(tvk_trend[-1]-tvk_trend[0])}pt shift since June</div>
     </div>""", unsafe_allow_html=True)
 with k3:
     st.markdown(f"""<div class="metric-card">
       <div class="label">Opponent Baseline (DMK)</div>
-      <div class="value" style="color:#ef4444">{dmk_trend[live_week-1]}%</div>
+      <div class="value" style="color:#ef4444">{dmk_trend[-1]}%</div>
       <div class="sublbl">Eroding baseline in urban centers</div>
     </div>""", unsafe_allow_html=True)
 with k4:
