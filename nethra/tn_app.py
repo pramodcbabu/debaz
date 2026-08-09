@@ -223,13 +223,13 @@ with st.sidebar:
         selected_constituency = st.selectbox("Filter Constituency", constituency_list)
         selected_region = "All"
     elif "Lok Sabha" in election_target:
-        region_list = ["All Parliaments"] + sorted(df_pc_39["region"].unique().tolist())
+        region_list = ["All Lok Sabha Seats"] + sorted(df_pc_39["region"].unique().tolist())
         selected_region = st.selectbox("Filter Region", region_list)
         
-        if selected_region != "All Parliaments":
-            pc_choices = ["All Parliaments in Region"] + df_pc_39[df_pc_39["region"] == selected_region]["name"].tolist()
+        if selected_region != "All Lok Sabha Seats":
+            pc_choices = ["All Lok Sabha Seats in Region"] + df_pc_39[df_pc_39["region"] == selected_region]["name"].tolist()
         else:
-            pc_choices = ["All Parliaments in Region"] + df_pc_39["name"].tolist()
+            pc_choices = ["All Lok Sabha Seats in Region"] + df_pc_39["name"].tolist()
             
         selected_constituency = st.selectbox("Select Lok Sabha Seat", pc_choices)
     else:
@@ -382,10 +382,10 @@ else:
 
     else:
         df_active = df_pc_39.copy()
-        if selected_region != "All Parliaments":
+        if selected_region != "All Lok Sabha Seats":
             df_active = df_active[df_active["region"] == selected_region]
             
-        if selected_constituency != "All Parliaments in Region" and selected_constituency != "All":
+        if selected_constituency != "All Lok Sabha Seats in Region" and selected_constituency != "All":
             df_active = df_active[df_active["name"] == selected_constituency]
             
         screen_title = f"🌐 Lok Sabha Parliamentary Elections 2029 — Exhaustive 39 Lok Sabha Seats ({len(df_active)} / 39 Tracked)"
@@ -685,10 +685,9 @@ else:
         # Query Historical Offline Anchor (from former_election_results.db)
         default_tvk = None if unit_label != "Assembly Constituency" else 15.0
         base_tvk, base_dmk, base_aiadmk, base_bjp = default_tvk, 30.0, 25.0, 5.0
-        if 'conn_hist' in globals():
-            try:
-                hist_df = pd.read_sql_query(f"SELECT * FROM historical_results WHERE unit_name='{t_row['name']}'", conn_hist)
-                if not hist_df.empty:
+        try:
+            hist_df = pd.read_sql_query(f"SELECT * FROM historical_results WHERE unit_name='{t_row['name']}'", conn_hist)
+            if not hist_df.empty:
                     h_row = hist_df.iloc[0]
                     
                     # Read explicitly from new schema if available
@@ -703,8 +702,8 @@ else:
                     if 'aiadmk_pct' in hist_df.columns and pd.notna(h_row['aiadmk_pct']): base_aiadmk = h_row['aiadmk_pct']
                     elif h_row['winner_party'] == 'AIADMK': base_aiadmk = h_row['winner_pct']
                     elif h_row['runner_party'] == 'AIADMK': base_aiadmk = h_row['runner_pct']
-            except Exception as e:
-                pass
+        except Exception as e:
+            pass
 
         # Calculate Exponential Moving Average (EMA) Series
         LAMBDA = 0.35 # Smoothing Factor
@@ -727,6 +726,7 @@ else:
             return s
 
         tvk_series = calc_ema_series(base_tvk, cur_tvk)
+        print(f"DEBUG: {t_row['name']} -> base_tvk={base_tvk}, cur_tvk={cur_tvk}, tvk_series={tvk_series}")
         dmk_series = calc_ema_series(base_dmk, cur_dmk)
         aiadmk_series = calc_ema_series(base_aiadmk, cur_aiadmk)
         bjp_series = calc_ema_series(base_bjp, cur_bjp)
