@@ -691,7 +691,9 @@ else:
             if unit_label == "Lok Sabha Parliament" or unit_label == "Lok Sabha Seat":
                 hist_query_name = f"{t_row['name']} Lok Sabha"
                 
-            hist_df = pd.read_sql_query(f"SELECT * FROM historical_results WHERE unit_name='{hist_query_name}'", conn_hist)
+            with sqlite3.connect("data/former_election_results.db") as fresh_conn:
+                hist_df = pd.read_sql_query(f"SELECT * FROM historical_results WHERE unit_name='{hist_query_name}'", fresh_conn)
+            
             if not hist_df.empty:
                     h_row = hist_df.iloc[0]
                     
