@@ -17,13 +17,17 @@ def init_db():
     os.makedirs("data", exist_ok=True)
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
-    c.execute("""CREATE TABLE IF NOT EXISTS historical_results (
+    c.execute("DROP TABLE IF EXISTS historical_results")
+    c.execute("""CREATE TABLE historical_results (
                     unit_name TEXT PRIMARY KEY,
                     election_type TEXT,
                     winner_party TEXT,
                     winner_pct REAL,
                     runner_party TEXT,
-                    runner_pct REAL
+                    runner_pct REAL,
+                    tvk_pct REAL,
+                    dmk_pct REAL,
+                    aiadmk_pct REAL
                  )""")
     conn.commit()
     return conn
@@ -86,7 +90,10 @@ List of Units:
                 "winner_party": winner,
                 "winner_pct": round(wp_val, 1),
                 "runner_party": runner,
-                "runner_pct": round(rp_val, 1)
+                "runner_pct": round(rp_val, 1),
+                "tvk_pct": round(tvk_s, 1) if tvk_s is not None else None,
+                "dmk_pct": round(dmk_s, 1),
+                "aiadmk_pct": round(adk_s, 1)
             })
         return fallback
 
@@ -102,10 +109,11 @@ def process_and_store(units, election_type, year, conn):
             c = conn.cursor()
             for r in results:
                 c.execute("""INSERT OR REPLACE INTO historical_results 
-                             (unit_name, election_type, winner_party, winner_pct, runner_party, runner_pct) 
-                             VALUES (?, ?, ?, ?, ?, ?)""", 
+                             (unit_name, election_type, winner_party, winner_pct, runner_party, runner_pct, tvk_pct, dmk_pct, aiadmk_pct) 
+                             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""", 
                           (r.get("unit_name"), election_type, r.get("winner_party"), 
-                           r.get("winner_pct"), r.get("runner_party"), r.get("runner_pct")))
+                           r.get("winner_pct"), r.get("runner_party"), r.get("runner_pct"),
+                           r.get("tvk_pct"), r.get("dmk_pct"), r.get("aiadmk_pct")))
             conn.commit()
             print(f"Processed batch of {len(results)} {election_type}s")
 

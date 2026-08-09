@@ -690,12 +690,20 @@ else:
                 hist_df = pd.read_sql_query(f"SELECT * FROM historical_results WHERE unit_name='{t_row['name']}'", conn_hist)
                 if not hist_df.empty:
                     h_row = hist_df.iloc[0]
-                    # Map winner/runner to bases
-                    parties = {"TVK": default_tvk, "DMK": 30.0, "AIADMK": 25.0, "BJP": 5.0}
-                    if h_row['winner_party'] in parties: parties[h_row['winner_party']] = h_row['winner_pct']
-                    if h_row['runner_party'] in parties: parties[h_row['runner_party']] = h_row['runner_pct']
-                    base_tvk, base_dmk, base_aiadmk, base_bjp = parties["TVK"], parties["DMK"], parties["AIADMK"], parties["BJP"]
-            except:
+                    
+                    # Read explicitly from new schema if available
+                    if 'tvk_pct' in hist_df.columns and pd.notna(h_row['tvk_pct']): base_tvk = h_row['tvk_pct']
+                    elif h_row['winner_party'] == 'TVK': base_tvk = h_row['winner_pct']
+                    elif h_row['runner_party'] == 'TVK': base_tvk = h_row['runner_pct']
+                    
+                    if 'dmk_pct' in hist_df.columns and pd.notna(h_row['dmk_pct']): base_dmk = h_row['dmk_pct']
+                    elif h_row['winner_party'] == 'DMK': base_dmk = h_row['winner_pct']
+                    elif h_row['runner_party'] == 'DMK': base_dmk = h_row['runner_pct']
+                    
+                    if 'aiadmk_pct' in hist_df.columns and pd.notna(h_row['aiadmk_pct']): base_aiadmk = h_row['aiadmk_pct']
+                    elif h_row['winner_party'] == 'AIADMK': base_aiadmk = h_row['winner_pct']
+                    elif h_row['runner_party'] == 'AIADMK': base_aiadmk = h_row['runner_pct']
+            except Exception as e:
                 pass
 
         # Calculate Exponential Moving Average (EMA) Series
