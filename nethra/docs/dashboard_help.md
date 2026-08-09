@@ -158,12 +158,14 @@ This score does not exist in a vacuum. It mathematically dictates the dashboard'
 ---
 
 <a id="math-historical-tuning"></a>
-## 8. Historical Verification Engine & Parameter Tuning
+## 8. Historical Verification Engine & Offline Sync
 <a href="/?nav=Assembly" target="_self" style="background:#facc15;color:#450a0a;padding:4px 10px;border-radius:4px;text-decoration:none;font-weight:bold;font-size:0.8rem">🔙 Return to Dashboard</a>
 
-To prevent NLP models from hallucinating ungrounded political shifts due to digital noise (e.g., projecting a TVK landslide in a deeply entrenched AIADMK stronghold), Nethra employs a **Historical Verification Engine**.
+To prevent NLP models from hallucinating ungrounded political shifts due to digital noise (e.g., projecting a TVK landslide in a deeply entrenched AIADMK stronghold), Nethra employs a **Historical Verification Engine & Strict Offline Sync**.
 
-The engine continually mines actual past election results (2021 Assembly, 2022 Local Body, 2024 Lok Sabha) and stores them as an immutable baseline in a dedicated database.
+**1. Baseline Initialization:** Base favorability is strictly initialized via a 1-to-1 extraction from actual offline ECI ground truth vote shares (Form 20). The SQLite database never guesses; it multiplies the raw `_share_2026` CSV data by 100 to establish an immutable, mathematically perfect baseline.
+
+**2. Live NLP Tuning:** Once the baseline is anchored to reality, the `mine_verified_sources.py` script (powered by the Gemini LLM) scrapes current digital sentiment and calculates the $\gamma$ multipliers to dynamically shift these offline baselines in real-time.
 
 **The Dampening Coefficient ($D$):**
 If the NLP model projects a TVK favorability surge (e.g. > 40%) in a constituency where they historically did not win, the system automatically applies a mathematical dampening penalty to anchor the projection closer to reality:
