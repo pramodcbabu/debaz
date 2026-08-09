@@ -508,9 +508,12 @@ else:
         st.markdown(f"**📊 Competitor Favorability Breakdown (Top 12 Displayed)** <a href='/?nav=Guide&section=math-competitor-bar' target='_self' class='help-bubble' title='View Math'>?</a>", unsafe_allow_html=True)
         df_bar_sub = df_active.head(12)
         fig_bar = go.Figure()
-        fig_bar.add_trace(go.Bar(x=df_bar_sub["name"], y=df_bar_sub["tvk_fav"], name="TVK", marker_color=TVK_GOLD))
-        fig_bar.add_trace(go.Bar(x=df_bar_sub["name"], y=df_bar_sub["dmk_fav"], name="DMK", marker_color=DMK_RED))
-        fig_bar.add_trace(go.Bar(x=df_bar_sub["name"], y=df_bar_sub["aiadmk_fav"], name="AIADMK", marker_color=AIADMK_BLUE))
+        col_tvk = "tvk_fav" if "tvk_fav" in df_bar_sub.columns else "tvk_proj"
+        col_dmk = "dmk_fav" if "dmk_fav" in df_bar_sub.columns else "dmk_proj"
+        col_admk = "aiadmk_fav" if "aiadmk_fav" in df_bar_sub.columns else "aiadmk_proj"
+        fig_bar.add_trace(go.Bar(x=df_bar_sub["name"], y=df_bar_sub[col_tvk], name="TVK", marker_color=TVK_GOLD))
+        fig_bar.add_trace(go.Bar(x=df_bar_sub["name"], y=df_bar_sub[col_dmk], name="DMK", marker_color=DMK_RED))
+        fig_bar.add_trace(go.Bar(x=df_bar_sub["name"], y=df_bar_sub[col_admk], name="AIADMK", marker_color=AIADMK_BLUE))
         fig_bar.update_layout(
             barmode="group",
             yaxis=dict(title="Favorability %", range=[0, 75]),
