@@ -208,7 +208,15 @@ with st.sidebar:
     if "Local Body" in election_target:
         zone_list = ["All Wards (200)", "⚡ 5 Deep-Audited GCC Wards"] + sorted(df_gcc_200["zone_name"].unique().tolist())
         selected_region = st.selectbox("Filter GCC Zone / Wards", zone_list)
-        selected_constituency = "All"
+        
+        if selected_region == "⚡ 5 Deep-Audited GCC Wards":
+            ward_choices = ["All Wards in Selection"] + df_gcc_200[df_gcc_200["is_deep_audited"] == 1]["name"].tolist()
+        elif selected_region != "All Wards (200)":
+            ward_choices = ["All Wards in Selection"] + df_gcc_200[df_gcc_200["zone_name"] == selected_region]["name"].tolist()
+        else:
+            ward_choices = ["All Wards in Selection"] + df_gcc_200["name"].tolist()
+            
+        selected_constituency = st.selectbox("Select Ward", ward_choices)
     elif "Assembly" in election_target:
         by_election_seats = ["Karur", "Tiruchirappalli (East)", "Perundurai", "Viralimalai", "Ambasamudram"]
         constituency_list = ["All Constituencies", "🔥 5 Target Byelection Seats"] + sorted(df_ac_234["name"].unique().tolist())
@@ -217,7 +225,13 @@ with st.sidebar:
     elif "Lok Sabha" in election_target:
         region_list = ["All Parliaments"] + sorted(df_pc_39["region"].unique().tolist())
         selected_region = st.selectbox("Filter Region", region_list)
-        selected_constituency = "All"
+        
+        if selected_region != "All Parliaments":
+            pc_choices = ["All Parliaments in Region"] + df_pc_39[df_pc_39["region"] == selected_region]["name"].tolist()
+        else:
+            pc_choices = ["All Parliaments in Region"] + df_pc_39["name"].tolist()
+            
+        selected_constituency = st.selectbox("Select Lok Sabha Seat", pc_choices)
     else:
         selected_region = "All"
         selected_constituency = "All"
@@ -346,6 +360,9 @@ else:
             df_active = df_active[df_active["is_deep_audited"] == 1]
         elif selected_region != "All Wards (200)":
             df_active = df_active[df_active["zone_name"] == selected_region]
+            
+        if selected_constituency != "All Wards in Selection" and selected_constituency != "All":
+            df_active = df_active[df_active["name"] == selected_constituency]
 
         screen_title = f"🏛️ TN Local Body Elections 2027 — Greater Chennai Corporation Wards ({len(df_active)} / 200 Tracked)"
         screen_subtitle = "Database-driven coverage of 200 GCC Wards. (⚡ 5 Deep Ground Audited Wards: W84 Anna Nagar, W151 Valasaravakkam, W177 Velachery, W180 Adyar, W197 Sholinganallur)."
@@ -367,6 +384,10 @@ else:
         df_active = df_pc_39.copy()
         if selected_region != "All Parliaments":
             df_active = df_active[df_active["region"] == selected_region]
+            
+        if selected_constituency != "All Parliaments in Region" and selected_constituency != "All":
+            df_active = df_active[df_active["name"] == selected_constituency]
+            
         screen_title = f"🌐 Lok Sabha Parliamentary Elections 2029 — Exhaustive 39 Lok Sabha Seats ({len(df_active)} / 39 Tracked)"
         screen_subtitle = "Long-term strategic tracking across all 39 Parliamentary Constituencies of Tamil Nadu."
         unit_label = "Parliament Seat"
@@ -662,14 +683,15 @@ else:
         cur_bjp = t_row["bjp_fav"] if "bjp_fav" in t_row else t_row.get("bjp_proj", 10.0)
 
         # Query Historical Offline Anchor (from former_election_results.db)
-        base_tvk, base_dmk, base_aiadmk, base_bjp = 15.0, 30.0, 25.0, 5.0
+        default_tvk = None if unit_label != "Assembly Constituency" else 15.0
+        base_tvk, base_dmk, base_aiadmk, base_bjp = default_tvk, 30.0, 25.0, 5.0
         if 'conn_hist' in globals():
             try:
                 hist_df = pd.read_sql_query(f"SELECT * FROM historical_results WHERE unit_name='{t_row['name']}'", conn_hist)
                 if not hist_df.empty:
                     h_row = hist_df.iloc[0]
                     # Map winner/runner to bases
-                    parties = {"TVK": 15.0, "DMK": 30.0, "AIADMK": 25.0, "BJP": 5.0}
+                    parties = {"TVK": default_tvk, "DMK": 30.0, "AIADMK": 25.0, "BJP": 5.0}
                     if h_row['winner_party'] in parties: parties[h_row['winner_party']] = h_row['winner_pct']
                     if h_row['runner_party'] in parties: parties[h_row['runner_party']] = h_row['runner_pct']
                     base_tvk, base_dmk, base_aiadmk, base_bjp = parties["TVK"], parties["DMK"], parties["AIADMK"], parties["BJP"]
