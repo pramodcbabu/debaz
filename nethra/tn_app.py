@@ -23,6 +23,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 import sqlite3
 import os
+import re
+import base64
 from pathlib import Path
 
 DB_PATH = "data/nethra_campaign.db"
@@ -275,6 +277,14 @@ st.markdown("<br>", unsafe_allow_html=True)
 if "System Guide" in election_target:
     st.markdown('<div class="section-header">📖 TVK System Architecture & Math Whitepaper</div>', unsafe_allow_html=True)
     help_md = Path("docs/dashboard_help.md").read_text()
+    
+    def render_mermaid(match):
+        graph = match.group(1).strip()
+        b64 = base64.b64encode(graph.encode('utf-8')).decode('utf-8')
+        return f"![Mermaid Architecture Diagram](https://mermaid.ink/svg/{b64})"
+    
+    help_md = re.sub(r'```mermaid\n(.*?)```', render_mermaid, help_md, flags=re.DOTALL)
+    
     st.markdown(help_md, unsafe_allow_html=True)
     
     if "section" in st.query_params:
@@ -397,7 +407,7 @@ else:
     map_col, bar_col = st.columns([1.3, 1])
 
     with map_col:
-        st.markdown(f"**📍 Visual Map Command ({unit_label} Level)**")
+        st.markdown(f"**📍 Visual Map Command ({unit_label} Level)** <a href='/?nav=Guide&section=math-geo-map' target='_self' class='help-bubble' title='View Math'>?</a>", unsafe_allow_html=True)
         st.caption("Click any marker on the map or select from sidebar dropdown to inspect that unit below!")
 
         color_col = "tvk_fav" if "tvk_fav" in df_active.columns else "tvk_proj"
@@ -473,7 +483,7 @@ else:
         """, unsafe_allow_html=True)
 
     with bar_col:
-        st.markdown(f"**📊 Competitor Favorability Breakdown (Top 12 Displayed)**")
+        st.markdown(f"**📊 Competitor Favorability Breakdown (Top 12 Displayed)** <a href='/?nav=Guide&section=math-competitor-bar' target='_self' class='help-bubble' title='View Math'>?</a>", unsafe_allow_html=True)
         df_bar_sub = df_active.head(12)
         fig_bar = go.Figure()
         fig_bar.add_trace(go.Bar(x=df_bar_sub["name"], y=df_bar_sub["tvk_fav"], name="TVK", marker_color=TVK_GOLD))
@@ -563,7 +573,7 @@ else:
         gap_col, table_col = st.columns([1, 1.2])
 
         with gap_col:
-            st.markdown(f"**Messaging Salience Gap (Top 12 Units)** *(Voter Priority % vs TVK Mention %)*")
+            st.markdown(f"**Messaging Salience Gap (Top 12 Units)** *(Voter Priority % vs TVK Mention %)* <a href='/?nav=Guide&section=math-salience-gap' target='_self' class='help-bubble' title='View Math'>?</a>", unsafe_allow_html=True)
             fig_gap = go.Figure()
             fig_gap.add_trace(go.Bar(y=df_bar_sub["name"], x=df_bar_sub["voter_salience"], name="Voter Priority %", orientation="h", marker_color="#38bdf8"))
             fig_gap.add_trace(go.Bar(y=df_bar_sub["name"], x=df_bar_sub["tvk_messaging"], name="TVK Messaging %", orientation="h", marker_color=TVK_GOLD))
@@ -610,7 +620,7 @@ else:
         t_col1, t_col2 = st.columns([1.4, 1])
 
         with t_col1:
-            st.markdown(f"**Party Favorability Trajectory (% Share) — {t_row['name']}**")
+            st.markdown(f"**Party Favorability Trajectory (% Share) — {t_row['name']}** <a href='/?nav=Guide&section=math-trend-line' target='_self' class='help-bubble' title='View Math'>?</a>", unsafe_allow_html=True)
             fig_trend = go.Figure()
             fig_trend.add_trace(go.Scatter(x=months, y=tvk_series, mode="lines+markers", name="TVK Favorability", line=dict(color=TVK_GOLD, width=3)))
             fig_trend.add_trace(go.Scatter(x=months, y=dmk_series, mode="lines+markers", name="DMK Favorability", line=dict(color="#ef4444", width=2)))
