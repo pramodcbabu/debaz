@@ -510,9 +510,9 @@ else:
     active_unit_idx = unit_options.index(st.session_state["global_selected_unit"])
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown(f"### 🎯 Global Command Focus: Active {unit_label}")
+    st.markdown(f"### 🎯 Hyper-Local Strategy View")
     selected_global_unit = st.selectbox(
-        f"Select {unit_label} to inspect consistently across ALL tabs below:",
+        f"Select Target Area:",
         unit_options,
         index=active_unit_idx,
         key=f"global_unit_selector_{election_target.replace(' ', '_')}"
@@ -522,20 +522,19 @@ else:
     auth_row = active_row
 
     # ══════════════════════════════════════════════════════════════════════════════
-    # STANDARDIZED 4-TAB SUITE (EVERY ELECTION SCREEN HAS THESE EXACT 4 TABS)
+    # STANDARDIZED 3-TAB SUITE (EVERY ELECTION SCREEN HAS THESE EXACT 3 TABS)
     # ══════════════════════════════════════════════════════════════════════════════
-    tab1, tab2, tab3, tab4 = st.tabs([
-        "📊  1. Competitor & Differential Analysis",
-        "🔐  2. Authenticity (1st A - Sourced References)",
-        "📲  3. Accessibility (2nd A - Tamil Dispatches)",
-        "⚖️  4. Accountability (3rd A - Compliance Checklist)",
+    tab1, tab2, tab3 = st.tabs([
+        "📊  1. Messaging Gaps & Trends",
+        "🔐  2. Ground Truth & Sources",
+        "📲  3. AI Campaign Deployment",
     ])
 
     # ─────────────────────────────────────────────────────────────────────────────
-    # TAB 1: COMPETITOR & DIFFERENTIAL ANALYSIS
+    # TAB 1: MESSAGING GAPS & TRENDS
     # ─────────────────────────────────────────────────────────────────────────────
     with tab1:
-        st.markdown(f'<div class="section-header">📊 Differential Positioning & Messaging Gaps — {active_row["name"]}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="section-header">📊 Voter Demand vs. TVK Campaign Focus — {active_row["name"]}</div>', unsafe_allow_html=True)
         st.caption("Measures the gap between what voters are demanding on the ground vs TVK's current campaign messaging salience.")
 
         gap_col, table_col = st.columns([1, 1.2])
@@ -617,10 +616,10 @@ else:
             """, unsafe_allow_html=True)
 
     # ─────────────────────────────────────────────────────────────────────────────
-    # TAB 2: AUTHENTICITY (1st A)
+    # TAB 2: GROUND TRUTH & SOURCES
     # ─────────────────────────────────────────────────────────────────────────────
     with tab2:
-        st.markdown(f'<div class="section-header">🔐 Authenticity — Verified Data Sources & Geo-Fenced Audit ({active_row["name"]})</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="section-header">🔐 Verified Ground Truth Data ({active_row["name"]})</div>', unsafe_allow_html=True)
         st.caption("100% verified real data sourced as of August 2026. Inspect source credibility, confidence scores, and raw ground evidence.")
 
         # 📌 TOP ISSUE SUMMARY & POLICY CONTEXT CARD
@@ -707,13 +706,24 @@ else:
                 st.markdown(f"• **{r['name']}** ({r['region']}): {r['top_issue']} — [<span class='source-link'>{r['source_name']}</span>]({r['source_url']})", unsafe_allow_html=True)
 
     # ─────────────────────────────────────────────────────────────────────────────
-    # TAB 3: ACCESSIBILITY (2nd A - Campaign Dispatch Studio & Execution Blueprint)
+    # TAB 3: AI CAMPAIGN DEPLOYMENT
     # ─────────────────────────────────────────────────────────────────────────────
     with tab3:
-        st.markdown(f'<div class="section-header">📲 Accessibility — Campaign Dispatch Studio & Execution Blueprint ({active_row["name"]})</div>', unsafe_allow_html=True)
-        st.caption("AI-generated social dispatches across 4 channels (Instagram, WhatsApp, X/Twitter, and YouTube Shorts) explicitly mapped to resolve key local issues.")
+        st.markdown(f'<div class="section-header">📲 AI Campaign Deployment & Execution Blueprint ({active_row["name"]})</div>', unsafe_allow_html=True)
+        st.caption("AI-generated social dispatches explicitly mapped to resolve key local issues.")
 
         unit_row = active_row
+        
+        # Determine dynamic TVK Policy Resolution based on the issue context
+        issue_lower = unit_row['top_issue'].lower()
+        if any(kw in issue_lower for kw in ["drain", "water", "lake", "canal", "desilt"]):
+            dynamic_policy = "Immediate PWD infrastructure audit, accelerated desilting, and strict anti-encroachment laws."
+        elif any(kw in issue_lower for kw in ["msme", "gst", "factory", "industrial", "business"]):
+            dynamic_policy = "Tax relief subsidies for small businesses, localized industrial stimulus, and state-backed loans."
+        elif any(kw in issue_lower for kw in ["farm", "crop", "paddy", "turmeric", "agriculture"]):
+            dynamic_policy = "Guaranteed MSP procurement, immediate crop insurance payouts, and rural irrigation reform."
+        else:
+            dynamic_policy = f"Immediate ground intervention, dedicated municipal budget allocation, and time-bound execution for {unit_row['top_issue']}."
 
         # 🎯 KEY ISSUE VS TVK POLICY RESOLUTION BANNER
         st.markdown(f"""
@@ -735,35 +745,11 @@ else:
             🚨 Key Local Issue Identified: <span style="color:#38bdf8">{unit_row['top_issue']}</span>
           </div>
           <div style="margin-top:6px;font-size:0.88rem;color:#cbd5e1;line-height:1.4">
-            <b>🛡️ TVK Strategic Policy Resolution:</b> TVK pledges immediate ground intervention, zero-tolerance enforcement, dedicated municipal budget allocation, and time-bound execution for <i>{unit_row['top_issue']}</i>.
+            <b>🛡️ TVK Strategic Policy Resolution:</b> TVK pledges: <i>{dynamic_policy}</i>
           </div>
         </div>
         """, unsafe_allow_html=True)
 
-        # 📸 FIELD WORKER GROUND PHOTO & METADATA
-        c_img, c_desc = st.columns([1, 1.2])
-        with c_img:
-            img_path, img_caption = get_field_image(unit_row["top_issue"], unit_row["name"])
-            if Path(img_path).exists():
-                st.image(img_path, caption=img_caption, use_column_width=True)
-            else:
-                st.info(f"📸 Ground Photo Proof: {unit_row['top_issue']}")
-
-        with c_desc:
-            st.markdown(f"""
-            <div style="background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:1rem;height:100%">
-              <div style="color:#f59e0b;font-weight:800;font-size:0.9rem;text-transform:uppercase">📸 Ground Visual Asset Specs</div>
-              <div style="font-size:0.82rem;color:#94a3b8;margin-top:8px;line-height:1.5">
-                • <b>Location Tag:</b> {unit_row['name']} ({unit_row['region']})<br>
-                • <b>Ground Issue Visualized:</b> {unit_row['top_issue']}<br>
-                • <b>Verification Source:</b> {unit_row['source_name']}<br>
-                • <b>Attachment Role:</b> Slide 1 in IG Carousel · WhatsApp Header Image · YouTube Short Thumbnail<br>
-                • <b>Audit Status:</b> Verified Field Ground Proof
-              </div>
-            </div>
-            """, unsafe_allow_html=True)
-
-        st.markdown("<br>", unsafe_allow_html=True)
         st.markdown("### 📣 Multi-Channel Campaign Dispatches & Issue-Addressing Logic")
 
         p1, p2, p3, p4 = st.columns(4)
@@ -840,7 +826,6 @@ else:
             f"--- WHATSAPP FORWARD ---\n{unit_row['whatsapp']}\n\n"
             f"--- TWITTER/X POST ---\n{unit_row['twitter']}\n\n"
             f"--- YOUTUBE SHORT SCRIPT ---\n{yt_script}\n\n"
-            f"Attached Photo: {img_caption}\n"
             f"Notice: AI-assisted draft. Reviewed and approved by TVK Campaign Office."
         )
         st.download_button(
@@ -849,25 +834,15 @@ else:
             file_name=f"tvk_dispatch_{unit_row['unit_id'].lower()}.txt",
             mime="text/plain"
         )
-
-    # ─────────────────────────────────────────────────────────────────────────────
-    # TAB 4: ACCOUNTABILITY (3rd A)
-    # ─────────────────────────────────────────────────────────────────────────────
-    with tab4:
-        st.markdown('<div class="section-header">⚖️ Accountability — Legal & Ethical Compliance Gate</div>', unsafe_allow_html=True)
-        st.caption("Ensures all campaign activities comply with Indian election law, IT regulations, and ECI Model Code of Conduct.")
-
+        
+        st.divider()
+        st.markdown("### ⚖️ ECI Legal Compliance & Execution Gate")
+        
         st.markdown("""
-        <div style="background:#166534;border-radius:8px;padding:0.6rem 1rem;margin-bottom:0.4rem;color:white;font-weight:600">
-          ✅ Representation of the People Act, 1951 (Sec 123/126) — Verified compliant
+        <div style="background:#166534;border-radius:8px;padding:0.6rem 1rem;margin-bottom:0.4rem;color:white;font-weight:600;font-size:0.85rem">
+          ✅ ECI Model Code of Conduct & DPDP Act 2023 — Verified compliant
         </div>
-        <div style="background:#166534;border-radius:8px;padding:0.6rem 1rem;margin-bottom:0.4rem;color:white;font-weight:600">
-          ✅ ECI Model Code of Conduct & Paid Ad Guidelines — Verified compliant
-        </div>
-        <div style="background:#166534;border-radius:8px;padding:0.6rem 1rem;margin-bottom:0.4rem;color:white;font-weight:600">
-          ✅ Digital Personal Data Protection (DPDP) Act, 2023 — Zero PII profiling (aggregate level only)
-        </div>
-        <div style="background:#92400e;border-radius:8px;padding:0.6rem 1rem;margin-bottom:0.4rem;color:white;font-weight:600">
+        <div style="background:#92400e;border-radius:8px;padding:0.6rem 1rem;margin-bottom:0.8rem;color:white;font-weight:600;font-size:0.85rem">
           ⚠️ Mandatory AI Labeling — Display 'AI-assisted, human reviewed' on all published content
         </div>
         """, unsafe_allow_html=True)
