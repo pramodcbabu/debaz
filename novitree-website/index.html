@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Novitree — Nethra TVK Political AI Executive Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #09090b;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1e293b;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #fff;
+    }
+    .brand-logo {
+      background: linear-gradient(135deg, #facc15, #eab308);
+      color: #450a0a;
+      font-weight: 900;
+      font-size: 1.2rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .brand-title {
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+    }
+    .brand-sub {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      display: block;
+    }
+    .badge-tvk {
+      background: #7f1d1d;
+      color: #facc15;
+      border: 1px solid #facc15;
+      font-weight: 800;
+      font-size: 0.75rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+    .portal-card {
+      background: linear-gradient(145deg, #18181b 0%, #09090b 100%);
+      border: 1px solid #27272a;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 460px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+    .portal-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #dc2626, #facc15, #dc2626);
+    }
+    .portal-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .portal-header h1 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #facc15;
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.02em;
+    }
+    .portal-header p {
+      color: #e2e8f0;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .portal-header small {
+      color: #94a3b8;
+      font-size: 0.8rem;
+      display: block;
+      margin-top: 0.2rem;
+    }
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: #18181b;
+      border: 1px solid #3f3f46;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus {
+      border-color: #facc15;
+    }
+    .error-box {
+      display: none;
+      background: rgba(220, 38, 38, 0.15);
+      border: 1px solid #ef4444;
+      color: #fca5a5;
+      padding: 0.75rem;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      margin-bottom: 1.25rem;
+      text-align: center;
+      font-weight: 600;
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, #facc15 0%, #eab308 100%);
+      border: none;
+      border-radius: 12px;
+      color: #450a0a;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 14px rgba(250, 204, 21, 0.25);
+    }
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(250, 204, 21, 0.35);
+    }
+    .features-list {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #27272a;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .feature-item {
+      font-size: 0.78rem;
+      color: #a1a1aa;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .feature-item span {
+      color: #facc15;
+    }
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.8rem;
+      color: #71717a;
+      border-top: 1px solid #18181b;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="brand" href="#">
+      <div class="brand-logo">N</div>
+      <div>
+        <span class="brand-title">NOVITREE</span>
+        <span class="brand-sub">Political AI Suite</span>
+      </div>
+    </a>
+    <span class="badge-tvk">TVK Executive Portal</span>
+  </header>
+
+  <main>
+    <div class="portal-card">
+      <div class="portal-header">
+        <h1>🛡️ NETHRA AI</h1>
+        <p>Tamilaga Vettri Kazhagam (TVK)</p>
+        <small>Executive Campaign Intelligence Gateway</small>
+      </div>
+
+      <div id="errorBox" class="error-box">
+        ❌ Invalid Credentials. Please use tvk_admin / tvk2026.
+      </div>
+
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="e.g. tvk_admin" required autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-submit">🔓 Sign In to Nethra Engine</button>
+      </form>
+
+      <div class="features-list">
+        <div class="feature-item"><span>⚡</span> 234 TN Assembly Seats</div>
+        <div class="feature-item"><span>🏛️</span> 200 GCC Wards</div>
+        <div class="feature-item"><span>🌐</span> 39 Lok Sabha Seats</div>
+        <div class="feature-item"><span>🛡️</span> Spam Filter Logs</div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Novitree Solutions &amp; Nethra Intelligence Suite &middot; Confidential TVK Demo Gateway
+  </footer>
+
+  <script>
+    function handleLogin(e) {
+      e.preventDefault();
+      const u = document.getElementById('username').value.trim();
+      const p = document.getElementById('password').value.trim();
+      if ((u === 'tvk_admin' || u === 'tvk_leadership' || u === 'debaz') && (p === 'tvk2026' || p === 'debaz2026')) {
+        document.getElementById('errorBox').style.display = 'none';
+        alert('✅ Authentication Successful! Redirecting to TVK Nethra Suite on Novitree...');
+        const targetUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+          ? 'http://localhost:8501'
+          : 'https://novitree-nethra.streamlit.app';
+        window.location.href = targetUrl;
+      } else {
+        document.getElementById('errorBox').style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
