@@ -253,11 +253,21 @@
       const p = document.getElementById('password').value.trim();
       if ((u === 'tvk_admin' || u === 'tvk_leadership' || u === 'debaz') && (p === 'tvk2026' || p === 'debaz2026')) {
         document.getElementById('errorBox').style.display = 'none';
-        alert('✅ Authentication Successful! Redirecting to TVK Nethra Suite on Novitree...');
         const targetUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
           ? 'http://localhost:8501'
-          : 'https://debaz-nethra.streamlit.app';
-        window.location.href = targetUrl;
+          : 'https://copied-thumb-drill-exclusive.trycloudflare.com';
+        
+        const mainElem = document.querySelector('main');
+        mainElem.style.padding = '0';
+        mainElem.innerHTML = `
+          <div style="width:100%; height:calc(100vh - 70px); display:flex; flex-direction:column; background:#09090b;">
+            <div style="background:#18181b; padding:8px 16px; border-bottom:1px solid #27272a; display:flex; justify-content:space-between; align-items:center;">
+              <span style="color:#facc15; font-weight:700; font-size:0.85rem;">🛡️ NETHRA AI EXECUTIVE SUITE ACTIVE</span>
+              <button onclick="location.reload()" style="background:#7f1d1d; color:#facc15; border:1px solid #facc15; border-radius:6px; padding:4px 12px; font-weight:700; font-size:0.8rem; cursor:pointer;">🔒 Sign Out</button>
+            </div>
+            <iframe src="${targetUrl}" style="width:100%; flex:1; border:none;" allow="geolocation; microphone; camera"></iframe>
+          </div>
+        `;
       } else {
         document.getElementById('errorBox').style.display = 'block';
       }
