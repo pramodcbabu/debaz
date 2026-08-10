@@ -253,9 +253,10 @@
       const p = document.getElementById('password').value.trim();
       if ((u === 'tvk_admin' || u === 'tvk_leadership' || u === 'debaz') && (p === 'tvk2026' || p === 'debaz2026')) {
         document.getElementById('errorBox').style.display = 'none';
-        const targetUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+        const baseUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
           ? 'http://localhost:8501'
           : 'https://copied-thumb-drill-exclusive.trycloudflare.com';
+        const targetUrl = baseUrl + '?auth=true&user=' + encodeURIComponent(u);
         
         const mainElem = document.querySelector('main');
         mainElem.style.padding = '0';
