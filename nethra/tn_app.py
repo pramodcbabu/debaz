@@ -833,7 +833,7 @@ else:
         with c_img:
             img_p, img_c = get_field_image(auth_row["top_issue"], auth_row["name"])
             if Path(img_p).exists():
-                st.image(img_p, caption=img_c, use_column_width=True)
+                st.image(img_p, caption=img_c, use_container_width=True)
 
         # 🔗 DETAILED REGISTRY OF ALL VERIFIED LINKS FOR SELECTED AREA
         st.markdown("<br>", unsafe_allow_html=True)
