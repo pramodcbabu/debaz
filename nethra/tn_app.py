@@ -80,11 +80,7 @@ VALID_USERS = {
 }
 
 if "authenticated" not in st.session_state:
-    if st.query_params.get("auth") == "true" or st.query_params.get("user"):
-        st.session_state["authenticated"] = True
-        st.session_state["username"] = st.query_params.get("user", "tvk_admin")
-    else:
-        st.session_state["authenticated"] = False
+    st.session_state["authenticated"] = False
 
 if not st.session_state["authenticated"]:
     col_a, col_b, col_c = st.columns([1, 2, 1])
