@@ -254,7 +254,9 @@
 
     function getActiveBackendUrl() {
       const stored = localStorage.getItem('nethra_custom_tunnel');
-      if (stored && stored.trim().length > 0) {
+      if (stored && stored.includes('trycloudflare.com')) {
+        localStorage.removeItem('nethra_custom_tunnel');
+      } else if (stored && stored.trim().length > 0) {
         return stored.trim().replace(/\/$/, '');
       }
       return (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
