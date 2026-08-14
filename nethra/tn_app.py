@@ -87,6 +87,16 @@ VALID_USERS = {
     "debaz": "debaz2026"
 }
 
+# Check URL parameter auth from novitree gateway
+try:
+    auth_param = st.query_params.get("auth")
+    user_param = st.query_params.get("user", "tvk_admin")
+    if auth_param == "true" or auth_param == ["true"]:
+        st.session_state["authenticated"] = True
+        st.session_state["username"] = user_param
+except Exception:
+    pass
+
 if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
 
