@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Novitree — Nethra TVK Political AI Executive Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -247,15 +250,34 @@
   </footer>
 
   <script>
+    const DEFAULT_TUNNEL = 'https://taken-jesse-privilege-authors.trycloudflare.com';
+
+    function getActiveBackendUrl() {
+      const stored = localStorage.getItem('nethra_custom_tunnel');
+      if (stored && stored.trim().length > 0) {
+        return stored.trim().replace(/\/$/, '');
+      }
+      return (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+        ? 'http://localhost:8501'
+        : DEFAULT_TUNNEL;
+    }
+
+    function promptNewTunnel() {
+      const current = getActiveBackendUrl();
+      const input = prompt("Enter active Cloudflare Tunnel URL (e.g., https://...trycloudflare.com):", current);
+      if (input !== null && input.trim().length > 0) {
+        localStorage.setItem('nethra_custom_tunnel', input.trim().replace(/\/$/, ''));
+        location.reload();
+      }
+    }
+
     function handleLogin(e) {
       e.preventDefault();
       const u = document.getElementById('username').value.trim();
       const p = document.getElementById('password').value.trim();
       if ((u === 'tvk_admin' || u === 'tvk_leadership' || u === 'debaz') && (p === 'tvk2026' || p === 'debaz2026')) {
         document.getElementById('errorBox').style.display = 'none';
-        const baseUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-          ? 'http://localhost:8501'
-          : 'https://taken-jesse-privilege-authors.trycloudflare.com';
+        const baseUrl = getActiveBackendUrl();
         const targetUrl = baseUrl + '?auth=true&user=' + encodeURIComponent(u);
         
         const mainElem = document.querySelector('main');
@@ -264,7 +286,10 @@
           <div style="width:100%; height:calc(100vh - 70px); display:flex; flex-direction:column; background:#09090b;">
             <div style="background:#18181b; padding:8px 16px; border-bottom:1px solid #27272a; display:flex; justify-content:space-between; align-items:center;">
               <span style="color:#facc15; font-weight:700; font-size:0.85rem;">🛡️ NETHRA AI EXECUTIVE SUITE ACTIVE</span>
-              <button onclick="location.reload()" style="background:#7f1d1d; color:#facc15; border:1px solid #facc15; border-radius:6px; padding:4px 12px; font-weight:700; font-size:0.8rem; cursor:pointer;">🔒 Sign Out</button>
+              <div style="display:flex; gap:8px;">
+                <button onclick="promptNewTunnel()" style="background:#27272a; color:#e2e8f0; border:1px solid #3f3f46; border-radius:6px; padding:4px 10px; font-weight:600; font-size:0.75rem; cursor:pointer;">⚙️ Update Tunnel</button>
+                <button onclick="location.reload()" style="background:#7f1d1d; color:#facc15; border:1px solid #facc15; border-radius:6px; padding:4px 12px; font-weight:700; font-size:0.8rem; cursor:pointer;">🔒 Sign Out</button>
+              </div>
             </div>
             <iframe src="${targetUrl}" style="width:100%; flex:1; border:none;" allow="geolocation; microphone; camera"></iframe>
           </div>
