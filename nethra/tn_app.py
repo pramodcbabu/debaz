@@ -176,7 +176,7 @@ try:
 except:
     df_verified = pd.DataFrame(columns=["unit_name", "article_url", "publisher", "article_title", "geo_relevance_score", "authenticity_score", "is_verified", "platform"])
 
-HIST_DB_PATH = "data/former_election_results.db"
+HIST_DB_PATH = resolve_path("data/former_election_results.db")
 if os.path.exists(HIST_DB_PATH):
     conn_hist = sqlite3.connect(HIST_DB_PATH)
     df_historical = pd.read_sql_query("SELECT * FROM historical_results", conn_hist)
@@ -602,12 +602,18 @@ else:
         fig_bar.add_trace(go.Bar(x=df_bar_sub["name"], y=df_bar_sub[col_admk], name="AIADMK", marker_color=AIADMK_BLUE))
         fig_bar.update_layout(
             barmode="group",
-            yaxis=dict(title="Favorability %", range=[0, 75]),
-            xaxis=dict(tickangle=-25, tickfont=dict(size=9)),
+            yaxis=dict(title="Favorability %", range=[0, 75], gridcolor="#334155", title_font=dict(color="#ffffff")),
+            xaxis=dict(tickangle=-25, tickfont=dict(size=10, color="#ffffff")),
             plot_bgcolor="#0f172a", paper_bgcolor="#0f172a",
-            font=dict(color="#e2e8f0"),
-            legend=dict(bgcolor="rgba(0,0,0,0)"),
-            height=420, margin=dict(t=10, b=10)
+            font=dict(color="#ffffff", family="Inter, sans-serif"),
+            legend=dict(
+                bgcolor="#1e293b",
+                bordercolor="#475569",
+                borderwidth=1,
+                font=dict(color="#ffffff", size=11, family="Inter, sans-serif"),
+                x=0.99, y=0.99, xanchor="right", yanchor="top"
+            ),
+            height=420, margin=dict(t=20, b=20, l=10, r=10)
         )
         st.plotly_chart(fig_bar, use_container_width=True)
 
@@ -689,10 +695,18 @@ else:
             fig_gap.add_trace(go.Bar(y=df_bar_sub["name"], x=df_bar_sub["voter_salience"], name="Voter Priority %", orientation="h", marker_color="#38bdf8"))
             fig_gap.add_trace(go.Bar(y=df_bar_sub["name"], x=df_bar_sub["tvk_messaging"], name="TVK Messaging %", orientation="h", marker_color=TVK_GOLD))
             fig_gap.update_layout(
-                barmode="group", xaxis=dict(title="% Volume"),
+                barmode="group", xaxis=dict(title="% Volume", gridcolor="#334155", title_font=dict(color="#ffffff")),
+                yaxis=dict(tickfont=dict(size=10, color="#ffffff")),
                 plot_bgcolor="#0f172a", paper_bgcolor="#0f172a",
-                font=dict(color="#e2e8f0"), legend=dict(bgcolor="rgba(0,0,0,0)"),
-                height=360, margin=dict(t=10, b=10)
+                font=dict(color="#ffffff", family="Inter, sans-serif"),
+                legend=dict(
+                    bgcolor="#1e293b",
+                    bordercolor="#475569",
+                    borderwidth=1,
+                    font=dict(color="#ffffff", size=11, family="Inter, sans-serif"),
+                    x=0.99, y=0.99, xanchor="right", yanchor="top"
+                ),
+                height=360, margin=dict(t=20, b=20, l=10, r=10)
             )
             st.plotly_chart(fig_gap, use_container_width=True)
 
@@ -727,7 +741,7 @@ else:
             if unit_label == "Lok Sabha Parliament" or unit_label == "Lok Sabha Seat":
                 hist_query_name = f"{t_row['name']} Lok Sabha"
                 
-            with sqlite3.connect("data/former_election_results.db") as fresh_conn:
+            with sqlite3.connect(HIST_DB_PATH) as fresh_conn:
                 hist_df = pd.read_sql_query(f"SELECT * FROM historical_results WHERE unit_name='{hist_query_name}'", fresh_conn)
             
             if not hist_df.empty:
@@ -770,7 +784,6 @@ else:
             return s
 
         tvk_series = calc_ema_series(base_tvk, cur_tvk)
-        print(f"DEBUG: {t_row['name']} -> base_tvk={base_tvk}, cur_tvk={cur_tvk}, tvk_series={tvk_series}")
         dmk_series = calc_ema_series(base_dmk, cur_dmk)
         aiadmk_series = calc_ema_series(base_aiadmk, cur_aiadmk)
         bjp_series = calc_ema_series(base_bjp, cur_bjp)
@@ -780,7 +793,6 @@ else:
 
         with t_col1:
             st.markdown(f"**Party Favorability Trajectory (% Share) — {t_row['name']}** <a href='/?nav=Guide&section=math-trend-line' target='_self' class='help-bubble' title='View Math'>?</a>", unsafe_allow_html=True)
-            st.write(f"TVK SERIES: {tvk_series}")
             fig_trend = go.Figure()
             fig_trend.add_trace(go.Scatter(x=months, y=tvk_series, mode="lines+markers", name="TVK Favorability", line=dict(color=TVK_GOLD, width=3)))
             fig_trend.add_trace(go.Scatter(x=months, y=dmk_series, mode="lines+markers", name="DMK Favorability", line=dict(color="#ef4444", width=2)))
@@ -789,10 +801,18 @@ else:
             fig_trend.add_trace(go.Scatter(x=months, y=issue_salience, mode="lines+markers", name="Voter Issue Salience", line=dict(color="#06b6d4", width=2, dash="dash")))
 
             fig_trend.update_layout(
-                yaxis=dict(title="% Score / Salience", range=[0, 100]),
+                yaxis=dict(title="% Score / Salience", range=[0, 100], gridcolor="#334155", title_font=dict(color="#ffffff")),
+                xaxis=dict(tickfont=dict(size=10, color="#ffffff")),
                 plot_bgcolor="#0f172a", paper_bgcolor="#0f172a",
-                font=dict(color="#e2e8f0"), legend=dict(bgcolor="rgba(0,0,0,0)"),
-                height=340, margin=dict(t=10, b=10)
+                font=dict(color="#ffffff", family="Inter, sans-serif"),
+                legend=dict(
+                    bgcolor="#1e293b",
+                    bordercolor="#475569",
+                    borderwidth=1,
+                    font=dict(color="#ffffff", size=11, family="Inter, sans-serif"),
+                    x=0.99, y=0.99, xanchor="right", yanchor="top"
+                ),
+                height=340, margin=dict(t=20, b=20, l=10, r=10)
             )
             st.plotly_chart(fig_trend, use_container_width=True)
             
