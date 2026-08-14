@@ -324,8 +324,11 @@ st.markdown("<br>", unsafe_allow_html=True)
 # SCREEN 5: HELP & DOCUMENTATION
 # ══════════════════════════════════════════════════════════════════════════════
 if "System Guide" in election_target:
-    st.markdown('<div class="section-header">📖 TVK System Architecture & Math Whitepaper</div>', unsafe_allow_html=True)
-    help_md = Path("docs/dashboard_help.md").read_text()
+    help_path = resolve_path("docs/dashboard_help.md")
+    if os.path.exists(help_path):
+        help_md = Path(help_path).read_text(encoding="utf-8")
+    else:
+        help_md = "## 📖 System Guide\nDocumentation file is being updated."
     
     def render_mermaid(match):
         graph = match.group(1).strip()
