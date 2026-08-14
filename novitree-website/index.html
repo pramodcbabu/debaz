@@ -251,12 +251,16 @@
 
   <script>
     const DEFAULT_TUNNEL = 'https://debaz.onrender.com';
+    try {
+      const existing = localStorage.getItem('nethra_custom_tunnel');
+      if (!existing || existing.includes('trycloudflare')) {
+        localStorage.setItem('nethra_custom_tunnel', DEFAULT_TUNNEL);
+      }
+    } catch(e) {}
 
     function getActiveBackendUrl() {
       const stored = localStorage.getItem('nethra_custom_tunnel');
-      if (stored && stored.includes('trycloudflare.com')) {
-        localStorage.removeItem('nethra_custom_tunnel');
-      } else if (stored && stored.trim().length > 0) {
+      if (stored && stored.trim().length > 0 && !stored.includes('trycloudflare')) {
         return stored.trim().replace(/\/$/, '');
       }
       return (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
