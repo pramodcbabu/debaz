@@ -155,6 +155,7 @@ TVK_RED     = "#7f1d1d"
 DMK_RED     = "#ef4444"
 AIADMK_BLUE = "#38bdf8"
 BJP_SAFFRON = "#fb923c"
+INC_SKYBLUE = "#60a5fa"
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SQL DATABASE QUERYING & STREAMLIT CACHING
@@ -597,9 +598,13 @@ else:
         col_tvk = "tvk_fav" if "tvk_fav" in df_bar_sub.columns else "tvk_proj"
         col_dmk = "dmk_fav" if "dmk_fav" in df_bar_sub.columns else "dmk_proj"
         col_admk = "aiadmk_fav" if "aiadmk_fav" in df_bar_sub.columns else "aiadmk_proj"
+        col_inc = "inc_fav" if "inc_fav" in df_bar_sub.columns else "inc_proj"
+        if col_inc not in df_bar_sub.columns:
+            df_bar_sub[col_inc] = 8.5
         fig_bar.add_trace(go.Bar(x=df_bar_sub["name"], y=df_bar_sub[col_tvk], name="TVK", marker_color=TVK_GOLD))
         fig_bar.add_trace(go.Bar(x=df_bar_sub["name"], y=df_bar_sub[col_dmk], name="DMK", marker_color=DMK_RED))
         fig_bar.add_trace(go.Bar(x=df_bar_sub["name"], y=df_bar_sub[col_admk], name="AIADMK", marker_color=AIADMK_BLUE))
+        fig_bar.add_trace(go.Bar(x=df_bar_sub["name"], y=df_bar_sub[col_inc], name="INC", marker_color=INC_SKYBLUE))
         fig_bar.update_layout(
             barmode="group",
             yaxis=dict(title="Favorability %", range=[0, 75], gridcolor="#334155", title_font=dict(color="#ffffff")),
@@ -731,10 +736,11 @@ else:
         cur_dmk = t_row["dmk_fav"] if "dmk_fav" in t_row else t_row.get("dmk_proj", 35.0)
         cur_aiadmk = t_row["aiadmk_fav"] if "aiadmk_fav" in t_row else t_row.get("aiadmk_proj", 20.0)
         cur_bjp = t_row["bjp_fav"] if "bjp_fav" in t_row else t_row.get("bjp_proj", 10.0)
+        cur_inc = t_row["inc_fav"] if "inc_fav" in t_row else t_row.get("inc_proj", 8.5)
 
         # Query Historical Offline Anchor (from former_election_results.db)
         default_tvk = None if unit_label != "Assembly Constituency" else 15.0
-        base_tvk, base_dmk, base_aiadmk, base_bjp = default_tvk, 30.0, 25.0, 5.0
+        base_tvk, base_dmk, base_aiadmk, base_bjp, base_inc = default_tvk, 30.0, 25.0, 5.0, 8.0
         try:
             # Match the exact string formatting used in former_election_results.db
             hist_query_name = t_row['name']
@@ -759,6 +765,10 @@ else:
                     if 'aiadmk_pct' in hist_df.columns and pd.notna(h_row['aiadmk_pct']): base_aiadmk = h_row['aiadmk_pct']
                     elif h_row['winner_party'] == 'AIADMK': base_aiadmk = h_row['winner_pct']
                     elif h_row['runner_party'] == 'AIADMK': base_aiadmk = h_row['runner_pct']
+
+                    if 'inc_pct' in hist_df.columns and pd.notna(h_row['inc_pct']): base_inc = h_row['inc_pct']
+                    elif h_row['winner_party'] == 'INC': base_inc = h_row['winner_pct']
+                    elif h_row['runner_party'] == 'INC': base_inc = h_row['runner_pct']
         except Exception as e:
             st.error(f"Error in base_tvk extraction: {e}")
 
@@ -787,6 +797,7 @@ else:
         dmk_series = calc_ema_series(base_dmk, cur_dmk)
         aiadmk_series = calc_ema_series(base_aiadmk, cur_aiadmk)
         bjp_series = calc_ema_series(base_bjp, cur_bjp)
+        inc_series = calc_ema_series(base_inc, cur_inc)
         issue_salience = calc_ema_series(t_row.get("voter_salience", 50) - 20, t_row.get("voter_salience", 75))
 
         t_col1, t_col2 = st.columns([1.4, 1])
@@ -798,6 +809,7 @@ else:
             fig_trend.add_trace(go.Scatter(x=months, y=dmk_series, mode="lines+markers", name="DMK Favorability", line=dict(color="#ef4444", width=2)))
             fig_trend.add_trace(go.Scatter(x=months, y=aiadmk_series, mode="lines+markers", name="AIADMK Favorability", line=dict(color="#10b981", width=2)))
             fig_trend.add_trace(go.Scatter(x=months, y=bjp_series, mode="lines+markers", name="BJP Favorability", line=dict(color="#f97316", width=2)))
+            fig_trend.add_trace(go.Scatter(x=months, y=inc_series, mode="lines+markers", name="INC Favorability", line=dict(color=INC_SKYBLUE, width=2)))
             fig_trend.add_trace(go.Scatter(x=months, y=issue_salience, mode="lines+markers", name="Voter Issue Salience", line=dict(color="#06b6d4", width=2, dash="dash")))
 
             fig_trend.update_layout(
