@@ -1,256 +1,316 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Debaz Solutions Private Limited delivers industrial automation and intelligent home automation solutions for efficient, secure, and connected spaces.">
-    <title>Debaz Solutions Private Limited</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <header class="site-header">
-      <a class="brand" href="#top" aria-label="Debaz Solutions home">
-        <img src="assets/debaz-logo.png" alt="Debaz Solutions Private Limited logo">
-        <span>
-          <strong>Debaz Solutions</strong>
-          <small>Private Limited</small>
-        </span>
-      </a>
-      <button class="menu-button" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-nav">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
-        <a href="#industrial">Industrial Automation</a>
-        <a href="#home">Home Automation</a>
-        <a href="#process">Process</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Novitree — Nethra TVK Political AI Executive Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #09090b;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1e293b;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #fff;
+    }
+    .brand-logo {
+      background: linear-gradient(135deg, #facc15, #eab308);
+      color: #450a0a;
+      font-weight: 900;
+      font-size: 1.2rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .brand-title {
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+    }
+    .brand-sub {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      display: block;
+    }
+    .badge-tvk {
+      background: #7f1d1d;
+      color: #facc15;
+      border: 1px solid #facc15;
+      font-weight: 800;
+      font-size: 0.75rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+    .portal-card {
+      background: linear-gradient(145deg, #18181b 0%, #09090b 100%);
+      border: 1px solid #27272a;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 460px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+    .portal-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #dc2626, #facc15, #dc2626);
+    }
+    .portal-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .portal-header h1 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #facc15;
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.02em;
+    }
+    .portal-header p {
+      color: #e2e8f0;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .portal-header small {
+      color: #94a3b8;
+      font-size: 0.8rem;
+      display: block;
+      margin-top: 0.2rem;
+    }
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: #18181b;
+      border: 1px solid #3f3f46;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus {
+      border-color: #facc15;
+    }
+    .error-box {
+      display: none;
+      background: rgba(220, 38, 38, 0.15);
+      border: 1px solid #ef4444;
+      color: #fca5a5;
+      padding: 0.75rem;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      margin-bottom: 1.25rem;
+      text-align: center;
+      font-weight: 600;
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, #facc15 0%, #eab308 100%);
+      border: none;
+      border-radius: 12px;
+      color: #450a0a;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 14px rgba(250, 204, 21, 0.25);
+    }
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(250, 204, 21, 0.35);
+    }
+    .features-list {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #27272a;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .feature-item {
+      font-size: 0.78rem;
+      color: #a1a1aa;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .feature-item span {
+      color: #facc15;
+    }
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.8rem;
+      color: #71717a;
+      border-top: 1px solid #18181b;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="brand" href="#">
+      <div class="brand-logo">N</div>
+      <div>
+        <span class="brand-title">NOVITREE</span>
+        <span class="brand-sub">Political AI Suite</span>
+      </div>
+    </a>
+    <span class="badge-tvk">TVK Executive Portal</span>
+  </header>
 
-    <main id="top">
-      <section class="hero">
-        <div class="hero-media" aria-hidden="true">
-          <img src="assets/debaz-logo.png" alt="">
+  <main>
+    <div class="portal-card">
+      <div class="portal-header">
+        <h1>🛡️ NETHRA AI</h1>
+        <p>Tamilaga Vettri Kazhagam (TVK)</p>
+        <small>Executive Campaign Intelligence Gateway</small>
+      </div>
+
+      <div id="errorBox" class="error-box">
+        ❌ Invalid Username or Password. Please try again or contact your administrator.
+      </div>
+
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="e.g. tvk_admin" required autocomplete="off">
         </div>
-        <div class="hero-content">
-          <p class="eyebrow">Industrial Automation + Home Automation</p>
-          <h1>Debaz Solutions Private Limited</h1>
-          <p class="hero-copy">We design, integrate, and maintain intelligent automation systems for factories, buildings, homes, hospitality spaces, healthcare facilities, and commercial environments.</p>
-          <div class="hero-actions">
-            <a class="button primary" href="#branches">Explore Solutions</a>
-            <a class="button ghost" href="https://www.debaz.in">www.debaz.in</a>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-submit">🔓 Sign In to Nethra Engine</button>
+      </form>
+
+      <div style="margin-top: 15px; padding: 10px; background: rgba(250, 204, 21, 0.1); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 8px; font-size: 0.8rem; color: #facc15; text-align: center;">
+        🔑 <b>Demo Access Credentials:</b><br>
+        Username: <code style="background:#27272a; padding:2px 6px; border-radius:4px; color:#fff;">tvk_admin</code> &nbsp;|&nbsp; 
+        Password: <code style="background:#27272a; padding:2px 6px; border-radius:4px; color:#fff;">tvk2026</code><br>
+        <span style="color:#a1a1aa; font-size:0.75rem;">Contact Admin (Debaz Solutions) for custom access role.</span>
+      </div>
+
+      <div class="features-list">
+        <div class="feature-item"><span>⚡</span> 234 TN Assembly Seats</div>
+        <div class="feature-item"><span>🏛️</span> 200 GCC Wards</div>
+        <div class="feature-item"><span>🌐</span> 39 Lok Sabha Seats</div>
+        <div class="feature-item"><span>🛡️</span> Spam Filter Logs</div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Novitree Solutions &amp; Nethra Intelligence Suite &middot; Confidential TVK Demo Gateway
+  </footer>
+
+  <script>
+    const DEFAULT_TUNNEL = 'https://debaz.onrender.com';
+    try {
+      const existing = localStorage.getItem('nethra_custom_tunnel');
+      if (!existing || existing.includes('trycloudflare')) {
+        localStorage.setItem('nethra_custom_tunnel', DEFAULT_TUNNEL);
+      }
+    } catch(e) {}
+
+    function getActiveBackendUrl() {
+      const stored = localStorage.getItem('nethra_custom_tunnel');
+      if (stored && stored.trim().length > 0 && !stored.includes('trycloudflare')) {
+        return stored.trim().replace(/\/$/, '');
+      }
+      return (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+        ? 'http://localhost:8501'
+        : DEFAULT_TUNNEL;
+    }
+
+    function promptNewTunnel() {
+      const current = getActiveBackendUrl();
+      const input = prompt("Enter active Cloudflare Tunnel URL (e.g., https://...trycloudflare.com):", current);
+      if (input !== null && input.trim().length > 0) {
+        localStorage.setItem('nethra_custom_tunnel', input.trim().replace(/\/$/, ''));
+        location.reload();
+      }
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const u = document.getElementById('username').value.trim();
+      const p = document.getElementById('password').value.trim();
+      if ((u === 'tvk_admin' || u === 'tvk_leadership' || u === 'debaz') && (p === 'tvk2026' || p === 'debaz2026')) {
+        document.getElementById('errorBox').style.display = 'none';
+        const baseUrl = getActiveBackendUrl();
+        const targetUrl = baseUrl + '?auth=true&user=' + encodeURIComponent(u);
+        
+        const mainElem = document.querySelector('main');
+        mainElem.style.padding = '0';
+        mainElem.innerHTML = `
+          <div style="width:100%; height:calc(100vh - 70px); display:flex; flex-direction:column; background:#09090b;">
+            <div style="background:#18181b; padding:8px 16px; border-bottom:1px solid #27272a; display:flex; justify-content:space-between; align-items:center;">
+              <span style="color:#facc15; font-weight:700; font-size:0.85rem;">🛡️ NETHRA AI EXECUTIVE SUITE ACTIVE</span>
+              <div style="display:flex; gap:8px;">
+                <button onclick="promptNewTunnel()" style="background:#27272a; color:#e2e8f0; border:1px solid #3f3f46; border-radius:6px; padding:4px 10px; font-weight:600; font-size:0.75rem; cursor:pointer;">⚙️ Update Tunnel</button>
+                <button onclick="location.reload()" style="background:#7f1d1d; color:#facc15; border:1px solid #facc15; border-radius:6px; padding:4px 12px; font-weight:700; font-size:0.8rem; cursor:pointer;">🔒 Sign Out</button>
+              </div>
+            </div>
+            <iframe src="${targetUrl}" style="width:100%; flex:1; border:none;" allow="geolocation; microphone; camera"></iframe>
           </div>
-        </div>
-      </section>
-
-      <section id="branches" class="section intro-section">
-        <div class="section-heading">
-          <p class="eyebrow">Two connected branches</p>
-          <h2>Automation for industry, buildings, and everyday living.</h2>
-        </div>
-        <div class="branch-grid">
-          <article class="branch-card industrial-card">
-            <div class="card-icon">IA</div>
-            <h3>Industrial Automation</h3>
-            <p>Control systems, electrical engineering, project management, system integration, commissioning, and long-term support for process and industrial environments.</p>
-            <a href="#industrial">View industrial services</a>
-          </article>
-          <article class="branch-card home-card">
-            <div class="card-icon">HA</div>
-            <h3>Home Automation</h3>
-            <p>Smart homes, building management, lighting, security, AV, energy monitoring, and hospitality automation for efficient, secure, and connected spaces.</p>
-            <a href="#home">View home automation</a>
-          </article>
-        </div>
-      </section>
-
-      <section id="industrial" class="section split-section industrial-section">
-        <div class="section-heading">
-          <p class="eyebrow">Industrial Automation</p>
-          <h2>Reliable control systems and electrical engineering services.</h2>
-          <p>Debaz provides industrial automation services including design, development, customization, installation, commissioning, maintenance, troubleshooting, and support for DCS, PLC, SCADA, HMI, and third-party interfaces.</p>
-        </div>
-        <div class="service-columns">
-          <div>
-            <h3>Core Services</h3>
-            <ul class="check-list">
-              <li>Design and development</li>
-              <li>System integration</li>
-              <li>Consulting</li>
-              <li>Maintenance and support</li>
-              <li>Remote engineering</li>
-              <li>Project management</li>
-              <li>Basic and conceptual engineering</li>
-              <li>Engineering specifications and drawings</li>
-              <li>Installation and commissioning</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Control Systems</h3>
-            <ul class="check-list">
-              <li>DCS and PLC systems from leading automation platforms</li>
-              <li>HMI and SCADA application design, development, and integration</li>
-              <li>DCS configuration and IEC 1131 based PLC logic</li>
-              <li>FAT, SAT, AMC, operation, and maintenance procedures</li>
-              <li>INTools administration and field instrument selection</li>
-              <li>Industrial standards including IS, BS, ASTM, ANSI, IEC, ASME, ISA, IEEE, CENELEC, and EEMUA</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Electrical Engineering</h3>
-            <ul class="check-list">
-              <li>Electrical panel design, assembly, installation, and commissioning</li>
-              <li>System design, detailed engineering, and project management</li>
-              <li>AC and DC distribution solutions</li>
-              <li>LT control and relay panels</li>
-              <li>Custom-built panels</li>
-              <li>Baggage and cargo handling systems</li>
-              <li>Sub-station automation</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section id="home" class="section home-section">
-        <div class="section-heading">
-          <p class="eyebrow">Home and Building Automation</p>
-          <h2>Intelligent automation. Smarter living. Better buildings.</h2>
-          <p>We help transform residential, commercial, hospitality, healthcare, and industrial environments into intelligent, efficient, secure, and connected spaces.</p>
-        </div>
-        <div class="service-grid">
-          <article>
-            <h3>Smart Home Automation</h3>
-            <p>Control lighting, air conditioning, curtains, entertainment, security, and appliances through mobile devices, touch panels, voice assistants, or centralized control.</p>
-          </article>
-          <article>
-            <h3>Lighting Control</h3>
-            <p>Scene control, dimming, scheduling, occupancy sensing, and energy optimization for homes, offices, hotels, and commercial spaces.</p>
-          </article>
-          <article>
-            <h3>Building Management</h3>
-            <p>Centralized monitoring and control of HVAC, lighting, power, water systems, and critical building infrastructure.</p>
-          </article>
-          <article>
-            <h3>KNX and DALI</h3>
-            <p>International-standard automation systems for scalable, future-ready projects.</p>
-          </article>
-          <article>
-            <h3>Security and Surveillance</h3>
-            <p>Integrated CCTV, access control, video intercom, intrusion detection, and perimeter security solutions.</p>
-          </article>
-          <article>
-            <h3>Audio Visual Systems</h3>
-            <p>Multi-room audio, home theaters, conference room AV, and centralized media control.</p>
-          </article>
-          <article>
-            <h3>Energy Management</h3>
-            <p>Energy monitoring, electrical load optimization, operating cost reduction, and sustainability improvement.</p>
-          </article>
-          <article>
-            <h3>Hospitality Automation</h3>
-            <p>Guest room management, centralized control, energy-saving automation, and smart hospitality solutions.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section industries-section">
-        <div class="section-heading">
-          <p class="eyebrow">Industries served</p>
-          <h2>Built for demanding sites and refined spaces.</h2>
-        </div>
-        <div class="pill-grid">
-          <span>Residential villas and apartments</span>
-          <span>Premium residences</span>
-          <span>Commercial buildings</span>
-          <span>Corporate offices</span>
-          <span>Hotels and resorts</span>
-          <span>Hospitals and healthcare</span>
-          <span>Educational institutions</span>
-          <span>Retail and shopping spaces</span>
-          <span>Industrial facilities</span>
-          <span>Warehouses and factories</span>
-        </div>
-      </section>
-
-      <section id="process" class="section process-section">
-        <div class="section-heading">
-          <p class="eyebrow">Delivery process</p>
-          <h2>From consultation to long-term support.</h2>
-        </div>
-        <div class="timeline">
-          <article>
-            <span>01</span>
-            <h3>Consultation</h3>
-            <p>Understanding project requirements, automation objectives, site conditions, and performance targets.</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3>Design and Engineering</h3>
-            <p>Preparing system architecture, layouts, schematics, specifications, and project documentation.</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3>Supply and Integration</h3>
-            <p>Procurement, installation, programming, integration, and commissioning of automation systems.</p>
-          </article>
-          <article>
-            <span>04</span>
-            <h3>Testing and Handover</h3>
-            <p>Comprehensive testing, user training, documentation, and structured project handover.</p>
-          </article>
-          <article>
-            <span>05</span>
-            <h3>Support and Maintenance</h3>
-            <p>Ongoing technical support, preventive maintenance, upgrades, and onsite or offshore assistance.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section why-section">
-        <div>
-          <p class="eyebrow">Why Debaz</p>
-          <h2>Technology-driven solutions with practical execution discipline.</h2>
-          <p>Our mission is to provide comprehensive, state-of-the-art solutions and services customized to client needs and committed to quality results.</p>
-        </div>
-        <div class="why-list">
-          <span>Customized system design</span>
-          <span>International automation standards</span>
-          <span>End-to-end project execution</span>
-          <span>Reliable after-sales support</span>
-          <span>Scalable, future-proof systems</span>
-          <span>Energy-efficient solutions</span>
-        </div>
-      </section>
-
-      <section id="contact" class="contact-section">
-        <div>
-          <p class="eyebrow">Start a project</p>
-          <h2>Bring Debaz into your next automation requirement.</h2>
-          <p>Share your project goals, site type, and automation scope to begin a consultation.</p>
-          <address class="contact-details">
-            <a href="mailto:pramod@debaz.in">pramod@debaz.in</a>
-            <a href="tel:+919884090840">9884090840</a>
-            <a href="https://www.debaz.in">www.debaz.in</a>
-            <span>71A, Burkit Road, T Nagar, Chennai - 600017</span>
-          </address>
-        </div>
-        <div class="contact-actions">
-          <a class="button primary" href="https://www.debaz.in">Visit www.debaz.in</a>
-          <a class="button light" href="#top">Back to top</a>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <p>Debaz Solutions Private Limited</p>
-      <p>Empowering buildings and industries through intelligent automation.</p>
-    </footer>
-
-    <script src="script.js"></script>
-  </body>
+        `;
+      } else {
+        document.getElementById('errorBox').style.display = 'block';
+      }
+    }
+  </script>
+</body>
 </html>
