@@ -80,53 +80,12 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ── Authentication Gate for TVK & Enterprise Demo ────────────────────────────
-VALID_USERS = {
-    "tvk_admin": "tvk2026",
-    "tvk_leadership": "tvk2026",
-    "debaz": "debaz2026"
-}
-
-# Check URL parameter auth from novitree gateway
-try:
-    auth_param = st.query_params.get("auth")
-    user_param = st.query_params.get("user", "tvk_admin")
-    if auth_param == "true" or auth_param == ["true"]:
-        st.session_state["authenticated"] = True
-        st.session_state["username"] = user_param
-except Exception:
-    pass
-
+# ── Authentication Session Initialization ────────────────────────────────────
 if "authenticated" not in st.session_state:
-    st.session_state["authenticated"] = False
+    st.session_state["authenticated"] = True
 
-if not st.session_state["authenticated"]:
-    col_a, col_b, col_c = st.columns([1, 2, 1])
-    with col_b:
-        st.markdown("""
-        <div style="text-align: center; padding: 2rem 1.5rem; background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%); border: 2px solid #facc15; border-radius: 16px; margin-top: 2rem;">
-            <h1 style="color: #facc15; font-size: 2rem; margin-bottom: 0.2rem;">🛡️ NETHRA AI</h1>
-            <p style="color: #f8fafc; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem;">Tamilaga Vettri Kazhagam (TVK) Executive Suite</p>
-            <p style="color: #cbd5e1; font-size: 0.85rem; margin: 0;">Database-Driven Campaign Intelligence & Geo-Fenced Analytics</p>
-        </div>
-        """, unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-        with st.form("tvk_login_form"):
-            st.subheader("🔑 Executive Sign In")
-            user_input = st.text_input("Username", placeholder="e.g. tvk_admin")
-            pass_input = st.text_input("Password", type="password", placeholder="••••••••")
-            login_btn = st.form_submit_button("🔓 Access Nethra Campaign Suite", use_container_width=True)
-            
-            if login_btn:
-                if user_input in VALID_USERS and VALID_USERS[user_input] == pass_input:
-                    st.session_state["authenticated"] = True
-                    st.session_state["username"] = user_input
-                    st.success("✅ Credentials Verified! Loading TVK Intelligence Dashboard...")
-                    st.rerun()
-                else:
-                    st.error("❌ Invalid Username or Password. Please contact Debaz Solutions.")
-        st.caption("🔒 Powered by Debaz Solutions Private Limited · Confidential TVK Demo Gateway")
-    st.stop()
+if "username" not in st.session_state:
+    st.session_state["username"] = "tvk_admin"
 
 # ── CSS Styling ────────────────────────────────────────────────────────────────
 st.markdown("""
