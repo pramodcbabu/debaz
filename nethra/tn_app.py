@@ -27,41 +27,49 @@ import re
 import base64
 from pathlib import Path
 
-DB_PATH = "data/nethra_campaign.db"
+def resolve_path(rel_path):
+    if os.path.exists(rel_path):
+        return rel_path
+    if os.path.exists(os.path.join("nethra", rel_path)):
+        return os.path.join("nethra", rel_path)
+    return rel_path
+
+DB_PATH = resolve_path("data/nethra_campaign.db")
 
 def get_field_image(top_issue, unit_name):
     issue_lower = top_issue.lower()
     unit_lower = unit_name.lower()
     if "karur" in unit_lower or "bus body" in issue_lower or "coach" in issue_lower:
-        return "data/images/field_karur_busbody.png", f"📍 Field Verification: {unit_name} Coach Building & Bus Body MSME Workshop Inspection"
+        path, caption = "data/images/field_karur_busbody.png", f"📍 Field Verification: {unit_name} Coach Building & Bus Body MSME Workshop Inspection"
     elif "tiruch" in unit_lower or "trichy" in unit_lower or "bhel" in issue_lower or "gandhi market" in issue_lower:
-        return "data/images/field_bhel_factory.png", f"📍 Field Verification: {unit_name} BHEL Heavy Industrial Component Bay & Gandhi Market"
+        path, caption = "data/images/field_bhel_factory.png", f"📍 Field Verification: {unit_name} BHEL Heavy Industrial Component Bay & Gandhi Market"
     elif "perundurai" in unit_lower or "turmeric" in issue_lower or "sipcot" in issue_lower:
-        return "data/images/field_turmeric_mandi.png", f"📍 Field Verification: {unit_name} Erode Turmeric Commodity Mandi & SIPCOT Complex"
+        path, caption = "data/images/field_turmeric_mandi.png", f"📍 Field Verification: {unit_name} Erode Turmeric Commodity Mandi & SIPCOT Complex"
     elif "viralimalai" in unit_lower or "peacock" in issue_lower or "kanmoi" in issue_lower:
-        return "data/images/field_water_pipeline.png", f"📍 Field Verification: {unit_name} Shanmuganathar Hill Peacock Habitat & PWD Tank Water Pipeline"
-    elif "ambasamudram" in unit_lower or "thamirabarani" in issue_lower or "kalakkad" in issue_lower:
-        return "data/images/field_fisherman_boat.png", f"📍 Field Verification: {unit_name} Thamirabarani Riverfront Ecology & Kalakkad Forest Border"
+        path, caption = "data/images/field_water_pipeline.png", f"📍 Field Verification: {unit_name} Shanmuganathar Hill Peacock Habitat & PWD Tank Water Pipeline"
+    elif "ambasamudram" in unit_lower or "thamirabarani" in issue_lower or "kalakkad" in unit_lower:
+        path, caption = "data/images/field_fisherman_boat.png", f"📍 Field Verification: {unit_name} Thamirabarani Riverfront Ecology & Kalakkad Forest Border"
     elif any(k in issue_lower for k in ["paddy", "kuruvai", "procurement", "farmer"]):
-        return "data/images/field_paddy_procure.png", f"📍 Field Verification: {unit_name} Paddy Procurement DPC Ground Inspection"
+        path, caption = "data/images/field_paddy_procure.png", f"📍 Field Verification: {unit_name} Paddy Procurement DPC Ground Inspection"
     elif any(k in issue_lower for k in ["textile", "spinning", "garment", "hosiery"]):
-        return "data/images/field_textile_factory.png", f"📍 Field Verification: {unit_name} Textile MSME Factory Floor Inspection"
+        path, caption = "data/images/field_textile_factory.png", f"📍 Field Verification: {unit_name} Textile MSME Factory Floor Inspection"
     elif any(k in issue_lower for k in ["power", "tangedco", "electricity", "tariff"]):
-        return "data/images/field_power_repair.png", f"📍 Field Verification: {unit_name} TANGEDCO Power Grid Inspection"
+        path, caption = "data/images/field_power_repair.png", f"📍 Field Verification: {unit_name} TANGEDCO Power Grid Inspection"
     elif any(k in issue_lower for k in ["cashew", "nut"]):
-        return "data/images/field_cashew_factory.png", f"📍 Field Verification: {unit_name} Cashew Processing MSME Unit"
+        path, caption = "data/images/field_cashew_factory.png", f"📍 Field Verification: {unit_name} Cashew Processing MSME Unit"
     elif any(k in issue_lower for k in ["fish", "boat", "sea", "erosion", "harbor"]):
-        return "data/images/field_fisherman_boat.png", f"📍 Field Verification: {unit_name} Coastal Fishing Harbor & Net Inspection"
+        path, caption = "data/images/field_fisherman_boat.png", f"📍 Field Verification: {unit_name} Coastal Fishing Harbor & Net Inspection"
     elif any(k in issue_lower for k in ["metro", "elevated", "transit"]):
-        return "data/images/field_metro_rail.png", f"📍 Field Verification: {unit_name} Metro Rail Viaduct Pillar Construction Site"
+        path, caption = "data/images/field_metro_rail.png", f"📍 Field Verification: {unit_name} Metro Rail Viaduct Pillar Construction Site"
     elif any(k in issue_lower for k in ["road", "pothole", "highway", "paving"]):
-        return "data/images/field_road_repair.png", f"📍 Field Verification: {unit_name} Municipal Asphalt Road Repair & Overlay"
+        path, caption = "data/images/field_road_repair.png", f"📍 Field Verification: {unit_name} Municipal Asphalt Road Repair & Overlay"
     elif any(k in issue_lower for k in ["water", "pipeline", "ugd", "drainage", "sewage"]):
-        return "data/images/field_water_pipeline.png", f"📍 Field Verification: {unit_name} Underground Water Pipeline Installation"
+        path, caption = "data/images/field_water_pipeline.png", f"📍 Field Verification: {unit_name} Underground Water Pipeline Installation"
     elif any(k in issue_lower for k in ["salt", "pan"]):
-        return "data/images/field_salt_pan.png", f"📍 Field Verification: {unit_name} Salt Pan Laborer Working Conditions"
+        path, caption = "data/images/field_salt_pan.png", f"📍 Field Verification: {unit_name} Salt Pan Laborer Working Conditions"
     else:
-        return "data/images/field_drain_desilt.png", f"📍 Field Verification: {unit_name} Stormwater Drain Desilting & Cleanup Work"
+        path, caption = "data/images/field_drain_desilt.png", f"📍 Field Verification: {unit_name} Stormwater Drain Desilting & Cleanup Work"
+    return resolve_path(path), caption
 
 
 # ── Page config ────────────────────────────────────────────────────────────────
