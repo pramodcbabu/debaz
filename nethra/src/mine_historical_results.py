@@ -7,11 +7,28 @@ import pandas as pd
 import google.generativeai as genai
 import concurrent.futures
 
+def load_env_file():
+    for env_path in [".env", "nethra/.env", "../.env"]:
+        if os.path.exists(env_path):
+            with open(env_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith("#") and "=" in line:
+                        k, v = line.split("=", 1)
+                        if k.strip() not in os.environ:
+                            os.environ[k.strip()] = v.strip().strip('"').strip("'")
+
+load_env_file()
+
 DB_PATH = "data/former_election_results.db"
-API_KEY = os.environ.get("GOOGLE_API_KEY", "AIzaSyCtc4edPxBIZOsTAgiTfgioiTm4mB46FW4")
+API_KEY = os.environ.get("GOOGLE_API_KEY")
+
+if not API_KEY:
+    print("Error: GOOGLE_API_KEY environment variable not set. Please export GOOGLE_API_KEY or configure .env", file=sys.stderr)
+    sys.exit(1)
 
 genai.configure(api_key=API_KEY)
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-3.5-flash")
 
 def init_db():
     os.makedirs("data", exist_ok=True)

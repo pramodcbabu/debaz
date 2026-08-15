@@ -516,11 +516,23 @@ def validate_youtube_oembed(url: str):
 # GEMINI LLM VERIFICATION LAYER
 # ══════════════════════════════════════════════════════════════════════════════
 
+def load_env_file():
+    for env_path in [".env", "nethra/.env", "../.env"]:
+        if os.path.exists(env_path):
+            with open(env_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith("#") and "=" in line:
+                        k, v = line.split("=", 1)
+                        if k.strip() not in os.environ:
+                            os.environ[k.strip()] = v.strip().strip('"').strip("'")
+
 def init_gemini():
     """Initialize Google Gemini client."""
+    load_env_file()
     api_key = os.environ.get("GOOGLE_API_KEY")
     if not api_key:
-        log.error("GOOGLE_API_KEY environment variable not set!")
+        log.error("GOOGLE_API_KEY environment variable not set! Please export GOOGLE_API_KEY or configure .env")
         sys.exit(1)
 
     import google.generativeai as genai
