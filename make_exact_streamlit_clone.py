@@ -228,12 +228,9 @@ with open("novitree-website/index.html", "w") as f:
     }
     .section-caption { color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem; }
 
-    .grid-2 { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.5rem; margin-bottom: 1.8rem; align-items: start; }
-    @media(max-width: 1024px) { .grid-2 { grid-template-columns: 1fr; } body { flex-direction: column; } aside { width: 100%; height: auto; position: relative; } }
-
     .chart-box { height: 420px; width: 100%; background: #0f172a; border-radius: 12px; border: 1px solid #1e293b; overflow: hidden; }
 
-    #mapContainer { height: 420px; width: 100%; border-radius: 12px; border: 1px solid #1e293b; overflow: hidden; background: #0f172a; }
+    #mapContainer { height: 480px; width: 100%; border-radius: 12px; border: 1px solid #1e293b; overflow: hidden; background: #0f172a; }
     .spotlight-card {
       background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
       border: 2px solid #f59e0b; border-radius: 12px; padding: 0.9rem 1.1rem; margin-top: 8px;
@@ -468,8 +465,15 @@ with open("novitree-website/index.html", "w") as f:
 
         <!-- 3. FULL WIDTH 6-MONTH HISTORICAL TRAJECTORY LINE CHART -->
         <div style="margin-bottom: 2rem;">
-          <div class="section-header">📈 6-Month Historical Favorability & Issue Trajectory</div>
+          <div class="section-header">📈 Key Issue Evolution Timeline — <span id="knnHeaderUnit">Chengalpattu</span></div>
           <div class="section-caption" id="trendCaption">Track how party favorability figures and voter issue salience evolved over the past 6 months.</div>
+          
+          <!-- AUTHENTIC KNN GEOSPATIAL BASELINE INTERPOLATION CALLOUT BOX -->
+          <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid #38bdf8; border-radius: 10px; padding: 1.1rem; margin-bottom: 1.2rem; color: #cbd5e1; font-size: 0.88rem; line-height: 1.6;" id="knnNoticeBox">
+            <b style="color: #38bdf8; font-size: 0.95rem;">Key Issue Evolution Timeline — <span id="knnUnitName">Chengalpattu</span></b><br>
+            <b>Geospatial Baseline Interpolation:</b> TVK did not formally contest the historical elections for this GCC Ward / Parliamentary unit. The historical anchor points on this curve are algorithmically estimated using a <b>K-Nearest Neighbors (KNN)</b> geospatial mapping of the closest 2026 Assembly Constituencies. The current target is mathematically driven by real-time NLP data mining of local issues. <a href="#" onclick="setScreen('Guide'); return false;" style="color: #facc15; font-weight: 700; text-decoration: underline;">See System Guide for exact mathematical proofs ↗</a>
+          </div>
+
           <div id="chartTrend" class="chart-box" style="height: 400px; width: 100%;"></div>
         </div>
       </div>
@@ -1102,7 +1106,15 @@ with open("novitree-website/index.html", "w") as f:
 
     function renderTrendChart(unitObj) {
       if (!unitObj) return;
-      document.getElementById('trendCaption').innerText = 'Track how party favorability figures and voter issue salience evolved over the past 6 months for ' + unitObj.name + '.';
+      
+      const name = unitObj.name || 'Selected Unit';
+      const hdrElem = document.getElementById('knnHeaderUnit');
+      if (hdrElem) hdrElem.innerText = name;
+      
+      const knnElem = document.getElementById('knnUnitName');
+      if (knnElem) knnElem.innerText = name;
+
+      document.getElementById('trendCaption').innerText = 'Track how party favorability figures and voter issue salience evolved over the past 6 months for ' + name + '.';
       
       const months = ["Feb 2026", "Mar 2026", "Apr 2026", "May 2026", "Jun 2026", "Jul 2026", "Aug 2026"];
       
@@ -1451,12 +1463,9 @@ with open("index.html", "w") as f:
     }
     .section-caption { color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem; }
 
-    .grid-2 { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.5rem; margin-bottom: 1.8rem; align-items: start; }
-    @media(max-width: 1024px) { .grid-2 { grid-template-columns: 1fr; } body { flex-direction: column; } aside { width: 100%; height: auto; position: relative; } }
-
     .chart-box { height: 420px; width: 100%; background: #0f172a; border-radius: 12px; border: 1px solid #1e293b; overflow: hidden; }
 
-    #mapContainer { height: 420px; width: 100%; border-radius: 12px; border: 1px solid #1e293b; overflow: hidden; background: #0f172a; }
+    #mapContainer { height: 480px; width: 100%; border-radius: 12px; border: 1px solid #1e293b; overflow: hidden; background: #0f172a; }
     .spotlight-card {
       background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
       border: 2px solid #f59e0b; border-radius: 12px; padding: 0.9rem 1.1rem; margin-top: 8px;
@@ -1691,8 +1700,15 @@ with open("index.html", "w") as f:
 
         <!-- 3. FULL WIDTH 6-MONTH HISTORICAL TRAJECTORY LINE CHART -->
         <div style="margin-bottom: 2rem;">
-          <div class="section-header">📈 6-Month Historical Favorability & Issue Trajectory</div>
+          <div class="section-header">📈 Key Issue Evolution Timeline — <span id="knnHeaderUnit">Chengalpattu</span></div>
           <div class="section-caption" id="trendCaption">Track how party favorability figures and voter issue salience evolved over the past 6 months.</div>
+          
+          <!-- AUTHENTIC KNN GEOSPATIAL BASELINE INTERPOLATION CALLOUT BOX -->
+          <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid #38bdf8; border-radius: 10px; padding: 1.1rem; margin-bottom: 1.2rem; color: #cbd5e1; font-size: 0.88rem; line-height: 1.6;" id="knnNoticeBox">
+            <b style="color: #38bdf8; font-size: 0.95rem;">Key Issue Evolution Timeline — <span id="knnUnitName">Chengalpattu</span></b><br>
+            <b>Geospatial Baseline Interpolation:</b> TVK did not formally contest the historical elections for this GCC Ward / Parliamentary unit. The historical anchor points on this curve are algorithmically estimated using a <b>K-Nearest Neighbors (KNN)</b> geospatial mapping of the closest 2026 Assembly Constituencies. The current target is mathematically driven by real-time NLP data mining of local issues. <a href="#" onclick="setScreen('Guide'); return false;" style="color: #facc15; font-weight: 700; text-decoration: underline;">See System Guide for exact mathematical proofs ↗</a>
+          </div>
+
           <div id="chartTrend" class="chart-box" style="height: 400px; width: 100%;"></div>
         </div>
       </div>
@@ -2325,7 +2341,15 @@ with open("index.html", "w") as f:
 
     function renderTrendChart(unitObj) {
       if (!unitObj) return;
-      document.getElementById('trendCaption').innerText = 'Track how party favorability figures and voter issue salience evolved over the past 6 months for ' + unitObj.name + '.';
+      
+      const name = unitObj.name || 'Selected Unit';
+      const hdrElem = document.getElementById('knnHeaderUnit');
+      if (hdrElem) hdrElem.innerText = name;
+      
+      const knnElem = document.getElementById('knnUnitName');
+      if (knnElem) knnElem.innerText = name;
+
+      document.getElementById('trendCaption').innerText = 'Track how party favorability figures and voter issue salience evolved over the past 6 months for ' + name + '.';
       
       const months = ["Feb 2026", "Mar 2026", "Apr 2026", "May 2026", "Jun 2026", "Jul 2026", "Aug 2026"];
       
@@ -2446,4 +2470,4 @@ with open("index.html", "w") as f:
 </html>
 """)
 
-print("✅ Clean full-width stacked subTab1 template written!")
+print("✅ Authentic KNN Geospatial Baseline Interpolation Callout Box written!")
