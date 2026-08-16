@@ -8,6 +8,14 @@ html_template = """<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Anti-Cache Meta Tags -->
+  <script>
+    try {
+      localStorage.removeItem('nethra_tunnel_url');
+      localStorage.removeItem('active_tunnel');
+      localStorage.removeItem('cached_tunnel_url');
+    } catch(e){}
+  </script>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -19,9 +27,9 @@ html_template = """<!DOCTYPE html>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   
   <!-- Plotly.js & Leaflet CSS/JS -->
-  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="vendor/plotly.min.js"></script>
+  <link rel="stylesheet" href="vendor/leaflet.css" />
+  <script src="vendor/leaflet.js"></script>
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -138,7 +146,7 @@ html_template = """<!DOCTYPE html>
       border: 1px solid #27272a;
       border-radius: 24px;
       width: 100%;
-      max-width: 440px;
+      max-width: 420px;
       padding: 2.2rem 2rem;
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
       position: relative;
@@ -223,25 +231,19 @@ html_template = """<!DOCTYPE html>
         <small>Executive Campaign Intelligence Gateway</small>
       </div>
       <div id="authError" class="error-box">
-        ❌ Invalid Username or Password. Please try again or contact administrator.
+        ❌ Invalid Username or Password. Please try again or contact your administrator.
       </div>
       <form onsubmit="handleAuthSubmit(event)">
         <div class="form-group">
           <label>Username</label>
-          <input type="text" id="authUsername" placeholder="e.g. tvk_admin" required autocomplete="off">
+          <input type="text" id="authUsername" placeholder="Enter Username" required autocomplete="off">
         </div>
         <div class="form-group">
           <label>Password</label>
           <input type="password" id="authPassword" placeholder="••••••••" required>
         </div>
         <button type="submit" class="btn-submit">🔓 Sign In to Nethra Engine</button>
-        <button type="button" onclick="quickDemoLogin()" style="width:100%; margin-top:8px; padding:0.65rem; background:#27272a; border:1px solid #3f3f46; border-radius:8px; color:#facc15; font-weight:700; font-size:0.85rem; cursor:pointer;">⚡ One-Click Auto Sign In</button>
       </form>
-      <div style="margin-top: 15px; padding: 10px; background: rgba(250, 204, 21, 0.1); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 8px; font-size: 0.8rem; color: #facc15; text-align: center;">
-        🔑 <b>Demo Access Credentials:</b><br>
-        Username: <code style="background:#27272a; padding:2px 6px; border-radius:4px; color:#fff;">tvk_admin</code> &nbsp;|&nbsp; 
-        Password: <code style="background:#27272a; padding:2px 6px; border-radius:4px; color:#fff;">tvk2026</code>
-      </div>
     </div>
   </div>
 
@@ -264,7 +266,7 @@ html_template = """<!DOCTYPE html>
     </div>
 
     <div class="user-info">
-      <span class="user-badge" id="currentUserDisplay">👤 tvk_admin</span>
+      <span class="user-badge" id="currentUserDisplay">👤 Executive User</span>
       <button class="btn-signout" onclick="handleSignOut()">🔒 Sign Out</button>
     </div>
   </header>
@@ -274,8 +276,19 @@ html_template = """<!DOCTYPE html>
     
     <!-- DASHBOARD VIEW CONTAINER -->
     <div id="screenDashboard">
-      <div class="section-header" id="screenTitle">🔥 TN Assembly Elections (234 Seats)</div>
-      <div class="section-caption" id="screenSubtitle">Database-driven real-time analytics & geo-fenced sentiment mining</div>
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom: 0.8rem; background:#18181b; border:1px solid #27272a; padding:12px 18px; border-radius:12px;">
+        <div>
+          <div class="section-header" id="screenTitle" style="margin-bottom:0;">🔥 TN Assembly Elections (234 Seats)</div>
+          <div class="section-caption" id="screenSubtitle" style="margin-bottom:0;">Database-driven real-time analytics & geo-fenced sentiment mining</div>
+        </div>
+
+        <!-- TARGET AREA DROPDOWN MENU -->
+        <div style="display:flex; align-items:center; gap:10px; margin-top:8px;">
+          <span style="font-weight:700; font-size:0.85rem; color:#f59e0b;">🎯 Select Constituency / Area:</span>
+          <select id="unitSelector" onchange="handleUnitSelect(this.value)" style="padding:8px 16px; background:#09090b; border:1px solid #facc15; color:#facc15; border-radius:8px; font-weight:700; font-size:0.9rem; cursor:pointer;">
+          </select>
+        </div>
+      </div>
 
       <!-- MAP & BAR CHART GRID -->
       <div class="grid-2">
@@ -323,13 +336,6 @@ html_template = """<!DOCTYPE html>
           <div style="color:#f8fafc;font-size:0.9rem">🔴 Avg DMK Baseline: <b style="color:#ef4444" id="bannerDMK">31.2%</b></div>
           <div style="color:#f8fafc;font-size:0.9rem">⚡ Net TVK Lead: <b style="color:#38bdf8" id="bannerLead">+7.2%</b></div>
         </div>
-      </div>
-
-      <!-- UNIT COMMAND SELECTOR & 3-TAB SUITE -->
-      <div style="display:flex; align-items:center; gap: 12px; margin-bottom: 1rem;">
-        <span style="font-weight:700; font-size:0.9rem; color:#f59e0b;">🎯 Target Area Selector:</span>
-        <select id="unitSelector" onchange="handleUnitSelect(this.value)" style="padding:6px 12px; background:#18181b; border:1px solid #3f3f46; color:#fff; border-radius:6px; font-weight:600; font-size:0.85rem;">
-        </select>
       </div>
 
       <div class="sub-tabs">
@@ -509,12 +515,6 @@ html_template = """<!DOCTYPE html>
     let mapObject = null;
     let mapMarkers = [];
 
-    function quickDemoLogin() {
-      document.getElementById('authUsername').value = 'tvk_admin';
-      document.getElementById('authPassword').value = 'tvk2026';
-      handleAuthSubmit(null);
-    }
-
     async function handleAuthSubmit(e) {
       if (e) e.preventDefault();
       const uInput = document.getElementById('authUsername').value.trim().toLowerCase();
@@ -602,7 +602,7 @@ html_template = """<!DOCTYPE html>
         document.getElementById('screenSubtitle').innerText = 'All 39 Lok Sabha Seats in Tamil Nadu';
       }
 
-      // Populate Unit Selector Dropdown
+      // Populate Unit Selector Dropdown Menu
       const selector = document.getElementById('unitSelector');
       selector.innerHTML = '';
       ds.forEach(item => {
@@ -886,4 +886,4 @@ with open("novitree-website/index.html", "w") as f:
 with open("index.html", "w") as f:
     f.write(html_template)
 
-print("✅ Built lightweight index.html! Size:", len(html_template), "bytes")
+print("✅ Built updated index.html with clean sign-in card and prominent constituency dropdown menu! Size:", len(html_template), "bytes")
