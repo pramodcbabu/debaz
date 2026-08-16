@@ -1,9 +1,4 @@
-import json, os
-
-with open("novitree-website/nethra_data.json", "r") as f:
-    nethra_data = json.load(f)
-
-html_template = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -196,7 +191,7 @@ html_template = """<!DOCTYPE html>
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem; }
     @media(max-width: 1024px) { .grid-2 { grid-template-columns: 1fr; } }
 
-    #mapContainer { height: 420px; border-radius: 12px; border: 1px solid #1e293b; overflow: hidden; }
+    #mapContainer { height: 420px; border-radius: 12px; border: 1px solid #1e293b; overflow: hidden; background: #0f172a; }
     .spotlight-card {
       background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
       border: 2px solid #f59e0b; border-radius: 12px; padding: 1rem 1.2rem; margin-top: 10px;
@@ -515,8 +510,6 @@ html_template = """<!DOCTYPE html>
 
     let currentScreen = 'Assembly';
     let activeUnitName = '';
-    let mapObject = null;
-    let mapMarkers = [];
 
     async function handleAuthSubmit(e) {
       if (e) e.preventDefault();
@@ -633,11 +626,6 @@ html_template = """<!DOCTYPE html>
       const unit = ds.find(u => u.name === unitName) || ds[0];
       renderSpotlight(unit);
       renderSubTab3(unit);
-      
-      // Highlight Marker on Map
-      if (mapObject && unit.lat && unit.lon) {
-        mapObject.setView([unit.lat, unit.lon], 11);
-      }
     }
 
     function renderSpotlight(unit) {
@@ -652,44 +640,60 @@ html_template = """<!DOCTYPE html>
     }
 
     function renderMap(ds) {
-      if (!mapObject) {
-        mapObject = L.map('mapContainer').setView([10.8505, 78.6569], 7);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-          attribution: '&copy; OpenStreetMap &copy; CARTO',
-          maxZoom: 19
-        }).addTo(mapObject);
-      }
-
-      // Clear existing markers
-      mapMarkers.forEach(m => mapObject.removeLayer(m));
-      mapMarkers = [];
-
-      ds.forEach(unit => {
-        if (unit.lat && unit.lon) {
-          let color = '#f59e0b';
-          const tvk = unit.tvk_fav || unit.tvk_proj || 25.0;
-          const dmk = unit.dmk_fav || unit.dmk_proj || 35.0;
-          if (tvk > dmk) color = '#22c55e';
-          else if (dmk > tvk + 10) color = '#ef4444';
-
-          const marker = L.circleMarker([unit.lat, unit.lon], {
-            radius: 7,
-            fillColor: color,
-            color: '#fff',
-            weight: 1,
-            opacity: 1,
-            fillOpacity: 0.85
-          }).addTo(mapObject);
-
-          marker.bindTooltip(`<b>${unit.name}</b><br>TVK Fav: ${tvk}%<br>Top Issue: ${unit.top_issue}`);
-          marker.on('click', () => {
-            document.getElementById('unitSelector').value = unit.name;
-            handleUnitSelect(unit.name);
-          });
-
-          mapMarkers.push(marker);
-        }
+      // Plotly Scattermapbox Map Engine with exact YlOrRd Heatmap Color Scale
+      const lats = ds.map(u => u.lat || 10.85);
+      const lons = ds.map(u => u.lon || 78.65);
+      const names = ds.map(u => u.name);
+      const tvkFavs = ds.map(u => u.tvk_fav || u.tvk_proj || 25.0);
+      const hoverTexts = ds.map(u => `<b>${u.name}</b><br>TVK Fav: ${u.tvk_fav || u.tvk_proj || 25}%<br>DMK Baseline: ${u.dmk_fav || u.dmk_proj || 35}%<br>Top Issue: ${u.top_issue || 'Infrastructure'}`);
+      
+      const sizes = ds.map(u => {
+        const v = u.voters || 250000;
+        return Math.min(Math.max(v / 15000, 8), 24);
       });
+
+      const mapTrace = {
+        type: 'scattermapbox',
+        lat: lats,
+        lon: lons,
+        mode: 'markers',
+        marker: {
+          size: sizes,
+          color: tvkFavs,
+          colorscale: 'YlOrRd',
+          cmin: 15,
+          cmax: 55,
+          colorbar: { title: 'TVK Fav %', ticksuffix: '%', titlefont: { color: '#ffffff' }, tickfont: { color: '#ffffff' } }
+        },
+        text: hoverTexts,
+        hoverinfo: 'text',
+        customdata: names
+      };
+
+      const mapLayout = {
+        mapbox: {
+          style: 'carto-darkmatter',
+          center: { lat: 10.8505, lon: 78.6569 },
+          zoom: 6.2
+        },
+        margin: { r: 0, t: 0, l: 0, b: 0 },
+        paper_bgcolor: '#0f172a',
+        plot_bgcolor: '#0f172a'
+      };
+
+      Plotly.newPlot('mapContainer', [mapTrace], mapLayout, { responsive: true, displayModeBar: false });
+
+      // Click Event to sync Target Area Dropdown & Spotlight
+      const mapElem = document.getElementById('mapContainer');
+      if (mapElem && mapElem.on) {
+        mapElem.on('plotly_click', function(data) {
+          if (data.points && data.points.length > 0) {
+            const clickedName = data.points[0].customdata;
+            document.getElementById('unitSelector').value = clickedName;
+            handleUnitSelect(clickedName);
+          }
+        });
+      }
     }
 
     function renderCompetitorChart(ds) {
@@ -849,9 +853,9 @@ html_template = """<!DOCTYPE html>
       const name = unit.name;
       const issue = unit.top_issue || 'Local Civic Grievance';
       
-      document.getElementById('copyWhatsApp').value = `🚨 TVK ${name} Constituency Campaign Alert:\\n\\nGround verification confirms top issue: ${issue}.\\n\\nTVK President Vijay has released a formal 5-point action plan for ${name}.\\n\\nJoin TVK Ground Campaign: tvk.org/${name.toLowerCase()}`;
-      document.getElementById('copyInstagram').value = `📍 Field Inspection: ${name} Constituency\\n\\nAddressing voter grievances on ${issue}.\\n\\n#TVK2026 #VijayForTN #${name.replace(/\\s+/g, '')} #TVKGroundTruth`;
-      document.getElementById('copyTwitter').value = `TVK local candidate releases formal pledge for ${name} covering ${issue}.\\n\\nNet TVK lead: +${unit.gap || 15}pt.\\n\\n#TVK2026 #TamilagaVettriKazhagam`;
+      document.getElementById('copyWhatsApp').value = `🚨 TVK ${name} Constituency Campaign Alert:\n\nGround verification confirms top issue: ${issue}.\n\nTVK President Vijay has released a formal 5-point action plan for ${name}.\n\nJoin TVK Ground Campaign: tvk.org/${name.toLowerCase()}`;
+      document.getElementById('copyInstagram').value = `📍 Field Inspection: ${name} Constituency\n\nAddressing voter grievances on ${issue}.\n\n#TVK2026 #VijayForTN #${name.replace(/\s+/g, '')} #TVKGroundTruth`;
+      document.getElementById('copyTwitter').value = `TVK local candidate releases formal pledge for ${name} covering ${issue}.\n\nNet TVK lead: +${unit.gap || 15}pt.\n\n#TVK2026 #TamilagaVettriKazhagam`;
     }
 
     function renderAuditScreen() {
@@ -881,12 +885,3 @@ html_template = """<!DOCTYPE html>
   </script>
 </body>
 </html>
-"""
-
-with open("novitree-website/index.html", "w") as f:
-    f.write(html_template)
-
-with open("index.html", "w") as f:
-    f.write(html_template)
-
-print("✅ Built updated index.html with clean sign-in card and prominent constituency dropdown menu! Size:", len(html_template), "bytes")
