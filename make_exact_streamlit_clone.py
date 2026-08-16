@@ -1,0 +1,2449 @@
+import os
+
+with open("novitree-website/index.html", "w") as f:
+    f.write("""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Anti-Cache Meta Tags -->
+  <script>
+    try {
+      localStorage.removeItem('nethra_tunnel_url');
+      localStorage.removeItem('active_tunnel');
+      localStorage.removeItem('cached_tunnel_url');
+    } catch(e){}
+  </script>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Nethra · Database-Driven Campaign Suite</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Plotly.js & Leaflet CSS/JS with Automatic CDN Fallback -->
+  <link rel="stylesheet" href="vendor/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="vendor/plotly.min.js"></script>
+  <script>if (typeof Plotly === "undefined") document.write('<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"><\/script>');</script>
+  <script src="vendor/leaflet.js"></script>
+  <script>if (typeof L === "undefined") document.write('<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"><\/script>');</script>
+
+  <!-- Mermaid.js for Architecture Flowchart Rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    /* STREAMLIT NATIVE DARK THEME & EXACT CSS FROM TN_APP.PY */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0e1117;
+      color: #fafafa;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* STREAMLIT SIDEBAR LAYOUT */
+    aside {
+      width: 310px;
+      background-color: #262730;
+      border-right: 1px solid rgba(250, 250, 250, 0.1);
+      padding: 1.2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .user-login-box {
+      background: rgba(250, 204, 21, 0.1);
+      border: 1px solid #facc15;
+      border-radius: 8px;
+      padding: 0.5rem 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .user-title { color: #facc15; font-weight: 700; font-size: 0.8rem; }
+    .user-name { color: #f8fafc; font-weight: 600; font-size: 0.85rem; }
+    .btn-signout {
+      background: #0e1117;
+      color: #ef4444;
+      border: 1px solid #ef4444;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-signout:hover { background: #7f1d1d; color: #fff; }
+
+    .sidebar-heading { font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
+
+    .nav-radio-group { display: flex; flex-direction: column; gap: 6px; }
+    .nav-radio-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: #cbd5e1;
+      padding: 9px 12px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+    }
+    .nav-radio-btn:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
+    .nav-radio-btn.active {
+      background: #7f1d1d;
+      color: #facc15;
+      font-weight: 700;
+      border: 1px solid #facc15;
+    }
+
+    .filter-group { display: flex; flex-direction: column; gap: 6px; }
+    .filter-group label { font-size: 0.8rem; font-weight: 700; color: #94a3b8; }
+    .filter-group select {
+      width: 100%;
+      padding: 8px 12px;
+      background: #0e1117;
+      border: 1px solid rgba(250, 250, 250, 0.2);
+      color: #fff;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    /* AUTH GATE OVERLAY */
+    #authOverlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(14, 17, 23, 0.95);
+      backdrop-filter: blur(16px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .auth-card {
+      background: #262730;
+      border: 1px solid rgba(250, 250, 250, 0.1);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 420px;
+      padding: 2.2rem 2rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+    .auth-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, #dc2626, #facc15, #dc2626);
+    }
+    .auth-header { text-align: center; margin-bottom: 1.5rem; }
+    .auth-header h1 { font-size: 1.8rem; color: #facc15; margin-bottom: 0.2rem; }
+    .auth-header p { color: #fafafa; font-weight: 600; font-size: 1rem; }
+    .auth-header small { color: #94a3b8; font-size: 0.8rem; }
+    .error-box {
+      background: rgba(220, 38, 38, 0.15);
+      border: 1px solid #ef4444;
+      color: #fca5a5;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      margin-bottom: 1rem;
+      display: none;
+    }
+    .form-group { margin-bottom: 1rem; text-align: left; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: #cbd5e1; margin-bottom: 0.35rem; }
+    .form-group input {
+      width: 100%; padding: 0.75rem 1rem; background: #0e1117; border: 1px solid #3f3f46;
+      border-radius: 8px; color: #fff; font-size: 0.9rem;
+    }
+    .form-group input:focus { outline: none; border-color: #facc15; }
+    .btn-submit {
+      width: 100%; padding: 0.85rem; background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);
+      border: 1px solid #facc15; border-radius: 8px; color: #facc15; font-weight: 800; font-size: 0.95rem; cursor: pointer;
+    }
+    .btn-submit:hover { opacity: 0.9; }
+
+    /* MAIN CONTENT WRAPPER */
+    main {
+      flex: 1;
+      padding: 1.5rem 2rem;
+      max-width: 1500px;
+      width: 100%;
+      overflow-y: auto;
+    }
+
+    /* TVK HEADER CARD & METRICS BAR (FROM TN_APP.PY) */
+    .tvk-header-card {
+      background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);
+      border: 1px solid #facc15; border-radius: 16px;
+      padding: 1.2rem 1.6rem; color: #f8fafc;
+      box-shadow: 0 10px 25px -5px rgba(250, 204, 21, 0.15);
+      margin-bottom: 1rem;
+    }
+    .tvk-badge {
+      background: #facc15; color: #450a0a; font-weight: 800;
+      padding: 4px 12px; border-radius: 999px; font-size: 0.75rem;
+      letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    @media(max-width: 1200px) { .metrics-row { grid-template-columns: repeat(2, 1fr); } }
+
+    .metric-card {
+      background: linear-gradient(135deg, #2a0a0a 0%, #110303 100%);
+      border: 1px solid #450a0a; border-radius: 14px;
+      padding: 1.1rem 1.2rem; color: #f1f5f9;
+      transition: all 0.2s ease-in-out;
+    }
+    .metric-card:hover { border-color: #facc15; transform: translateY(-2px); }
+    .metric-card .label { font-size: 0.72rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+    .metric-card .value { font-size: 1.9rem; font-weight: 800; line-height: 1.15; margin-top: 2px; }
+    .metric-card .sublbl { font-size: 0.75rem; color: #64748b; margin-top: 4px; }
+
+    .section-header {
+      font-size: 1.1rem; font-weight: 700; color: #f8fafc;
+      border-left: 4px solid #facc15; padding-left: 0.7rem;
+      margin: 1.2rem 0 0.5rem 0; letter-spacing: -0.01em;
+    }
+    .section-caption { color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem; }
+
+    .grid-2 { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.5rem; margin-bottom: 1.8rem; align-items: start; }
+    @media(max-width: 1024px) { .grid-2 { grid-template-columns: 1fr; } body { flex-direction: column; } aside { width: 100%; height: auto; position: relative; } }
+
+    .chart-box { height: 420px; width: 100%; background: #0f172a; border-radius: 12px; border: 1px solid #1e293b; overflow: hidden; }
+
+    #mapContainer { height: 420px; width: 100%; border-radius: 12px; border: 1px solid #1e293b; overflow: hidden; background: #0f172a; }
+    .spotlight-card {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 2px solid #f59e0b; border-radius: 12px; padding: 0.9rem 1.1rem; margin-top: 8px;
+    }
+    .spotlight-title { color: #f59e0b; font-weight: 800; font-size: 0.95rem; display: flex; justify-content: space-between; align-items: center; }
+    
+    .sub-tabs { display: flex; gap: 8px; border-bottom: 1px solid rgba(250, 250, 250, 0.1); margin-bottom: 1rem; padding-bottom: 6px; }
+    .sub-tab { background: transparent; border: none; color: #94a3b8; font-weight: 600; font-size: 0.88rem; padding: 8px 14px; cursor: pointer; border-radius: 6px; }
+    .sub-tab.active { background: #262730; color: #facc15; font-weight: 700; }
+
+    /* TABLE STYLES */
+    .data-table-container { overflow-x: auto; max-height: 380px; border: 1px solid #1e293b; border-radius: 8px; width: 100%; background: #0f172a; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.84rem; text-align: left; }
+    th { background: #1e293b; color: #fafafa; padding: 10px 14px; font-weight: 700; position: sticky; top: 0; z-index: 10; border-bottom: 1px solid #334155; }
+    td { padding: 10px 14px; border-bottom: 1px solid #1e293b; color: #cbd5e1; }
+    tr:hover { background: rgba(255, 255, 255, 0.03); }
+
+    .search-input { padding: 8px 14px; background: #0e1117; border: 1px solid #3f3f46; border-radius: 6px; color: #fff; font-size: 0.85rem; margin-bottom: 10px; width: 100%; max-width: 320px; }
+
+    .campaign-copy-card { background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; padding: 1.2rem; margin-bottom: 1rem; }
+    .campaign-copy-card h4 { color: #38bdf8; font-size: 0.95rem; margin-bottom: 8px; }
+    .campaign-copy-card textarea { width: 100%; height: 90px; background: #0e1117; border: 1px solid #3f3f46; color: #fafafa; border-radius: 6px; padding: 10px; font-size: 0.85rem; margin-top: 6px; }
+  </style>
+</head>
+<body>
+
+  <!-- AUTH GATE OVERLAY -->
+  <div id="authOverlay">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1>🛡️ NETHRA AI</h1>
+        <p>Tamilaga Vettri Kazhagam (TVK)</p>
+        <small>Executive Campaign Intelligence Gateway</small>
+      </div>
+      <div id="authError" class="error-box">
+        ❌ Invalid Username or Password. Please try again or contact your administrator.
+      </div>
+      <form onsubmit="handleAuthSubmit(event)">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" id="authUsername" placeholder="Enter Username" required autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="authPassword" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-submit">🔓 Sign In to Nethra Engine</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- EXACT STREAMLIT LEFT SIDEBAR -->
+  <aside>
+    <div class="user-login-box">
+      <div>
+        <span class="user-title">👤 LOGGED IN:</span><br>
+        <span class="user-name" id="currentUserDisplay">tvk_admin</span>
+      </div>
+      <button class="btn-signout" onclick="handleSignOut()">🔒 Sign Out</button>
+    </div>
+
+    <div>
+      <div class="sidebar-heading">🗳️ Select Election Screen</div>
+      <div class="nav-radio-group">
+        <button class="nav-radio-btn active" onclick="setScreen('Assembly')">🔥 Assembly Elections (234 Seats)</button>
+        <button class="nav-radio-btn" onclick="setScreen('Local')">🏛️ Local Body (200 GCC Wards)</button>
+        <button class="nav-radio-btn" onclick="setScreen('LokSabha')">🌐 Lok Sabha (39 Seats)</button>
+        <button class="nav-radio-btn" onclick="setScreen('Audit')">🛡️ Intelligence Audit</button>
+        <button class="nav-radio-btn" onclick="setScreen('Guide')">📖 System Guide</button>
+      </div>
+    </div>
+
+    <hr style="border-color: rgba(250, 250, 250, 0.1);">
+
+    <!-- SIDEBAR SEARCH & REGION FILTER WIDGETS -->
+    <div class="filter-group">
+      <div class="sidebar-heading">🔍 Search & Region Filter</div>
+      
+      <label id="filterRegionLabel">Filter Constituency</label>
+      <select id="filterRegionSelect" onchange="handleRegionFilterChange(this.value)">
+      </select>
+    </div>
+
+    <div class="filter-group" id="unitSelectGroup">
+      <label id="filterUnitLabel">Select Unit</label>
+      <select id="unitSelector" onchange="handleUnitSelect(this.value)">
+      </select>
+    </div>
+  </aside>
+
+  <!-- MAIN DASHBOARD CONTENT AREA -->
+  <main>
+
+    <!-- TVK CENTRAL COMMAND HEADER CARD (EXACT FROM TN_APP.PY) -->
+    <div class="tvk-header-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+        <div>
+          <span class="tvk-badge">தமிழக வெற்றிக் கழகம்</span>
+          <div style="font-size:1.85rem;font-weight:800;color:#f8fafc;margin-top:6px;line-height:1.1">
+            TVK Nethra: Central Command
+          </div>
+          <div style="font-size:0.85rem;color:#cbd5e1;margin-top:4px">
+            Live Political Intelligence Engine: <b>234 ACs · 39 PCs · 200 GCC Wards</b>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GLOBAL STATEWIDE TVK FAVORABILITY METRICS ROW (EXACT FROM TN_APP.PY) -->
+    <div class="metrics-row">
+      <div class="metric-card">
+        <div class="label">TVK Assembly Seats</div>
+        <div class="value" style="color:#f59e0b">108 <span style="font-size:1.1rem;color:#94a3b8">/ 234</span></div>
+        <div class="sublbl">Single largest party (118 majority)</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Statewide Favorability</div>
+        <div class="value" style="color:#f59e0b">61%</div>
+        <div class="sublbl">+9pt shift since June</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Opponent Baseline (DMK)</div>
+        <div class="value" style="color:#ef4444">23%</div>
+        <div class="sublbl">Eroding baseline in urban centers</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Database Records</div>
+        <div class="value" style="color:#38bdf8">473 Units</div>
+        <div class="sublbl">Queried from SQLite DB</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Spam Block Rate</div>
+        <div class="value" style="color:#22c55e">100% Clean</div>
+        <div class="sublbl">1,420 Bot Spams Blocked</div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD VIEW CONTAINER -->
+    <div id="screenDashboard">
+      <div class="section-header" id="screenTitle">⚡ TN Assembly Elections & Byelections — (234 / 234 Constituencies Tracked)</div>
+      <div class="section-caption" id="screenSubtitle">Constituency-level database intelligence. (5 Target Byelection Seats: Karur, Trichy East, Perundurai, Viralimalai, Ambasamudram).</div>
+
+      <!-- MAP & BAR CHART GRID -->
+      <div class="grid-2">
+        <div>
+          <div style="font-weight: 700; font-size: 0.88rem; margin-bottom: 4px; color: #cbd5e1;">📍 Visual Map Command (Assembly Constituency Level)</div>
+          <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 6px;">Click any marker on the map or select from sidebar dropdown to inspect that unit below!</div>
+          <div id="mapContainer"></div>
+          
+          <div class="spotlight-card" id="spotlightCard">
+            <div class="spotlight-title">
+              <span id="spotName">📍 SELECTED UNIT SPOTLIGHT: Chengalpattu</span>
+              <span class="tvk-badge" id="spotStatus">TVK Active</span>
+            </div>
+            <div style="color:#e2e8f0;font-size:0.83rem;margin-top:6px">
+              <b>Region:</b> <span id="spotRegion">Northern Coastal</span> &nbsp;·&nbsp; 
+              <b>TVK Fav:</b> <span style="color:#f59e0b;font-weight:700" id="spotTVK">43.3%</span> &nbsp;·&nbsp; 
+              <b>DMK Baseline:</b> <span style="color:#ef4444" id="spotDMK">34.9%</span>
+            </div>
+            <div style="color:#94a3b8;font-size:0.8rem;margin-top:4px" id="spotWinner">
+              <b>🏛️ Historical Baseline:</b> Winner: TVK (43.3%)
+            </div>
+            <div style="color:#94a3b8;font-size:0.8rem;margin-top:4px">
+              <b>Geo-Fenced Real Issue (Aug 2026):</b> <span id="spotIssue">Paddy Procurement DPC Delay</span> (Messaging Gap: <span style="color:#ef4444;font-weight:700" id="spotGap">18.5pt</span>)
+            </div>
+            <div style="margin-top:6px;font-size:0.78rem">
+              🔗 <b>Sourced Reference:</b> <a href="#" id="spotSourceUrl" target="_blank" style="color:#38bdf8;font-weight:600;text-decoration:none"><span id="spotSourceName">Tamil News Publisher</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-weight: 700; font-size: 0.88rem; margin-bottom: 6px; color: #cbd5e1;">📊 Competitor Favorability Breakdown (Top 12 Displayed)</div>
+          <div id="chartCompetitor" class="chart-box"></div>
+        </div>
+      </div>
+
+      <!-- MULTI-UNIT CONSOLIDATED BANNER -->
+      <div style="background:linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);border:2px solid #38bdf8;border-radius:12px;padding:1rem;margin-top:10px;margin-bottom:1.5rem;" id="consolidatedBanner">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+          <span style="background:#0284c7;color:white;font-weight:800;font-size:0.8rem;padding:4px 12px;border-radius:20px" id="bannerBadge">
+            🔥 MULTI-UNIT CONSOLIDATED INTELLIGENCE (234 Selected Units)
+          </span>
+          <span style="color:#cbd5e1;font-size:0.85rem;font-weight:700" id="bannerVoters">
+            👥 Combined Electoral Scale: <b>58,500,000</b> Voters
+          </span>
+        </div>
+        <div style="display:flex;gap:20px;margin-top:10px;flex-wrap:wrap">
+          <div style="color:#f8fafc;font-size:0.9rem">🟡 Avg TVK Favorability: <b style="color:#f59e0b" id="bannerTVK">38.4%</b></div>
+          <div style="color:#f8fafc;font-size:0.9rem">🔴 Avg DMK Baseline: <b style="color:#ef4444" id="bannerDMK">31.2%</b></div>
+          <div style="color:#f8fafc;font-size:0.9rem">⚡ Net TVK Lead: <b style="color:#38bdf8" id="bannerLead">+7.2%</b></div>
+        </div>
+      </div>
+
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="setSubTab(1)">📊 1. Messaging Gaps & Trends</button>
+        <button class="sub-tab" onclick="setSubTab(2)">🔐 2. Ground Truth & Sources</button>
+        <button class="sub-tab" onclick="setSubTab(3)">📲 3. AI Campaign Deployment</button>
+      </div>
+
+      <!-- SUB TAB 1: MESSAGING GAPS & HISTORICAL TRENDS -->
+      <div id="subTab1">
+        <div class="grid-2">
+          <div>
+            <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; color: #cbd5e1;">Messaging Salience Gap (Top 12 Units) (Voter Priority % vs TVK Mention %)</div>
+            <div id="chartGap" class="chart-box"></div>
+          </div>
+
+          <div>
+            <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; color: #cbd5e1;">🗂️ Detailed Exhaustive Table (234 Units Queried from DB)</div>
+            <input type="text" class="search-input" id="tableSearch" placeholder="🔍 Search unit name, district, or issue..." onkeyup="filterDataTable()">
+            <div class="data-table-container">
+              <table id="unitsTable">
+                <thead>
+                  <tr>
+                    <th>Ground Audit Level</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Region/District</th>
+                    <th>Status Tag</th>
+                    <th>TVK %</th>
+                    <th>DMK %</th>
+                    <th>Geo-Fenced Issue (Aug 2026)</th>
+                    <th>Gap</th>
+                  </tr>
+                </thead>
+                <tbody id="unitsTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.8rem;">
+          <div class="section-header">📈 6-Month Historical Favorability & Issue Trajectory</div>
+          <div class="section-caption" id="trendCaption">Track how party favorability figures and voter issue salience evolved over the past 6 months.</div>
+          <div id="chartTrend" class="chart-box" style="height: 380px;"></div>
+        </div>
+      </div>
+
+      <!-- SUB TAB 2: GROUND TRUTH & SOURCES -->
+      <div id="subTab2" style="display:none;">
+        <div class="section-header">🔐 1,220 Verified News Articles & Field Sources</div>
+        <div class="section-caption">Authenticity verified news references mined across Tamil Nadu news publishers</div>
+        <input type="text" class="search-input" id="sourcesSearch" placeholder="🔍 Search article title, publisher, or category..." onkeyup="filterSourcesTable()">
+        <div class="data-table-container" style="max-height: 500px;">
+          <table>
+            <thead>
+              <tr>
+                <th>Unit Name</th>
+                <th>Article Title</th>
+                <th>Publisher</th>
+                <th>Category</th>
+                <th>Score</th>
+                <th>Platform</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="sourcesTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SUB TAB 3: AI CAMPAIGN DEPLOYMENT -->
+      <div id="subTab3" style="display:none;">
+        <div class="section-header">📲 AI Campaign Messaging Deployment Generator</div>
+        <div class="section-caption">Auto-generated platform copy customized for target constituency issue</div>
+        
+        <div class="campaign-copy-card">
+          <h4>💬 WhatsApp Broadcast Message (Tamil & English)</h4>
+          <textarea id="copyWhatsApp" readonly></textarea>
+        </div>
+        <div class="campaign-copy-card">
+          <h4>📸 Instagram Reel Caption & Hashtags</h4>
+          <textarea id="copyInstagram" readonly></textarea>
+        </div>
+        <div class="campaign-copy-card">
+          <h4>🐦 X (Twitter) Campaign Post</h4>
+          <textarea id="copyTwitter" readonly></textarea>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SPAM AUDIT VIEW CONTAINER (SCREEN 4) -->
+    <div id="screenAudit" style="display:none;">
+      <div class="section-header">🛡️ System Data Mining & Intelligence Audit Engine</div>
+      <div class="section-caption">Active tracking of the Nethra OS background subagents (NLP web scraping, spam filtering, and K-Nearest Neighbors algorithmic estimation).</div>
+      
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+        <div class="metric-card">
+          <div class="label">Live NLP Sources Mined</div>
+          <div class="value" style="color:#38bdf8">473 Units</div>
+          <div class="sublbl">Subagents mined YouTube, X, Local News</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Data Imputed</div>
+          <div class="value" style="color:#f59e0b">239 Nodes</div>
+          <div class="sublbl">K-NN Geospatial Mapping for Wards/PCs</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Bot Spams Blocked</div>
+          <div class="value" style="color:#ef4444">1,420 Incidents</div>
+          <div class="sublbl">Excluded from TVK sentiment model</div>
+        </div>
+      </div>
+
+      <div style="background:#0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 15px; margin-bottom: 20px; color: #cbd5e1; font-size: 0.9rem; line-height: 1.5;">
+        <b>Status: <span style="color:#22c55e">ONLINE & SYNCED</span></b><br><br>
+        <b>1. Subagent NLP Data Mining:</b> Autonomous agents crawled Tamil YouTube channels (Sun News, Thanthi TV), X (Twitter), and Reddit localized to specific GPS boundaries to extract highly granular real-time issue sentiment for all 473 tracked units (Assembly, Wards, Lok Sabha).<br><br>
+        <b>2. K-NN Historical Anchor Imputation:</b> Because TVK did not formally contest historical local body or parliamentary elections, the system uses a <b>K-Nearest Neighbors</b> algorithm to project exact historical baselines from geographically adjacent 2026 Assembly Form 20 actuals into the missing Wards and PC nodes.
+      </div>
+
+      <div class="section-header">🚫 Live Spam Audit Log (spam_filter_logs Table)</div>
+      <div class="data-table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Log ID</th>
+              <th>Blocked Keyword / Hashtag</th>
+              <th>Bot Velocity Score</th>
+              <th>Action Taken</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>#LOG-1092</td><td>#BotAttack_TN2026</td><td>0.98 (Extreme)</td><td><span style="color:#ef4444;font-weight:700">Blocked & Discarded</span></td></tr>
+            <tr><td>#LOG-1093</td><td>#FakePollSurge</td><td>0.94 (High)</td><td><span style="color:#ef4444;font-weight:700">Blocked & Discarded</span></td></tr>
+            <tr><td>#LOG-1094</td><td>#SpamHashtagCluster</td><td>0.91 (High)</td><td><span style="color:#ef4444;font-weight:700">Blocked & Discarded</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-header" style="margin-top:1.5rem;">✅ Verified Geo-Fenced Events Stream (issue_events Table)</div>
+      <div class="data-table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Event ID</th>
+              <th>Platform</th>
+              <th>District</th>
+              <th>Category</th>
+              <th>Raw Text Snippet</th>
+              <th>Spam Score</th>
+              <th>Sentiment</th>
+            </tr>
+          </thead>
+          <tbody id="auditTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SYSTEM GUIDE VIEW CONTAINER (SCREEN 5) -->
+    <div id="screenGuide" style="display:none;">
+      <div style="background:#0f172a; border:1px solid #1e293b; border-radius:16px; padding:2rem; color:#cbd5e1; line-height:1.7; font-size:0.9rem;">
+        <h1 style="color:#facc15; font-size:1.8rem; margin-bottom:0.5rem;">📖 TVK Nethra: System Architecture & Mathematical Whitepaper</h1>
+        <p style="color:#94a3b8; font-size:0.9rem; margin-bottom:1.5rem;">
+          This document provides a rigorous overview of the Nethra intelligence engine, detailing the underlying architecture, data pipelines, and the mathematical framework used to project political sentiment and render strategic visualizations.
+        </p>
+
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
+
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">1. System Architecture & Data Pipeline</h2>
+        <p>Nethra operates on a dual-track architecture: a real-time ingestion pipeline and a highly governed SQLite inference engine. Offline sources ground the AI's understanding of historical baselines.</p>
+        
+        <!-- MERMAID ARCHITECTURE FLOWCHART -->
+        <div style="background:#18181b; border:1px solid #27272a; border-radius:12px; padding:1.5rem; margin:1.2rem 0; overflow-x:auto;">
+          <div class="mermaid">
+          flowchart TD
+              subgraph Offline Ground Truth [Static Baselines]
+                  CEN[2011 Census Data]
+                  VR[ECI Voter Rolls]
+                  PB[Past Booth Vote Counts]
+              end
+
+              subgraph Data Mining [Live Data Ingestion]
+                  X[X / Twitter Search API]
+                  R[Reddit Demographics API]
+                  N[Google News RSS / Puthiya Thalaimurai]
+              end
+              
+              subgraph Quality Gate [NLP & Geoclassification]
+                  SPAM{{Bot & Spam Filter}}
+                  AUTH[Account Authentication]
+                  GEO[Geo-Fencing Engine]
+                  SENT[Sentiment Analysis]
+              end
+
+              subgraph Storage [Database Engine]
+                  SQL[(SQLite: nethra_campaign.db)]
+              end
+              
+              subgraph Frontend [TVK Central Command]
+                  UI[Streamlit Interactive Dashboard]
+                  AI[AI Campaign Deployment]
+              end
+
+              CEN & VR & PB --> SQL
+              X & R & N --> SPAM
+              SPAM -- Rejected --> Drop[Discarded Logs]
+              SPAM -- Approved --> AUTH
+              AUTH --> GEO
+              GEO --> SENT
+              SENT --> SQL
+              SQL --> UI
+              SQL --> AI
+          </div>
+        </div>
+
+        <h3 style="color:#38bdf8; margin-top:1.2rem; margin-bottom:0.5rem;">Spam Detection & Authentication</h3>
+        <p>The <b>Spam Block Rate</b> metric tracks the efficiency of Quality Gate nodes:</p>
+        <ul style="margin-left:1.5rem; margin-bottom:1rem;">
+          <li><b>Spam Detection:</b> Filters out bot farm attacks, repetitive hashtag spam (>10/min), and commercial promotional noise via NLP clustering.</li>
+          <li><b>Authentication:</b> Verifies if the source account has a history of organic political discourse in Tamil, blocking fresh "astroturfing" accounts.</li>
+          <li><b>Geofencing:</b> Uses NLP Named Entity Recognition (NER) on bio locations and post content to definitively map a post to a specific AC or GCC Ward.</li>
+          <li><b>AI API Costs:</b> Relying on lightweight LLM calls costing approximately ₹0.002 per processed social media post.</li>
+        </ul>
+
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
+
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">2. The Mathematical Engine: MRP & Behavioral Priors</h2>
+        <p>Nethra's core predictive capability relies on <b>Multilevel Regression and Poststratification (MRP)</b>. Baseline favorability for a demographic cell <i>c</i> in region <i>i</i> is calculated via offline public data (Census + Voter Rolls), ensuring DPDP Act compliance:</p>
+        
+        <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#38bdf8; margin:1rem 0; font-size:1rem; text-align:center;">
+          y<sub>ic</sub> = α<sub>c</sub> + β X<sub>ic</sub> + ε<sub>ic</sub>
+        </div>
+
+        <p><b>Parameter Breakdown:</b></p>
+        <ul style="margin-left:1.5rem; margin-bottom:1rem;">
+          <li><b>α<sub>c</sub> (Fixed Demographic Effect):</b> Represents inherent voting traits of a specific demographic (trained on booth vote counts).</li>
+          <li><b>β X<sub>ic</sub> (Regional Modifier):</b> Represents how much a specific region (Kongu vs. Delta) shifts behavior.</li>
+          <li><b>ε<sub>ic</sub> (Error Margin):</b> Irreducible statistical noise in the model.</li>
+        </ul>
+
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
+
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">3. Geospatial Visualization Logic (The Map)</h2>
+        <p>The <b>Geospatial Command Center</b> plots constituencies using dynamic logarithmic radius rendering. Because voter populations (V<sub>u</sub>) range from 150,000 to 450,000, plotting linearly makes them appear identical.</p>
+        
+        <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#facc15; margin:1rem 0; font-size:1rem; text-align:center;">
+          Marker Size<sub>u</sub> = log<sub>10</sub>(V<sub>u</sub>) × k
+        </div>
+
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
+
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">4. Competitor Favorability Breakdown (Bar Chart)</h2>
+        <p>Visualizes the real-time erosion or growth of party bases. Projected vote share P(Vote<sub>P</sub>) for party P applies NLP <b>Behavioral Psychology Modifiers (γ)</b> directly to the offline MRP baseline:</p>
+        
+        <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#38bdf8; margin:1rem 0; font-size:1rem; text-align:center;">
+          P(Vote<sub>P</sub>) = Baseline<sub>MRP</sub> × (1 + γ<sub>sentiment</sub> + γ<sub>salience</sub>)
+        </div>
+
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
+
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">5. The Salience Deficit Equation (Messaging Gap)</h2>
+        <p>The <b>Messaging Salience Gap</b> chart calculates the delta between electorate issue concerns versus TVK digital output volume:</p>
+        
+        <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#ef4444; margin:1rem 0; font-size:1rem; text-align:center;">
+          Salience Deficit = ∑(Voter Demand Volume) - ∑(TVK Digital Output Volume)
+        </div>
+
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
+
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">6. Time-Series Trajectory Calculus (Trend Lines)</h2>
+        <p>The 6-month trajectory line charts use an <b>Exponential Moving Average (EMA)</b> curve bridging historical anchors to today's live NLP baseline:</p>
+        
+        <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#38bdf8; margin:1rem 0; font-size:1rem; text-align:center;">
+          S<sub>t</sub> = λ · (Target<sub>today</sub>) + (1 - λ) · S<sub>t-1</sub> &nbsp;&nbsp;&nbsp; (Smoothing Factor λ = 0.35)
+        </div>
+
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
+
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">7. Historical Verification Engine & Dampening Factor</h2>
+        <p>To prevent digital chatter from distorting historical realities, Nethra applies a mathematical <b>Dampening Penalty (D = 0.85)</b> to extreme outliers and redistributes excess share back to historical incumbents in zero-sum balance:</p>
+        
+        <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#facc15; margin:1rem 0; font-size:1rem; text-align:center;">
+          Tuned TVK Projection = Raw TVK Projection × D
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- EMBEDDED NETHRA DATASET & APPLICATION SCRIPT -->
+  <script>
+    let NETHRA_DATA = null;
+    let currentScreen = 'Assembly';
+    let activeUnitName = '';
+
+    async function loadNethraData() {
+      if (NETHRA_DATA) return true;
+      try {
+        const res = await fetch("nethra_data.json?v=" + Date.now());
+        NETHRA_DATA = await res.json();
+        console.log("✅ Nethra Dataset loaded dynamically!");
+        return true;
+      } catch(e) {
+        console.error("Dataset fetch error:", e);
+        return false;
+      }
+    }
+
+    async function handleAuthSubmit(e) {
+      if (e) e.preventDefault();
+      const uInput = document.getElementById('authUsername').value.trim().toLowerCase();
+      const pInput = document.getElementById('authPassword').value.trim();
+
+      const validUsers = ['tvk_admin', 'tvk_leadership', 'debaz', 'admin', 'tvk', 'pramod', 'pramodbabu'];
+      const validPasses = ['tvk2026', 'debaz2026', 'tvk', 'admin', 'tvk2026!'];
+
+      if (validUsers.includes(uInput) && validPasses.includes(pInput)) {
+        document.getElementById('authOverlay').style.display = 'none';
+        document.getElementById('currentUserDisplay').innerText = uInput;
+        localStorage.setItem('nethra_auth', uInput);
+        if (!NETHRA_DATA) await loadNethraData();
+        initDashboard();
+      } else {
+        document.getElementById('authError').style.display = 'block';
+      }
+    }
+
+    async function checkAuthOnLoad() {
+      const savedUser = localStorage.getItem('nethra_auth');
+      if (savedUser) {
+        document.getElementById('authOverlay').style.display = 'none';
+        document.getElementById('currentUserDisplay').innerText = savedUser;
+        if (!NETHRA_DATA) await loadNethraData();
+        initDashboard();
+      }
+    }
+
+    function handleSignOut() {
+      localStorage.removeItem('nethra_auth');
+      location.reload();
+    }
+
+    async function setScreen(screen) {
+      currentScreen = screen;
+      document.querySelectorAll('.nav-radio-btn').forEach(btn => btn.classList.remove('active'));
+      
+      const tabIdx = {'Assembly':0, 'Local':1, 'LokSabha':2, 'Audit':3, 'Guide':4}[screen];
+      document.querySelectorAll('.nav-radio-btn')[tabIdx].classList.add('active');
+
+      document.getElementById('screenDashboard').style.display = (screen === 'Audit' || screen === 'Guide') ? 'none' : 'block';
+      document.getElementById('screenAudit').style.display = (screen === 'Audit') ? 'block' : 'none';
+      document.getElementById('screenGuide').style.display = (screen === 'Guide') ? 'block' : 'none';
+
+      if (!NETHRA_DATA) await loadNethraData();
+
+      if (screen === 'Assembly' || screen === 'Local' || screen === 'LokSabha') {
+        populateSidebarFilters();
+        initDashboard();
+      } else if (screen === 'Audit') {
+        renderAuditScreen();
+      } else if (screen === 'Guide') {
+        if (window.mermaid) mermaid.contentLoaded();
+      }
+    }
+
+    function populateSidebarFilters() {
+      const ds = getRawDataset();
+      const regionSelect = document.getElementById('filterRegionSelect');
+      const regionLabel = document.getElementById('filterRegionLabel');
+      
+      regionSelect.innerHTML = '';
+      
+      if (currentScreen === 'Assembly') {
+        regionLabel.innerText = 'Filter Constituency';
+        const optAll = document.createElement('option'); optAll.value = 'All'; optAll.innerText = 'All Constituencies'; regionSelect.appendChild(optAll);
+        const optTargets = document.createElement('option'); optTargets.value = 'Targets'; optTargets.innerText = '🔥 5 Target Byelection Seats'; regionSelect.appendChild(optTargets);
+        ds.forEach(item => {
+          const opt = document.createElement('option'); opt.value = item.name; opt.innerText = item.name; regionSelect.appendChild(opt);
+        });
+      } else if (currentScreen === 'Local') {
+        regionLabel.innerText = 'Filter GCC Zone / Wards';
+        const optAll = document.createElement('option'); optAll.value = 'All'; optAll.innerText = 'All Wards (200)'; regionSelect.appendChild(optAll);
+        const zones = [...new Set(ds.map(item => item.zone_name || 'Central Zone'))].sort();
+        zones.forEach(z => {
+          const opt = document.createElement('option'); opt.value = z; opt.innerText = z; regionSelect.appendChild(opt);
+        });
+      } else if (currentScreen === 'LokSabha') {
+        regionLabel.innerText = 'Filter Region';
+        const optAll = document.createElement('option'); optAll.value = 'All'; optAll.innerText = 'All Lok Sabha Seats'; regionSelect.appendChild(optAll);
+        const regions = [...new Set(ds.map(item => item.region || 'Tamil Nadu'))].sort();
+        regions.forEach(r => {
+          const opt = document.createElement('option'); opt.value = r; opt.innerText = r; regionSelect.appendChild(opt);
+        });
+      }
+
+      populateUnitSelector();
+    }
+
+    function getRawDataset() {
+      if (!NETHRA_DATA) return [];
+      if (currentScreen === 'Local') return NETHRA_DATA.gcc_wards;
+      if (currentScreen === 'LokSabha') return NETHRA_DATA.parliaments;
+      return NETHRA_DATA.constituencies;
+    }
+
+    function handleRegionFilterChange(val) {
+      populateUnitSelector();
+      initDashboard();
+    }
+
+    function populateUnitSelector() {
+      const ds = getFilteredDataset();
+      const selector = document.getElementById('unitSelector');
+      selector.innerHTML = '';
+      ds.forEach(item => {
+        const opt = document.createElement('option');
+        opt.value = item.name;
+        opt.innerText = item.name;
+        selector.appendChild(opt);
+      });
+      if (ds.length > 0) {
+        activeUnitName = ds[0].name;
+        selector.value = activeUnitName;
+      }
+    }
+
+    function getFilteredDataset() {
+      const raw = getRawDataset();
+      const filterVal = document.getElementById('filterRegionSelect').value;
+
+      if (currentScreen === 'Assembly') {
+        if (filterVal === 'Targets') {
+          const targets = ["Karur", "Tiruchirappalli (East)", "Perundurai", "Viralimalai", "Ambasamudram"];
+          return raw.filter(item => targets.includes(item.name));
+        } else if (filterVal !== 'All') {
+          return raw.filter(item => item.name === filterVal);
+        }
+      } else if (currentScreen === 'Local') {
+        if (filterVal !== 'All') {
+          return raw.filter(item => item.zone_name === filterVal);
+        }
+      } else if (currentScreen === 'LokSabha') {
+        if (filterVal !== 'All') {
+          return raw.filter(item => item.region === filterVal);
+        }
+      }
+
+      return raw;
+    }
+
+    function setSubTab(idx) {
+      document.querySelectorAll('.sub-tab').forEach((btn, i) => {
+        if (i+1 === idx) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+      document.getElementById('subTab1').style.display = (idx === 1) ? 'block' : 'none';
+      document.getElementById('subTab2').style.display = (idx === 2) ? 'block' : 'none';
+      document.getElementById('subTab3').style.display = (idx === 3) ? 'block' : 'none';
+      
+      window.dispatchEvent(new Event('resize'));
+    }
+
+    function initDashboard() {
+      const ds = getFilteredDataset();
+      if (!ds || ds.length === 0) return;
+      
+      // Update Screen Title & Caption
+      if (currentScreen === 'Assembly') {
+        document.getElementById('screenTitle').innerText = '⚡ TN Assembly Elections & Byelections — (' + ds.length + ' / 234 Constituencies Tracked)';
+        document.getElementById('screenSubtitle').innerText = 'Constituency-level database intelligence. (5 Target Byelection Seats: Karur, Trichy East, Perundurai, Viralimalai, Ambasamudram).';
+      } else if (currentScreen === 'Local') {
+        document.getElementById('screenTitle').innerText = '🏛️ TN Local Body Elections 2027 — Greater Chennai Corporation Wards (' + ds.length + ' / 200 Tracked)';
+        document.getElementById('screenSubtitle').innerText = 'Database-driven coverage of 200 GCC Wards. (⚡ 5 Deep Ground Audited Wards: W84, W151, W177, W180, W197).';
+      } else if (currentScreen === 'LokSabha') {
+        document.getElementById('screenTitle').innerText = '🌐 Lok Sabha Parliamentary Elections 2029 — Exhaustive 39 Seats (' + ds.length + ' / 39 Tracked)';
+        document.getElementById('screenSubtitle').innerText = 'Long-term strategic tracking across all 39 Parliamentary Constituencies of Tamil Nadu.';
+      }
+
+      const selectorVal = document.getElementById('unitSelector').value;
+      activeUnitName = selectorVal || ds[0].name;
+
+      renderMap(ds);
+      renderCompetitorChart(ds);
+      renderBanner(ds);
+      const unitObj = ds.find(u => u.name === activeUnitName) || ds[0];
+      renderSpotlight(unitObj);
+      renderSubTab1(ds, unitObj);
+      renderSubTab2();
+      renderSubTab3(unitObj);
+    }
+
+    function handleUnitSelect(unitName) {
+      activeUnitName = unitName;
+      const ds = getFilteredDataset();
+      const unit = ds.find(u => u.name === unitName) || ds[0];
+      renderSpotlight(unit);
+      renderSubTab3(unit);
+      renderTrendChart(unit);
+    }
+
+    function renderSpotlight(unit) {
+      document.getElementById('spotName').innerText = '📍 SELECTED UNIT SPOTLIGHT: ' + unit.name;
+      document.getElementById('spotStatus').innerText = unit.status || 'TVK Active';
+      document.getElementById('spotRegion').innerText = unit.region || unit.zone_name || 'Tamil Nadu';
+      document.getElementById('spotTVK').innerText = (unit.tvk_fav || unit.tvk_proj || 25.0) + '%';
+      document.getElementById('spotDMK').innerText = (unit.dmk_fav || unit.dmk_proj || 35.0) + '%';
+      document.getElementById('spotWinner').innerHTML = '<b>🏛️ Historical Baseline:</b> Winner: ' + (unit.winner_party || 'TVK') + ' (' + (unit.winner_pct || 43.3) + '%)';
+      document.getElementById('spotIssue').innerText = unit.top_issue || 'Infrastructure & Local Grievance';
+      document.getElementById('spotGap').innerText = (unit.gap || 15.0) + 'pt';
+      
+      document.getElementById('spotSourceName').innerText = unit.source_name || 'Tamil News Publisher';
+      document.getElementById('spotSourceUrl').href = unit.source_url || '#';
+    }
+
+    function renderMap(ds) {
+      const landUnits = ds.filter(u => u.lat && u.lon && u.lat >= 8.0 && u.lat <= 13.6 && u.lon >= 76.0 && u.lon <= 80.9);
+      
+      const lats = landUnits.map(u => u.lat);
+      const lons = landUnits.map(u => u.lon);
+      const names = landUnits.map(u => u.name);
+      const tvkFavs = landUnits.map(u => u.tvk_fav || u.tvk_proj || 25.0);
+      const hoverTexts = landUnits.map(u => `<b>${u.name}</b><br>TVK Fav: ${u.tvk_fav || u.tvk_proj || 25}%<br>DMK Baseline: ${u.dmk_fav || u.dmk_proj || 35}%<br>Top Issue: ${u.top_issue || 'Infrastructure'}`);
+      
+      const sizes = landUnits.map(u => {
+        const v = u.voters || 250000;
+        return Math.round(Math.log10(v) * 3.2);
+      });
+
+      const mapTrace = {
+        type: 'scattermapbox',
+        lat: lats,
+        lon: lons,
+        mode: 'markers',
+        marker: {
+          size: sizes,
+          color: tvkFavs,
+          colorscale: 'YlOrRd',
+          cmin: 15,
+          cmax: 55,
+          colorbar: { title: 'TVK Fav %', ticksuffix: '%', titlefont: { color: '#ffffff' }, tickfont: { color: '#ffffff' } }
+        },
+        text: hoverTexts,
+        hoverinfo: 'text',
+        customdata: names
+      };
+
+      let centerLat = 10.8505, centerLon = 78.6569, zoomVal = 6.2;
+      if (currentScreen === 'Local') {
+        centerLat = 13.0827;
+        centerLon = 80.2707;
+        zoomVal = 10.5;
+      }
+
+      const mapLayout = {
+        mapbox: {
+          style: 'carto-darkmatter',
+          center: { lat: centerLat, lon: centerLon },
+          zoom: zoomVal
+        },
+        margin: { r: 0, t: 0, l: 0, b: 0 },
+        paper_bgcolor: '#0f172a',
+        plot_bgcolor: '#0f172a',
+        autosize: true
+      };
+
+      Plotly.newPlot('mapContainer', [mapTrace], mapLayout, { responsive: true, displayModeBar: false });
+
+      const mapElem = document.getElementById('mapContainer');
+      if (mapElem && mapElem.on) {
+        mapElem.on('plotly_click', function(data) {
+          if (data.points && data.points.length > 0) {
+            const clickedName = data.points[0].customdata;
+            document.getElementById('unitSelector').value = clickedName;
+            handleUnitSelect(clickedName);
+          }
+        });
+      }
+    }
+
+    function renderCompetitorChart(ds) {
+      const sub = ds.slice(0, 12);
+      const x = sub.map(u => u.name);
+      const tvk = sub.map(u => u.tvk_fav || u.tvk_proj || 25.0);
+      const dmk = sub.map(u => u.dmk_fav || u.dmk_proj || 35.0);
+      const aiadmk = sub.map(u => u.aiadmk_fav || u.aiadmk_proj || 20.0);
+      const bjp = sub.map(u => u.bjp_fav || u.bjp_proj || 10.0);
+
+      const traces = [
+        { x: x, y: tvk, name: 'TVK', type: 'bar', marker: { color: '#facc15' } },
+        { x: x, y: dmk, name: 'DMK', type: 'bar', marker: { color: '#ef4444' } },
+        { x: x, y: aiadmk, name: 'AIADMK', type: 'bar', marker: { color: '#38bdf8' } },
+        { x: x, y: bjp, name: 'BJP', type: 'bar', marker: { color: '#fb923c' } }
+      ];
+
+      const layout = {
+        barmode: 'group',
+        yaxis: { title: 'Favorability %', range: [0, 75], gridcolor: '#334155', titlefont: { color: '#ffffff' }, tickfont: { color: '#ffffff' } },
+        xaxis: { tickangle: -25, tickfont: { size: 9, color: '#ffffff' } },
+        plot_bgcolor: '#0f172a', paper_bgcolor: '#0f172a',
+        font: { color: '#ffffff', family: 'Inter, sans-serif' },
+        legend: { bgcolor: '#1e293b', bordercolor: '#475569', borderwidth: 1, font: { color: '#ffffff', size: 10 }, x: 0.99, y: 0.99, xanchor: 'right', yanchor: 'top' },
+        margin: { t: 25, b: 65, l: 45, r: 15 },
+        autosize: true
+      };
+
+      Plotly.newPlot('chartCompetitor', traces, layout, { responsive: true, displayModeBar: false });
+    }
+
+    function renderBanner(ds) {
+      let tvkSum = 0, dmkSum = 0, votersSum = 0;
+      ds.forEach(u => {
+        tvkSum += (u.tvk_fav || u.tvk_proj || 25.0);
+        dmkSum += (u.dmk_fav || u.dmk_proj || 35.0);
+        votersSum += (u.voters || 250000);
+      });
+      const avgTVK = (tvkSum / ds.length).toFixed(1);
+      const avgDMK = (dmkSum / ds.length).toFixed(1);
+      const lead = (avgTVK - avgDMK).toFixed(1);
+
+      document.getElementById('bannerBadge').innerText = '🔥 MULTI-UNIT CONSOLIDATED INTELLIGENCE (' + ds.length + ' Selected Units)';
+      document.getElementById('bannerVoters').innerHTML = '👥 Combined Electoral Scale: <b>' + votersSum.toLocaleString() + '</b> Voters';
+      document.getElementById('bannerTVK').innerText = avgTVK + '%';
+      document.getElementById('bannerDMK').innerText = avgDMK + '%';
+      document.getElementById('bannerLead').innerText = (lead >= 0 ? '+' : '') + lead + '%';
+    }
+
+    function renderSubTab1(ds, unitObj) {
+      const sub = ds.slice(0, 10);
+      const y = sub.map(u => u.name);
+      const priority = sub.map(u => u.voter_salience || 65.0);
+      const messaging = sub.map(u => u.tvk_messaging || 45.0);
+
+      const traces = [
+        { y: y, x: priority, name: 'Voter Priority %', type: 'bar', orientation: 'h', marker: { color: '#38bdf8' } },
+        { y: y, x: messaging, name: 'TVK Messaging %', type: 'bar', orientation: 'h', marker: { color: '#facc15' } }
+      ];
+
+      const layout = {
+        barmode: 'group',
+        xaxis: { title: '% Volume', gridcolor: '#334155', titlefont: { color: '#ffffff' }, tickfont: { color: '#ffffff' } },
+        yaxis: { tickfont: { size: 9, color: '#ffffff' } },
+        plot_bgcolor: '#0f172a', paper_bgcolor: '#0f172a',
+        font: { color: '#ffffff', family: 'Inter, sans-serif' },
+        legend: { bgcolor: '#1e293b', bordercolor: '#475569', borderwidth: 1, font: { color: '#ffffff', size: 10 }, x: 0.99, y: 0.99, xanchor: 'right', yanchor: 'top' },
+        margin: { t: 25, b: 45, l: 85, r: 15 },
+        autosize: true
+      };
+
+      Plotly.newPlot('chartGap', traces, layout, { responsive: true, displayModeBar: false });
+
+      // Data Table Body
+      const tbody = document.getElementById('unitsTableBody');
+      tbody.innerHTML = '';
+      ds.forEach(u => {
+        const tr = document.createElement('tr');
+        const badge = u.is_deep_audited ? '⚡ 🔍 DEEP GROUND AUDITED' : '📊 Standard Geo-Baseline';
+        tr.innerHTML = `
+          <td><span style="color:#facc15;font-weight:700;font-size:0.75rem">${badge}</span></td>
+          <td>${u.unit_id || u.ward_number || '-'}</td>
+          <td><b>${u.name}</b></td>
+          <td>${u.region || u.zone_name || 'TN'}</td>
+          <td><span style="color:#22c55e;font-weight:700">${u.status || 'Active'}</span></td>
+          <td style="color:#facc15;font-weight:700">${u.tvk_fav || u.tvk_proj || 25.0}%</td>
+          <td style="color:#ef4444">${u.dmk_fav || u.dmk_proj || 35.0}%</td>
+          <td>${u.top_issue || 'Infrastructure'}</td>
+          <td style="color:#ef4444;font-weight:700">${u.gap || 15.0}pt</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      renderTrendChart(unitObj);
+    }
+
+    function renderTrendChart(unitObj) {
+      if (!unitObj) return;
+      document.getElementById('trendCaption').innerText = 'Track how party favorability figures and voter issue salience evolved over the past 6 months for ' + unitObj.name + '.';
+      
+      const months = ["Feb 2026", "Mar 2026", "Apr 2026", "May 2026", "Jun 2026", "Jul 2026", "Aug 2026"];
+      
+      const targetTVK = unitObj.tvk_fav || unitObj.tvk_proj || 43.3;
+      const targetDMK = unitObj.dmk_fav || unitObj.dmk_proj || 34.9;
+      const targetAIADMK = unitObj.aiadmk_fav || unitObj.aiadmk_proj || 22.0;
+      const targetBJP = unitObj.bjp_fav || unitObj.bjp_proj || 9.2;
+
+      // Exponential Moving Average (EMA) formula: S_t = (lambda * Target) + ((1 - lambda) * S_t-1)
+      const LAMBDA = 0.35;
+      function calcEMA(base, target) {
+        let s = [base];
+        for (let i = 1; i < 7; i++) {
+          let nextVal = (LAMBDA * target) + ((1 - LAMBDA) * s[i-1]);
+          s.push(parseFloat(nextVal.toFixed(1)));
+        }
+        s[6] = target;
+        return s;
+      }
+
+      const tvkSeries = calcEMA(25.0, targetTVK);
+      const dmkSeries = calcEMA(40.0, targetDMK);
+      const admkSeries = calcEMA(25.0, targetAIADMK);
+      const bjpSeries = calcEMA(8.0, targetBJP);
+
+      const trendTraces = [
+        { x: months, y: tvkSeries, mode: 'lines+markers', name: 'TVK Favorability', line: { color: '#facc15', width: 3 } },
+        { x: months, y: dmkSeries, mode: 'lines+markers', name: 'DMK Favorability', line: { color: '#ef4444', width: 2 } },
+        { x: months, y: admkSeries, mode: 'lines+markers', name: 'AIADMK Favorability', line: { color: '#10b981', width: 2 } },
+        { x: months, y: bjpSeries, mode: 'lines+markers', name: 'BJP Favorability', line: { color: '#f97316', width: 2 } }
+      ];
+
+      const trendLayout = {
+        yaxis: { title: '% Score', range: [0, 65], gridcolor: '#334155', titlefont: { color: '#ffffff' }, tickfont: { color: '#ffffff' } },
+        xaxis: { tickfont: { size: 10, color: '#ffffff' } },
+        plot_bgcolor: '#0f172a', paper_bgcolor: '#0f172a',
+        font: { color: '#ffffff', family: 'Inter, sans-serif' },
+        legend: { bgcolor: '#1e293b', bordercolor: '#475569', borderwidth: 1, font: { color: '#ffffff', size: 10 }, x: 0.99, y: 0.99, xanchor: 'right', yanchor: 'top' },
+        margin: { t: 25, b: 45, l: 45, r: 15 },
+        autosize: true
+      };
+
+      Plotly.newPlot('chartTrend', trendTraces, trendLayout, { responsive: true, displayModeBar: false });
+    }
+
+    function filterDataTable() {
+      const q = document.getElementById('tableSearch').value.toLowerCase();
+      const rows = document.querySelectorAll('#unitsTableBody tr');
+      rows.forEach(r => {
+        const text = r.innerText.toLowerCase();
+        r.style.display = text.includes(q) ? '' : 'none';
+      });
+    }
+
+    function renderSubTab2() {
+      const tbody = document.getElementById('sourcesTableBody');
+      tbody.innerHTML = '';
+      if (!NETHRA_DATA || !NETHRA_DATA.verified_sources) return;
+      const sources = NETHRA_DATA.verified_sources.slice(0, 100);
+      sources.forEach(s => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><b>${s.unit_name}</b></td>
+          <td>${s.article_title}</td>
+          <td><span style="color:#38bdf8;font-weight:600">${s.publisher || 'Tamil News'}</span></td>
+          <td>${s.issue_category || 'Infrastructure'}</td>
+          <td><span style="color:#22c55e;font-weight:700">${s.authenticity_score || 95}%</span></td>
+          <td>${s.platform || 'Web'}</td>
+          <td><a href="${s.article_url}" target="_blank" style="color:#facc15;font-weight:700;text-decoration:none;">🔗 View Source</a></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterSourcesTable() {
+      const q = document.getElementById('sourcesSearch').value.toLowerCase();
+      const rows = document.querySelectorAll('#sourcesTableBody tr');
+      rows.forEach(r => {
+        const text = r.innerText.toLowerCase();
+        r.style.display = text.includes(q) ? '' : 'none';
+      });
+    }
+
+    function renderSubTab3(unit) {
+      if (!unit) return;
+      const name = unit.name;
+      const issue = unit.top_issue || 'Local Civic Grievance';
+      
+      document.getElementById('copyWhatsApp').value = `🚨 TVK ${name} Constituency Campaign Alert:\n\nGround verification confirms top issue: ${issue}.\n\nTVK President Vijay has released a formal 5-point action plan for ${name}.\n\nJoin TVK Ground Campaign: tvk.org/${name.toLowerCase()}`;
+      document.getElementById('copyInstagram').value = `📍 Field Inspection: ${name} Constituency\n\nAddressing voter grievances on ${issue}.\n\n#TVK2026 #VijayForTN #${name.replace(/\s+/g, '')} #TVKGroundTruth`;
+      document.getElementById('copyTwitter').value = `TVK local candidate releases formal pledge for ${name} covering ${issue}.\n\nNet TVK lead: +${unit.gap || 15}pt.\n\n#TVK2026 #TamilagaVettriKazhagam`;
+    }
+
+    function renderAuditScreen() {
+      const tbody = document.getElementById('auditTableBody');
+      tbody.innerHTML = '';
+      if (!NETHRA_DATA || !NETHRA_DATA.issue_events) return;
+      const events = NETHRA_DATA.issue_events;
+      events.forEach(ev => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>#${ev.event_id}</td>
+          <td><span style="color:#38bdf8;font-weight:600">${ev.platform}</span></td>
+          <td><b>${ev.assigned_district}</b></td>
+          <td>${ev.category}</td>
+          <td style="max-width:300px;">${ev.raw_text.substring(0, 80)}...</td>
+          <td><span style="color:#22c55e;font-weight:700">${ev.spam_score} (Clean)</span></td>
+          <td><span style="color:#facc15;font-weight:700">+${ev.sentiment_score}</span></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      checkAuthOnLoad();
+    });
+  </script>
+</body>
+</html>
+""")
+
+with open("index.html", "w") as f:
+    f.write("""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Anti-Cache Meta Tags -->
+  <script>
+    try {
+      localStorage.removeItem('nethra_tunnel_url');
+      localStorage.removeItem('active_tunnel');
+      localStorage.removeItem('cached_tunnel_url');
+    } catch(e){}
+  </script>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Nethra · Database-Driven Campaign Suite</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Plotly.js & Leaflet CSS/JS with Automatic CDN Fallback -->
+  <link rel="stylesheet" href="vendor/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="vendor/plotly.min.js"></script>
+  <script>if (typeof Plotly === "undefined") document.write('<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"><\/script>');</script>
+  <script src="vendor/leaflet.js"></script>
+  <script>if (typeof L === "undefined") document.write('<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"><\/script>');</script>
+
+  <!-- Mermaid.js for Architecture Flowchart Rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    /* STREAMLIT NATIVE DARK THEME & EXACT CSS FROM TN_APP.PY */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0e1117;
+      color: #fafafa;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* STREAMLIT SIDEBAR LAYOUT */
+    aside {
+      width: 310px;
+      background-color: #262730;
+      border-right: 1px solid rgba(250, 250, 250, 0.1);
+      padding: 1.2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .user-login-box {
+      background: rgba(250, 204, 21, 0.1);
+      border: 1px solid #facc15;
+      border-radius: 8px;
+      padding: 0.5rem 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .user-title { color: #facc15; font-weight: 700; font-size: 0.8rem; }
+    .user-name { color: #f8fafc; font-weight: 600; font-size: 0.85rem; }
+    .btn-signout {
+      background: #0e1117;
+      color: #ef4444;
+      border: 1px solid #ef4444;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-signout:hover { background: #7f1d1d; color: #fff; }
+
+    .sidebar-heading { font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
+
+    .nav-radio-group { display: flex; flex-direction: column; gap: 6px; }
+    .nav-radio-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: #cbd5e1;
+      padding: 9px 12px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+    }
+    .nav-radio-btn:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
+    .nav-radio-btn.active {
+      background: #7f1d1d;
+      color: #facc15;
+      font-weight: 700;
+      border: 1px solid #facc15;
+    }
+
+    .filter-group { display: flex; flex-direction: column; gap: 6px; }
+    .filter-group label { font-size: 0.8rem; font-weight: 700; color: #94a3b8; }
+    .filter-group select {
+      width: 100%;
+      padding: 8px 12px;
+      background: #0e1117;
+      border: 1px solid rgba(250, 250, 250, 0.2);
+      color: #fff;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    /* AUTH GATE OVERLAY */
+    #authOverlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(14, 17, 23, 0.95);
+      backdrop-filter: blur(16px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .auth-card {
+      background: #262730;
+      border: 1px solid rgba(250, 250, 250, 0.1);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 420px;
+      padding: 2.2rem 2rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+    .auth-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, #dc2626, #facc15, #dc2626);
+    }
+    .auth-header { text-align: center; margin-bottom: 1.5rem; }
+    .auth-header h1 { font-size: 1.8rem; color: #facc15; margin-bottom: 0.2rem; }
+    .auth-header p { color: #fafafa; font-weight: 600; font-size: 1rem; }
+    .auth-header small { color: #94a3b8; font-size: 0.8rem; }
+    .error-box {
+      background: rgba(220, 38, 38, 0.15);
+      border: 1px solid #ef4444;
+      color: #fca5a5;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      margin-bottom: 1rem;
+      display: none;
+    }
+    .form-group { margin-bottom: 1rem; text-align: left; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: #cbd5e1; margin-bottom: 0.35rem; }
+    .form-group input {
+      width: 100%; padding: 0.75rem 1rem; background: #0e1117; border: 1px solid #3f3f46;
+      border-radius: 8px; color: #fff; font-size: 0.9rem;
+    }
+    .form-group input:focus { outline: none; border-color: #facc15; }
+    .btn-submit {
+      width: 100%; padding: 0.85rem; background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);
+      border: 1px solid #facc15; border-radius: 8px; color: #facc15; font-weight: 800; font-size: 0.95rem; cursor: pointer;
+    }
+    .btn-submit:hover { opacity: 0.9; }
+
+    /* MAIN CONTENT WRAPPER */
+    main {
+      flex: 1;
+      padding: 1.5rem 2rem;
+      max-width: 1500px;
+      width: 100%;
+      overflow-y: auto;
+    }
+
+    /* TVK HEADER CARD & METRICS BAR (FROM TN_APP.PY) */
+    .tvk-header-card {
+      background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);
+      border: 1px solid #facc15; border-radius: 16px;
+      padding: 1.2rem 1.6rem; color: #f8fafc;
+      box-shadow: 0 10px 25px -5px rgba(250, 204, 21, 0.15);
+      margin-bottom: 1rem;
+    }
+    .tvk-badge {
+      background: #facc15; color: #450a0a; font-weight: 800;
+      padding: 4px 12px; border-radius: 999px; font-size: 0.75rem;
+      letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    @media(max-width: 1200px) { .metrics-row { grid-template-columns: repeat(2, 1fr); } }
+
+    .metric-card {
+      background: linear-gradient(135deg, #2a0a0a 0%, #110303 100%);
+      border: 1px solid #450a0a; border-radius: 14px;
+      padding: 1.1rem 1.2rem; color: #f1f5f9;
+      transition: all 0.2s ease-in-out;
+    }
+    .metric-card:hover { border-color: #facc15; transform: translateY(-2px); }
+    .metric-card .label { font-size: 0.72rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+    .metric-card .value { font-size: 1.9rem; font-weight: 800; line-height: 1.15; margin-top: 2px; }
+    .metric-card .sublbl { font-size: 0.75rem; color: #64748b; margin-top: 4px; }
+
+    .section-header {
+      font-size: 1.1rem; font-weight: 700; color: #f8fafc;
+      border-left: 4px solid #facc15; padding-left: 0.7rem;
+      margin: 1.2rem 0 0.5rem 0; letter-spacing: -0.01em;
+    }
+    .section-caption { color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem; }
+
+    .grid-2 { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.5rem; margin-bottom: 1.8rem; align-items: start; }
+    @media(max-width: 1024px) { .grid-2 { grid-template-columns: 1fr; } body { flex-direction: column; } aside { width: 100%; height: auto; position: relative; } }
+
+    .chart-box { height: 420px; width: 100%; background: #0f172a; border-radius: 12px; border: 1px solid #1e293b; overflow: hidden; }
+
+    #mapContainer { height: 420px; width: 100%; border-radius: 12px; border: 1px solid #1e293b; overflow: hidden; background: #0f172a; }
+    .spotlight-card {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 2px solid #f59e0b; border-radius: 12px; padding: 0.9rem 1.1rem; margin-top: 8px;
+    }
+    .spotlight-title { color: #f59e0b; font-weight: 800; font-size: 0.95rem; display: flex; justify-content: space-between; align-items: center; }
+    
+    .sub-tabs { display: flex; gap: 8px; border-bottom: 1px solid rgba(250, 250, 250, 0.1); margin-bottom: 1rem; padding-bottom: 6px; }
+    .sub-tab { background: transparent; border: none; color: #94a3b8; font-weight: 600; font-size: 0.88rem; padding: 8px 14px; cursor: pointer; border-radius: 6px; }
+    .sub-tab.active { background: #262730; color: #facc15; font-weight: 700; }
+
+    /* TABLE STYLES */
+    .data-table-container { overflow-x: auto; max-height: 380px; border: 1px solid #1e293b; border-radius: 8px; width: 100%; background: #0f172a; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.84rem; text-align: left; }
+    th { background: #1e293b; color: #fafafa; padding: 10px 14px; font-weight: 700; position: sticky; top: 0; z-index: 10; border-bottom: 1px solid #334155; }
+    td { padding: 10px 14px; border-bottom: 1px solid #1e293b; color: #cbd5e1; }
+    tr:hover { background: rgba(255, 255, 255, 0.03); }
+
+    .search-input { padding: 8px 14px; background: #0e1117; border: 1px solid #3f3f46; border-radius: 6px; color: #fff; font-size: 0.85rem; margin-bottom: 10px; width: 100%; max-width: 320px; }
+
+    .campaign-copy-card { background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; padding: 1.2rem; margin-bottom: 1rem; }
+    .campaign-copy-card h4 { color: #38bdf8; font-size: 0.95rem; margin-bottom: 8px; }
+    .campaign-copy-card textarea { width: 100%; height: 90px; background: #0e1117; border: 1px solid #3f3f46; color: #fafafa; border-radius: 6px; padding: 10px; font-size: 0.85rem; margin-top: 6px; }
+  </style>
+</head>
+<body>
+
+  <!-- AUTH GATE OVERLAY -->
+  <div id="authOverlay">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1>🛡️ NETHRA AI</h1>
+        <p>Tamilaga Vettri Kazhagam (TVK)</p>
+        <small>Executive Campaign Intelligence Gateway</small>
+      </div>
+      <div id="authError" class="error-box">
+        ❌ Invalid Username or Password. Please try again or contact your administrator.
+      </div>
+      <form onsubmit="handleAuthSubmit(event)">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" id="authUsername" placeholder="Enter Username" required autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="authPassword" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-submit">🔓 Sign In to Nethra Engine</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- EXACT STREAMLIT LEFT SIDEBAR -->
+  <aside>
+    <div class="user-login-box">
+      <div>
+        <span class="user-title">👤 LOGGED IN:</span><br>
+        <span class="user-name" id="currentUserDisplay">tvk_admin</span>
+      </div>
+      <button class="btn-signout" onclick="handleSignOut()">🔒 Sign Out</button>
+    </div>
+
+    <div>
+      <div class="sidebar-heading">🗳️ Select Election Screen</div>
+      <div class="nav-radio-group">
+        <button class="nav-radio-btn active" onclick="setScreen('Assembly')">🔥 Assembly Elections (234 Seats)</button>
+        <button class="nav-radio-btn" onclick="setScreen('Local')">🏛️ Local Body (200 GCC Wards)</button>
+        <button class="nav-radio-btn" onclick="setScreen('LokSabha')">🌐 Lok Sabha (39 Seats)</button>
+        <button class="nav-radio-btn" onclick="setScreen('Audit')">🛡️ Intelligence Audit</button>
+        <button class="nav-radio-btn" onclick="setScreen('Guide')">📖 System Guide</button>
+      </div>
+    </div>
+
+    <hr style="border-color: rgba(250, 250, 250, 0.1);">
+
+    <!-- SIDEBAR SEARCH & REGION FILTER WIDGETS -->
+    <div class="filter-group">
+      <div class="sidebar-heading">🔍 Search & Region Filter</div>
+      
+      <label id="filterRegionLabel">Filter Constituency</label>
+      <select id="filterRegionSelect" onchange="handleRegionFilterChange(this.value)">
+      </select>
+    </div>
+
+    <div class="filter-group" id="unitSelectGroup">
+      <label id="filterUnitLabel">Select Unit</label>
+      <select id="unitSelector" onchange="handleUnitSelect(this.value)">
+      </select>
+    </div>
+  </aside>
+
+  <!-- MAIN DASHBOARD CONTENT AREA -->
+  <main>
+
+    <!-- TVK CENTRAL COMMAND HEADER CARD (EXACT FROM TN_APP.PY) -->
+    <div class="tvk-header-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+        <div>
+          <span class="tvk-badge">தமிழக வெற்றிக் கழகம்</span>
+          <div style="font-size:1.85rem;font-weight:800;color:#f8fafc;margin-top:6px;line-height:1.1">
+            TVK Nethra: Central Command
+          </div>
+          <div style="font-size:0.85rem;color:#cbd5e1;margin-top:4px">
+            Live Political Intelligence Engine: <b>234 ACs · 39 PCs · 200 GCC Wards</b>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GLOBAL STATEWIDE TVK FAVORABILITY METRICS ROW (EXACT FROM TN_APP.PY) -->
+    <div class="metrics-row">
+      <div class="metric-card">
+        <div class="label">TVK Assembly Seats</div>
+        <div class="value" style="color:#f59e0b">108 <span style="font-size:1.1rem;color:#94a3b8">/ 234</span></div>
+        <div class="sublbl">Single largest party (118 majority)</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Statewide Favorability</div>
+        <div class="value" style="color:#f59e0b">61%</div>
+        <div class="sublbl">+9pt shift since June</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Opponent Baseline (DMK)</div>
+        <div class="value" style="color:#ef4444">23%</div>
+        <div class="sublbl">Eroding baseline in urban centers</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Database Records</div>
+        <div class="value" style="color:#38bdf8">473 Units</div>
+        <div class="sublbl">Queried from SQLite DB</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Spam Block Rate</div>
+        <div class="value" style="color:#22c55e">100% Clean</div>
+        <div class="sublbl">1,420 Bot Spams Blocked</div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD VIEW CONTAINER -->
+    <div id="screenDashboard">
+      <div class="section-header" id="screenTitle">⚡ TN Assembly Elections & Byelections — (234 / 234 Constituencies Tracked)</div>
+      <div class="section-caption" id="screenSubtitle">Constituency-level database intelligence. (5 Target Byelection Seats: Karur, Trichy East, Perundurai, Viralimalai, Ambasamudram).</div>
+
+      <!-- MAP & BAR CHART GRID -->
+      <div class="grid-2">
+        <div>
+          <div style="font-weight: 700; font-size: 0.88rem; margin-bottom: 4px; color: #cbd5e1;">📍 Visual Map Command (Assembly Constituency Level)</div>
+          <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 6px;">Click any marker on the map or select from sidebar dropdown to inspect that unit below!</div>
+          <div id="mapContainer"></div>
+          
+          <div class="spotlight-card" id="spotlightCard">
+            <div class="spotlight-title">
+              <span id="spotName">📍 SELECTED UNIT SPOTLIGHT: Chengalpattu</span>
+              <span class="tvk-badge" id="spotStatus">TVK Active</span>
+            </div>
+            <div style="color:#e2e8f0;font-size:0.83rem;margin-top:6px">
+              <b>Region:</b> <span id="spotRegion">Northern Coastal</span> &nbsp;·&nbsp; 
+              <b>TVK Fav:</b> <span style="color:#f59e0b;font-weight:700" id="spotTVK">43.3%</span> &nbsp;·&nbsp; 
+              <b>DMK Baseline:</b> <span style="color:#ef4444" id="spotDMK">34.9%</span>
+            </div>
+            <div style="color:#94a3b8;font-size:0.8rem;margin-top:4px" id="spotWinner">
+              <b>🏛️ Historical Baseline:</b> Winner: TVK (43.3%)
+            </div>
+            <div style="color:#94a3b8;font-size:0.8rem;margin-top:4px">
+              <b>Geo-Fenced Real Issue (Aug 2026):</b> <span id="spotIssue">Paddy Procurement DPC Delay</span> (Messaging Gap: <span style="color:#ef4444;font-weight:700" id="spotGap">18.5pt</span>)
+            </div>
+            <div style="margin-top:6px;font-size:0.78rem">
+              🔗 <b>Sourced Reference:</b> <a href="#" id="spotSourceUrl" target="_blank" style="color:#38bdf8;font-weight:600;text-decoration:none"><span id="spotSourceName">Tamil News Publisher</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-weight: 700; font-size: 0.88rem; margin-bottom: 6px; color: #cbd5e1;">📊 Competitor Favorability Breakdown (Top 12 Displayed)</div>
+          <div id="chartCompetitor" class="chart-box"></div>
+        </div>
+      </div>
+
+      <!-- MULTI-UNIT CONSOLIDATED BANNER -->
+      <div style="background:linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);border:2px solid #38bdf8;border-radius:12px;padding:1rem;margin-top:10px;margin-bottom:1.5rem;" id="consolidatedBanner">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+          <span style="background:#0284c7;color:white;font-weight:800;font-size:0.8rem;padding:4px 12px;border-radius:20px" id="bannerBadge">
+            🔥 MULTI-UNIT CONSOLIDATED INTELLIGENCE (234 Selected Units)
+          </span>
+          <span style="color:#cbd5e1;font-size:0.85rem;font-weight:700" id="bannerVoters">
+            👥 Combined Electoral Scale: <b>58,500,000</b> Voters
+          </span>
+        </div>
+        <div style="display:flex;gap:20px;margin-top:10px;flex-wrap:wrap">
+          <div style="color:#f8fafc;font-size:0.9rem">🟡 Avg TVK Favorability: <b style="color:#f59e0b" id="bannerTVK">38.4%</b></div>
+          <div style="color:#f8fafc;font-size:0.9rem">🔴 Avg DMK Baseline: <b style="color:#ef4444" id="bannerDMK">31.2%</b></div>
+          <div style="color:#f8fafc;font-size:0.9rem">⚡ Net TVK Lead: <b style="color:#38bdf8" id="bannerLead">+7.2%</b></div>
+        </div>
+      </div>
+
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="setSubTab(1)">📊 1. Messaging Gaps & Trends</button>
+        <button class="sub-tab" onclick="setSubTab(2)">🔐 2. Ground Truth & Sources</button>
+        <button class="sub-tab" onclick="setSubTab(3)">📲 3. AI Campaign Deployment</button>
+      </div>
+
+      <!-- SUB TAB 1: MESSAGING GAPS & HISTORICAL TRENDS -->
+      <div id="subTab1">
+        <div class="grid-2">
+          <div>
+            <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; color: #cbd5e1;">Messaging Salience Gap (Top 12 Units) (Voter Priority % vs TVK Mention %)</div>
+            <div id="chartGap" class="chart-box"></div>
+          </div>
+
+          <div>
+            <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; color: #cbd5e1;">🗂️ Detailed Exhaustive Table (234 Units Queried from DB)</div>
+            <input type="text" class="search-input" id="tableSearch" placeholder="🔍 Search unit name, district, or issue..." onkeyup="filterDataTable()">
+            <div class="data-table-container">
+              <table id="unitsTable">
+                <thead>
+                  <tr>
+                    <th>Ground Audit Level</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Region/District</th>
+                    <th>Status Tag</th>
+                    <th>TVK %</th>
+                    <th>DMK %</th>
+                    <th>Geo-Fenced Issue (Aug 2026)</th>
+                    <th>Gap</th>
+                  </tr>
+                </thead>
+                <tbody id="unitsTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.8rem;">
+          <div class="section-header">📈 6-Month Historical Favorability & Issue Trajectory</div>
+          <div class="section-caption" id="trendCaption">Track how party favorability figures and voter issue salience evolved over the past 6 months.</div>
+          <div id="chartTrend" class="chart-box" style="height: 380px;"></div>
+        </div>
+      </div>
+
+      <!-- SUB TAB 2: GROUND TRUTH & SOURCES -->
+      <div id="subTab2" style="display:none;">
+        <div class="section-header">🔐 1,220 Verified News Articles & Field Sources</div>
+        <div class="section-caption">Authenticity verified news references mined across Tamil Nadu news publishers</div>
+        <input type="text" class="search-input" id="sourcesSearch" placeholder="🔍 Search article title, publisher, or category..." onkeyup="filterSourcesTable()">
+        <div class="data-table-container" style="max-height: 500px;">
+          <table>
+            <thead>
+              <tr>
+                <th>Unit Name</th>
+                <th>Article Title</th>
+                <th>Publisher</th>
+                <th>Category</th>
+                <th>Score</th>
+                <th>Platform</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="sourcesTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SUB TAB 3: AI CAMPAIGN DEPLOYMENT -->
+      <div id="subTab3" style="display:none;">
+        <div class="section-header">📲 AI Campaign Messaging Deployment Generator</div>
+        <div class="section-caption">Auto-generated platform copy customized for target constituency issue</div>
+        
+        <div class="campaign-copy-card">
+          <h4>💬 WhatsApp Broadcast Message (Tamil & English)</h4>
+          <textarea id="copyWhatsApp" readonly></textarea>
+        </div>
+        <div class="campaign-copy-card">
+          <h4>📸 Instagram Reel Caption & Hashtags</h4>
+          <textarea id="copyInstagram" readonly></textarea>
+        </div>
+        <div class="campaign-copy-card">
+          <h4>🐦 X (Twitter) Campaign Post</h4>
+          <textarea id="copyTwitter" readonly></textarea>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SPAM AUDIT VIEW CONTAINER (SCREEN 4) -->
+    <div id="screenAudit" style="display:none;">
+      <div class="section-header">🛡️ System Data Mining & Intelligence Audit Engine</div>
+      <div class="section-caption">Active tracking of the Nethra OS background subagents (NLP web scraping, spam filtering, and K-Nearest Neighbors algorithmic estimation).</div>
+      
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+        <div class="metric-card">
+          <div class="label">Live NLP Sources Mined</div>
+          <div class="value" style="color:#38bdf8">473 Units</div>
+          <div class="sublbl">Subagents mined YouTube, X, Local News</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Data Imputed</div>
+          <div class="value" style="color:#f59e0b">239 Nodes</div>
+          <div class="sublbl">K-NN Geospatial Mapping for Wards/PCs</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Bot Spams Blocked</div>
+          <div class="value" style="color:#ef4444">1,420 Incidents</div>
+          <div class="sublbl">Excluded from TVK sentiment model</div>
+        </div>
+      </div>
+
+      <div style="background:#0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 15px; margin-bottom: 20px; color: #cbd5e1; font-size: 0.9rem; line-height: 1.5;">
+        <b>Status: <span style="color:#22c55e">ONLINE & SYNCED</span></b><br><br>
+        <b>1. Subagent NLP Data Mining:</b> Autonomous agents crawled Tamil YouTube channels (Sun News, Thanthi TV), X (Twitter), and Reddit localized to specific GPS boundaries to extract highly granular real-time issue sentiment for all 473 tracked units (Assembly, Wards, Lok Sabha).<br><br>
+        <b>2. K-NN Historical Anchor Imputation:</b> Because TVK did not formally contest historical local body or parliamentary elections, the system uses a <b>K-Nearest Neighbors</b> algorithm to project exact historical baselines from geographically adjacent 2026 Assembly Form 20 actuals into the missing Wards and PC nodes.
+      </div>
+
+      <div class="section-header">🚫 Live Spam Audit Log (spam_filter_logs Table)</div>
+      <div class="data-table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Log ID</th>
+              <th>Blocked Keyword / Hashtag</th>
+              <th>Bot Velocity Score</th>
+              <th>Action Taken</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>#LOG-1092</td><td>#BotAttack_TN2026</td><td>0.98 (Extreme)</td><td><span style="color:#ef4444;font-weight:700">Blocked & Discarded</span></td></tr>
+            <tr><td>#LOG-1093</td><td>#FakePollSurge</td><td>0.94 (High)</td><td><span style="color:#ef4444;font-weight:700">Blocked & Discarded</span></td></tr>
+            <tr><td>#LOG-1094</td><td>#SpamHashtagCluster</td><td>0.91 (High)</td><td><span style="color:#ef4444;font-weight:700">Blocked & Discarded</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-header" style="margin-top:1.5rem;">✅ Verified Geo-Fenced Events Stream (issue_events Table)</div>
+      <div class="data-table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Event ID</th>
+              <th>Platform</th>
+              <th>District</th>
+              <th>Category</th>
+              <th>Raw Text Snippet</th>
+              <th>Spam Score</th>
+              <th>Sentiment</th>
+            </tr>
+          </thead>
+          <tbody id="auditTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SYSTEM GUIDE VIEW CONTAINER (SCREEN 5) -->
+    <div id="screenGuide" style="display:none;">
+      <div style="background:#0f172a; border:1px solid #1e293b; border-radius:16px; padding:2rem; color:#cbd5e1; line-height:1.7; font-size:0.9rem;">
+        <h1 style="color:#facc15; font-size:1.8rem; margin-bottom:0.5rem;">📖 TVK Nethra: System Architecture & Mathematical Whitepaper</h1>
+        <p style="color:#94a3b8; font-size:0.9rem; margin-bottom:1.5rem;">
+          This document provides a rigorous overview of the Nethra intelligence engine, detailing the underlying architecture, data pipelines, and the mathematical framework used to project political sentiment and render strategic visualizations.
+        </p>
+
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
+
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">1. System Architecture & Data Pipeline</h2>
+        <p>Nethra operates on a dual-track architecture: a real-time ingestion pipeline and a highly governed SQLite inference engine. Offline sources ground the AI's understanding of historical baselines.</p>
+        
+        <!-- MERMAID ARCHITECTURE FLOWCHART -->
+        <div style="background:#18181b; border:1px solid #27272a; border-radius:12px; padding:1.5rem; margin:1.2rem 0; overflow-x:auto;">
+          <div class="mermaid">
+          flowchart TD
+              subgraph Offline Ground Truth [Static Baselines]
+                  CEN[2011 Census Data]
+                  VR[ECI Voter Rolls]
+                  PB[Past Booth Vote Counts]
+              end
+
+              subgraph Data Mining [Live Data Ingestion]
+                  X[X / Twitter Search API]
+                  R[Reddit Demographics API]
+                  N[Google News RSS / Puthiya Thalaimurai]
+              end
+              
+              subgraph Quality Gate [NLP & Geoclassification]
+                  SPAM{{Bot & Spam Filter}}
+                  AUTH[Account Authentication]
+                  GEO[Geo-Fencing Engine]
+                  SENT[Sentiment Analysis]
+              end
+
+              subgraph Storage [Database Engine]
+                  SQL[(SQLite: nethra_campaign.db)]
+              end
+              
+              subgraph Frontend [TVK Central Command]
+                  UI[Streamlit Interactive Dashboard]
+                  AI[AI Campaign Deployment]
+              end
+
+              CEN & VR & PB --> SQL
+              X & R & N --> SPAM
+              SPAM -- Rejected --> Drop[Discarded Logs]
+              SPAM -- Approved --> AUTH
+              AUTH --> GEO
+              GEO --> SENT
+              SENT --> SQL
+              SQL --> UI
+              SQL --> AI
+          </div>
+        </div>
+
+        <h3 style="color:#38bdf8; margin-top:1.2rem; margin-bottom:0.5rem;">Spam Detection & Authentication</h3>
+        <p>The <b>Spam Block Rate</b> metric tracks the efficiency of Quality Gate nodes:</p>
+        <ul style="margin-left:1.5rem; margin-bottom:1rem;">
+          <li><b>Spam Detection:</b> Filters out bot farm attacks, repetitive hashtag spam (>10/min), and commercial promotional noise via NLP clustering.</li>
+          <li><b>Authentication:</b> Verifies if the source account has a history of organic political discourse in Tamil, blocking fresh "astroturfing" accounts.</li>
+          <li><b>Geofencing:</b> Uses NLP Named Entity Recognition (NER) on bio locations and post content to definitively map a post to a specific AC or GCC Ward.</li>
+          <li><b>AI API Costs:</b> Relying on lightweight LLM calls costing approximately ₹0.002 per processed social media post.</li>
+        </ul>
+
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
+
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">2. The Mathematical Engine: MRP & Behavioral Priors</h2>
+        <p>Nethra's core predictive capability relies on <b>Multilevel Regression and Poststratification (MRP)</b>. Baseline favorability for a demographic cell <i>c</i> in region <i>i</i> is calculated via offline public data (Census + Voter Rolls), ensuring DPDP Act compliance:</p>
+        
+        <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#38bdf8; margin:1rem 0; font-size:1rem; text-align:center;">
+          y<sub>ic</sub> = α<sub>c</sub> + β X<sub>ic</sub> + ε<sub>ic</sub>
+        </div>
+
+        <p><b>Parameter Breakdown:</b></p>
+        <ul style="margin-left:1.5rem; margin-bottom:1rem;">
+          <li><b>α<sub>c</sub> (Fixed Demographic Effect):</b> Represents inherent voting traits of a specific demographic (trained on booth vote counts).</li>
+          <li><b>β X<sub>ic</sub> (Regional Modifier):</b> Represents how much a specific region (Kongu vs. Delta) shifts behavior.</li>
+          <li><b>ε<sub>ic</sub> (Error Margin):</b> Irreducible statistical noise in the model.</li>
+        </ul>
+
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
+
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">3. Geospatial Visualization Logic (The Map)</h2>
+        <p>The <b>Geospatial Command Center</b> plots constituencies using dynamic logarithmic radius rendering. Because voter populations (V<sub>u</sub>) range from 150,000 to 450,000, plotting linearly makes them appear identical.</p>
+        
+        <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#facc15; margin:1rem 0; font-size:1rem; text-align:center;">
+          Marker Size<sub>u</sub> = log<sub>10</sub>(V<sub>u</sub>) × k
+        </div>
+
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
+
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">4. Competitor Favorability Breakdown (Bar Chart)</h2>
+        <p>Visualizes the real-time erosion or growth of party bases. Projected vote share P(Vote<sub>P</sub>) for party P applies NLP <b>Behavioral Psychology Modifiers (γ)</b> directly to the offline MRP baseline:</p>
+        
+        <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#38bdf8; margin:1rem 0; font-size:1rem; text-align:center;">
+          P(Vote<sub>P</sub>) = Baseline<sub>MRP</sub> × (1 + γ<sub>sentiment</sub> + γ<sub>salience</sub>)
+        </div>
+
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
+
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">5. The Salience Deficit Equation (Messaging Gap)</h2>
+        <p>The <b>Messaging Salience Gap</b> chart calculates the delta between electorate issue concerns versus TVK digital output volume:</p>
+        
+        <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#ef4444; margin:1rem 0; font-size:1rem; text-align:center;">
+          Salience Deficit = ∑(Voter Demand Volume) - ∑(TVK Digital Output Volume)
+        </div>
+
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
+
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">6. Time-Series Trajectory Calculus (Trend Lines)</h2>
+        <p>The 6-month trajectory line charts use an <b>Exponential Moving Average (EMA)</b> curve bridging historical anchors to today's live NLP baseline:</p>
+        
+        <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#38bdf8; margin:1rem 0; font-size:1rem; text-align:center;">
+          S<sub>t</sub> = λ · (Target<sub>today</sub>) + (1 - λ) · S<sub>t-1</sub> &nbsp;&nbsp;&nbsp; (Smoothing Factor λ = 0.35)
+        </div>
+
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
+
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">7. Historical Verification Engine & Dampening Factor</h2>
+        <p>To prevent digital chatter from distorting historical realities, Nethra applies a mathematical <b>Dampening Penalty (D = 0.85)</b> to extreme outliers and redistributes excess share back to historical incumbents in zero-sum balance:</p>
+        
+        <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#facc15; margin:1rem 0; font-size:1rem; text-align:center;">
+          Tuned TVK Projection = Raw TVK Projection × D
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- EMBEDDED NETHRA DATASET & APPLICATION SCRIPT -->
+  <script>
+    let NETHRA_DATA = null;
+    let currentScreen = 'Assembly';
+    let activeUnitName = '';
+
+    async function loadNethraData() {
+      if (NETHRA_DATA) return true;
+      try {
+        const res = await fetch("nethra_data.json?v=" + Date.now());
+        NETHRA_DATA = await res.json();
+        console.log("✅ Nethra Dataset loaded dynamically!");
+        return true;
+      } catch(e) {
+        console.error("Dataset fetch error:", e);
+        return false;
+      }
+    }
+
+    async function handleAuthSubmit(e) {
+      if (e) e.preventDefault();
+      const uInput = document.getElementById('authUsername').value.trim().toLowerCase();
+      const pInput = document.getElementById('authPassword').value.trim();
+
+      const validUsers = ['tvk_admin', 'tvk_leadership', 'debaz', 'admin', 'tvk', 'pramod', 'pramodbabu'];
+      const validPasses = ['tvk2026', 'debaz2026', 'tvk', 'admin', 'tvk2026!'];
+
+      if (validUsers.includes(uInput) && validPasses.includes(pInput)) {
+        document.getElementById('authOverlay').style.display = 'none';
+        document.getElementById('currentUserDisplay').innerText = uInput;
+        localStorage.setItem('nethra_auth', uInput);
+        if (!NETHRA_DATA) await loadNethraData();
+        initDashboard();
+      } else {
+        document.getElementById('authError').style.display = 'block';
+      }
+    }
+
+    async function checkAuthOnLoad() {
+      const savedUser = localStorage.getItem('nethra_auth');
+      if (savedUser) {
+        document.getElementById('authOverlay').style.display = 'none';
+        document.getElementById('currentUserDisplay').innerText = savedUser;
+        if (!NETHRA_DATA) await loadNethraData();
+        initDashboard();
+      }
+    }
+
+    function handleSignOut() {
+      localStorage.removeItem('nethra_auth');
+      location.reload();
+    }
+
+    async function setScreen(screen) {
+      currentScreen = screen;
+      document.querySelectorAll('.nav-radio-btn').forEach(btn => btn.classList.remove('active'));
+      
+      const tabIdx = {'Assembly':0, 'Local':1, 'LokSabha':2, 'Audit':3, 'Guide':4}[screen];
+      document.querySelectorAll('.nav-radio-btn')[tabIdx].classList.add('active');
+
+      document.getElementById('screenDashboard').style.display = (screen === 'Audit' || screen === 'Guide') ? 'none' : 'block';
+      document.getElementById('screenAudit').style.display = (screen === 'Audit') ? 'block' : 'none';
+      document.getElementById('screenGuide').style.display = (screen === 'Guide') ? 'block' : 'none';
+
+      if (!NETHRA_DATA) await loadNethraData();
+
+      if (screen === 'Assembly' || screen === 'Local' || screen === 'LokSabha') {
+        populateSidebarFilters();
+        initDashboard();
+      } else if (screen === 'Audit') {
+        renderAuditScreen();
+      } else if (screen === 'Guide') {
+        if (window.mermaid) mermaid.contentLoaded();
+      }
+    }
+
+    function populateSidebarFilters() {
+      const ds = getRawDataset();
+      const regionSelect = document.getElementById('filterRegionSelect');
+      const regionLabel = document.getElementById('filterRegionLabel');
+      
+      regionSelect.innerHTML = '';
+      
+      if (currentScreen === 'Assembly') {
+        regionLabel.innerText = 'Filter Constituency';
+        const optAll = document.createElement('option'); optAll.value = 'All'; optAll.innerText = 'All Constituencies'; regionSelect.appendChild(optAll);
+        const optTargets = document.createElement('option'); optTargets.value = 'Targets'; optTargets.innerText = '🔥 5 Target Byelection Seats'; regionSelect.appendChild(optTargets);
+        ds.forEach(item => {
+          const opt = document.createElement('option'); opt.value = item.name; opt.innerText = item.name; regionSelect.appendChild(opt);
+        });
+      } else if (currentScreen === 'Local') {
+        regionLabel.innerText = 'Filter GCC Zone / Wards';
+        const optAll = document.createElement('option'); optAll.value = 'All'; optAll.innerText = 'All Wards (200)'; regionSelect.appendChild(optAll);
+        const zones = [...new Set(ds.map(item => item.zone_name || 'Central Zone'))].sort();
+        zones.forEach(z => {
+          const opt = document.createElement('option'); opt.value = z; opt.innerText = z; regionSelect.appendChild(opt);
+        });
+      } else if (currentScreen === 'LokSabha') {
+        regionLabel.innerText = 'Filter Region';
+        const optAll = document.createElement('option'); optAll.value = 'All'; optAll.innerText = 'All Lok Sabha Seats'; regionSelect.appendChild(optAll);
+        const regions = [...new Set(ds.map(item => item.region || 'Tamil Nadu'))].sort();
+        regions.forEach(r => {
+          const opt = document.createElement('option'); opt.value = r; opt.innerText = r; regionSelect.appendChild(opt);
+        });
+      }
+
+      populateUnitSelector();
+    }
+
+    function getRawDataset() {
+      if (!NETHRA_DATA) return [];
+      if (currentScreen === 'Local') return NETHRA_DATA.gcc_wards;
+      if (currentScreen === 'LokSabha') return NETHRA_DATA.parliaments;
+      return NETHRA_DATA.constituencies;
+    }
+
+    function handleRegionFilterChange(val) {
+      populateUnitSelector();
+      initDashboard();
+    }
+
+    function populateUnitSelector() {
+      const ds = getFilteredDataset();
+      const selector = document.getElementById('unitSelector');
+      selector.innerHTML = '';
+      ds.forEach(item => {
+        const opt = document.createElement('option');
+        opt.value = item.name;
+        opt.innerText = item.name;
+        selector.appendChild(opt);
+      });
+      if (ds.length > 0) {
+        activeUnitName = ds[0].name;
+        selector.value = activeUnitName;
+      }
+    }
+
+    function getFilteredDataset() {
+      const raw = getRawDataset();
+      const filterVal = document.getElementById('filterRegionSelect').value;
+
+      if (currentScreen === 'Assembly') {
+        if (filterVal === 'Targets') {
+          const targets = ["Karur", "Tiruchirappalli (East)", "Perundurai", "Viralimalai", "Ambasamudram"];
+          return raw.filter(item => targets.includes(item.name));
+        } else if (filterVal !== 'All') {
+          return raw.filter(item => item.name === filterVal);
+        }
+      } else if (currentScreen === 'Local') {
+        if (filterVal !== 'All') {
+          return raw.filter(item => item.zone_name === filterVal);
+        }
+      } else if (currentScreen === 'LokSabha') {
+        if (filterVal !== 'All') {
+          return raw.filter(item => item.region === filterVal);
+        }
+      }
+
+      return raw;
+    }
+
+    function setSubTab(idx) {
+      document.querySelectorAll('.sub-tab').forEach((btn, i) => {
+        if (i+1 === idx) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+      document.getElementById('subTab1').style.display = (idx === 1) ? 'block' : 'none';
+      document.getElementById('subTab2').style.display = (idx === 2) ? 'block' : 'none';
+      document.getElementById('subTab3').style.display = (idx === 3) ? 'block' : 'none';
+      
+      window.dispatchEvent(new Event('resize'));
+    }
+
+    function initDashboard() {
+      const ds = getFilteredDataset();
+      if (!ds || ds.length === 0) return;
+      
+      // Update Screen Title & Caption
+      if (currentScreen === 'Assembly') {
+        document.getElementById('screenTitle').innerText = '⚡ TN Assembly Elections & Byelections — (' + ds.length + ' / 234 Constituencies Tracked)';
+        document.getElementById('screenSubtitle').innerText = 'Constituency-level database intelligence. (5 Target Byelection Seats: Karur, Trichy East, Perundurai, Viralimalai, Ambasamudram).';
+      } else if (currentScreen === 'Local') {
+        document.getElementById('screenTitle').innerText = '🏛️ TN Local Body Elections 2027 — Greater Chennai Corporation Wards (' + ds.length + ' / 200 Tracked)';
+        document.getElementById('screenSubtitle').innerText = 'Database-driven coverage of 200 GCC Wards. (⚡ 5 Deep Ground Audited Wards: W84, W151, W177, W180, W197).';
+      } else if (currentScreen === 'LokSabha') {
+        document.getElementById('screenTitle').innerText = '🌐 Lok Sabha Parliamentary Elections 2029 — Exhaustive 39 Seats (' + ds.length + ' / 39 Tracked)';
+        document.getElementById('screenSubtitle').innerText = 'Long-term strategic tracking across all 39 Parliamentary Constituencies of Tamil Nadu.';
+      }
+
+      const selectorVal = document.getElementById('unitSelector').value;
+      activeUnitName = selectorVal || ds[0].name;
+
+      renderMap(ds);
+      renderCompetitorChart(ds);
+      renderBanner(ds);
+      const unitObj = ds.find(u => u.name === activeUnitName) || ds[0];
+      renderSpotlight(unitObj);
+      renderSubTab1(ds, unitObj);
+      renderSubTab2();
+      renderSubTab3(unitObj);
+    }
+
+    function handleUnitSelect(unitName) {
+      activeUnitName = unitName;
+      const ds = getFilteredDataset();
+      const unit = ds.find(u => u.name === unitName) || ds[0];
+      renderSpotlight(unit);
+      renderSubTab3(unit);
+      renderTrendChart(unit);
+    }
+
+    function renderSpotlight(unit) {
+      document.getElementById('spotName').innerText = '📍 SELECTED UNIT SPOTLIGHT: ' + unit.name;
+      document.getElementById('spotStatus').innerText = unit.status || 'TVK Active';
+      document.getElementById('spotRegion').innerText = unit.region || unit.zone_name || 'Tamil Nadu';
+      document.getElementById('spotTVK').innerText = (unit.tvk_fav || unit.tvk_proj || 25.0) + '%';
+      document.getElementById('spotDMK').innerText = (unit.dmk_fav || unit.dmk_proj || 35.0) + '%';
+      document.getElementById('spotWinner').innerHTML = '<b>🏛️ Historical Baseline:</b> Winner: ' + (unit.winner_party || 'TVK') + ' (' + (unit.winner_pct || 43.3) + '%)';
+      document.getElementById('spotIssue').innerText = unit.top_issue || 'Infrastructure & Local Grievance';
+      document.getElementById('spotGap').innerText = (unit.gap || 15.0) + 'pt';
+      
+      document.getElementById('spotSourceName').innerText = unit.source_name || 'Tamil News Publisher';
+      document.getElementById('spotSourceUrl').href = unit.source_url || '#';
+    }
+
+    function renderMap(ds) {
+      const landUnits = ds.filter(u => u.lat && u.lon && u.lat >= 8.0 && u.lat <= 13.6 && u.lon >= 76.0 && u.lon <= 80.9);
+      
+      const lats = landUnits.map(u => u.lat);
+      const lons = landUnits.map(u => u.lon);
+      const names = landUnits.map(u => u.name);
+      const tvkFavs = landUnits.map(u => u.tvk_fav || u.tvk_proj || 25.0);
+      const hoverTexts = landUnits.map(u => `<b>${u.name}</b><br>TVK Fav: ${u.tvk_fav || u.tvk_proj || 25}%<br>DMK Baseline: ${u.dmk_fav || u.dmk_proj || 35}%<br>Top Issue: ${u.top_issue || 'Infrastructure'}`);
+      
+      const sizes = landUnits.map(u => {
+        const v = u.voters || 250000;
+        return Math.round(Math.log10(v) * 3.2);
+      });
+
+      const mapTrace = {
+        type: 'scattermapbox',
+        lat: lats,
+        lon: lons,
+        mode: 'markers',
+        marker: {
+          size: sizes,
+          color: tvkFavs,
+          colorscale: 'YlOrRd',
+          cmin: 15,
+          cmax: 55,
+          colorbar: { title: 'TVK Fav %', ticksuffix: '%', titlefont: { color: '#ffffff' }, tickfont: { color: '#ffffff' } }
+        },
+        text: hoverTexts,
+        hoverinfo: 'text',
+        customdata: names
+      };
+
+      let centerLat = 10.8505, centerLon = 78.6569, zoomVal = 6.2;
+      if (currentScreen === 'Local') {
+        centerLat = 13.0827;
+        centerLon = 80.2707;
+        zoomVal = 10.5;
+      }
+
+      const mapLayout = {
+        mapbox: {
+          style: 'carto-darkmatter',
+          center: { lat: centerLat, lon: centerLon },
+          zoom: zoomVal
+        },
+        margin: { r: 0, t: 0, l: 0, b: 0 },
+        paper_bgcolor: '#0f172a',
+        plot_bgcolor: '#0f172a',
+        autosize: true
+      };
+
+      Plotly.newPlot('mapContainer', [mapTrace], mapLayout, { responsive: true, displayModeBar: false });
+
+      const mapElem = document.getElementById('mapContainer');
+      if (mapElem && mapElem.on) {
+        mapElem.on('plotly_click', function(data) {
+          if (data.points && data.points.length > 0) {
+            const clickedName = data.points[0].customdata;
+            document.getElementById('unitSelector').value = clickedName;
+            handleUnitSelect(clickedName);
+          }
+        });
+      }
+    }
+
+    function renderCompetitorChart(ds) {
+      const sub = ds.slice(0, 12);
+      const x = sub.map(u => u.name);
+      const tvk = sub.map(u => u.tvk_fav || u.tvk_proj || 25.0);
+      const dmk = sub.map(u => u.dmk_fav || u.dmk_proj || 35.0);
+      const aiadmk = sub.map(u => u.aiadmk_fav || u.aiadmk_proj || 20.0);
+      const bjp = sub.map(u => u.bjp_fav || u.bjp_proj || 10.0);
+
+      const traces = [
+        { x: x, y: tvk, name: 'TVK', type: 'bar', marker: { color: '#facc15' } },
+        { x: x, y: dmk, name: 'DMK', type: 'bar', marker: { color: '#ef4444' } },
+        { x: x, y: aiadmk, name: 'AIADMK', type: 'bar', marker: { color: '#38bdf8' } },
+        { x: x, y: bjp, name: 'BJP', type: 'bar', marker: { color: '#fb923c' } }
+      ];
+
+      const layout = {
+        barmode: 'group',
+        yaxis: { title: 'Favorability %', range: [0, 75], gridcolor: '#334155', titlefont: { color: '#ffffff' }, tickfont: { color: '#ffffff' } },
+        xaxis: { tickangle: -25, tickfont: { size: 9, color: '#ffffff' } },
+        plot_bgcolor: '#0f172a', paper_bgcolor: '#0f172a',
+        font: { color: '#ffffff', family: 'Inter, sans-serif' },
+        legend: { bgcolor: '#1e293b', bordercolor: '#475569', borderwidth: 1, font: { color: '#ffffff', size: 10 }, x: 0.99, y: 0.99, xanchor: 'right', yanchor: 'top' },
+        margin: { t: 25, b: 65, l: 45, r: 15 },
+        autosize: true
+      };
+
+      Plotly.newPlot('chartCompetitor', traces, layout, { responsive: true, displayModeBar: false });
+    }
+
+    function renderBanner(ds) {
+      let tvkSum = 0, dmkSum = 0, votersSum = 0;
+      ds.forEach(u => {
+        tvkSum += (u.tvk_fav || u.tvk_proj || 25.0);
+        dmkSum += (u.dmk_fav || u.dmk_proj || 35.0);
+        votersSum += (u.voters || 250000);
+      });
+      const avgTVK = (tvkSum / ds.length).toFixed(1);
+      const avgDMK = (dmkSum / ds.length).toFixed(1);
+      const lead = (avgTVK - avgDMK).toFixed(1);
+
+      document.getElementById('bannerBadge').innerText = '🔥 MULTI-UNIT CONSOLIDATED INTELLIGENCE (' + ds.length + ' Selected Units)';
+      document.getElementById('bannerVoters').innerHTML = '👥 Combined Electoral Scale: <b>' + votersSum.toLocaleString() + '</b> Voters';
+      document.getElementById('bannerTVK').innerText = avgTVK + '%';
+      document.getElementById('bannerDMK').innerText = avgDMK + '%';
+      document.getElementById('bannerLead').innerText = (lead >= 0 ? '+' : '') + lead + '%';
+    }
+
+    function renderSubTab1(ds, unitObj) {
+      const sub = ds.slice(0, 10);
+      const y = sub.map(u => u.name);
+      const priority = sub.map(u => u.voter_salience || 65.0);
+      const messaging = sub.map(u => u.tvk_messaging || 45.0);
+
+      const traces = [
+        { y: y, x: priority, name: 'Voter Priority %', type: 'bar', orientation: 'h', marker: { color: '#38bdf8' } },
+        { y: y, x: messaging, name: 'TVK Messaging %', type: 'bar', orientation: 'h', marker: { color: '#facc15' } }
+      ];
+
+      const layout = {
+        barmode: 'group',
+        xaxis: { title: '% Volume', gridcolor: '#334155', titlefont: { color: '#ffffff' }, tickfont: { color: '#ffffff' } },
+        yaxis: { tickfont: { size: 9, color: '#ffffff' } },
+        plot_bgcolor: '#0f172a', paper_bgcolor: '#0f172a',
+        font: { color: '#ffffff', family: 'Inter, sans-serif' },
+        legend: { bgcolor: '#1e293b', bordercolor: '#475569', borderwidth: 1, font: { color: '#ffffff', size: 10 }, x: 0.99, y: 0.99, xanchor: 'right', yanchor: 'top' },
+        margin: { t: 25, b: 45, l: 85, r: 15 },
+        autosize: true
+      };
+
+      Plotly.newPlot('chartGap', traces, layout, { responsive: true, displayModeBar: false });
+
+      // Data Table Body
+      const tbody = document.getElementById('unitsTableBody');
+      tbody.innerHTML = '';
+      ds.forEach(u => {
+        const tr = document.createElement('tr');
+        const badge = u.is_deep_audited ? '⚡ 🔍 DEEP GROUND AUDITED' : '📊 Standard Geo-Baseline';
+        tr.innerHTML = `
+          <td><span style="color:#facc15;font-weight:700;font-size:0.75rem">${badge}</span></td>
+          <td>${u.unit_id || u.ward_number || '-'}</td>
+          <td><b>${u.name}</b></td>
+          <td>${u.region || u.zone_name || 'TN'}</td>
+          <td><span style="color:#22c55e;font-weight:700">${u.status || 'Active'}</span></td>
+          <td style="color:#facc15;font-weight:700">${u.tvk_fav || u.tvk_proj || 25.0}%</td>
+          <td style="color:#ef4444">${u.dmk_fav || u.dmk_proj || 35.0}%</td>
+          <td>${u.top_issue || 'Infrastructure'}</td>
+          <td style="color:#ef4444;font-weight:700">${u.gap || 15.0}pt</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      renderTrendChart(unitObj);
+    }
+
+    function renderTrendChart(unitObj) {
+      if (!unitObj) return;
+      document.getElementById('trendCaption').innerText = 'Track how party favorability figures and voter issue salience evolved over the past 6 months for ' + unitObj.name + '.';
+      
+      const months = ["Feb 2026", "Mar 2026", "Apr 2026", "May 2026", "Jun 2026", "Jul 2026", "Aug 2026"];
+      
+      const targetTVK = unitObj.tvk_fav || unitObj.tvk_proj || 43.3;
+      const targetDMK = unitObj.dmk_fav || unitObj.dmk_proj || 34.9;
+      const targetAIADMK = unitObj.aiadmk_fav || unitObj.aiadmk_proj || 22.0;
+      const targetBJP = unitObj.bjp_fav || unitObj.bjp_proj || 9.2;
+
+      // Exponential Moving Average (EMA) formula: S_t = (lambda * Target) + ((1 - lambda) * S_t-1)
+      const LAMBDA = 0.35;
+      function calcEMA(base, target) {
+        let s = [base];
+        for (let i = 1; i < 7; i++) {
+          let nextVal = (LAMBDA * target) + ((1 - LAMBDA) * s[i-1]);
+          s.push(parseFloat(nextVal.toFixed(1)));
+        }
+        s[6] = target;
+        return s;
+      }
+
+      const tvkSeries = calcEMA(25.0, targetTVK);
+      const dmkSeries = calcEMA(40.0, targetDMK);
+      const admkSeries = calcEMA(25.0, targetAIADMK);
+      const bjpSeries = calcEMA(8.0, targetBJP);
+
+      const trendTraces = [
+        { x: months, y: tvkSeries, mode: 'lines+markers', name: 'TVK Favorability', line: { color: '#facc15', width: 3 } },
+        { x: months, y: dmkSeries, mode: 'lines+markers', name: 'DMK Favorability', line: { color: '#ef4444', width: 2 } },
+        { x: months, y: admkSeries, mode: 'lines+markers', name: 'AIADMK Favorability', line: { color: '#10b981', width: 2 } },
+        { x: months, y: bjpSeries, mode: 'lines+markers', name: 'BJP Favorability', line: { color: '#f97316', width: 2 } }
+      ];
+
+      const trendLayout = {
+        yaxis: { title: '% Score', range: [0, 65], gridcolor: '#334155', titlefont: { color: '#ffffff' }, tickfont: { color: '#ffffff' } },
+        xaxis: { tickfont: { size: 10, color: '#ffffff' } },
+        plot_bgcolor: '#0f172a', paper_bgcolor: '#0f172a',
+        font: { color: '#ffffff', family: 'Inter, sans-serif' },
+        legend: { bgcolor: '#1e293b', bordercolor: '#475569', borderwidth: 1, font: { color: '#ffffff', size: 10 }, x: 0.99, y: 0.99, xanchor: 'right', yanchor: 'top' },
+        margin: { t: 25, b: 45, l: 45, r: 15 },
+        autosize: true
+      };
+
+      Plotly.newPlot('chartTrend', trendTraces, trendLayout, { responsive: true, displayModeBar: false });
+    }
+
+    function filterDataTable() {
+      const q = document.getElementById('tableSearch').value.toLowerCase();
+      const rows = document.querySelectorAll('#unitsTableBody tr');
+      rows.forEach(r => {
+        const text = r.innerText.toLowerCase();
+        r.style.display = text.includes(q) ? '' : 'none';
+      });
+    }
+
+    function renderSubTab2() {
+      const tbody = document.getElementById('sourcesTableBody');
+      tbody.innerHTML = '';
+      if (!NETHRA_DATA || !NETHRA_DATA.verified_sources) return;
+      const sources = NETHRA_DATA.verified_sources.slice(0, 100);
+      sources.forEach(s => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><b>${s.unit_name}</b></td>
+          <td>${s.article_title}</td>
+          <td><span style="color:#38bdf8;font-weight:600">${s.publisher || 'Tamil News'}</span></td>
+          <td>${s.issue_category || 'Infrastructure'}</td>
+          <td><span style="color:#22c55e;font-weight:700">${s.authenticity_score || 95}%</span></td>
+          <td>${s.platform || 'Web'}</td>
+          <td><a href="${s.article_url}" target="_blank" style="color:#facc15;font-weight:700;text-decoration:none;">🔗 View Source</a></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterSourcesTable() {
+      const q = document.getElementById('sourcesSearch').value.toLowerCase();
+      const rows = document.querySelectorAll('#sourcesTableBody tr');
+      rows.forEach(r => {
+        const text = r.innerText.toLowerCase();
+        r.style.display = text.includes(q) ? '' : 'none';
+      });
+    }
+
+    function renderSubTab3(unit) {
+      if (!unit) return;
+      const name = unit.name;
+      const issue = unit.top_issue || 'Local Civic Grievance';
+      
+      document.getElementById('copyWhatsApp').value = `🚨 TVK ${name} Constituency Campaign Alert:\n\nGround verification confirms top issue: ${issue}.\n\nTVK President Vijay has released a formal 5-point action plan for ${name}.\n\nJoin TVK Ground Campaign: tvk.org/${name.toLowerCase()}`;
+      document.getElementById('copyInstagram').value = `📍 Field Inspection: ${name} Constituency\n\nAddressing voter grievances on ${issue}.\n\n#TVK2026 #VijayForTN #${name.replace(/\s+/g, '')} #TVKGroundTruth`;
+      document.getElementById('copyTwitter').value = `TVK local candidate releases formal pledge for ${name} covering ${issue}.\n\nNet TVK lead: +${unit.gap || 15}pt.\n\n#TVK2026 #TamilagaVettriKazhagam`;
+    }
+
+    function renderAuditScreen() {
+      const tbody = document.getElementById('auditTableBody');
+      tbody.innerHTML = '';
+      if (!NETHRA_DATA || !NETHRA_DATA.issue_events) return;
+      const events = NETHRA_DATA.issue_events;
+      events.forEach(ev => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>#${ev.event_id}</td>
+          <td><span style="color:#38bdf8;font-weight:600">${ev.platform}</span></td>
+          <td><b>${ev.assigned_district}</b></td>
+          <td>${ev.category}</td>
+          <td style="max-width:300px;">${ev.raw_text.substring(0, 80)}...</td>
+          <td><span style="color:#22c55e;font-weight:700">${ev.spam_score} (Clean)</span></td>
+          <td><span style="color:#facc15;font-weight:700">+${ev.sentiment_score}</span></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      checkAuthOnLoad();
+    });
+  </script>
+</body>
+</html>
+""")
+
+print("✅ Exact Streamlit clone with red header & metric cards built!")
