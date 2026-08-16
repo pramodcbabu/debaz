@@ -29,6 +29,10 @@
   <script src="vendor/leaflet.js"></script>
   <script>if (typeof L === "undefined") document.write('<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"><\/script>');</script>
 
+  <!-- Mermaid.js for Architecture Flowchart Rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -468,115 +472,133 @@
       </div>
     </div>
 
-    <!-- SYSTEM GUIDE VIEW CONTAINER (EXACT AUTHENTIC 187-LINE WHITEPAPER) -->
+    <!-- SYSTEM GUIDE VIEW CONTAINER (EXACT 187-LINE WHITEPAPER WITH MERMAID FLOWCHART) -->
     <div id="screenGuide" style="display:none;">
-      
-<div style="background:#0f172a; border:1px solid #1e293b; border-radius:16px; padding:2rem; color:#cbd5e1; line-height:1.7; font-size:0.9rem;">
-  <h1 style="color:#facc15; font-size:1.8rem; margin-bottom:0.5rem; display:flex; align-items:center; gap:10px;">
-    📖 TVK Nethra: System Architecture & Mathematical Whitepaper
-  </h1>
-  <p style="color:#94a3b8; font-size:0.9rem; margin-bottom:1.5rem;">
-    This document provides a rigorous overview of the Nethra intelligence engine, detailing the underlying architecture, data pipelines, and the mathematical framework used to project political sentiment and render strategic visualizations.
-  </p>
+      <div style="background:#0f172a; border:1px solid #1e293b; border-radius:16px; padding:2rem; color:#cbd5e1; line-height:1.7; font-size:0.9rem;">
+        <h1 style="color:#facc15; font-size:1.8rem; margin-bottom:0.5rem;">📖 TVK Nethra: System Architecture & Mathematical Whitepaper</h1>
+        <p style="color:#94a3b8; font-size:0.9rem; margin-bottom:1.5rem;">
+          This document provides a rigorous overview of the Nethra intelligence engine, detailing the underlying architecture, data pipelines, and the mathematical framework used to project political sentiment and render strategic visualizations.
+        </p>
 
-  <hr style="border-color:#1e293b; margin:1.5rem 0;">
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
 
-  <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">1. System Architecture & Data Pipeline</h2>
-  <p>Nethra operates on a dual-track architecture: a real-time ingestion pipeline and a highly governed SQLite inference engine. Offline sources ground the AI's understanding of historical baselines.</p>
-  
-  <div style="background:#18181b; border:1px solid #27272a; border-radius:12px; padding:1.2rem; margin:1rem 0;">
-    <div style="color:#38bdf8; font-weight:700; font-size:0.85rem; margin-bottom:8px;">📡 Data Flow & Architecture Pipeline Matrix</div>
-    <ul style="list-style:none; padding:0; display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:12px;">
-      <li style="background:#09090b; padding:10px; border-radius:8px; border:1px solid #3f3f46;">
-        <b style="color:#facc15;">1. Offline Ground Truth:</b><br>
-        2011 Census, ECI Voter Rolls, Form 20 Booth Vote Counts.
-      </li>
-      <li style="background:#09090b; padding:10px; border-radius:8px; border:1px solid #3f3f46;">
-        <b style="color:#38bdf8;">2. Live Data Ingestion:</b><br>
-        X / Twitter Firehose, Reddit Demographics, Google News RSS.
-      </li>
-      <li style="background:#09090b; padding:10px; border-radius:8px; border:1px solid #3f3f46;">
-        <b style="color:#22c55e;">3. Quality Gate & NLP:</b><br>
-        Bot Filter, Sentiment Analysis, Geo-Fencing NER Engine.
-      </li>
-      <li style="background:#09090b; padding:10px; border-radius:8px; border:1px solid #3f3f46;">
-        <b style="color:#fb923c;">4. Database Engine:</b><br>
-        SQLite nethra_campaign.db with Gemini 1.5 LLM inference.
-      </li>
-    </ul>
-  </div>
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">1. System Architecture & Data Pipeline</h2>
+        <p>Nethra operates on a dual-track architecture: a real-time ingestion pipeline and a highly governed SQLite inference engine. Offline sources ground the AI's understanding of historical baselines.</p>
+        
+        <!-- AUTHENTIC MERMAID ARCHITECTURE FLOWCHART -->
+        <div style="background:#18181b; border:1px solid #27272a; border-radius:12px; padding:1.5rem; margin:1.2rem 0; overflow-x:auto;">
+          <div class="mermaid">
+          flowchart TD
+              subgraph Offline Ground Truth [Static Baselines]
+                  CEN[2011 Census Data]
+                  VR[ECI Voter Rolls]
+                  PB[Past Booth Vote Counts]
+              end
 
-  <h3 style="color:#38bdf8; margin-top:1.2rem; margin-bottom:0.5rem;">Spam Detection & Authentication</h3>
-  <p>The <b>Spam Block Rate</b> metric tracks the efficiency of Quality Gate nodes:</p>
-  <ul style="margin-left:1.5rem; margin-bottom:1rem;">
-    <li><b>Spam Detection:</b> Filters out bot farm attacks, repetitive hashtag spam (>10/min), and commercial promotional noise via NLP clustering.</li>
-    <li><b>Authentication:</b> Verifies if the source account has a history of organic political discourse in Tamil, blocking fresh "astroturfing" accounts.</li>
-    <li><b>Geofencing:</b> Uses NLP Named Entity Recognition (NER) on bio locations and post content to definitively map a post to a specific AC or GCC Ward.</li>
-    <li><b>AI API Costs:</b> Relying on lightweight LLM calls costing approximately ₹0.002 per processed social media post.</li>
-  </ul>
+              subgraph Data Mining [Live Data Ingestion]
+                  X[X / Twitter Search API]
+                  R[Reddit Demographics API]
+                  N[Google News RSS / Puthiya Thalaimurai]
+              end
+              
+              subgraph Quality Gate [NLP & Geoclassification]
+                  SPAM{{Bot & Spam Filter}}
+                  AUTH[Account Authentication]
+                  GEO[Geo-Fencing Engine]
+                  SENT[Sentiment Analysis]
+              end
 
-  <hr style="border-color:#1e293b; margin:1.5rem 0;">
+              subgraph Storage [Database Engine]
+                  SQL[(SQLite: nethra_campaign.db)]
+              end
+              
+              subgraph Frontend [TVK Central Command]
+                  UI[Streamlit Interactive Dashboard]
+                  AI[AI Campaign Deployment]
+              end
 
-  <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">2. The Mathematical Engine: MRP & Behavioral Priors</h2>
-  <p>Nethra's core predictive capability relies on <b>Multilevel Regression and Poststratification (MRP)</b>. Baseline favorability for a demographic cell <i>c</i> in region <i>i</i> is calculated via offline public data (Census + Voter Rolls), ensuring DPDP Act compliance:</p>
-  
-  <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#38bdf8; margin:1rem 0; font-size:1rem; text-align:center;">
-    y<sub>ic</sub> = α<sub>c</sub> + β X<sub>ic</sub> + ε<sub>ic</sub>
-  </div>
+              CEN & VR & PB --> SQL
+              X & R & N --> SPAM
+              SPAM -- Rejected --> Drop[Discarded Logs]
+              SPAM -- Approved --> AUTH
+              AUTH --> GEO
+              GEO --> SENT
+              SENT --> SQL
+              SQL --> UI
+              SQL --> AI
+          </div>
+        </div>
 
-  <p><b>Parameter Breakdown:</b></p>
-  <ul style="margin-left:1.5rem; margin-bottom:1rem;">
-    <li><b>α<sub>c</sub> (Fixed Demographic Effect):</b> Represents inherent voting traits of a specific demographic (trained on booth vote counts).</li>
-    <li><b>β X<sub>ic</sub> (Regional Modifier):</b> Represents how much a specific region (Kongu vs. Delta) shifts behavior.</li>
-    <li><b>ε<sub>ic</sub> (Error Margin):</b> Irreducible statistical noise in the model.</li>
-  </ul>
+        <h3 style="color:#38bdf8; margin-top:1.2rem; margin-bottom:0.5rem;">Spam Detection & Authentication</h3>
+        <p>The <b>Spam Block Rate</b> metric tracks the efficiency of Quality Gate nodes:</p>
+        <ul style="margin-left:1.5rem; margin-bottom:1rem;">
+          <li><b>Spam Detection:</b> Filters out bot farm attacks, repetitive hashtag spam (>10/min), and commercial promotional noise via NLP clustering.</li>
+          <li><b>Authentication:</b> Verifies if the source account has a history of organic political discourse in Tamil, blocking fresh "astroturfing" accounts.</li>
+          <li><b>Geofencing:</b> Uses NLP Named Entity Recognition (NER) on bio locations and post content to definitively map a post to a specific AC or GCC Ward.</li>
+          <li><b>AI API Costs:</b> Relying on lightweight LLM calls costing approximately ₹0.002 per processed social media post.</li>
+        </ul>
 
-  <hr style="border-color:#1e293b; margin:1.5rem 0;">
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
 
-  <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">3. Geospatial Visualization Logic (The Map)</h2>
-  <p>The <b>Geospatial Command Center</b> plots constituencies using dynamic logarithmic radius rendering. Because voter populations (V<sub>u</sub>) range from 150,000 to 450,000, plotting linearly makes them appear identical.</p>
-  
-  <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#facc15; margin:1rem 0; font-size:1rem; text-align:center;">
-    Marker Size<sub>u</sub> = log<sub>10</sub>(V<sub>u</sub>) × k
-  </div>
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">2. The Mathematical Engine: MRP & Behavioral Priors</h2>
+        <p>Nethra's core predictive capability relies on <b>Multilevel Regression and Poststratification (MRP)</b>. Baseline favorability for a demographic cell <i>c</i> in region <i>i</i> is calculated via offline public data (Census + Voter Rolls), ensuring DPDP Act compliance:</p>
+        
+        <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#38bdf8; margin:1rem 0; font-size:1rem; text-align:center;">
+          y<sub>ic</sub> = α<sub>c</sub> + β X<sub>ic</sub> + ε<sub>ic</sub>
+        </div>
 
-  <hr style="border-color:#1e293b; margin:1.5rem 0;">
+        <p><b>Parameter Breakdown:</b></p>
+        <ul style="margin-left:1.5rem; margin-bottom:1rem;">
+          <li><b>α<sub>c</sub> (Fixed Demographic Effect):</b> Represents inherent voting traits of a specific demographic (trained on booth vote counts).</li>
+          <li><b>β X<sub>ic</sub> (Regional Modifier):</b> Represents how much a specific region (Kongu vs. Delta) shifts behavior.</li>
+          <li><b>ε<sub>ic</sub> (Error Margin):</b> Irreducible statistical noise in the model.</li>
+        </ul>
 
-  <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">4. Competitor Favorability Breakdown (Bar Chart)</h2>
-  <p>Visualizes the real-time erosion or growth of party bases. Projected vote share P(Vote<sub>P</sub>) for party P applies NLP <b>Behavioral Psychology Modifiers (γ)</b> directly to the offline MRP baseline:</p>
-  
-  <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#38bdf8; margin:1rem 0; font-size:1rem; text-align:center;">
-    P(Vote<sub>P</sub>) = Baseline<sub>MRP</sub> × (1 + γ<sub>sentiment</sub> + γ<sub>salience</sub>)
-  </div>
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
 
-  <hr style="border-color:#1e293b; margin:1.5rem 0;">
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">3. Geospatial Visualization Logic (The Map)</h2>
+        <p>The <b>Geospatial Command Center</b> plots constituencies using dynamic logarithmic radius rendering. Because voter populations (V<sub>u</sub>) range from 150,000 to 450,000, plotting linearly makes them appear identical.</p>
+        
+        <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#facc15; margin:1rem 0; font-size:1rem; text-align:center;">
+          Marker Size<sub>u</sub> = log<sub>10</sub>(V<sub>u</sub>) × k
+        </div>
 
-  <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">5. The Salience Deficit Equation (Messaging Gap)</h2>
-  <p>The <b>Messaging Salience Gap</b> chart calculates the delta between electorate issue concerns versus TVK digital output volume:</p>
-  
-  <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#ef4444; margin:1rem 0; font-size:1rem; text-align:center;">
-    Salience Deficit = ∑(Voter Demand Volume) - ∑(TVK Digital Output Volume)
-  </div>
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
 
-  <hr style="border-color:#1e293b; margin:1.5rem 0;">
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">4. Competitor Favorability Breakdown (Bar Chart)</h2>
+        <p>Visualizes the real-time erosion or growth of party bases. Projected vote share P(Vote<sub>P</sub>) for party P applies NLP <b>Behavioral Psychology Modifiers (γ)</b> directly to the offline MRP baseline:</p>
+        
+        <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#38bdf8; margin:1rem 0; font-size:1rem; text-align:center;">
+          P(Vote<sub>P</sub>) = Baseline<sub>MRP</sub> × (1 + γ<sub>sentiment</sub> + γ<sub>salience</sub>)
+        </div>
 
-  <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">6. Time-Series Trajectory Calculus (Trend Lines)</h2>
-  <p>The 6-month trajectory line charts use an <b>Exponential Moving Average (EMA)</b> curve bridging historical anchors to today's live NLP baseline:</p>
-  
-  <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#38bdf8; margin:1rem 0; font-size:1rem; text-align:center;">
-    S<sub>t</sub> = λ · (Target<sub>today</sub>) + (1 - λ) · S<sub>t-1</sub> &nbsp;&nbsp;&nbsp; (Smoothing Factor λ = 0.35)
-  </div>
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
 
-  <hr style="border-color:#1e293b; margin:1.5rem 0;">
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">5. The Salience Deficit Equation (Messaging Gap)</h2>
+        <p>The <b>Messaging Salience Gap</b> chart calculates the delta between electorate issue concerns versus TVK digital output volume:</p>
+        
+        <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#ef4444; margin:1rem 0; font-size:1rem; text-align:center;">
+          Salience Deficit = ∑(Voter Demand Volume) - ∑(TVK Digital Output Volume)
+        </div>
 
-  <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">7. Historical Verification Engine & Dampening Factor</h2>
-  <p>To prevent digital chatter from distorting historical realities, Nethra applies a mathematical <b>Dampening Penalty (D = 0.85)</b> to extreme outliers and redistributes excess share back to historical incumbents in zero-sum balance:</p>
-  
-  <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#facc15; margin:1rem 0; font-size:1rem; text-align:center;">
-    Tuned TVK Projection = Raw TVK Projection × D
-  </div>
-</div>
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
 
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">6. Time-Series Trajectory Calculus (Trend Lines)</h2>
+        <p>The 6-month trajectory line charts use an <b>Exponential Moving Average (EMA)</b> curve bridging historical anchors to today's live NLP baseline:</p>
+        
+        <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#38bdf8; margin:1rem 0; font-size:1rem; text-align:center;">
+          S<sub>t</sub> = λ · (Target<sub>today</sub>) + (1 - λ) · S<sub>t-1</sub> &nbsp;&nbsp;&nbsp; (Smoothing Factor λ = 0.35)
+        </div>
+
+        <hr style="border-color:#1e293b; margin:1.5rem 0;">
+
+        <h2 style="color:#facc15; font-size:1.3rem; margin-top:1.5rem; margin-bottom:0.8rem;">7. Historical Verification Engine & Dampening Factor</h2>
+        <p>To prevent digital chatter from distorting historical realities, Nethra applies a mathematical <b>Dampening Penalty (D = 0.85)</b> to extreme outliers and redistributes excess share back to historical incumbents in zero-sum balance:</p>
+        
+        <div style="background:#18181b; padding:1rem; border-radius:8px; font-family:monospace; color:#facc15; margin:1rem 0; font-size:1rem; text-align:center;">
+          Tuned TVK Projection = Raw TVK Projection × D
+        </div>
+      </div>
     </div>
 
   </main>
@@ -652,6 +674,8 @@
         initDashboard();
       } else if (screen === 'Audit') {
         renderAuditScreen();
+      } else if (screen === 'Guide') {
+        if (window.mermaid) mermaid.contentLoaded();
       }
     }
 
@@ -733,7 +757,7 @@
     }
 
     function renderMap(ds) {
-      // Filter out invalid coordinates to prevent ocean dots
+      // High-precision land filtering
       const landUnits = ds.filter(u => u.lat && u.lon && u.lat >= 8.0 && u.lat <= 13.6 && u.lon >= 76.0 && u.lon <= 80.9);
       
       const lats = landUnits.map(u => u.lat);
@@ -960,23 +984,9 @@
       const name = unit.name;
       const issue = unit.top_issue || 'Local Civic Grievance';
       
-      document.getElementById('copyWhatsApp').value = `🚨 TVK ${name} Constituency Campaign Alert:
-
-Ground verification confirms top issue: ${issue}.
-
-TVK President Vijay has released a formal 5-point action plan for ${name}.
-
-Join TVK Ground Campaign: tvk.org/${name.toLowerCase()}`;
-      document.getElementById('copyInstagram').value = `📍 Field Inspection: ${name} Constituency
-
-Addressing voter grievances on ${issue}.
-
-#TVK2026 #VijayForTN #${name.replace(/\s+/g, '')} #TVKGroundTruth`;
-      document.getElementById('copyTwitter').value = `TVK local candidate releases formal pledge for ${name} covering ${issue}.
-
-Net TVK lead: +${unit.gap || 15}pt.
-
-#TVK2026 #TamilagaVettriKazhagam`;
+      document.getElementById('copyWhatsApp').value = `🚨 TVK ${name} Constituency Campaign Alert:\n\nGround verification confirms top issue: ${issue}.\n\nTVK President Vijay has released a formal 5-point action plan for ${name}.\n\nJoin TVK Ground Campaign: tvk.org/${name.toLowerCase()}`;
+      document.getElementById('copyInstagram').value = `📍 Field Inspection: ${name} Constituency\n\nAddressing voter grievances on ${issue}.\n\n#TVK2026 #VijayForTN #${name.replace(/\s+/g, '')} #TVKGroundTruth`;
+      document.getElementById('copyTwitter').value = `TVK local candidate releases formal pledge for ${name} covering ${issue}.\n\nNet TVK lead: +${unit.gap || 15}pt.\n\n#TVK2026 #TamilagaVettriKazhagam`;
     }
 
     function renderAuditScreen() {

@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+import json, os
+
+with open("novitree-website/nethra_data.json", "r") as f:
+    nethra_data = json.load(f)
+
+html_template = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -25,9 +30,9 @@
   <link rel="stylesheet" href="vendor/leaflet.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="vendor/plotly.min.js"></script>
-  <script>if (typeof Plotly === "undefined") document.write('<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"><\/script>');</script>
+  <script>if (typeof Plotly === "undefined") document.write('<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"><\\/script>');</script>
   <script src="vendor/leaflet.js"></script>
-  <script>if (typeof L === "undefined") document.write('<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"><\/script>');</script>
+  <script>if (typeof L === "undefined") document.write('<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"><\\/script>');</script>
 
   <!-- Mermaid.js for Architecture Flowchart Rendering -->
   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
@@ -984,9 +989,9 @@
       const name = unit.name;
       const issue = unit.top_issue || 'Local Civic Grievance';
       
-      document.getElementById('copyWhatsApp').value = `🚨 TVK ${name} Constituency Campaign Alert:\n\nGround verification confirms top issue: ${issue}.\n\nTVK President Vijay has released a formal 5-point action plan for ${name}.\n\nJoin TVK Ground Campaign: tvk.org/${name.toLowerCase()}`;
-      document.getElementById('copyInstagram').value = `📍 Field Inspection: ${name} Constituency\n\nAddressing voter grievances on ${issue}.\n\n#TVK2026 #VijayForTN #${name.replace(/\s+/g, '')} #TVKGroundTruth`;
-      document.getElementById('copyTwitter').value = `TVK local candidate releases formal pledge for ${name} covering ${issue}.\n\nNet TVK lead: +${unit.gap || 15}pt.\n\n#TVK2026 #TamilagaVettriKazhagam`;
+      document.getElementById('copyWhatsApp').value = `🚨 TVK ${name} Constituency Campaign Alert:\\n\\nGround verification confirms top issue: ${issue}.\\n\\nTVK President Vijay has released a formal 5-point action plan for ${name}.\\n\\nJoin TVK Ground Campaign: tvk.org/${name.toLowerCase()}`;
+      document.getElementById('copyInstagram').value = `📍 Field Inspection: ${name} Constituency\\n\\nAddressing voter grievances on ${issue}.\\n\\n#TVK2026 #VijayForTN #${name.replace(/\\s+/g, '')} #TVKGroundTruth`;
+      document.getElementById('copyTwitter').value = `TVK local candidate releases formal pledge for ${name} covering ${issue}.\\n\\nNet TVK lead: +${unit.gap || 15}pt.\\n\\n#TVK2026 #TamilagaVettriKazhagam`;
     }
 
     function renderAuditScreen() {
@@ -1016,3 +1021,12 @@
   </script>
 </body>
 </html>
+"""
+
+with open("novitree-website/index.html", "w") as f:
+    f.write(html_template)
+
+with open("index.html", "w") as f:
+    f.write(html_template)
+
+print("✅ Built index.html with Mermaid flowchart rendering and high-precision land coordinates!")
