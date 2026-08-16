@@ -10,6 +10,14 @@ html_template = """<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Anti-Cache Meta Tags & Storage Purge -->
+  <script>
+    try {
+      localStorage.removeItem('nethra_tunnel_url');
+      localStorage.removeItem('active_tunnel');
+      localStorage.removeItem('cached_tunnel_url');
+    } catch(e){}
+  </script>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
