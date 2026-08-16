@@ -188,10 +188,12 @@
     .section-header { font-size: 1.2rem; font-weight: 800; color: #f8fafc; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 8px; }
     .section-caption { color: #94a3b8; font-size: 0.82rem; margin-bottom: 1rem; }
     
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.8rem; align-items: start; }
     @media(max-width: 1024px) { .grid-2 { grid-template-columns: 1fr; } }
 
-    #mapContainer { height: 420px; border-radius: 12px; border: 1px solid #1e293b; overflow: hidden; background: #0f172a; }
+    .chart-box { height: 380px; width: 100%; background: #0f172a; border-radius: 12px; border: 1px solid #1e293b; overflow: hidden; }
+
+    #mapContainer { height: 380px; width: 100%; border-radius: 12px; border: 1px solid #1e293b; overflow: hidden; background: #0f172a; }
     .spotlight-card {
       background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
       border: 2px solid #f59e0b; border-radius: 12px; padding: 1rem 1.2rem; margin-top: 10px;
@@ -204,7 +206,7 @@
     .sub-tab.active { background: #27272a; color: #facc15; }
 
     /* Table Styles */
-    .data-table-container { overflow-x: auto; max-height: 400px; border: 1px solid #1e293b; border-radius: 8px; }
+    .data-table-container { overflow-x: auto; max-height: 380px; border: 1px solid #1e293b; border-radius: 8px; width: 100%; }
     table { width: 100%; border-collapse: collapse; font-size: 0.82rem; text-align: left; }
     th { background: #1e293b; color: #f8fafc; padding: 8px 12px; font-weight: 700; position: sticky; top: 0; z-index: 10; }
     td { padding: 8px 12px; border-bottom: 1px solid #1e293b; color: #cbd5e1; }
@@ -274,7 +276,7 @@
     
     <!-- DASHBOARD VIEW CONTAINER -->
     <div id="screenDashboard">
-      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom: 0.8rem; background:#18181b; border:1px solid #27272a; padding:12px 18px; border-radius:12px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom: 1.2rem; background:#18181b; border:1px solid #27272a; padding:12px 18px; border-radius:12px;">
         <div>
           <div class="section-header" id="screenTitle" style="margin-bottom:0;">🔥 TN Assembly Elections (234 Seats)</div>
           <div class="section-caption" id="screenSubtitle" style="margin-bottom:0;">Database-driven real-time analytics & geo-fenced sentiment mining</div>
@@ -315,12 +317,12 @@
 
         <div>
           <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; color: #cbd5e1;">📊 Competitor Favorability Breakdown (Top 12 Displayed)</div>
-          <div id="chartCompetitor" style="height: 420px; background: #0f172a; border-radius: 12px; border: 1px solid #1e293b;"></div>
+          <div id="chartCompetitor" class="chart-box"></div>
         </div>
       </div>
 
       <!-- MULTI-UNIT CONSOLIDATED BANNER -->
-      <div style="background:linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);border:2px solid #38bdf8;border-radius:12px;padding:1rem;margin-bottom:1.2rem;">
+      <div style="background:linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);border:2px solid #38bdf8;border-radius:12px;padding:1rem;margin-bottom:1.5rem;">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
           <span style="background:#0284c7;color:white;font-weight:800;font-size:0.8rem;padding:4px 12px;border-radius:20px" id="bannerBadge">
             🔥 MULTI-UNIT CONSOLIDATED INTELLIGENCE
@@ -347,7 +349,7 @@
         <div class="grid-2">
           <div>
             <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; color: #cbd5e1;">Messaging Salience Gap (Voter Priority % vs TVK Mention %)</div>
-            <div id="chartGap" style="height: 360px; background: #0f172a; border-radius: 12px; border: 1px solid #1e293b;"></div>
+            <div id="chartGap" class="chart-box"></div>
           </div>
 
           <div>
@@ -373,10 +375,10 @@
           </div>
         </div>
 
-        <div style="margin-top: 1.5rem;">
+        <div style="margin-top: 1.8rem;">
           <div class="section-header">📈 6-Month Historical Favorability & Issue Trajectory</div>
           <div class="section-caption">Exponential Moving Average (EMA) smoothing curve over 6-month historical baseline</div>
-          <div id="chartTrend" style="height: 360px; background: #0f172a; border-radius: 12px; border: 1px solid #1e293b;"></div>
+          <div id="chartTrend" class="chart-box" style="height: 360px;"></div>
         </div>
       </div>
 
@@ -573,6 +575,9 @@
       document.getElementById('subTab1').style.display = (idx === 1) ? 'block' : 'none';
       document.getElementById('subTab2').style.display = (idx === 2) ? 'block' : 'none';
       document.getElementById('subTab3').style.display = (idx === 3) ? 'block' : 'none';
+      
+      // Trigger Plotly relayout to prevent overlap
+      window.dispatchEvent(new Event('resize'));
     }
 
     function getActiveDataset() {
@@ -640,16 +645,18 @@
     }
 
     function renderMap(ds) {
-      // Plotly Scattermapbox Map Engine with exact YlOrRd Heatmap Color Scale
-      const lats = ds.map(u => u.lat || 10.85);
-      const lons = ds.map(u => u.lon || 78.65);
-      const names = ds.map(u => u.name);
-      const tvkFavs = ds.map(u => u.tvk_fav || u.tvk_proj || 25.0);
-      const hoverTexts = ds.map(u => `<b>${u.name}</b><br>TVK Fav: ${u.tvk_fav || u.tvk_proj || 25}%<br>DMK Baseline: ${u.dmk_fav || u.dmk_proj || 35}%<br>Top Issue: ${u.top_issue || 'Infrastructure'}`);
+      // Filter out invalid coordinates to prevent ocean dots
+      const landUnits = ds.filter(u => u.lat && u.lon && u.lat >= 8.0 && u.lat <= 13.6 && u.lon >= 76.0 && u.lon <= 80.9);
       
-      const sizes = ds.map(u => {
+      const lats = landUnits.map(u => u.lat);
+      const lons = landUnits.map(u => u.lon);
+      const names = landUnits.map(u => u.name);
+      const tvkFavs = landUnits.map(u => u.tvk_fav || u.tvk_proj || 25.0);
+      const hoverTexts = landUnits.map(u => `<b>${u.name}</b><br>TVK Fav: ${u.tvk_fav || u.tvk_proj || 25}%<br>DMK Baseline: ${u.dmk_fav || u.dmk_proj || 35}%<br>Top Issue: ${u.top_issue || 'Infrastructure'}`);
+      
+      const sizes = landUnits.map(u => {
         const v = u.voters || 250000;
-        return Math.min(Math.max(v / 15000, 8), 24);
+        return Math.min(Math.max(v / 18000, 7), 22);
       });
 
       const mapTrace = {
@@ -678,7 +685,8 @@
         },
         margin: { r: 0, t: 0, l: 0, b: 0 },
         paper_bgcolor: '#0f172a',
-        plot_bgcolor: '#0f172a'
+        plot_bgcolor: '#0f172a',
+        autosize: true
       };
 
       Plotly.newPlot('mapContainer', [mapTrace], mapLayout, { responsive: true, displayModeBar: false });
@@ -713,12 +721,13 @@
 
       const layout = {
         barmode: 'group',
-        yaxis: { title: 'Favorability %', range: [0, 75], gridcolor: '#334155', titlefont: { color: '#ffffff' } },
+        yaxis: { title: 'Favorability %', range: [0, 75], gridcolor: '#334155', titlefont: { color: '#ffffff' }, tickfont: { color: '#ffffff' } },
         xaxis: { tickangle: -25, tickfont: { size: 9, color: '#ffffff' } },
         plot_bgcolor: '#0f172a', paper_bgcolor: '#0f172a',
         font: { color: '#ffffff', family: 'Inter, sans-serif' },
-        legend: { bgcolor: '#1e293b', bordercolor: '#475569', borderwidth: 1, font: { color: '#ffffff', size: 11 }, x: 0.99, y: 0.99, xanchor: 'right', yanchor: 'top' },
-        margin: { t: 20, b: 20, l: 10, r: 10 }
+        legend: { bgcolor: '#1e293b', bordercolor: '#475569', borderwidth: 1, font: { color: '#ffffff', size: 10 }, x: 0.99, y: 0.99, xanchor: 'right', yanchor: 'top' },
+        margin: { t: 25, b: 65, l: 45, r: 15 },
+        autosize: true
       };
 
       Plotly.newPlot('chartCompetitor', traces, layout, { responsive: true, displayModeBar: false });
@@ -743,8 +752,8 @@
     }
 
     function renderSubTab1(ds) {
-      // Messaging Gap Chart
-      const sub = ds.slice(0, 12);
+      // Messaging Gap Chart - Fixed Margins to Prevent Table Overlap
+      const sub = ds.slice(0, 10);
       const y = sub.map(u => u.name);
       const priority = sub.map(u => u.voter_salience || 65.0);
       const messaging = sub.map(u => u.tvk_messaging || 45.0);
@@ -756,12 +765,13 @@
 
       const layout = {
         barmode: 'group',
-        xaxis: { title: '% Volume', gridcolor: '#334155', titlefont: { color: '#ffffff' } },
+        xaxis: { title: '% Volume', gridcolor: '#334155', titlefont: { color: '#ffffff' }, tickfont: { color: '#ffffff' } },
         yaxis: { tickfont: { size: 9, color: '#ffffff' } },
         plot_bgcolor: '#0f172a', paper_bgcolor: '#0f172a',
         font: { color: '#ffffff', family: 'Inter, sans-serif' },
-        legend: { bgcolor: '#1e293b', bordercolor: '#475569', borderwidth: 1, font: { color: '#ffffff', size: 11 }, x: 0.99, y: 0.99, xanchor: 'right', yanchor: 'top' },
-        margin: { t: 20, b: 20, l: 10, r: 10 }
+        legend: { bgcolor: '#1e293b', bordercolor: '#475569', borderwidth: 1, font: { color: '#ffffff', size: 10 }, x: 0.99, y: 0.99, xanchor: 'right', yanchor: 'top' },
+        margin: { t: 25, b: 45, l: 85, r: 15 },
+        autosize: true
       };
 
       Plotly.newPlot('chartGap', traces, layout, { responsive: true, displayModeBar: false });
@@ -799,12 +809,13 @@
       ];
 
       const trendLayout = {
-        yaxis: { title: '% Score', range: [0, 60], gridcolor: '#334155', titlefont: { color: '#ffffff' } },
+        yaxis: { title: '% Score', range: [0, 60], gridcolor: '#334155', titlefont: { color: '#ffffff' }, tickfont: { color: '#ffffff' } },
         xaxis: { tickfont: { size: 10, color: '#ffffff' } },
         plot_bgcolor: '#0f172a', paper_bgcolor: '#0f172a',
         font: { color: '#ffffff', family: 'Inter, sans-serif' },
-        legend: { bgcolor: '#1e293b', bordercolor: '#475569', borderwidth: 1, font: { color: '#ffffff', size: 11 }, x: 0.99, y: 0.99, xanchor: 'right', yanchor: 'top' },
-        margin: { t: 20, b: 20, l: 10, r: 10 }
+        legend: { bgcolor: '#1e293b', bordercolor: '#475569', borderwidth: 1, font: { color: '#ffffff', size: 10 }, x: 0.99, y: 0.99, xanchor: 'right', yanchor: 'top' },
+        margin: { t: 25, b: 45, l: 45, r: 15 },
+        autosize: true
       };
 
       Plotly.newPlot('chartTrend', trendTraces, trendLayout, { responsive: true, displayModeBar: false });
