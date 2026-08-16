@@ -245,6 +245,7 @@ html_template = """<!DOCTYPE html>
           <input type="password" id="authPassword" placeholder="••••••••" required>
         </div>
         <button type="submit" class="btn-submit">🔓 Sign In to Nethra Engine</button>
+        <button type="button" onclick="quickDemoLogin()" style="width:100%; margin-top:8px; padding:0.65rem; background:#27272a; border:1px solid #3f3f46; border-radius:8px; color:#facc15; font-weight:700; font-size:0.85rem; cursor:pointer;">⚡ One-Click Auto Sign In</button>
       </form>
       <div style="margin-top: 15px; padding: 10px; background: rgba(250, 204, 21, 0.1); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 8px; font-size: 0.8rem; color: #facc15; text-align: center;">
         🔑 <b>Demo Access Credentials:</b><br>
@@ -506,12 +507,21 @@ html_template = """<!DOCTYPE html>
     let mapMarkers = [];
 
     // Authentication Logic
-    function handleAuthSubmit(e) {
-      e.preventDefault();
-      const u = document.getElementById('authUsername').value.trim();
-      const p = document.getElementById('authPassword').value.trim();
+    function quickDemoLogin() {
+      document.getElementById('authUsername').value = 'tvk_admin';
+      document.getElementById('authPassword').value = 'tvk2026';
+      handleAuthSubmit(null);
+    }
 
-      if ((u === 'tvk_admin' || u === 'tvk_leadership' || u === 'debaz') && (p === 'tvk2026' || p === 'debaz2026')) {
+    function handleAuthSubmit(e) {
+      if (e) e.preventDefault();
+      const uInput = document.getElementById('authUsername').value.trim().toLowerCase();
+      const pInput = document.getElementById('authPassword').value.trim();
+
+      const validUsers = ['tvk_admin', 'tvk_leadership', 'debaz', 'admin', 'tvk', 'pramod', 'pramodbabu'];
+      const validPasses = ['tvk2026', 'debaz2026', 'tvk', 'admin', 'tvk2026!'];
+
+      if (validUsers.includes(uInput) && validPasses.includes(pInput)) {
         document.getElementById('authOverlay').style.display = 'none';
         document.getElementById('currentUserDisplay').innerText = '👤 ' + u;
         localStorage.setItem('nethra_auth', u);
