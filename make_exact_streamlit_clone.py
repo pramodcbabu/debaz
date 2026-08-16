@@ -245,13 +245,13 @@ with open("novitree-website/index.html", "w") as f:
     .sub-tab.active { background: #262730; color: #facc15; font-weight: 700; }
 
     /* TABLE STYLES */
-    .data-table-container { overflow-x: auto; max-height: 420px; border: 1px solid #1e293b; border-radius: 8px; width: 100%; background: #0f172a; }
+    .data-table-container { overflow-x: auto; max-height: 440px; border: 1px solid #1e293b; border-radius: 8px; width: 100%; background: #0f172a; }
     table { width: 100%; border-collapse: collapse; font-size: 0.84rem; text-align: left; }
     th { background: #1e293b; color: #fafafa; padding: 10px 14px; font-weight: 700; position: sticky; top: 0; z-index: 10; border-bottom: 1px solid #334155; }
     td { padding: 10px 14px; border-bottom: 1px solid #1e293b; color: #cbd5e1; }
     tr:hover { background: rgba(255, 255, 255, 0.03); }
 
-    .search-input { padding: 8px 14px; background: #0e1117; border: 1px solid #3f3f46; border-radius: 6px; color: #fff; font-size: 0.85rem; margin-bottom: 10px; width: 100%; max-width: 320px; }
+    .search-input { padding: 8px 14px; background: #0e1117; border: 1px solid #3f3f46; border-radius: 6px; color: #fff; font-size: 0.85rem; margin-bottom: 10px; width: 100%; max-width: 360px; }
 
     .campaign-copy-card { background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; padding: 1.2rem; margin-bottom: 1rem; }
     .campaign-copy-card h4 { color: #38bdf8; font-size: 0.95rem; margin-bottom: 8px; }
@@ -438,14 +438,14 @@ with open("novitree-website/index.html", "w") as f:
       <div id="subTab1">
         <!-- 1. FULL WIDTH MESSAGING SALIENCE GAP CHART -->
         <div style="margin-bottom: 2rem;">
-          <div style="font-weight: 700; font-size: 0.92rem; margin-bottom: 6px; color: #cbd5e1;">📊 Messaging Salience Gap (Top 12 Units) (Voter Priority % vs TVK Mention %)</div>
-          <div id="chartGap" class="chart-box" style="height: 440px; width: 100%;"></div>
+          <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 8px; color: #cbd5e1;">📊 Messaging Salience Gap (Top 12 Units) (Voter Priority % vs TVK Mention %)</div>
+          <div id="chartGap" class="chart-box" style="height: 460px; width: 100%;"></div>
         </div>
 
         <!-- 2. FULL WIDTH DETAILED EXHAUSTIVE DATA TABLE -->
         <div style="margin-bottom: 2rem;">
-          <div style="font-weight: 700; font-size: 0.92rem; margin-bottom: 6px; color: #cbd5e1;">🗂️ Detailed Exhaustive Table (Queried from DB)</div>
-          <input type="text" class="search-input" id="tableSearch" placeholder="🔍 Search unit name, district, or issue..." onkeyup="filterDataTable()">
+          <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 8px; color: #cbd5e1;">🗂️ Detailed Exhaustive Table (Queried from DB)</div>
+          <input type="text" class="search-input" id="tableSearch" placeholder="🔍 Search unit name, district, or issue..." onkeyup="filterDataTable()" style="max-width: 400px; width: 100%;">
           <div class="data-table-container" style="max-height: 440px; width: 100%;">
             <table id="unitsTable">
               <thead>
@@ -1053,7 +1053,7 @@ with open("novitree-website/index.html", "w") as f:
     }
 
     function renderSubTab1(ds, unitObj) {
-      // FULL WIDTH MESSAGING SALIENCE GAP CHART WITH EXTRA LEFT MARGIN (170px) FOR CLEAN Y-AXIS LABELS
+      // FULL WIDTH MESSAGING SALIENCE GAP CHART WITH EXTRA LEFT MARGIN (180px) FOR CLEAN Y-AXIS LABELS
       const sub = ds.slice(0, 12);
       const y = sub.map(u => u.name);
       const priority = sub.map(u => u.voter_salience || 65.0);
@@ -1468,13 +1468,13 @@ with open("index.html", "w") as f:
     .sub-tab.active { background: #262730; color: #facc15; font-weight: 700; }
 
     /* TABLE STYLES */
-    .data-table-container { overflow-x: auto; max-height: 420px; border: 1px solid #1e293b; border-radius: 8px; width: 100%; background: #0f172a; }
+    .data-table-container { overflow-x: auto; max-height: 440px; border: 1px solid #1e293b; border-radius: 8px; width: 100%; background: #0f172a; }
     table { width: 100%; border-collapse: collapse; font-size: 0.84rem; text-align: left; }
     th { background: #1e293b; color: #fafafa; padding: 10px 14px; font-weight: 700; position: sticky; top: 0; z-index: 10; border-bottom: 1px solid #334155; }
     td { padding: 10px 14px; border-bottom: 1px solid #1e293b; color: #cbd5e1; }
     tr:hover { background: rgba(255, 255, 255, 0.03); }
 
-    .search-input { padding: 8px 14px; background: #0e1117; border: 1px solid #3f3f46; border-radius: 6px; color: #fff; font-size: 0.85rem; margin-bottom: 10px; width: 100%; max-width: 320px; }
+    .search-input { padding: 8px 14px; background: #0e1117; border: 1px solid #3f3f46; border-radius: 6px; color: #fff; font-size: 0.85rem; margin-bottom: 10px; width: 100%; max-width: 360px; }
 
     .campaign-copy-card { background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; padding: 1.2rem; margin-bottom: 1rem; }
     .campaign-copy-card h4 { color: #38bdf8; font-size: 0.95rem; margin-bottom: 8px; }
@@ -1661,14 +1661,14 @@ with open("index.html", "w") as f:
       <div id="subTab1">
         <!-- 1. FULL WIDTH MESSAGING SALIENCE GAP CHART -->
         <div style="margin-bottom: 2rem;">
-          <div style="font-weight: 700; font-size: 0.92rem; margin-bottom: 6px; color: #cbd5e1;">📊 Messaging Salience Gap (Top 12 Units) (Voter Priority % vs TVK Mention %)</div>
-          <div id="chartGap" class="chart-box" style="height: 440px; width: 100%;"></div>
+          <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 8px; color: #cbd5e1;">📊 Messaging Salience Gap (Top 12 Units) (Voter Priority % vs TVK Mention %)</div>
+          <div id="chartGap" class="chart-box" style="height: 460px; width: 100%;"></div>
         </div>
 
         <!-- 2. FULL WIDTH DETAILED EXHAUSTIVE DATA TABLE -->
         <div style="margin-bottom: 2rem;">
-          <div style="font-weight: 700; font-size: 0.92rem; margin-bottom: 6px; color: #cbd5e1;">🗂️ Detailed Exhaustive Table (Queried from DB)</div>
-          <input type="text" class="search-input" id="tableSearch" placeholder="🔍 Search unit name, district, or issue..." onkeyup="filterDataTable()">
+          <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 8px; color: #cbd5e1;">🗂️ Detailed Exhaustive Table (Queried from DB)</div>
+          <input type="text" class="search-input" id="tableSearch" placeholder="🔍 Search unit name, district, or issue..." onkeyup="filterDataTable()" style="max-width: 400px; width: 100%;">
           <div class="data-table-container" style="max-height: 440px; width: 100%;">
             <table id="unitsTable">
               <thead>
@@ -2276,7 +2276,7 @@ with open("index.html", "w") as f:
     }
 
     function renderSubTab1(ds, unitObj) {
-      // FULL WIDTH MESSAGING SALIENCE GAP CHART WITH EXTRA LEFT MARGIN (170px) FOR CLEAN Y-AXIS LABELS
+      // FULL WIDTH MESSAGING SALIENCE GAP CHART WITH EXTRA LEFT MARGIN (180px) FOR CLEAN Y-AXIS LABELS
       const sub = ds.slice(0, 12);
       const y = sub.map(u => u.name);
       const priority = sub.map(u => u.voter_salience || 65.0);
@@ -2446,4 +2446,4 @@ with open("index.html", "w") as f:
 </html>
 """)
 
-print("✅ Full-width stacked Messaging Salience Gap & Data Table layout built!")
+print("✅ Clean full-width stacked subTab1 template written!")
