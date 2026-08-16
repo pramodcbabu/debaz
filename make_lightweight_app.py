@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+import json, os
+
+with open("novitree-website/nethra_data.json", "r") as f:
+    nethra_data = json.load(f)
+
+html_template = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -841,9 +846,9 @@
       const name = unit.name;
       const issue = unit.top_issue || 'Local Civic Grievance';
       
-      document.getElementById('copyWhatsApp').value = `🚨 TVK ${name} Constituency Campaign Alert:\n\nGround verification confirms top issue: ${issue}.\n\nTVK President Vijay has released a formal 5-point action plan for ${name}.\n\nJoin TVK Ground Campaign: tvk.org/${name.toLowerCase()}`;
-      document.getElementById('copyInstagram').value = `📍 Field Inspection: ${name} Constituency\n\nAddressing voter grievances on ${issue}.\n\n#TVK2026 #VijayForTN #${name.replace(/\s+/g, '')} #TVKGroundTruth`;
-      document.getElementById('copyTwitter').value = `TVK local candidate releases formal pledge for ${name} covering ${issue}.\n\nNet TVK lead: +${unit.gap || 15}pt.\n\n#TVK2026 #TamilagaVettriKazhagam`;
+      document.getElementById('copyWhatsApp').value = `🚨 TVK ${name} Constituency Campaign Alert:\\n\\nGround verification confirms top issue: ${issue}.\\n\\nTVK President Vijay has released a formal 5-point action plan for ${name}.\\n\\nJoin TVK Ground Campaign: tvk.org/${name.toLowerCase()}`;
+      document.getElementById('copyInstagram').value = `📍 Field Inspection: ${name} Constituency\\n\\nAddressing voter grievances on ${issue}.\\n\\n#TVK2026 #VijayForTN #${name.replace(/\\s+/g, '')} #TVKGroundTruth`;
+      document.getElementById('copyTwitter').value = `TVK local candidate releases formal pledge for ${name} covering ${issue}.\\n\\nNet TVK lead: +${unit.gap || 15}pt.\\n\\n#TVK2026 #TamilagaVettriKazhagam`;
     }
 
     function renderAuditScreen() {
@@ -873,3 +878,12 @@
   </script>
 </body>
 </html>
+"""
+
+with open("novitree-website/index.html", "w") as f:
+    f.write(html_template)
+
+with open("index.html", "w") as f:
+    f.write(html_template)
+
+print("✅ Built lightweight index.html! Size:", len(html_template), "bytes")
