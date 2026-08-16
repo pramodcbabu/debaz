@@ -245,7 +245,7 @@ with open("novitree-website/index.html", "w") as f:
     .sub-tab.active { background: #262730; color: #facc15; font-weight: 700; }
 
     /* TABLE STYLES */
-    .data-table-container { overflow-x: auto; max-height: 380px; border: 1px solid #1e293b; border-radius: 8px; width: 100%; background: #0f172a; }
+    .data-table-container { overflow-x: auto; max-height: 420px; border: 1px solid #1e293b; border-radius: 8px; width: 100%; background: #0f172a; }
     table { width: 100%; border-collapse: collapse; font-size: 0.84rem; text-align: left; }
     th { background: #1e293b; color: #fafafa; padding: 10px 14px; font-weight: 700; position: sticky; top: 0; z-index: 10; border-bottom: 1px solid #334155; }
     td { padding: 10px 14px; border-bottom: 1px solid #1e293b; color: #cbd5e1; }
@@ -434,42 +434,43 @@ with open("novitree-website/index.html", "w") as f:
         <button class="sub-tab" onclick="setSubTab(3)">📲 3. AI Campaign Deployment</button>
       </div>
 
-      <!-- SUB TAB 1: MESSAGING GAPS & HISTORICAL TRENDS -->
+      <!-- SUB TAB 1: FULL-WIDTH VERTICALLY STACKED SECTIONS -->
       <div id="subTab1">
-        <div class="grid-2">
-          <div>
-            <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; color: #cbd5e1;">Messaging Salience Gap (Top 12 Units) (Voter Priority % vs TVK Mention %)</div>
-            <div id="chartGap" class="chart-box"></div>
-          </div>
+        <!-- 1. FULL WIDTH MESSAGING SALIENCE GAP CHART -->
+        <div style="margin-bottom: 2rem;">
+          <div style="font-weight: 700; font-size: 0.92rem; margin-bottom: 6px; color: #cbd5e1;">📊 Messaging Salience Gap (Top 12 Units) (Voter Priority % vs TVK Mention %)</div>
+          <div id="chartGap" class="chart-box" style="height: 440px; width: 100%;"></div>
+        </div>
 
-          <div>
-            <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; color: #cbd5e1;">🗂️ Detailed Exhaustive Table (234 Units Queried from DB)</div>
-            <input type="text" class="search-input" id="tableSearch" placeholder="🔍 Search unit name, district, or issue..." onkeyup="filterDataTable()">
-            <div class="data-table-container">
-              <table id="unitsTable">
-                <thead>
-                  <tr>
-                    <th>Ground Audit Level</th>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Region/District</th>
-                    <th>Status Tag</th>
-                    <th>TVK %</th>
-                    <th>DMK %</th>
-                    <th>Geo-Fenced Issue (Aug 2026)</th>
-                    <th>Gap</th>
-                  </tr>
-                </thead>
-                <tbody id="unitsTableBody"></tbody>
-              </table>
-            </div>
+        <!-- 2. FULL WIDTH DETAILED EXHAUSTIVE DATA TABLE -->
+        <div style="margin-bottom: 2rem;">
+          <div style="font-weight: 700; font-size: 0.92rem; margin-bottom: 6px; color: #cbd5e1;">🗂️ Detailed Exhaustive Table (Queried from DB)</div>
+          <input type="text" class="search-input" id="tableSearch" placeholder="🔍 Search unit name, district, or issue..." onkeyup="filterDataTable()">
+          <div class="data-table-container" style="max-height: 440px; width: 100%;">
+            <table id="unitsTable">
+              <thead>
+                <tr>
+                  <th>Ground Audit Level</th>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Region/District</th>
+                  <th>Status Tag</th>
+                  <th>TVK %</th>
+                  <th>DMK %</th>
+                  <th>Geo-Fenced Issue (Aug 2026)</th>
+                  <th>Gap</th>
+                </tr>
+              </thead>
+              <tbody id="unitsTableBody"></tbody>
+            </table>
           </div>
         </div>
 
-        <div style="margin-top: 1.8rem;">
+        <!-- 3. FULL WIDTH 6-MONTH HISTORICAL TRAJECTORY LINE CHART -->
+        <div style="margin-bottom: 2rem;">
           <div class="section-header">📈 6-Month Historical Favorability & Issue Trajectory</div>
           <div class="section-caption" id="trendCaption">Track how party favorability figures and voter issue salience evolved over the past 6 months.</div>
-          <div id="chartTrend" class="chart-box" style="height: 380px;"></div>
+          <div id="chartTrend" class="chart-box" style="height: 400px; width: 100%;"></div>
         </div>
       </div>
 
@@ -892,7 +893,6 @@ with open("novitree-website/index.html", "w") as f:
       const ds = getFilteredDataset();
       if (!ds || ds.length === 0) return;
       
-      // Update Screen Title & Caption
       if (currentScreen === 'Assembly') {
         document.getElementById('screenTitle').innerText = '⚡ TN Assembly Elections & Byelections — (' + ds.length + ' / 234 Constituencies Tracked)';
         document.getElementById('screenSubtitle').innerText = 'Constituency-level database intelligence. (5 Target Byelection Seats: Karur, Trichy East, Perundurai, Viralimalai, Ambasamudram).';
@@ -974,9 +974,9 @@ with open("novitree-website/index.html", "w") as f:
 
       let centerLat = 10.8505, centerLon = 78.6569, zoomVal = 6.2;
       if (currentScreen === 'Local') {
-        centerLat = 13.0827;
-        centerLon = 80.2707;
-        zoomVal = 10.5;
+        centerLat = 13.0450;
+        centerLon = 80.2200;
+        zoomVal = 11.2;
       }
 
       const mapLayout = {
@@ -1053,7 +1053,8 @@ with open("novitree-website/index.html", "w") as f:
     }
 
     function renderSubTab1(ds, unitObj) {
-      const sub = ds.slice(0, 10);
+      // FULL WIDTH MESSAGING SALIENCE GAP CHART WITH EXTRA LEFT MARGIN (170px) FOR CLEAN Y-AXIS LABELS
+      const sub = ds.slice(0, 12);
       const y = sub.map(u => u.name);
       const priority = sub.map(u => u.voter_salience || 65.0);
       const messaging = sub.map(u => u.tvk_messaging || 45.0);
@@ -1066,11 +1067,11 @@ with open("novitree-website/index.html", "w") as f:
       const layout = {
         barmode: 'group',
         xaxis: { title: '% Volume', gridcolor: '#334155', titlefont: { color: '#ffffff' }, tickfont: { color: '#ffffff' } },
-        yaxis: { tickfont: { size: 9, color: '#ffffff' } },
+        yaxis: { tickfont: { size: 10, color: '#ffffff' }, automargin: true },
         plot_bgcolor: '#0f172a', paper_bgcolor: '#0f172a',
         font: { color: '#ffffff', family: 'Inter, sans-serif' },
-        legend: { bgcolor: '#1e293b', bordercolor: '#475569', borderwidth: 1, font: { color: '#ffffff', size: 10 }, x: 0.99, y: 0.99, xanchor: 'right', yanchor: 'top' },
-        margin: { t: 25, b: 45, l: 85, r: 15 },
+        legend: { bgcolor: '#1e293b', bordercolor: '#475569', borderwidth: 1, font: { color: '#ffffff', size: 11 }, x: 0.99, y: 0.99, xanchor: 'right', yanchor: 'top' },
+        margin: { t: 25, b: 45, l: 180, r: 25 },
         autosize: true
       };
 
@@ -1110,7 +1111,6 @@ with open("novitree-website/index.html", "w") as f:
       const targetAIADMK = unitObj.aiadmk_fav || unitObj.aiadmk_proj || 22.0;
       const targetBJP = unitObj.bjp_fav || unitObj.bjp_proj || 9.2;
 
-      // Exponential Moving Average (EMA) formula: S_t = (lambda * Target) + ((1 - lambda) * S_t-1)
       const LAMBDA = 0.35;
       function calcEMA(base, target) {
         let s = [base];
@@ -1468,7 +1468,7 @@ with open("index.html", "w") as f:
     .sub-tab.active { background: #262730; color: #facc15; font-weight: 700; }
 
     /* TABLE STYLES */
-    .data-table-container { overflow-x: auto; max-height: 380px; border: 1px solid #1e293b; border-radius: 8px; width: 100%; background: #0f172a; }
+    .data-table-container { overflow-x: auto; max-height: 420px; border: 1px solid #1e293b; border-radius: 8px; width: 100%; background: #0f172a; }
     table { width: 100%; border-collapse: collapse; font-size: 0.84rem; text-align: left; }
     th { background: #1e293b; color: #fafafa; padding: 10px 14px; font-weight: 700; position: sticky; top: 0; z-index: 10; border-bottom: 1px solid #334155; }
     td { padding: 10px 14px; border-bottom: 1px solid #1e293b; color: #cbd5e1; }
@@ -1657,42 +1657,43 @@ with open("index.html", "w") as f:
         <button class="sub-tab" onclick="setSubTab(3)">📲 3. AI Campaign Deployment</button>
       </div>
 
-      <!-- SUB TAB 1: MESSAGING GAPS & HISTORICAL TRENDS -->
+      <!-- SUB TAB 1: FULL-WIDTH VERTICALLY STACKED SECTIONS -->
       <div id="subTab1">
-        <div class="grid-2">
-          <div>
-            <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; color: #cbd5e1;">Messaging Salience Gap (Top 12 Units) (Voter Priority % vs TVK Mention %)</div>
-            <div id="chartGap" class="chart-box"></div>
-          </div>
+        <!-- 1. FULL WIDTH MESSAGING SALIENCE GAP CHART -->
+        <div style="margin-bottom: 2rem;">
+          <div style="font-weight: 700; font-size: 0.92rem; margin-bottom: 6px; color: #cbd5e1;">📊 Messaging Salience Gap (Top 12 Units) (Voter Priority % vs TVK Mention %)</div>
+          <div id="chartGap" class="chart-box" style="height: 440px; width: 100%;"></div>
+        </div>
 
-          <div>
-            <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; color: #cbd5e1;">🗂️ Detailed Exhaustive Table (234 Units Queried from DB)</div>
-            <input type="text" class="search-input" id="tableSearch" placeholder="🔍 Search unit name, district, or issue..." onkeyup="filterDataTable()">
-            <div class="data-table-container">
-              <table id="unitsTable">
-                <thead>
-                  <tr>
-                    <th>Ground Audit Level</th>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Region/District</th>
-                    <th>Status Tag</th>
-                    <th>TVK %</th>
-                    <th>DMK %</th>
-                    <th>Geo-Fenced Issue (Aug 2026)</th>
-                    <th>Gap</th>
-                  </tr>
-                </thead>
-                <tbody id="unitsTableBody"></tbody>
-              </table>
-            </div>
+        <!-- 2. FULL WIDTH DETAILED EXHAUSTIVE DATA TABLE -->
+        <div style="margin-bottom: 2rem;">
+          <div style="font-weight: 700; font-size: 0.92rem; margin-bottom: 6px; color: #cbd5e1;">🗂️ Detailed Exhaustive Table (Queried from DB)</div>
+          <input type="text" class="search-input" id="tableSearch" placeholder="🔍 Search unit name, district, or issue..." onkeyup="filterDataTable()">
+          <div class="data-table-container" style="max-height: 440px; width: 100%;">
+            <table id="unitsTable">
+              <thead>
+                <tr>
+                  <th>Ground Audit Level</th>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Region/District</th>
+                  <th>Status Tag</th>
+                  <th>TVK %</th>
+                  <th>DMK %</th>
+                  <th>Geo-Fenced Issue (Aug 2026)</th>
+                  <th>Gap</th>
+                </tr>
+              </thead>
+              <tbody id="unitsTableBody"></tbody>
+            </table>
           </div>
         </div>
 
-        <div style="margin-top: 1.8rem;">
+        <!-- 3. FULL WIDTH 6-MONTH HISTORICAL TRAJECTORY LINE CHART -->
+        <div style="margin-bottom: 2rem;">
           <div class="section-header">📈 6-Month Historical Favorability & Issue Trajectory</div>
           <div class="section-caption" id="trendCaption">Track how party favorability figures and voter issue salience evolved over the past 6 months.</div>
-          <div id="chartTrend" class="chart-box" style="height: 380px;"></div>
+          <div id="chartTrend" class="chart-box" style="height: 400px; width: 100%;"></div>
         </div>
       </div>
 
@@ -2115,7 +2116,6 @@ with open("index.html", "w") as f:
       const ds = getFilteredDataset();
       if (!ds || ds.length === 0) return;
       
-      // Update Screen Title & Caption
       if (currentScreen === 'Assembly') {
         document.getElementById('screenTitle').innerText = '⚡ TN Assembly Elections & Byelections — (' + ds.length + ' / 234 Constituencies Tracked)';
         document.getElementById('screenSubtitle').innerText = 'Constituency-level database intelligence. (5 Target Byelection Seats: Karur, Trichy East, Perundurai, Viralimalai, Ambasamudram).';
@@ -2197,9 +2197,9 @@ with open("index.html", "w") as f:
 
       let centerLat = 10.8505, centerLon = 78.6569, zoomVal = 6.2;
       if (currentScreen === 'Local') {
-        centerLat = 13.0827;
-        centerLon = 80.2707;
-        zoomVal = 10.5;
+        centerLat = 13.0450;
+        centerLon = 80.2200;
+        zoomVal = 11.2;
       }
 
       const mapLayout = {
@@ -2276,7 +2276,8 @@ with open("index.html", "w") as f:
     }
 
     function renderSubTab1(ds, unitObj) {
-      const sub = ds.slice(0, 10);
+      // FULL WIDTH MESSAGING SALIENCE GAP CHART WITH EXTRA LEFT MARGIN (170px) FOR CLEAN Y-AXIS LABELS
+      const sub = ds.slice(0, 12);
       const y = sub.map(u => u.name);
       const priority = sub.map(u => u.voter_salience || 65.0);
       const messaging = sub.map(u => u.tvk_messaging || 45.0);
@@ -2289,11 +2290,11 @@ with open("index.html", "w") as f:
       const layout = {
         barmode: 'group',
         xaxis: { title: '% Volume', gridcolor: '#334155', titlefont: { color: '#ffffff' }, tickfont: { color: '#ffffff' } },
-        yaxis: { tickfont: { size: 9, color: '#ffffff' } },
+        yaxis: { tickfont: { size: 10, color: '#ffffff' }, automargin: true },
         plot_bgcolor: '#0f172a', paper_bgcolor: '#0f172a',
         font: { color: '#ffffff', family: 'Inter, sans-serif' },
-        legend: { bgcolor: '#1e293b', bordercolor: '#475569', borderwidth: 1, font: { color: '#ffffff', size: 10 }, x: 0.99, y: 0.99, xanchor: 'right', yanchor: 'top' },
-        margin: { t: 25, b: 45, l: 85, r: 15 },
+        legend: { bgcolor: '#1e293b', bordercolor: '#475569', borderwidth: 1, font: { color: '#ffffff', size: 11 }, x: 0.99, y: 0.99, xanchor: 'right', yanchor: 'top' },
+        margin: { t: 25, b: 45, l: 180, r: 25 },
         autosize: true
       };
 
@@ -2333,7 +2334,6 @@ with open("index.html", "w") as f:
       const targetAIADMK = unitObj.aiadmk_fav || unitObj.aiadmk_proj || 22.0;
       const targetBJP = unitObj.bjp_fav || unitObj.bjp_proj || 9.2;
 
-      // Exponential Moving Average (EMA) formula: S_t = (lambda * Target) + ((1 - lambda) * S_t-1)
       const LAMBDA = 0.35;
       function calcEMA(base, target) {
         let s = [base];
@@ -2446,4 +2446,4 @@ with open("index.html", "w") as f:
 </html>
 """)
 
-print("✅ Exact Streamlit clone with red header & metric cards built!")
+print("✅ Full-width stacked Messaging Salience Gap & Data Table layout built!")
