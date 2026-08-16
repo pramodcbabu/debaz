@@ -677,11 +677,18 @@
         customdata: names
       };
 
+      let centerLat = 10.8505, centerLon = 78.6569, zoomVal = 6.2;
+      if (currentScreen === 'Local') {
+        centerLat = 13.0827;
+        centerLon = 80.2707;
+        zoomVal = 10.5;
+      }
+
       const mapLayout = {
         mapbox: {
           style: 'carto-darkmatter',
-          center: { lat: 10.8505, lon: 78.6569 },
-          zoom: 6.2
+          center: { lat: centerLat, lon: centerLon },
+          zoom: zoomVal
         },
         margin: { r: 0, t: 0, l: 0, b: 0 },
         paper_bgcolor: '#0f172a',
