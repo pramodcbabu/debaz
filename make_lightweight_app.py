@@ -26,10 +26,13 @@ html_template = """<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   
-  <!-- Plotly.js & Leaflet CSS/JS -->
-  <script src="vendor/plotly.min.js"></script>
+  <!-- Plotly.js & Leaflet CSS/JS with Automatic CDN Fallback -->
   <link rel="stylesheet" href="vendor/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="vendor/plotly.min.js"></script>
+  <script>if (typeof Plotly === "undefined") document.write('<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"><\/script>');</script>
   <script src="vendor/leaflet.js"></script>
+  <script>if (typeof L === "undefined") document.write('<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"><\/script>');</script>
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
